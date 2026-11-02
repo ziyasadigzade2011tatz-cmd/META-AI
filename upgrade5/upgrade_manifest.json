@@ -63,7 +63,7 @@
     "area": "core",
     "path": "meta5/agent.py",
     "old_hash": null,
-    "new_hash": "647cd7ea46164a9f444ac95ea7394b458ccdf13b5c11f9ab5c7df6c49a523c56"
+    "new_hash": "dd9a73d307dcb77a0da5eb3e369a398945d0ff7f2f7852e17448837efdc7a3d9"
   },
   {
     "area": "core",
@@ -99,13 +99,13 @@
     "area": "core",
     "path": "meta5/context.py",
     "old_hash": null,
-    "new_hash": "cdcaa4365da1c46f3cef3666394c01f5e62f6c27e0960538ff4550bc6fbeb88c"
+    "new_hash": "47276d503798f85fd3fee908d23c9d728e55af2e27bf3eacd49bbf19ac71bbf4"
   },
   {
     "area": "core",
     "path": "meta5/dialogue.py",
     "old_hash": null,
-    "new_hash": "6e7b0fc42c39c9f24b425357802fc77dd685f126383a9280da2480d463eadd0b"
+    "new_hash": "2d67f7d6ce956595780651004a14205c2e1a8d06a21ecd2157d7870be19a7995"
   },
   {
     "area": "core",
@@ -123,7 +123,7 @@
     "area": "core",
     "path": "meta5/memory.py",
     "old_hash": null,
-    "new_hash": "145e9bc39be54a227dce9a31332cc781b83b67804330ac2e4b796058ae2747a2"
+    "new_hash": "87a0f8a6693da97c519a0e9b08b7a0c6fa2cc16a389239694b67a4a8ed5538e2"
   },
   {
     "area": "core",
@@ -147,7 +147,7 @@
     "area": "core",
     "path": "meta5/research.py",
     "old_hash": null,
-    "new_hash": "4968438ed6a79bfcafe3168355c06691244e832c9ae2faa35cbb1d92a0688de7"
+    "new_hash": "e1189ab463aeaff19e929e4ad64277f8992a3b416b557a1bfdd8acd6dfb6af27"
   },
   {
     "area": "core",
@@ -196,5 +196,11 @@
     "path": "meta_desktop.py",
     "old_hash": "3a3d295e2df6087aae89e767ef2bfe89998778c98387fb71db85ba0d2e2fce87",
     "new_hash": "b734d002be54490e89ac794dfa5036a96871cb48e2b1666b01edc21464dc4791"
+  },
+  {
+    "new_hash": "0c165e79e0cdb86743a4d320c40398e7051141941fb8e1050ec3fcfe772aa21a",
+    "old_hash": null,
+    "area": "core",
+    "path": "meta5/knowledge.py"
   }
 ]

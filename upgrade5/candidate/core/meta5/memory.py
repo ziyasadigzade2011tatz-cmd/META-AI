@@ -47,7 +47,7 @@ class Memory:
     def capture(self,text):
         if not self.enabled():return
         if re.search(r'не запоминай|не сохраняй|без запоминания',text,re.I):return
-        explicit=re.match(r'^запомни\s*:\s*(.+)',text,re.I|re.S)
+        explicit=re.match(r'^(?:запомни\s*:\s*|когда я говорю\s+|в моём словаре\s+)(.+)',text,re.I|re.S)
         pref=re.fullmatch(r'\s*(?:я (?:люблю|предпочитаю|играю в)|мне нравится)\s+.{2,250}[.!]?\s*',text,re.I)
         if explicit or pref:
             try:self.add(explicit.group(1) if explicit else text.strip(),'fact' if explicit else 'preference')
@@ -57,3 +57,4 @@ class Memory:
             if value is None:
                 r=c.execute('SELECT value FROM summaries WHERE session=?',(session,)).fetchone();return r[0] if r else ''
             c.execute('INSERT OR REPLACE INTO summaries VALUES(?,?,?)',(session,str(value)[:5000],time.time()))
+

@@ -9,6 +9,11 @@ def research(messages,preferences=(),emit=lambda *a:None):
     try:first=web_search(plan['query'],max_results=5)
     except WebError as exc:
         emit('research_warning',{'message':str(exc)[:400]});first={'results':[]}
+        from .knowledge import cache
+        saved=cache(plan['query'])
+        if saved:
+            emit('research_warning',{'message':'Использованы ранее сохранённые источники'})
+            return {'query':plan['query'],'sources':saved,'cached':True}
         if not plan['alternative']:raise
     hits,excluded=rank_sources(first.get('results',[]),plan)
     if plan['alternative'] and (not hits or not any(h['preferred_source'] for h in hits)):
@@ -18,7 +23,7 @@ def research(messages,preferences=(),emit=lambda *a:None):
             combined={h['url']:h for h in [*first.get('results',[]),*second.get('results',[])] if isinstance(h,dict) and h.get('url')}
             hits,excluded=rank_sources(list(combined.values()),plan)
         except WebError as exc:emit('research_warning',{'message':str(exc)[:250]})
-    if not hits:raise WebError('Нет источников, относящихся к выбранной игре и теме. Уточни игру или формулировку.')
+    if not hits:raise WebError('Нет источников, относящихся к этому вопросу. Уточни формулировку.')
     emit('sources_found',{'query':plan['query'],'sources':hits,'excluded':excluded})
     for hit in hits[:2]:
         if time.monotonic()-started>25:break
@@ -28,5 +33,9 @@ def research(messages,preferences=(),emit=lambda *a:None):
             emit('page_opened',{'url':hit['url'],'characters':len(page.get('text',''))})
         except (ValueError,OSError) as exc:
             hit.update(opened=False,fetch_error=type(exc).__name__+': '+str(exc)[:180]);emit('page_failed',{'url':hit['url'],'error':hit['fetch_error']})
+    from .knowledge import cache
+    try:cache(plan['query'],hits)
+    except (OSError,__import__('sqlite3').Error):pass
     result={'query':plan['query'],'context':plan['context'],'sources':hits,'excluded':excluded,'seconds':round(time.monotonic()-started,2)}
     emit('research_done',{'sources':len(hits),'seconds':result['seconds']});return result
+
