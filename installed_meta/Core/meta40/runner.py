@@ -22,7 +22,7 @@ sys.exit(0 if result.wasSuccessful() else 1)
 
 class WindowsJob:
     """Kill all children on close; fail closed if assignment is unavailable."""
-    def __init__(self):
+    def __init__(self,max_processes=8,memory_mb=512,total_memory_mb=2048):
         self.handle = None
         if os.name != 'nt':
             return
@@ -47,9 +47,10 @@ class WindowsJob:
         self.k = k
         self.handle = k.CreateJobObjectW(None, None)
         limits = Extended()
-        limits.basic.flags = 0x2000 | 0x100 | 0x8  # kill on close, per-process memory, process count
-        limits.basic.active = 8
-        limits.process_memory = 512 * 1024 * 1024
+        limits.basic.flags = 0x2000 | 0x100 | 0x8 | 0x200
+        limits.basic.active = max(1,min(24,int(max_processes)))
+        limits.process_memory = max(64,min(1024,int(memory_mb))) * 1024 * 1024
+        limits.job_memory = max(256,min(4096,int(total_memory_mb))) * 1024 * 1024
         if not self.handle or not k.SetInformationJobObject(self.handle, 9, ctypes.byref(limits), ctypes.sizeof(limits)):
             self.close()
             raise OSError('Cannot create restricted test process job')

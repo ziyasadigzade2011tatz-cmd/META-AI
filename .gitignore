@@ -28,3 +28,13 @@
 **/Models/blobs/
 .DS_Store
 Thumbs.db
+**/meta5_state/
+**/upgrade_backups/
+**/repair_backups/
+**/checkpoints/
+**/workspaces/
+**/artifacts/
+**/account.json
+**/install-last.json
+**/meta5_receipts/
+**/backup_*/

@@ -1,2 +1,2 @@
-"""META 4.0 local coding runtime."""
-VERSION = '4.0.1'
+"""META Code: local coding agent. API compatibility with META 4.0."""
+VERSION = '5.0.0'

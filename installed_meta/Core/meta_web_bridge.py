@@ -3,7 +3,7 @@ Preserves agent_chat, /chat, streaming and memory flows.
 """
 from __future__ import annotations
 import asyncio
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 from zoneinfo import ZoneInfo
 import json
 import logging
@@ -11,7 +11,7 @@ import re
 from typing import Callable
 
 log = logging.getLogger('meta.web_bridge')
-_RESEARCH = re.compile(r'\b(?:найди|поищи|проверь|источник|источники|ссылк\w*|документаци\w*|в интернете|в сети|онлайн|последн\w*|сегодня|сейчас|новост\w*|актуальн\w*|search|browse|look up|latest|current|documentation|web)\b', re.I)
+_RESEARCH = re.compile(r'\b(?:найди|найти|ищи|поищи|поиск|погугли|загугли|проверь|источник|источники|ссылк\w*|документаци\w*|интернет\w*|в сети|онлайн|последн\w*|сегодня|сейчас|новост\w*|актуальн\w*|search|browse|look up|latest|current|documentation|web)\b', re.I)
 _NO_WEB = re.compile(r'(?:без интернета|не ищи в интернете|не используй интернет|offline only|do not browse)', re.I)
 _FOLLOWUP = re.compile(r'^(?:а что|а почему|а подробнее|подробнее|а как|и что|продолжай|а источник|а ссылки)', re.I)
 
@@ -31,7 +31,11 @@ def query_from(messages: list) -> str:
     query = users[-1].strip()
     if len(query) < 45 and len(users)>1:
         query = users[-2][:160] + ' ' + query
-    return re.sub(r'\s+', ' ', query)[:280]
+    if re.search(r'(?:gh[pousr]_|github_pat_|sk-[A-Za-z0-9]{15}|(?:api[_ -]?key|password|пароль|токен)\s*[:=])',query,re.I):
+        raise ValueError('Не отправляю секреты в поисковый запрос')
+    query=re.sub(r'^(?:пожалуйста[, ]*)?(?:найди|найти|ищи|поищи|погугли|загугли|search for|search|look up)\s*(?:мне\s+)?(?:в интернете|в сети|онлайн)?\s*','',query,flags=re.I)
+    query=re.sub(r'\s+(?:и\s+)?(?:дай|приведи|покажи)\s+(?:(?:две|два|три|\d+)\s+)?ссылк\w*.*$','',query,flags=re.I)
+    return re.sub(r'\s+', ' ', query).strip(' .?!')[:280]
 
 
 def research(query: str) -> dict:
@@ -46,7 +50,7 @@ def research(query: str) -> dict:
                   'snippet':str(hit.get('snippet',''))[:700]}
         sources.append(source)
     # Read up to two pages so the model can answer from evidence rather than search snippets alone.
-    for item in sources[:2]:
+    for item in sources[:1]:
         try:
             page = web_fetch(item['url'])
             item['page_text'] = str(page.get('text',''))[:4500]
@@ -60,7 +64,9 @@ def research(query: str) -> dict:
 
 def system_context(research_data: dict|None, error: str|None) -> str:
     # Note: timestamps only when asked; don't claim browsing if a lookup fails.
-    stamp = datetime.now(ZoneInfo('Asia/Baku')).isoformat(timespec='seconds')
+    try: local_zone=ZoneInfo('Asia/Baku')
+    except (ImportError,KeyError): local_zone=timezone(timedelta(hours=4),'Asia/Baku')
+    stamp = datetime.now(local_zone).isoformat(timespec='seconds')
     text = ('META runtime context: current local time in Asia/Baku is '+stamp+'. '
             'You are META, a local assistant with optional public-web research. '
             'Never claim you browsed unless actual sources appear below. '
@@ -78,7 +84,7 @@ def system_context(research_data: dict|None, error: str|None) -> str:
 class WebChatMiddleware:
     """Pure ASGI middleware; can be installed after existing routes without touching them."""
     PATHS = {'/chat','/v1/chat/completions'}
-    def __init__(self, app, max_body=100_000):
+    def __init__(self, app, max_body=16*1024*1024):
         self.app = app
         self.max_body = max_body
 
@@ -106,30 +112,26 @@ class WebChatMiddleware:
                 raise ValueError('No messages')
         except (ValueError,TypeError,AttributeError):
             return await self.app(scope,_one_receive(raw),send)
-        if should_research(messages):
-            data=None; error=None
-            try:
-                data=await asyncio.wait_for(asyncio.to_thread(research,query_from(messages)),timeout=35)
-                if not data.get('sources'): error='No valid search results'
-            except Exception as exc:
-                error=type(exc).__name__+': '+str(exc)[:110]
-                log.warning('META web research failed: %s',error)
-            payload['messages']=[{'role':'system','content':system_context(data if data and data.get('sources') else None,error)}]+messages
-        else:
-            # Inject reliable runtime date even for offline conversations.
-            payload['messages']=[{'role':'system','content':system_context(None,None)}]+messages
+        if not messages:
+            return await self.app(scope,_one_receive(raw,receive),send)
+        # Chat runtime owns research for BOTH routes. Middleware injects time
+        # only, so a lookup is not executed twice and SSE keeps disconnects.
+        payload['messages']=[{'role':'system','content':system_context(None,None)}]+messages
         body=json.dumps(payload,ensure_ascii=False).encode('utf-8')
-        return await self.app(scope,_one_receive(body),send)
+        scope=dict(scope)
+        scope['headers']=[(k,v) for k,v in scope.get('headers',[]) if k.lower()!=b'content-length']+[(b'content-length',str(len(body)).encode())]
+        return await self.app(scope,_one_receive(body,receive),send)
 
 
-def _one_receive(body):
+def _one_receive(body, fallback=None):
     sent=False
     async def receive():
         nonlocal sent
         if not sent:
             sent=True
             return {'type':'http.request','body':body,'more_body':False}
-        # Typical downstream handlers call receive only until body is complete.
+        if fallback is not None:
+            return await fallback()
         await asyncio.Future()
     return receive
 

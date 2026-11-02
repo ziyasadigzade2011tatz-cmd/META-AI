@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "checks": [
+    "task panel",
+    "existing project default",
+    "project ranges",
+    "model profiles",
+    "memory add/delete",
+    "SSE response",
+    "source links"
+  ],
+  "page_errors": []
+}

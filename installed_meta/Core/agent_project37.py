@@ -63,10 +63,10 @@ def parse_coder_files(text):
                 named = line.group(1).strip()
         if not named:
             continue
-        if named in seen:
+        if named.casefold() in seen:
             raise ValueError('Duplicate file: ' + named)
         _validate(named, content)
-        seen.add(named)
+        seen.add(named.casefold())
         files.append({'path':named,'content':content})
     return files
 
@@ -80,8 +80,8 @@ def stage_project(files):
     changes = []
     for f in files:
         name = f['path']
-        if name in names: raise ValueError('Duplicate path')
-        names.add(name)
+        if name.casefold() in names: raise ValueError('Duplicate path')
+        names.add(name.casefold())
         _, old, diff = _validate(name, f['content'])
         changes.append({'path':name,'content':f['content'],'expected_hash':digest(old)})
     proposal_id = uuid.uuid4().hex
@@ -110,8 +110,8 @@ def _checked(changes):
     seen = set()
     for change in changes:
         path, content = change['path'], change['content']
-        if path in seen: raise ValueError('Duplicate file path')
-        seen.add(path)
+        if path.casefold() in seen: raise ValueError('Duplicate file path')
+        seen.add(path.casefold())
         target, current, diff = _validate(path,content)
         if digest(current) != change['expected_hash']:
             raise RuntimeError('File changed after preview: ' + path)

@@ -556,6 +556,7 @@ def main():
         else:
             item.cancel()
     profile.downloadRequested.connect(save_download)
+    view.page().newWindowRequested.connect(lambda request: webbrowser.open(request.requestedUrl().toString()) if request.requestedUrl().scheme() == 'https' else None)
     view.setUrl(QUrl(f'http://127.0.0.1:{PORT}/'))
     window.show()
     return app.exec()

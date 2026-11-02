@@ -1,0 +1,7 @@
+{
+  "node": "D:\\META\\Tools\\node.exe",
+  "npm": "D:\\META\\Tools\\node_modules\\npm\\bin\\npm-cli.js",
+  "typescript": "D:\\META\\Tools\\node_modules\\typescript\\lib\\tsc.js",
+  "playwright": "D:\\META\\Tools\\node_modules\\playwright",
+  "edge": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+}

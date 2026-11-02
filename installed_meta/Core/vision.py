@@ -122,7 +122,7 @@ async def vision_reply(messages):
         )
     })
 
-    async with httpx.AsyncClient(timeout=300) as client:
+    async with httpx.AsyncClient(trust_env=False, timeout=300) as client:
         response = await client.post(
             OLLAMA_URL,
             json={

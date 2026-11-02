@@ -1,0 +1,200 @@
+[
+  {
+    "area": "core",
+    "path": "agent_chat.py",
+    "old_hash": "15cac4d37aca41200236f70f918d48846bf973897ce7d4641795d7c11938a116",
+    "new_hash": "5ce91cd46c639e455a30325eefbd1a546a0155659c0f4717483af396eda2f5e5"
+  },
+  {
+    "area": "core",
+    "path": "agent_pending.py",
+    "old_hash": "7b8baf838e2dd66742523e85432acd29406ece46c0072d731aeafa1756cd83de",
+    "new_hash": "3b79744d65aafa9655fc89ca7cad2be90ea21d25aa1aebdee47919724e73f638"
+  },
+  {
+    "area": "core",
+    "path": "main.py",
+    "old_hash": "fc201aa01203add59684ef81f8edc3fa02ab9bb99855e21cacc2c41ed5f409cb",
+    "new_hash": "2d65bae4e74e4755dd853bdc10df8dc9435745a9b74f423c3f646d30722a8266"
+  },
+  {
+    "area": "core",
+    "path": "meta40/__init__.py",
+    "old_hash": "3ecfb4b7e9fc43439d1a20b32fc402537bc79281942baf182312767506174d44",
+    "new_hash": "81a49127d64470ee5eaffedddaebea1fab9986d57c8b5ea2992f6b8f981573cc"
+  },
+  {
+    "area": "core",
+    "path": "meta40/api.py",
+    "old_hash": "aed5623a0365d3fe3bab86c9bd230aa86358e80921b65241a209875ba2e7b547",
+    "new_hash": "ba11af74bc6176bc4d7764fd1bb29eb8ce325023a3add92a3240d5cafd79fe1c"
+  },
+  {
+    "area": "core",
+    "path": "meta40/engine.py",
+    "old_hash": "ae81c9bd86e2d4a3fe4bb0a28710b702c87b983f031d09227fa347cd0d78e941",
+    "new_hash": "a96e65ce91572332c2518b7090b36a69ae155824ed38b9d02f7e431c69d543bc"
+  },
+  {
+    "area": "core",
+    "path": "meta40/runner.py",
+    "old_hash": "fd0c954a50c1c2417e0a83a972b862c826a1efa1f39aeda9133862fa13dd1209",
+    "new_hash": "7cdab3d46abf1d38602f724cbcfade98fa780d3ac2bc76ba15ac1cdae5d699b6"
+  },
+  {
+    "area": "core",
+    "path": "meta40/selfdev.py",
+    "old_hash": "9ee907a9abc540407bc449ae55ebb1038075728caf37b12ed58e622bd6715964",
+    "new_hash": "0d256aafe59064ec44cee5181bd3930abb3852091bd76d5a2dbdbacd9e7bd0cf"
+  },
+  {
+    "area": "core",
+    "path": "meta40/web_research.py",
+    "old_hash": "531b6901f88e7ca06f1e17cf4155a1f24bda90a1fcecb4d75d6c671ebf24bf52",
+    "new_hash": "2ab274feb6e2b20f59340717f854677ef6aa7b8a2a6c0a7244a1dd5f16447e0f"
+  },
+  {
+    "area": "core",
+    "path": "meta5/__init__.py",
+    "old_hash": null,
+    "new_hash": "eb213fee89cf199c67e7ba78b49ad2c84e0410f4e1672b4f3432258dd1aea328"
+  },
+  {
+    "area": "core",
+    "path": "meta5/agent.py",
+    "old_hash": null,
+    "new_hash": "647cd7ea46164a9f444ac95ea7394b458ccdf13b5c11f9ab5c7df6c49a523c56"
+  },
+  {
+    "area": "core",
+    "path": "meta5/api.py",
+    "old_hash": null,
+    "new_hash": "fba93012162185e75831944765ffe0cb956a6557194713a400687a1cc2219cf5"
+  },
+  {
+    "area": "core",
+    "path": "meta5/benchmarks.py",
+    "old_hash": null,
+    "new_hash": "1c161143b74cf3b6fb452d419585a0b3c78205226d52f1465f2ea12e4b37f07a"
+  },
+  {
+    "area": "core",
+    "path": "meta5/browser_probe.cjs",
+    "old_hash": null,
+    "new_hash": "277ebd911cf940505df64c4a3c86150119c4a3bd7bae07842d64d499ac89884a"
+  },
+  {
+    "area": "core",
+    "path": "meta5/changes.py",
+    "old_hash": null,
+    "new_hash": "5aad3cb7f865a928d765ecb8706c12e866ff3dc85cff99ba33d577b3c1b5c590"
+  },
+  {
+    "area": "core",
+    "path": "meta5/citations.py",
+    "old_hash": null,
+    "new_hash": "02d0a74a192abf92de6fc69c3ad9e23f08819eb539fb9d1fdce1a3cdfc11e3bb"
+  },
+  {
+    "area": "core",
+    "path": "meta5/context.py",
+    "old_hash": null,
+    "new_hash": "cdcaa4365da1c46f3cef3666394c01f5e62f6c27e0960538ff4550bc6fbeb88c"
+  },
+  {
+    "area": "core",
+    "path": "meta5/dialogue.py",
+    "old_hash": null,
+    "new_hash": "6e7b0fc42c39c9f24b425357802fc77dd685f126383a9280da2480d463eadd0b"
+  },
+  {
+    "area": "core",
+    "path": "meta5/git_tools.py",
+    "old_hash": null,
+    "new_hash": "8c4237c1384e54d9289f4e8faeb12e6d51144fb8d5ccfa52d3afea0a7b7f7d1f"
+  },
+  {
+    "area": "core",
+    "path": "meta5/jobs.py",
+    "old_hash": null,
+    "new_hash": "66d7c0865d6546b9af2090ef604b602b6375dc22c22ff31e19cc11add0ce8187"
+  },
+  {
+    "area": "core",
+    "path": "meta5/memory.py",
+    "old_hash": null,
+    "new_hash": "145e9bc39be54a227dce9a31332cc781b83b67804330ac2e4b796058ae2747a2"
+  },
+  {
+    "area": "core",
+    "path": "meta5/models.py",
+    "old_hash": null,
+    "new_hash": "49c4c62557a2db8d7bd5e2d0d0c850c1463a1b31127aefe26d7b78a0e7dfb35f"
+  },
+  {
+    "area": "core",
+    "path": "meta5/process.py",
+    "old_hash": null,
+    "new_hash": "47f43f979e42aff4b30da5947980f5354ac048fe5b22be60a89ccbd2fcb1e2ed"
+  },
+  {
+    "area": "core",
+    "path": "meta5/project.py",
+    "old_hash": null,
+    "new_hash": "a85d04d2007d322edb94668f4cb595c4d5121f2602e4ef34c2d1f0ad12a4db8d"
+  },
+  {
+    "area": "core",
+    "path": "meta5/research.py",
+    "old_hash": null,
+    "new_hash": "4968438ed6a79bfcafe3168355c06691244e832c9ae2faa35cbb1d92a0688de7"
+  },
+  {
+    "area": "core",
+    "path": "meta5/storage.py",
+    "old_hash": null,
+    "new_hash": "55459acfbcea18a6e4f23c2b232fcb486006da6579b71f8948cf05e40e3470e5"
+  },
+  {
+    "area": "core",
+    "path": "meta5/tools.py",
+    "old_hash": null,
+    "new_hash": "0721f4667d0a2820ad810bc96ab256ec58806b46268a2b1cd9fe7672a9fadf0b"
+  },
+  {
+    "area": "core",
+    "path": "meta5/transport.py",
+    "old_hash": null,
+    "new_hash": "b9e4f646cdbb525c4b0f82a499d04195f1ea0ee0cf682de577d23bfca482e7a3"
+  },
+  {
+    "area": "core",
+    "path": "meta5_models_seed.json",
+    "old_hash": null,
+    "new_hash": "a61aadb917ca49ab807b85e19983eb008e4c2b82b4eb51cb073319d94c73343f"
+  },
+  {
+    "area": "core",
+    "path": "meta5_tools.json",
+    "old_hash": null,
+    "new_hash": "29dbf7afc19084466b653ccc1bf6c800923cb6c3ea81880f3442a2334e616cee"
+  },
+  {
+    "area": "desktop",
+    "path": "assets/app.js",
+    "old_hash": "b2b8a6daacb76b6cc4bcf98540abf369b01f64f5f3197aadaa44de63abd3cb22",
+    "new_hash": "cb0b8e52b6386267be4aefb6c5407f2e057924f539396b3cb3cfd10b31e0185c"
+  },
+  {
+    "area": "desktop",
+    "path": "meta40_desktop.py",
+    "old_hash": "b7289b0e651612896e21df387caf77dfe5035fd3b4c6a552a711123c41427a6a",
+    "new_hash": "81843efcd0becf00d6f0392354888a820ad8491b509bc08e0d73e5083024de0c"
+  },
+  {
+    "area": "desktop",
+    "path": "meta_desktop.py",
+    "old_hash": "3a3d295e2df6087aae89e767ef2bfe89998778c98387fb71db85ba0d2e2fce87",
+    "new_hash": "b734d002be54490e89ac794dfa5036a96871cb48e2b1666b01edc21464dc4791"
+  }
+]

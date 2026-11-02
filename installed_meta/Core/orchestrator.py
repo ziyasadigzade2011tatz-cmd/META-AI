@@ -275,7 +275,7 @@ async def run_team(task):
     warnings = []
     timeout = httpx.Timeout(300.0, connect=15.0)
 
-    async with httpx.AsyncClient(timeout=timeout) as client:
+    async with httpx.AsyncClient(trust_env=False, timeout=timeout) as client:
         plan = await invoke(
             team, "Planner", client, task, optional=True
         )

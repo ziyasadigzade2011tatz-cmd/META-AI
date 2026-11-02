@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "checks": [
+    "isolated account login",
+    "authenticated proxy",
+    "real Core SSE",
+    "persist before done",
+    "regenerate archives previous version"
+  ],
+  "events": [
+    6,
+    6
+  ],
+  "seconds": [
+    0.71,
+    0.57
+  ]
+}

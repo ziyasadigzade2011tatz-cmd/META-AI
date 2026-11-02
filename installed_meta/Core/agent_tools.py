@@ -1,6 +1,6 @@
-﻿from pathlib import Path
+from pathlib import Path
 
-WORKSPACE = Path(r"D:\META\Projects").resolve()
+WORKSPACE = Path(r"D:\META\Projects").absolute()
 WORKSPACE.mkdir(parents=True, exist_ok=True)
 
 ALLOWED_EXTENSIONS = {
@@ -14,9 +14,20 @@ def safe_path(relative_path):
     if not isinstance(relative_path, str):
         raise ValueError("Invalid path")
 
-    path = (WORKSPACE / relative_path).resolve()
+    from meta40.workspace import Workspace, relative, reparse
+    root = Workspace(WORKSPACE).root
+    relative_path = relative_path.replace('\\','/')
+    if relative_path == '.':
+        return root
+    parts = relative(relative_path)
+    path = root.joinpath(*parts)
+    for item in [path,*path.parents]:
+        if item.is_symlink() or (item.exists() and reparse(item)):
+            raise ValueError('Links and junctions are forbidden')
+        if item == root: break
+    path = path.resolve()
 
-    if not path.is_relative_to(WORKSPACE):
+    if not path.is_relative_to(root):
         raise ValueError("Access outside META Projects denied")
 
     return path
@@ -54,21 +65,13 @@ def read_file(file_path):
 
 
 def create_file(file_path, content):
-    path = safe_path(file_path)
-
-    if path.suffix.lower() not in ALLOWED_EXTENSIONS:
-        raise ValueError("Unsupported file type")
-
-    if len(content) > 20000:
-        raise ValueError("Content too large")
-
-    if not path.parent.is_dir():
-        raise ValueError("Parent folder does not exist")
-
-    with path.open("x", encoding="utf-8") as file:
-        file.write(content)
-
-    return {
-        "created": True,
-        "path": str(path)
-    }
+    """Prepare a proposal; no tool is allowed to write the live project directly."""
+    target = safe_path(file_path)
+    if target.exists():
+        raise ValueError("File already exists; use a reviewed edit proposal")
+    from meta40.workspace import validate_content
+    validate_content(file_path.replace("\\", "/"),content)
+    from agent_pending import stage
+    proposal = stage(file_path,content)
+    return {**proposal, "created":False, "applied":False,
+            "message":"Заявка подготовлена. Файл будет создан после подтверждения."}

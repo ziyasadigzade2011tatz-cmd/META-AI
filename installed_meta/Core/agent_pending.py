@@ -252,3 +252,14 @@ def proposal_preview(proposal_id):
 def proposal_approve(proposal_id):
     from meta40.proposals import is_ours, approve
     return approve(proposal_id) if is_ours(proposal_id) else _meta40_previous_approve(proposal_id)
+
+
+# META5_APPROVAL_COMPATIBILITY
+_meta5_previous_preview=proposal_preview
+_meta5_previous_approve=proposal_approve
+def proposal_preview(proposal_id):
+    from meta5.changes import ours,preview
+    return preview(proposal_id) if ours(proposal_id) else _meta5_previous_preview(proposal_id)
+def proposal_approve(proposal_id):
+    from meta5.changes import ours,approve
+    return approve(proposal_id) if ours(proposal_id) else _meta5_previous_approve(proposal_id)

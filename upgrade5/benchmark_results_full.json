@@ -1,0 +1,134 @@
+{
+  "hardware": {
+    "ram_gb": 16,
+    "gpu": "RTX 3050 Laptop",
+    "vram_gb": 4
+  },
+  "scope": "Two short local smoke tasks; not a comprehensive intelligence benchmark",
+  "results": [
+    {
+      "model": "qwen2.5:3b",
+      "test": "context",
+      "passed": false,
+      "answer": {
+        "game": "Хойку"
+      },
+      "tokens": 8,
+      "tokens_per_second": 48.08,
+      "seconds": 2.26
+    },
+    {
+      "model": "qwen2.5:3b",
+      "test": "code",
+      "passed": true,
+      "answer": {
+        "code": "def add(a,b): return a+b;"
+      },
+      "tokens": 14,
+      "tokens_per_second": 70.32,
+      "seconds": 0.28
+    },
+    {
+      "model": "qwen3:4b",
+      "test": "context",
+      "passed": false,
+      "answer": {
+        "game": "Paradox Interactive"
+      },
+      "tokens": 12,
+      "tokens_per_second": 29.9,
+      "seconds": 4.63
+    },
+    {
+      "model": "qwen3:4b",
+      "test": "code",
+      "passed": true,
+      "answer": {
+        "code": "def add(a, b):\n    return a + b"
+      },
+      "tokens": 21,
+      "tokens_per_second": 28.41,
+      "seconds": 0.9
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "test": "context",
+      "passed": false,
+      "error": "JSONDecodeError: Unterminated string starting at: line 1 column 9 (char 8)",
+      "seconds": 26.45
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "test": "code",
+      "passed": true,
+      "answer": {
+        "code": "def add(a, b): return a + b"
+      },
+      "tokens": 15,
+      "tokens_per_second": 13.34,
+      "seconds": 1.56
+    },
+    {
+      "model": "qwen2.5-coder:14b",
+      "test": "context",
+      "passed": true,
+      "answer": {
+        "game": "Hearts of Iron IV"
+      },
+      "tokens": 10,
+      "tokens_per_second": 5.65,
+      "seconds": 19.95
+    },
+    {
+      "model": "qwen2.5-coder:14b",
+      "test": "code",
+      "passed": false,
+      "error": "SyntaxError: unexpected character after line continuation character (<unknown>, line 1)",
+      "seconds": 4.27
+    },
+    {
+      "model": "qwen2.5:3b",
+      "test": "grounded_context",
+      "passed": true,
+      "answer": {
+        "game": "Hearts of Iron IV"
+      },
+      "tokens": 10,
+      "tokens_per_second": 68.02,
+      "seconds": 3.81
+    },
+    {
+      "model": "qwen3:4b",
+      "test": "grounded_context",
+      "passed": true,
+      "answer": {
+        "game": "Hearts of Iron IV"
+      },
+      "tokens": 14,
+      "tokens_per_second": 28.43,
+      "seconds": 6.5
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "test": "grounded_context",
+      "passed": true,
+      "answer": {
+        "game": "Hearts of Iron IV"
+      },
+      "tokens": 10,
+      "tokens_per_second": 13.5,
+      "seconds": 8.98
+    },
+    {
+      "model": "qwen2.5-coder:14b",
+      "test": "grounded_context",
+      "passed": true,
+      "answer": {
+        "game": "Hearts of Iron IV"
+      },
+      "tokens": 14,
+      "tokens_per_second": 5.31,
+      "seconds": 20.2
+    }
+  ]
+}
