@@ -1,0 +1,251 @@
+﻿import ast
+import re
+from dataclasses import dataclass, field
+
+import httpx
+
+OLLAMA = "http://127.0.0.1:11434/api/chat"
+
+@dataclass
+class Agent:
+    name: str
+    model: str
+    instruction: str
+    max_tokens: int = 400
+    history: list = field(default_factory=list)
+
+    async def run(self, client, task, context=""):
+        prompt = (
+            "ЗАДАЧА ПОЛЬЗОВАТЕЛЯ:\n" + task
+            + "\n\nКОНТЕКСТ КОМАНДЫ:\n" + context[:6500]
+        )
+        messages = [
+            {"role": "system", "content": self.instruction},
+            {"role": "user", "content": prompt}
+        ]
+        response = await client.post(
+            OLLAMA,
+            json={
+                "model": self.model,
+                "stream": False,
+                "messages": messages,
+                "options": {
+                    "num_ctx": 4096,
+                    "num_predict": self.max_tokens,
+                    "temperature": 0.15
+                }
+            }
+        )
+        response.raise_for_status()
+        answer = response.json().get(
+            "message", {}
+        ).get("content", "").strip()
+        if not answer:
+            raise RuntimeError(
+                self.name + ": пустой ответ модели"
+            )
+        self.history.extend([
+            messages[-1],
+            {"role": "assistant", "content": answer}
+        ])
+        print("META TEAM:", self.name, "finished", flush=True)
+        return answer
+
+
+def create_team():
+    rules = (
+        "Ты независимый агент команды META. "
+        "Отвечай по-русски. Не выдумывай результаты "
+        "запуска кода или операций с файлами. "
+    )
+    return {
+        "Planner": Agent(
+            "Planner", "qwen2.5:3b",
+            rules + "Составь короткий технический план.",
+            250
+        ),
+        "Files": Agent(
+            "Files", "qwen2.5:3b",
+            rules + "Определи нужные файлы. "
+            "Пока у тебя нет доступа к файловой системе.",
+            200
+        ),
+        "Coder": Agent(
+            "Coder", "qwen2.5-coder:7b",
+            rules + "Напиши законченное решение. "
+            "Если нужен Python, помести ПОЛНЫЙ код "
+            "в один блок ```python ... ```. "
+            "Сохраняй отступы 4 пробела. "
+            "Не обрывай программу. "
+            "Не используй многоточия вместо кода.",
+            1900
+        ),
+        "Writer": Agent(
+            "Writer", "qwen2.5:3b",
+            rules + "Подготовь краткое описание решения. "
+            "Не переписывай программный код.",
+            200
+        ),
+        "Teacher": Agent(
+            "Teacher", "qwen2.5:3b",
+            rules + "Ты независимый Reviewer. "
+            "Проверь архитектуру, логику, ошибки "
+            "и ограничения результата Coder. "
+            "Назови конкретные проблемы, если они есть. "
+            "Не утверждай, что тестировал программу.",
+            400
+        ),
+        "General": Agent(
+            "General", "qwen2.5:3b",
+            rules + "Дай максимум 3 коротких предложения "
+            "об итоговом решении и его ограничениях. "
+            "НЕ ПЕРЕПИСЫВАЙ КОД.",
+            200
+        )
+    }
+
+
+def python_blocks(text):
+    return re.findall(
+        r"```(?:python|py)\s*\n(.*?)```",
+        text,
+        flags=re.IGNORECASE | re.DOTALL
+    )
+
+
+def validate_python(text, required=False):
+    blocks = python_blocks(text)
+
+    if not blocks:
+        if required:
+            return False, (
+                "Нет полного закрытого блока ```python. "
+                "Верни законченную программу."
+            )
+        return True, "Блок Python не требуется"
+
+    for index, code in enumerate(blocks, 1):
+        try:
+            ast.parse(code)
+        except SyntaxError as error:
+            return False, (
+                f"Python блок {index}: строка "
+                f"{error.lineno}: {error.msg}"
+            )
+
+    return True, (
+        f"Синтаксис Python проверен: {len(blocks)} блок(ов). "
+        "Выполнение и логика не проверялись."
+    )
+
+
+def needs_python(task):
+    low = task.lower()
+    return any(word in low for word in (
+        "python", "питон", ".py",
+        "калькулятор на python",
+        "python script"
+    ))
+
+
+async def call(agent, client, task, context=""):
+    print(
+        f"META TEAM: {agent.name} started [{agent.model}]",
+        flush=True
+    )
+    return await agent.run(client, task, context)
+
+
+async def run_team(task):
+    task = task.strip()
+    if not task or len(task) > 2000:
+        return "Задача пуста или превышает 2000 символов."
+
+    team = create_team()
+    async with httpx.AsyncClient(
+        timeout=httpx.Timeout(300, connect=15)
+    ) as client:
+        plan = await call(team["Planner"], client, task)
+        files = await call(
+            team["Files"], client, task, plan
+        )
+
+        context = (
+            "ПЛАН:\n" + plan
+            + "\n\nТРЕБОВАНИЯ К ФАЙЛАМ:\n" + files
+        )
+        code_result = await call(
+            team["Coder"], client, task, context
+        )
+
+        valid, validation = validate_python(
+            code_result, needs_python(task)
+        )
+        attempts = 0
+
+        while not valid and attempts < 2:
+            attempts += 1
+            print(
+                f"META TEAM: Coder repair attempt {attempts}",
+                flush=True
+            )
+            code_result = await call(
+                team["Coder"],
+                client,
+                task,
+                context
+                + "\n\nПРЕДЫДУЩИЙ ОТВЕТ:\n"
+                + code_result[-4500:]
+                + "\n\nОШИБКА ПРОВЕРКИ:\n"
+                + validation
+                + "\nИсправь ошибку. Верни полный код."
+            )
+            valid, validation = validate_python(
+                code_result, needs_python(task)
+            )
+
+        print("META TEAM: Python validation:", validation,
+              flush=True)
+
+        review = await call(
+            team["Teacher"],
+            client,
+            task,
+            "РЕЗУЛЬТАТ CODER:\n"
+            + code_result[:5500]
+            + "\n\nПРОВЕРКА СИНТАКСИСА:\n"
+            + validation
+        )
+
+        explanation = await call(
+            team["Writer"],
+            client,
+            task,
+            "ПЛАН:\n" + plan
+            + "\n\nЗАМЕЧАНИЯ REVIEWER:\n" + review
+        )
+
+        summary = await call(
+            team["General"],
+            client,
+            task,
+            "ОПИСАНИЕ:\n" + explanation
+            + "\n\nПРОВЕРКА:\n" + validation
+            + "\n\nРЕВЬЮ:\n" + review
+        )
+
+    status = (
+        "Синтаксическая проверка пройдена"
+        if valid else "Проверка не пройдена"
+    )
+
+    return (
+        "## META Team — Orchestrator 2.1\n\n"
+        + "### Итог\n\n" + summary
+        + "\n\n### Результат Coder\n\n"
+        + code_result
+        + "\n\n### Проверка Python\n\n"
+        + status + ": " + validation
+        + "\n\n### Reviewer\n\n" + review
+        + "\n\n*Код не запускался, файлы не изменялись.*"
+    )

@@ -1,0 +1,1241 @@
+[
+  {
+    "path": "installed_meta/Modelfile",
+    "source_group": "installed_meta",
+    "sha256": "eaca7ac3c1a1e077d4e87fdbb031197280c4d4820ffd8ba1d3c6cdf09adf2833",
+    "bytes": 2214,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Start_META.cmd",
+    "source_group": "installed_meta",
+    "sha256": "616c5d2439574b1df99596b8ff0a8cabca94ab22c135b02d00b67cbc9159334a",
+    "bytes": 221,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/agent_chat.py",
+    "source_group": "installed_meta",
+    "sha256": "30bc9b47e5baec7d0eaed76a20a5eaa6c2c71efbca180492f439499c2d51ae30",
+    "bytes": 12270,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/agent_chat_backup.py",
+    "source_group": "installed_meta",
+    "sha256": "77b72f62575423d83a9d594aaf96567050771bdb78eed287d53ff4290041c9eb",
+    "bytes": 7421,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/agent_chat_before_35_20261102_005240.py",
+    "source_group": "installed_meta",
+    "sha256": "8557514bd2c6ef46e4698d26e25a03a30697bb3d3fa0df51df61bb297185b91a",
+    "bytes": 12141,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/agent_chat_before_fastpath.py",
+    "source_group": "installed_meta",
+    "sha256": "c88172c71a79bd18497a59af7134a21e0da42a712ce6866aee545e2e52a0e290",
+    "bytes": 7837,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/agent_chat_before_fast_model.py",
+    "source_group": "installed_meta",
+    "sha256": "16d29567275ada4920b88b30753189ac3c389543380c221b0de53fb6deaed69e",
+    "bytes": 9445,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/agent_chat_before_language_fix.py",
+    "source_group": "installed_meta",
+    "sha256": "06e17c3b736a0a270be0c9151bcc3523f3a2160114973190243f9988d2dffe53",
+    "bytes": 10246,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/agent_chat_before_orchestrator.py",
+    "source_group": "installed_meta",
+    "sha256": "e8cf1fbef272b85b2d6fc05b80090652a509d7a5e82d1ec3f25708fc7edf62db",
+    "bytes": 11908,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/agent_chat_before_performance.py",
+    "source_group": "installed_meta",
+    "sha256": "2fcd38577785179ad2f4fcdd16c9c2d81aa915c9517166fa3a79e4604a034cc1",
+    "bytes": 10825,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/agent_chat_before_quick_model.py",
+    "source_group": "installed_meta",
+    "sha256": "aeb6595282f096db6c728d1d9cd307db0c4b2d1ca7134859f01ba7e9ed5b3e07",
+    "bytes": 8644,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/agent_chat_before_regex_fix.py",
+    "source_group": "installed_meta",
+    "sha256": "4518b72c88c762286e6f1b9b7fed7163f8d0d4846227b8babc1abc542a50cad3",
+    "bytes": 8563,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/agent_chat_before_registry.py",
+    "source_group": "installed_meta",
+    "sha256": "77ada76d0bb55e6508da7929e2d10b63d1245f36d42afaafe439105591041d34",
+    "bytes": 11338,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/agent_chat_before_speed.py",
+    "source_group": "installed_meta",
+    "sha256": "172943c60c4f9758260b0a1e97e0455c56c23e100cda4db138fc8b9f0fdde559",
+    "bytes": 8530,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/agent_chat_before_vision.py",
+    "source_group": "installed_meta",
+    "sha256": "14bfda011323b2e1d4ef07f0c064351c2d33afa519aabacb8678dffa5d71bc67",
+    "bytes": 11696,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/agent_pending.py",
+    "source_group": "installed_meta",
+    "sha256": "7b8baf838e2dd66742523e85432acd29406ece46c0072d731aeafa1756cd83de",
+    "bytes": 8491,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/agent_project37.py",
+    "source_group": "installed_meta",
+    "sha256": "2e192d605048193eb8d83ce872996fe17bead3d19963b3e223bd9ea45894ada8",
+    "bytes": 8894,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/agent_proposal_bridge.py",
+    "source_group": "installed_meta",
+    "sha256": "74a0da2c02e43ad2587bb43034b08c4bdb05c761f62d23e62fe85b5bd985994f",
+    "bytes": 2786,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/agent_registry.py",
+    "source_group": "installed_meta",
+    "sha256": "499b062dd726a09fa97c407fefd59ef17de2d4c3a4cd2128b211625a50d6cae4",
+    "bytes": 2788,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/agent_state.py",
+    "source_group": "installed_meta",
+    "sha256": "61813872c132e8bacaf8af4dd7597d2f9e187170ea4d32efc74239351083bd61",
+    "bytes": 2049,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/agent_tools.py",
+    "source_group": "installed_meta",
+    "sha256": "17b04c4105d1230e7dc48047f4371d304e6de4a70dcfb5c5cc369e3c238518b6",
+    "bytes": 1751,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/agent_workspace.py",
+    "source_group": "installed_meta",
+    "sha256": "9de4759d96681be1b79ed3a4305a52cc2fbb7a26e76c3187b3b79aaa8272b7ee",
+    "bytes": 2371,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/agent_write.py",
+    "source_group": "installed_meta",
+    "sha256": "900dab615b2b226eeceee6f39770392a9975087066923245afaf4463db2a4abc",
+    "bytes": 2563,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/config.py",
+    "source_group": "installed_meta",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/connect_agent_chat.py",
+    "source_group": "installed_meta",
+    "sha256": "b860dcb366d5c9854abbf7b0778d88a71b30ed5d3831b464ca9b9cd1e9f1364d",
+    "bytes": 917,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/connect_fast_model.py",
+    "source_group": "installed_meta",
+    "sha256": "ff4568cb9d918add0855647d11f34c97d8527fad2cc52e8b1b1320910a25e370",
+    "bytes": 1356,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/fix_agent.py",
+    "source_group": "installed_meta",
+    "sha256": "741820e00ccf9659cc41002528a26ef00282400fb22749bd179502283772bdaf",
+    "bytes": 745,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/fix_fastpath.py",
+    "source_group": "installed_meta",
+    "sha256": "e667085c3f76b1dbd22ade3cea47660331f7db4ba081eaa1725f8b0fdbd09469",
+    "bytes": 1165,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/fix_language.py",
+    "source_group": "installed_meta",
+    "sha256": "419cac748032deb974b5993f59878dbcef61c308af28b689e8871e2aab212ea0",
+    "bytes": 1827,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/fix_performance_install.py",
+    "source_group": "installed_meta",
+    "sha256": "0bd8482810f623a29b278f293ab3857df3b8bca598d882a56248d6f04adf2889",
+    "bytes": 1593,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/fix_speed.py",
+    "source_group": "installed_meta",
+    "sha256": "d77987556e66edf55ad8089273a13df5687bb504004c3873a2c12b1cad6c6fa3",
+    "bytes": 630,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/install_agent.py",
+    "source_group": "installed_meta",
+    "sha256": "cacd548d2f26db8322a21539bc1390876dbebf849b217ec87976a8913d2fb8fc",
+    "bytes": 1505,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/install_fastpath.py",
+    "source_group": "installed_meta",
+    "sha256": "52a3475690d25017fd1a88ff81f7aaa1041bcdad0951e163ae6ed6ff5ef271c9",
+    "bytes": 1590,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/install_memory.py",
+    "source_group": "installed_meta",
+    "sha256": "f114d016456d71199c7edd2023457049f091d6dd780b99530b2f41da7a5868cb",
+    "bytes": 1697,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/install_orchestrator.py",
+    "source_group": "installed_meta",
+    "sha256": "91cce2e1af5b09f788a293e22832906328be193ce1020840fff7b0b173063819",
+    "bytes": 952,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/install_performance.py",
+    "source_group": "installed_meta",
+    "sha256": "98e9609c23969c5eccb6f9309c76b6e2c4d9ca04eed09bd91a5aec815ba5433b",
+    "bytes": 1554,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/install_quick_model.py",
+    "source_group": "installed_meta",
+    "sha256": "7a673239ef630c5591f9a5fc78fb0b71b3441d3d6342741dadea0db585f35909",
+    "bytes": 957,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/install_registry.py",
+    "source_group": "installed_meta",
+    "sha256": "a4d9bcb612736370cedea6975a673e0cb61cd972b75e25693de416934e7362d5",
+    "bytes": 1034,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/install_vision.py",
+    "source_group": "installed_meta",
+    "sha256": "09f6bfc08ab6237e26f3810c33759fcb44364890d1a43e8c3943e69bca1baeb0",
+    "bytes": 909,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/main.py",
+    "source_group": "installed_meta",
+    "sha256": "adafd2de15a24864e0e39f9c9768dd42fcaca53eaaad09ba939859d04142474d",
+    "bytes": 10441,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/main_backup_v02.py",
+    "source_group": "installed_meta",
+    "sha256": "0df3497147dad6ffbfaf10bc76b5ba531f78305c4196df1ba2153ebc514e1df0",
+    "bytes": 2804,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/main_before_agent.py",
+    "source_group": "installed_meta",
+    "sha256": "e3aa1334d71d4431b759406560327a8481e7062c1aff9da9a6454a994fc6f899",
+    "bytes": 7154,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/main_before_agent34_20261102_005048.py",
+    "source_group": "installed_meta",
+    "sha256": "d1fcecd1b1974c51cad72c2db02f7a109ab17ce922e29da8256f02ad846044bc",
+    "bytes": 10220,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/main_before_agent_33_20261102_004304.py",
+    "source_group": "installed_meta",
+    "sha256": "34a4f0183ddcc16ea46ed749255dc4ef8db497560f543d0730fea610e4bd9ca1",
+    "bytes": 8654,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/main_before_agent_chat.py",
+    "source_group": "installed_meta",
+    "sha256": "1026204ad32036aaec0ffec796bccdc635344954c236660004f6149b0a37487a",
+    "bytes": 8272,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/main_before_memory.py",
+    "source_group": "installed_meta",
+    "sha256": "e96e5831de6024aad45b52667ef584ea49d5604cbdea8253d706b35baa63a7ae",
+    "bytes": 6650,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/memory.py",
+    "source_group": "installed_meta",
+    "sha256": "e9d3a5986f8aecfc75e931af351aef420c64e55fb502a7d072514c0b7a456445",
+    "bytes": 7005,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/memory_backup_v1.py",
+    "source_group": "installed_meta",
+    "sha256": "2d0361b4e26bf7e2201efc2c7344fcfa1b2b594d5fca669ffe217fe738fc16e9",
+    "bytes": 2256,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/memory_backup_v2.py",
+    "source_group": "installed_meta",
+    "sha256": "7e5bdad9cf8e24f991e29bac2f621d4a851ed355185fbdcc8dc281d6c5bdb26c",
+    "bytes": 6391,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/meta_engine38.py",
+    "source_group": "installed_meta",
+    "sha256": "6a81160f591c7ab803b80f96dd57275af5680540b7f18382c8cefa47d8c0f6d0",
+    "bytes": 12295,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/meta_web_bridge.py",
+    "source_group": "installed_meta",
+    "sha256": "7c9b8805cff499fc9d5cb2bb2eabcefca304af2d313564417f37581e8840cedb",
+    "bytes": 6942,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/orchestrator.py",
+    "source_group": "installed_meta",
+    "sha256": "93d35a09d52f89bc28da948ad2760d6ab188fb71dd768ffbb72bd40dabc37aa4",
+    "bytes": 14268,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/orchestrator.py.backup_20261101_233743",
+    "source_group": "installed_meta",
+    "sha256": "4ed9c39440bf8f5ad68b70a9dbe05f8ea2b3e6a09c1a49f8bfe2e82aa433e846",
+    "bytes": 2965,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/orchestrator.py.backup_20261101_235313",
+    "source_group": "installed_meta",
+    "sha256": "3ccdcbd930dce416daf041a283492a3261945b9e6a8a30a8dcf6831f5f387ff6",
+    "bytes": 5979,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/orchestrator.py.backup_20261102_000816",
+    "source_group": "installed_meta",
+    "sha256": "78123fe4842ba42d5087f36c4c7d0fd8d679708060a751c13c573cdb9e969069",
+    "bytes": 8037,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/orchestrator.py.backup_20261102_004035",
+    "source_group": "installed_meta",
+    "sha256": "f40b47f820a0243ac1548360a68babb6d07b5616f6c44bb176b1d7a0ca98d19f",
+    "bytes": 14267,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/orchestrator_before_memory_20261102_002624.py",
+    "source_group": "installed_meta",
+    "sha256": "194a9892dbb9c9e9f116b6065cdec15cdd840b6136c14e38595ac35bd56f07f8",
+    "bytes": 12489,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/orchestrator_before_multiagent.py",
+    "source_group": "installed_meta",
+    "sha256": "4ed9c39440bf8f5ad68b70a9dbe05f8ea2b3e6a09c1a49f8bfe2e82aa433e846",
+    "bytes": 2965,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/orchestrator_before_workspace_20261102_003608.py",
+    "source_group": "installed_meta",
+    "sha256": "398be707d1dd10218531debeab46104a86953a759a8a330358dd9a84b7a46da6",
+    "bytes": 14036,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/performance_router.py",
+    "source_group": "installed_meta",
+    "sha256": "6a3bbb765ee8160669f117089a75bb10735d0835c66b6c4c0bcf834d2df3262c",
+    "bytes": 1630,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/requirements.txt",
+    "source_group": "installed_meta",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/router.py",
+    "source_group": "installed_meta",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/semantic.py",
+    "source_group": "installed_meta",
+    "sha256": "8e7dd2900072b267e8e4240c8ba4a538efd2d2ffa5af26ed152081e671d7cf05",
+    "bytes": 2547,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/upgrade_semantic.py",
+    "source_group": "installed_meta",
+    "sha256": "08c1e0a426f750259fa2d200e985ac1a6e848c7da564de56aa34d7595b9fdd79",
+    "bytes": 678,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/vision.py",
+    "source_group": "installed_meta",
+    "sha256": "f293bf94f0b52c5adeca06a7a5b53556233eb33b485c1ab28ebe90d29bfbb9d6",
+    "bytes": 4048,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/meta40/api.py",
+    "source_group": "installed_meta",
+    "sha256": "16f657851478d3346cfbeae11429706f4a3d859d1f1113915a37804e613d1c9f",
+    "bytes": 7140,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/meta40/context.py",
+    "source_group": "installed_meta",
+    "sha256": "894f5b90b0be9110e63ce46a9e39dc6fe50508a2e85c448b21a00697ffeb248a",
+    "bytes": 1798,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/meta40/engine.py",
+    "source_group": "installed_meta",
+    "sha256": "05a79337e31f5c765852d17b1f57828150a55f74d54985042ea64d7098916b9a",
+    "bytes": 10997,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/meta40/proposals.py",
+    "source_group": "installed_meta",
+    "sha256": "38c10bc0bef822c8e4370db0326b88b25046a70023d11737c6f6d6eb326e83b2",
+    "bytes": 8252,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/meta40/runner.py",
+    "source_group": "installed_meta",
+    "sha256": "fd0c954a50c1c2417e0a83a972b862c826a1efa1f39aeda9133862fa13dd1209",
+    "bytes": 6134,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/meta40/selfdev.py",
+    "source_group": "installed_meta",
+    "sha256": "51a011711649f994b1335cc75385bf3a2d3382e8d2df7db46ea96f9541d68af6",
+    "bytes": 838,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/meta40/web_research.py",
+    "source_group": "installed_meta",
+    "sha256": "69b44227898628b6a96dd6951aa3c362552e1fb0fd9a7431b52d6b1d4619797a",
+    "bytes": 6853,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/meta40/web_tools.py",
+    "source_group": "installed_meta",
+    "sha256": "065b968b721a52a131d06abcbc48505c2b953ee55173eda80d9da5c8bfa13166",
+    "bytes": 5632,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/meta40/workspace.py",
+    "source_group": "installed_meta",
+    "sha256": "7a801c3f5236c15d86e9af331d5621972ae646b7b9a59126fe83f6de7d47fbc6",
+    "bytes": 4950,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/meta40/__init__.py",
+    "source_group": "installed_meta",
+    "sha256": "55dcbf57f0f6a6c251434ebdc85555b5548db77a804f483be103e29357379035",
+    "bytes": 55,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/meta40_backups/20261102_052830_217948/0.bak",
+    "source_group": "installed_meta",
+    "sha256": "3a21ce649c57d417e0ed9ae4e1d405a60f4237e78cc34f4f8fdcba4bf6f41106",
+    "bytes": 10551,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/meta40_backups/20261102_052830_217948/1.bak",
+    "source_group": "installed_meta",
+    "sha256": "fe689753d1543861c170c8858a457c22c26912e4fede02041fd4eb372238b073",
+    "bytes": 8243,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/meta40_backups/20261102_052830_217948/2.bak",
+    "source_group": "installed_meta",
+    "sha256": "686bfa791702f04dd8e9d77ca6a6b164cfbabe447aa2a745a07d602dd2b13077",
+    "bytes": 30879,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/meta40_backups/20261102_052830_217948/3.bak",
+    "source_group": "installed_meta",
+    "sha256": "c8a51c9bf0e015f411dbd48a5683c4026f495c9d629e66370c129d4fda3c5f17",
+    "bytes": 33182,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/meta40_backups/fix401_20261102_053457_781869/0.bak",
+    "source_group": "installed_meta",
+    "sha256": "0892074d89f2855e82d5b132425e246fcae16b0f242c1f4cb68291dd341ec46e",
+    "bytes": 41031,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/meta40_backups/fix401_20261102_053457_781869/1.bak",
+    "source_group": "installed_meta",
+    "sha256": "04739bccf6c65a49f2de4ec27bc6edd73a1c79f544c7a9bcbb2e91733215c233",
+    "bytes": 55,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/meta40_backups/fix401_20261102_053457_781869/2.bak",
+    "source_group": "installed_meta",
+    "sha256": "ec74db04d7b88a4cd72f9683a9eaed49096a47306481d88dcef2930b05e6177c",
+    "bytes": 4215,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/meta40_backups/fix401_20261102_053457_781869/3.bak",
+    "source_group": "installed_meta",
+    "sha256": "cfa4a254b1bd82c7eeaeb505f0beac4f7ac181e7a9ac2ff9cc0caebc53d58f30",
+    "bytes": 6886,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Core/meta_web44_backups/20261102_065107_097890/main.py",
+    "source_group": "installed_meta",
+    "sha256": "2ccad14afc6ca0a6cf57c6733629fde900f06e565c25c466272d1361f8796690",
+    "bytes": 10287,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Models/manifests/registry.ollama.ai/library/embeddinggemma/latest",
+    "source_group": "installed_meta",
+    "sha256": "d1a9ad04c64272d78aab43641947f5cb18eec9e8cbf13d26223caeae2432d112",
+    "bytes": 904,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Models/manifests/registry.ollama.ai/library/qwen2.5/3b",
+    "source_group": "installed_meta",
+    "sha256": "cd232a7a8d590449a99eb8fe29b614ef9bf3624d2d17faa496e1135ba4188be0",
+    "bytes": 1020,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Models/manifests/registry.ollama.ai/library/qwen2.5-coder/14b",
+    "source_group": "installed_meta",
+    "sha256": "625d05f3834d90b629b4830bfe1707259e3c1affa21955990a67f0b62bba9aea",
+    "bytes": 1021,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Models/manifests/registry.ollama.ai/library/qwen2.5-coder/7b",
+    "source_group": "installed_meta",
+    "sha256": "4aaba1ee422af93aad53ecbdfc8a159770cf254a9950b7a4304cf9ee3555ef31",
+    "bytes": 1021,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Models/manifests/registry.ollama.ai/library/qwen2.5vl/3b",
+    "source_group": "installed_meta",
+    "sha256": "85ba0d3634ea7ffa04c0d5d39d7830c94a69c5c63fdb5e4bf1af6251440aae96",
+    "bytes": 1166,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Models/manifests/registry.ollama.ai/library/qwen3/4b",
+    "source_group": "installed_meta",
+    "sha256": "31d9857b5705086d352d4d6db04e86c5d0f6a2b5d59a4dc7ce5cdb271ccf9141",
+    "bytes": 1022,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Models/manifests-v2/ollama.com/library/embeddinggemma/latest",
+    "source_group": "installed_meta",
+    "sha256": "85462619ee721b466c5927d109d4cb765861907d5417b9109caebc4e614679f1",
+    "bytes": 741,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Models/manifests-v2/ollama.com/library/meta/latest",
+    "source_group": "installed_meta",
+    "sha256": "1479ad6805ce0a1c8b6e56fae8524279764a9f6047bdbc04c57eb002ecf7b79d",
+    "bytes": 1078,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Models/manifests-v2/ollama.com/library/qwen2.5/3b",
+    "source_group": "installed_meta",
+    "sha256": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+    "bytes": 857,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Models/manifests-v2/ollama.com/library/qwen2.5-coder/14b",
+    "source_group": "installed_meta",
+    "sha256": "9ec8897f747e246e970bc5cfdda85d22f1123dc2e3d34978a010a75968716849",
+    "bytes": 858,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Models/manifests-v2/ollama.com/library/qwen2.5-coder/7b",
+    "source_group": "installed_meta",
+    "sha256": "dae161e27b0e90dd1856c8bb3209201fd6736d8eb66298e75ed87571486f4364",
+    "bytes": 858,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Models/manifests-v2/ollama.com/library/qwen2.5vl/3b",
+    "source_group": "installed_meta",
+    "sha256": "fb90415cde1ef08aa669ae74b082d49b158729b6db1ab183c941417d507e71a1",
+    "bytes": 1002,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Models/manifests-v2/ollama.com/library/qwen3/4b",
+    "source_group": "installed_meta",
+    "sha256": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+    "bytes": 859,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Models/metadata/sha256-0800cbac9c2064dde519420e75e512a83cb360de3ad5df176185dc69652fc515.json",
+    "source_group": "installed_meta",
+    "sha256": "8590cade77f98500cfef5b2bbf93f3ba43ab681c5f35b1381db407a792474fd5",
+    "bytes": 1441,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Models/metadata/sha256-3e4cb14174460404e7a233e531675303b2fbf7749c02f91864fe311ab6344e4f.json",
+    "source_group": "installed_meta",
+    "sha256": "5bcfd021ee089af6b9303643c33f32cf335a1c0c13c4ece9ed59f1f88cff5a37",
+    "bytes": 5724,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Models/metadata/sha256-5ee4f07cdb9beadbbb293e85803c569b01bd37ed059d2715faa7bb405f31caa6.json",
+    "source_group": "installed_meta",
+    "sha256": "df397c38780075a59f3484b06fc5592a2650e0fa85803bf85a84c3a4ddfa9282",
+    "bytes": 4168,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Models/metadata/sha256-60e05f2100071479f596b964f89f510f057ce397ea22f2833a0cfe029bfc2463.json",
+    "source_group": "installed_meta",
+    "sha256": "8ad0c9264b93c1bd5812ae7200fab5746e39fb8ef3092cbbe087107396bc68b7",
+    "bytes": 4200,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Models/metadata/sha256-ac9bc7a69dab38da1c790838955f1293420b55ab555ef6b4615efa1c1507b1ed.json",
+    "source_group": "installed_meta",
+    "sha256": "a7a6f3c9cc890316fe0a525c297ca9ffcd2f926833ca78edde63ccfaab662333",
+    "bytes": 4205,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Models/metadata/sha256-e9758e589d443f653821b7be9bb9092c1bf7434522b70ec6e83591b1320fdb4d.json",
+    "source_group": "installed_meta",
+    "sha256": "5923820d029c499741a38a7eb9c69a456707b4831e133f2a5536400698131f7f",
+    "bytes": 2471,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Projects/agent34_test.py",
+    "source_group": "installed_meta",
+    "sha256": "77532ba426bd7d47028cd51408bf7382c3a3c55208d3b4eab843cd37aecfdfb4",
+    "bytes": 29,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Projects/calculator.py",
+    "source_group": "installed_meta",
+    "sha256": "1ccb257d8993082a3b97f1998dcd79630d3021e0da9f78995498fec1d51f7cd0",
+    "bytes": 1614,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Projects/calculator.py.b8a3b657.bak",
+    "source_group": "installed_meta",
+    "sha256": "62ebc30ac0f5806f88496f1d4ffd48f39236767f918c40ba813f465f45ffa778",
+    "bytes": 1629,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Projects/hello_agent.txt",
+    "source_group": "installed_meta",
+    "sha256": "e5917959bf4c7d7c906398614508899088941bc1fcdaba3bf2cf876410686b1e",
+    "bytes": 80,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Projects/hello_meta.txt",
+    "source_group": "installed_meta",
+    "sha256": "31af5690f0382a1c0bb897b9c3cb50fd629c4c1161b3406e782dadfcae1bc575",
+    "bytes": 34,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Projects/main.py",
+    "source_group": "installed_meta",
+    "sha256": "d02e4538a94b3be372c6d3b5f41026a3f20217e5f47b07188e1f261429cd521b",
+    "bytes": 1146,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Projects/meta_agent_test.py",
+    "source_group": "installed_meta",
+    "sha256": "470485b382157b6ea74930ff6696f2a6e844403283fd5b5e1620932a5f4f6151",
+    "bytes": 76,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Projects/storage.py",
+    "source_group": "installed_meta",
+    "sha256": "f9e28624a31ae90760d198b1e32a0ba5b38b7528c1f63aa29feab78166fb52b0",
+    "bytes": 276,
+    "redacted": false
+  },
+  {
+    "path": "installed_meta/Projects/tasks.py",
+    "source_group": "installed_meta",
+    "sha256": "821a5aacaa71f20689388b8d03fbae70faa8450589f1636e111738d2a902f7d8",
+    "bytes": 619,
+    "redacted": false
+  },
+  {
+    "path": "desktop/Apply_hotfix.cmd",
+    "source_group": "desktop",
+    "sha256": "3c05f6960b681dc1e832f0f4c599fd83d4b78dcd82c883f6cd44be63eeb561f5",
+    "bytes": 224,
+    "redacted": false
+  },
+  {
+    "path": "desktop/Build_Standalone_EXE.cmd",
+    "source_group": "desktop",
+    "sha256": "0b42caeee556512e849920aee82a5099ba98eb861de7a41aa0874cb00bfdf28b",
+    "bytes": 560,
+    "redacted": false
+  },
+  {
+    "path": "desktop/Install_hotfix_in_existing_1_3.ps1",
+    "source_group": "desktop",
+    "sha256": "9809b7b43b900690ec25509313c8e977ab19ca1caa8149a2bd5b38f9dcb73da0",
+    "bytes": 1112,
+    "redacted": false
+  },
+  {
+    "path": "desktop/Install_META_1_3.cmd",
+    "source_group": "desktop",
+    "sha256": "d16bafaec8722b947be006106c0f5f29ff425401aa3f862f7a8aa23084367ea5",
+    "bytes": 466,
+    "redacted": false
+  },
+  {
+    "path": "desktop/META.exe",
+    "source_group": "desktop",
+    "sha256": "2e26c3399ce99a5a02ed14056d3687442c3a2d92f84131690d7269f28b971678",
+    "bytes": 3584,
+    "redacted": false
+  },
+  {
+    "path": "desktop/meta40_desktop.py",
+    "source_group": "desktop",
+    "sha256": "b7289b0e651612896e21df387caf77dfe5035fd3b4c6a552a711123c41427a6a",
+    "bytes": 2449,
+    "redacted": false
+  },
+  {
+    "path": "desktop/meta_desktop.py",
+    "source_group": "desktop",
+    "sha256": "3a3d295e2df6087aae89e767ef2bfe89998778c98387fb71db85ba0d2e2fce87",
+    "bytes": 30708,
+    "redacted": false
+  },
+  {
+    "path": "desktop/README_PATCH_RU.txt",
+    "source_group": "desktop",
+    "sha256": "0a18d2c19b1bb9a58e0fdc1584bb9a15d0130e21e1f967903f19f7310c53f7e5",
+    "bytes": 3687,
+    "redacted": false
+  },
+  {
+    "path": "desktop/README_RU.txt",
+    "source_group": "desktop",
+    "sha256": "f2d76c60e31efbca02711107b55271ef96a768a376103faa08fd3db961585dd3",
+    "bytes": 3156,
+    "redacted": false
+  },
+  {
+    "path": "desktop/Start_META.cmd",
+    "source_group": "desktop",
+    "sha256": "5a71daef8e34f67fb89b5a2b49dee604ee466f75b521a57e9c47358f53afd993",
+    "bytes": 102,
+    "redacted": false
+  },
+  {
+    "path": "desktop/Start_META_Code.cmd",
+    "source_group": "desktop",
+    "sha256": "5877029afd60def992988d8e807f84a63216c8c9065523b5af6203d0ebba2f0d",
+    "bytes": 235,
+    "redacted": false
+  },
+  {
+    "path": "desktop/assets/app.css",
+    "source_group": "desktop",
+    "sha256": "64645312564c329f45c38dacadd01d3e57096030504351c5628b04c64960a64d",
+    "bytes": 25747,
+    "redacted": false
+  },
+  {
+    "path": "desktop/assets/app.js",
+    "source_group": "desktop",
+    "sha256": "b2b8a6daacb76b6cc4bcf98540abf369b01f64f5f3197aadaa44de63abd3cb22",
+    "bytes": 41472,
+    "redacted": false
+  },
+  {
+    "path": "desktop/assets/index.html",
+    "source_group": "desktop",
+    "sha256": "a3eb964a3c5728599f7801ec9162c4d798c87f8ca71444e0367ec74025aec2ee",
+    "bytes": 7064,
+    "redacted": false
+  },
+  {
+    "path": "desktop/assets/meta-icon.png",
+    "source_group": "desktop",
+    "sha256": "d2c390d5e66baf28ff37e7c96531b01f580e5d5866dd13e8209941fb88a82687",
+    "bytes": 4800,
+    "redacted": false
+  },
+  {
+    "path": "desktop/assets/meta-icon.svg",
+    "source_group": "desktop",
+    "sha256": "f81882d553a7bfe273edf0d17b564642baecc2ea4a1cc322af4f8d697c841c5f",
+    "bytes": 250,
+    "redacted": false
+  },
+  {
+    "path": "desktop/assets/meta.ico",
+    "source_group": "desktop",
+    "sha256": "44e69bce6b62fa2638f6bcbf36c41d8dfa7c82d814e5bec2b9976f7fea578d7e",
+    "bytes": 18611,
+    "redacted": false
+  },
+  {
+    "path": "desktop/backup_agent36_20261102_011601/core/agent_pending.py",
+    "source_group": "desktop",
+    "sha256": "5ed01c5375a39474785cc65975aed50f53d0b2ff005049d845d1f1f6ac910041",
+    "bytes": 3573,
+    "redacted": false
+  },
+  {
+    "path": "desktop/backup_agent36_20261102_011601/desktop/meta_desktop.py",
+    "source_group": "desktop",
+    "sha256": "12c3fe334710e19a23b7a82c858418903b569f7cc128e7bc5246b7570c9fb01c",
+    "bytes": 28271,
+    "redacted": false
+  },
+  {
+    "path": "desktop/backup_agent36_20261102_011601/desktop/assets/app.css",
+    "source_group": "desktop",
+    "sha256": "a78b98b67a1c3dc39a86bd365066ef7f23b49734dd6b79e9c90099e10ce67727",
+    "bytes": 24968,
+    "redacted": false
+  },
+  {
+    "path": "desktop/backup_agent36_20261102_011601/desktop/assets/app.js",
+    "source_group": "desktop",
+    "sha256": "ae7d6c049cc4c6bc84068f2bebcb39b84d9e0e0eb36f20db750afe27417312a0",
+    "bytes": 30188,
+    "redacted": false
+  },
+  {
+    "path": "desktop/backup_agent37_20261102_045817_042966/core/agent_pending.py",
+    "source_group": "desktop",
+    "sha256": "dbba6d8e301e0e6ac105d8fd90787e44861def328f56b3ead252cf15d9e090d3",
+    "bytes": 7301,
+    "redacted": false
+  },
+  {
+    "path": "desktop/backup_agent37_20261102_045817_042966/core/agent_proposal_bridge.py",
+    "source_group": "desktop",
+    "sha256": "41c99f27a875e0332bde3d9c485ce7c57f79215ae922d3d8fb8e0ee2f2ce7549",
+    "bytes": 2174,
+    "redacted": false
+  },
+  {
+    "path": "desktop/backup_agent37_20261102_045817_042966/desktop/assets/app.css",
+    "source_group": "desktop",
+    "sha256": "c92964202ba6487cc552f848b3e4836ab48052ac7c0deb4ec13ab47dbfd990ce",
+    "bytes": 25612,
+    "redacted": false
+  },
+  {
+    "path": "desktop/backup_agent37_20261102_045817_042966/desktop/assets/app.js",
+    "source_group": "desktop",
+    "sha256": "d96a66bba4d983026059195bf44e0a53689bb27d0239ff6ed53d93d6ab7f01c1",
+    "bytes": 33074,
+    "redacted": false
+  },
+  {
+    "path": "desktop/backup_agent38_20261102_051138_590671/agent_proposal_bridge.py",
+    "source_group": "desktop",
+    "sha256": "bdd0d6f4190797ef798b965cce7d77932a10639d6d99962b524f1de7ac223e7a",
+    "bytes": 2534,
+    "redacted": false
+  },
+  {
+    "path": "desktop/metacode/cli.py",
+    "source_group": "desktop",
+    "sha256": "8e51d4bd06f5fc20f2f40a5b88e15e610c46cce70783e23534407acf6fe62c8b",
+    "bytes": 2340,
+    "redacted": false
+  },
+  {
+    "path": "desktop/metacode/config.json",
+    "source_group": "desktop",
+    "sha256": "80fd3379094b548e6740a4d5ac90b9ad7b540065ef4a3ae941e2fdc882570a7a",
+    "bytes": 47,
+    "redacted": false
+  },
+  {
+    "path": "desktop/metacode/engine.py",
+    "source_group": "desktop",
+    "sha256": "1a7a02e9056a57c6435946f296a3ddf18bf86ac95ad62c3f13ba9bbf882b2c6b",
+    "bytes": 10189,
+    "redacted": false
+  },
+  {
+    "path": "desktop/metacode/test_engine.py",
+    "source_group": "desktop",
+    "sha256": "a0ddd07d98cfde6265976d4fea0ccece745d138b8dedf179d11508d7205967f8",
+    "bytes": 1421,
+    "redacted": false
+  },
+  {
+    "path": "desktop/metacode/__init__.py",
+    "source_group": "desktop",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0,
+    "redacted": false
+  },
+  {
+    "path": "downloads/META_4_4_Chat_Web/META_4_4_Chat_Web/install_meta_web44.py",
+    "source_group": "downloads/META_4_4_Chat_Web",
+    "sha256": "9ce92f7629261fa4af212e8a3b3a8b80d8a80e39788d3f850dae779c294d686e",
+    "bytes": 2148,
+    "redacted": false
+  },
+  {
+    "path": "downloads/META_4_4_Chat_Web/META_4_4_Chat_Web/main.py",
+    "source_group": "downloads/META_4_4_Chat_Web",
+    "sha256": "adafd2de15a24864e0e39f9c9768dd42fcaca53eaaad09ba939859d04142474d",
+    "bytes": 10441,
+    "redacted": false
+  },
+  {
+    "path": "downloads/META_4_4_Chat_Web/META_4_4_Chat_Web/meta_web_bridge.py",
+    "source_group": "downloads/META_4_4_Chat_Web",
+    "sha256": "7c9b8805cff499fc9d5cb2bb2eabcefca304af2d313564417f37581e8840cedb",
+    "bytes": 6942,
+    "redacted": false
+  },
+  {
+    "path": "downloads/META_4_4_Chat_Web/META_4_4_Chat_Web/README_RU.md",
+    "source_group": "downloads/META_4_4_Chat_Web",
+    "sha256": "6172f05286ecb7e57cffd21378593358c6491ee7d9e0c73ad2c06572c6632824",
+    "bytes": 5765,
+    "redacted": false
+  },
+  {
+    "path": "downloads/META_4_4_Chat_Web/META_4_4_Chat_Web/test_web_bridge.py",
+    "source_group": "downloads/META_4_4_Chat_Web",
+    "sha256": "48423139e5aaef3b47901ea23e2a80171c45a1a844adb15760f80cdb04c08367",
+    "bytes": 2956,
+    "redacted": false
+  },
+  {
+    "path": "downloads/META_4_4_Chat_Web/META_4_4_Chat_Web/web_research.py",
+    "source_group": "downloads/META_4_4_Chat_Web",
+    "sha256": "69b44227898628b6a96dd6951aa3c362552e1fb0fd9a7431b52d6b1d4619797a",
+    "bytes": 6853,
+    "redacted": false
+  },
+  {
+    "path": "releases/meta40_upgrade/build_release.py",
+    "source_group": "meta40_upgrade",
+    "sha256": "d14ca22ad4bcd566a0aa00b0b5c749f9152ef5c15f78c620422c99e784147694",
+    "bytes": 1251,
+    "redacted": false
+  },
+  {
+    "path": "releases/meta40_upgrade/demo_ollama.py",
+    "source_group": "meta40_upgrade",
+    "sha256": "6f42d2babd2decfbc5ceda5b0fc81290d073709f1e632e20317b6b942171d7fd",
+    "bytes": 2075,
+    "redacted": false
+  },
+  {
+    "path": "releases/meta40_upgrade/install_meta40.py",
+    "source_group": "meta40_upgrade",
+    "sha256": "faca02b1cb0475a9b2e8c69a838be7246778ea3bab0dfc35d39c2f47a4478b33",
+    "bytes": 9907,
+    "redacted": false
+  },
+  {
+    "path": "releases/meta40_upgrade/Install_META_4.cmd",
+    "source_group": "meta40_upgrade",
+    "sha256": "ed6d56646566cc2c8ea44fb47953a5133f708bb201f3458b09f42ce1344e76cd",
+    "bytes": 443,
+    "redacted": false
+  },
+  {
+    "path": "releases/meta40_upgrade/LIVE_DEMO_RESULT.json",
+    "source_group": "meta40_upgrade",
+    "sha256": "c5b0098de33a9c6352f41c322fb639d5808fa9bc03e57a0a1f1e6af71c615f2f",
+    "bytes": 2598,
+    "redacted": false
+  },
+  {
+    "path": "releases/meta40_upgrade/patch_meta401.py",
+    "source_group": "meta40_upgrade",
+    "sha256": "c6d55c3f0a5b910e3d65b43a4f087eebda59f290d55b8ba93fabef266ab4b940",
+    "bytes": 3211,
+    "redacted": false
+  },
+  {
+    "path": "releases/meta40_upgrade/README_RU.md",
+    "source_group": "meta40_upgrade",
+    "sha256": "b7a24578c6f7e9b2937289f4d42f36a9c876b366a1a087f8930d28963206e0e2",
+    "bytes": 15810,
+    "redacted": false
+  },
+  {
+    "path": "releases/meta40_upgrade/SHA256SUMS.txt",
+    "source_group": "meta40_upgrade",
+    "sha256": "104ca1b57dd723836db8ed1bf6a5d7dc6bd1894a8f0609f7c359680a5264b3c5",
+    "bytes": 1679,
+    "redacted": false
+  },
+  {
+    "path": "releases/meta40_upgrade/VERIFICATION_RU.md",
+    "source_group": "meta40_upgrade",
+    "sha256": "0c6bbe623af3bb2f1bc90bc98c58f52751330e1b392af800821e0ab78d659e9b",
+    "bytes": 5153,
+    "redacted": false
+  },
+  {
+    "path": "releases/meta40_upgrade/core/meta40/api.py",
+    "source_group": "meta40_upgrade",
+    "sha256": "541ba75128597ef4b7da6daeeec86461f950e8dda237ec178ab4112d39756ec6",
+    "bytes": 6976,
+    "redacted": false
+  },
+  {
+    "path": "releases/meta40_upgrade/core/meta40/engine.py",
+    "source_group": "meta40_upgrade",
+    "sha256": "184f45fbb16e3690c45930ce2ad8583c31b569e6ac5f212917defa3288f0c710",
+    "bytes": 7827,
+    "redacted": false
+  },
+  {
+    "path": "releases/meta40_upgrade/core/meta40/proposals.py",
+    "source_group": "meta40_upgrade",
+    "sha256": "38c10bc0bef822c8e4370db0326b88b25046a70023d11737c6f6d6eb326e83b2",
+    "bytes": 8252,
+    "redacted": false
+  },
+  {
+    "path": "releases/meta40_upgrade/core/meta40/runner.py",
+    "source_group": "meta40_upgrade",
+    "sha256": "fd0c954a50c1c2417e0a83a972b862c826a1efa1f39aeda9133862fa13dd1209",
+    "bytes": 6134,
+    "redacted": false
+  },
+  {
+    "path": "releases/meta40_upgrade/core/meta40/workspace.py",
+    "source_group": "meta40_upgrade",
+    "sha256": "7a801c3f5236c15d86e9af331d5621972ae646b7b9a59126fe83f6de7d47fbc6",
+    "bytes": 4950,
+    "redacted": false
+  },
+  {
+    "path": "releases/meta40_upgrade/core/meta40/__init__.py",
+    "source_group": "meta40_upgrade",
+    "sha256": "55dcbf57f0f6a6c251434ebdc85555b5548db77a804f483be103e29357379035",
+    "bytes": 55,
+    "redacted": false
+  },
+  {
+    "path": "releases/meta40_upgrade/desktop/agent40.js",
+    "source_group": "meta40_upgrade",
+    "sha256": "bb92c3fd1ee048318da2b9ee07f930d6aedda9a1531ddac3f38c33c9425ec8e3",
+    "bytes": 8419,
+    "redacted": false
+  },
+  {
+    "path": "releases/meta40_upgrade/desktop/meta40_desktop.py",
+    "source_group": "meta40_upgrade",
+    "sha256": "b7289b0e651612896e21df387caf77dfe5035fd3b4c6a552a711123c41427a6a",
+    "bytes": 2449,
+    "redacted": false
+  },
+  {
+    "path": "releases/meta40_upgrade/examples/meta40_demo/calc.py",
+    "source_group": "meta40_upgrade",
+    "sha256": "e1a894022d1a082987b87adecb623438c9e386d86b2b621cff4a5fe7fdf7edc8",
+    "bytes": 32,
+    "redacted": false
+  },
+  {
+    "path": "releases/meta40_upgrade/examples/meta40_demo/test_calc.py",
+    "source_group": "meta40_upgrade",
+    "sha256": "bd5ccfbd340a1c5ed6ffc703c5100118f16c33b952c8b2893476b2d24a86a0fc",
+    "bytes": 136,
+    "redacted": false
+  },
+  {
+    "path": "releases/meta40_upgrade/tests/test_meta40.py",
+    "source_group": "meta40_upgrade",
+    "sha256": "31b97c5e6fe971a780c2f69f4aa245525bdf63519deca90f6ab009f1b85faf8e",
+    "bytes": 18633,
+    "redacted": false
+  },
+  {
+    "path": "docs/META_4_0_Подробный_отчёт.docx",
+    "source_group": "chat_document",
+    "sha256": "bc68e12b3c89c2cb66abcec7fb3493f8de0f88660a8893d44af7c05da4ef4807",
+    "bytes": 53195,
+    "redacted": false
+  },
+  {
+    "path": "archives/META_4_0_Upgrade.zip",
+    "source_group": "chat_release",
+    "sha256": "16909f0d5fd2239c169eff29bd22330066ff541835b2c326b80285c65bbe2233",
+    "bytes": 39904,
+    "redacted": false
+  },
+  {
+    "path": "archives/downloads/META_4_4_Chat_Web.zip",
+    "source_group": "download_release",
+    "sha256": "848e1f4ade2a5e6af93ed8b5dd8b296579e7e75ffdc07349cb5976dbb0f6970c",
+    "bytes": 14055,
+    "redacted": false
+  },
+  {
+    "path": "tools/collect_meta.py",
+    "source_group": "collection_support",
+    "sha256": "a996cc9e695ac9902873d2b0b1a2fae7f21e9b273816cd3b16439076424c8acd",
+    "bytes": 10080,
+    "redacted": false
+  },
+  {
+    "path": "docs/source/build_report.py",
+    "source_group": "collection_support",
+    "sha256": "d433466e74ed48a5ac7bf4341d3da27ca7a31e4823a0359729c23ba84a97a49b",
+    "bytes": 50096,
+    "redacted": false
+  },
+  {
+    "path": "docs/source/render_word.ps1",
+    "source_group": "collection_support",
+    "sha256": "220b709e46585ffb5cbe090f4ff165cb477cf26d007f185c35d3f16406be3fde",
+    "bytes": 769,
+    "redacted": false
+  },
+  {
+    "path": "docs/source/render_pages.py",
+    "source_group": "collection_support",
+    "sha256": "490998c6d737fd7f1124b0aa034d1792e9ad7e98af62155c5b12c2dd7064e693",
+    "bytes": 410,
+    "redacted": false
+  },
+  {
+    "path": "docs/META_4_0_report.pdf",
+    "source_group": "collection_support",
+    "sha256": "902494b93f344f7f7fbf8627d10c6ef955dddcd6d244d9a6505edb168f9a90cb",
+    "bytes": 353782,
+    "redacted": false
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "source_files": 177,
+  "source_bytes": 1573818,
+  "same_content_copies": 12,
+  "secret_scan": "passed",
+  "originals_modified": false,
+  "source_groups": {
+    "installed_meta": 112,
+    "desktop": 31,
+    "downloads/META_4_4_Chat_Web": 6,
+    "meta40_upgrade": 20,
+    "chat_document": 1,
+    "chat_release": 1,
+    "download_release": 1,
+    "collection_support": 5
+  }
+}

@@ -1,0 +1,208 @@
+'use strict';
+const $=id=>document.getElementById(id);
+const icons={code:'M8 8 4 12l4 4M16 8l4 4-4 4M14 5l-4 14',plus:'M12 5v14M5 12h14',search:'m21 21-4.4-4.4M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z','file-text':'M6 3h9l4 4v14H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm9 0v5h5M8 12h8M8 16h8',grid:'M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z',panel:'M3 4h18v16H3zM9 4v16',settings:'M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM19 15l2 2-3 3-2-2M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.2 2.2M16.9 16.9l2.2 2.2M19.1 4.9l-2.2 2.2M7.1 16.9l-2.2 2.2','chevron-down':'m6 9 6 6 6-6','square-pen':'M12 4H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h13a2 2 0 0 0 2-2v-7M13 13l7-7 2 2-7 7-3 1 1-3Z',lightbulb:'M9 18h6M10 22h4M12 2a7 7 0 0 0-4 13 4 4 0 0 1 1 3h6a4 4 0 0 1 1-3A7 7 0 0 0 12 2Z',calendar:'M3 5h18v16H3zM7 2v6M17 2v6M3 10h18',layers:'m12 2 10 6-10 6L2 8l10-6Zm-10 11 10 6 10-6M2 18l10 5 10-5',image:'M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1ZM6 16l4-4 3 3 3-4 4 5M8 8h.01',paperclip:'m21 11-8.5 8.5a6 6 0 0 1-8.5-8.5L13 3.5a4 4 0 0 1 5.7 5.7L9.5 18a2 2 0 0 1-2.8-2.8L15 7',x:'M18 6 6 18M6 6l12 12','arrow-up':'M12 19V5m-7 7 7-7 7 7',menu:'M3 6h18M3 12h18M3 18h18',sliders:'M4 7h16M4 17h16M9 4v6M15 14v6',user:'M20 21a8 8 0 0 0-16 0M12 13a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z',brain:'M12 18V5a3 3 0 0 0-5.5-1.7A4.5 4.5 0 0 0 4 11a4.5 4.5 0 0 0 2 8.5c2 1.5 4 1 6-1.5Zm0 0V5a3 3 0 0 1 5.5-1.7A4.5 4.5 0 0 1 20 11a4.5 4.5 0 0 1-2 8.5c-2 1.5-4 1-6-1.5Z',shield:'M12 2 3 6v6c0 6 4 9 9 10 5-1 9-4 9-10V6l-9-4Z','user-round':'M20 21a8 8 0 0 0-16 0M12 13a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z',link:'M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-2 2M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l2-2',info:'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20ZM12 11v6M12 7h.01',ellipsis:'M5 12h.01M12 12h.01M19 12h.01',message:'M21 11a9 9 0 0 1-9 9 9 9 0 0 1-4-.9L3 21l1.9-5.5A9 9 0 1 1 21 11Z',pin:'M16 3l5 5-3 1-3 5-3 1-4-4-5 8 8-5 1-3 5-3 1-3Z',trash:'M3 6h18M8 6V4h8v2M5 6l1 15h12l1-15M10 10v7M14 10v7',download:'M12 3v12m-5-5 5 5 5-5M4 18v3h16v-3',logout:'M9 4H4v16h5M16 16l4-4-4-4M20 12H9',refresh:'M20 7v5h-5M4 17v-5h5M5 9a8 8 0 0 1 14-2l1 5M4 12l1 5a8 8 0 0 0 14-2'};
+const icon=n=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${icons[n]||icons.info}"/></svg>`;
+const html=x=>String(x??'').replace(/[&<>"']/g,k=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[k]));
+function decorate(el=document){el.querySelectorAll('[data-i]').forEach(x=>x.innerHTML=icon(x.dataset.i));}
+async function api(path,method='GET',data=null){let options={method,credentials:'same-origin',headers:{}};if(data!==null){options.headers['Content-Type']='application/json';options.body=JSON.stringify(data)}const response=await fetch(path,options);let value;try{value=await response.json()}catch{throw Error('Неверный ответ приложения')}if(response.status===401){showAuth('login');throw Error('Требуется вход')}if(!response.ok)throw Error(value.error||'Ошибка '+response.status);return value}
+let prefs={theme:'dark',accent:'amber',density:'compact',font_size:'normal',display_name:'',assistant_name:'META',language:'ru',response_style:'balanced',start_screen:'actions',show_tips:true,reduce_motion:false,custom_instructions:''};
+let account={configured:false,signed_in:true},chats=[],entries=[],active=null,busy=false,attachment=null,page='general',currentNote=null,notes=[],codeMode=false;
+function toast(msg){let d=document.createElement('div');d.className='toast';d.textContent=msg;$('toasts').append(d);setTimeout(()=>d.remove(),4500)}
+function applyPrefs(){let p=prefs;document.body.dataset.theme=p.theme==='system'?(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark'):p.theme;document.body.dataset.accent=p.accent;document.body.dataset.density=p.density;document.body.dataset.font=p.font_size;document.body.dataset.reduceMotion=String(p.reduce_motion);$('quickActions').hidden=!p.show_tips||!!entries.length||p.start_screen==='minimal';$('quickActions').style.visibility=entries.length?'hidden':'visible'}
+function updateModeUI(){
+ document.body.dataset.mode=codeMode?'code':'chat';
+ $('workspaceLabel').textContent=codeMode?'META Code':'META';
+ $('messageInput').placeholder=codeMode?'Опиши задачу, ошибку или проект…':'Сообщение для META';
+ $('codeOpen').classList.toggle('selected',codeMode);
+ const labels=codeMode?['Создать проект','Исправить ошибку','Объяснить код','Разобрать скриншот']:['Придумать идеи','Спланировать проект','Разобраться в теме','Разобрать фото'];
+ const prompts=codeMode?['Помоги создать программный проект: предложи структуру и начальный код','Помоги найти и исправить ошибку в моём коде','Разъясни алгоритм и улучши код','']:['Помоги придумать идеи для нового проекта','Помоги спланировать проект: начни с уточнения цели','Помоги разобраться в сложной теме простыми словами',''];
+ [...$('quickActions').children].forEach((b,i)=>{let svg=b.querySelector('svg')?.outerHTML||'';b.innerHTML=svg+labels[i];if(i<3)b.dataset.prompt=prompts[i]});
+ $('quickActions').classList.toggle('code-quick',codeMode);
+}
+function updateProfile(){const name=account.configured?account.name:'Локальный профиль';$('profileName').textContent=name;$('avatarLetter').textContent=(name[0]||'M').toUpperCase();$('profileState').textContent=account.configured?(account.signed_in?'Вход выполнен':'Требуется вход'):'Без регистрации';}
+function showAuth(mode){$('authOverlay').hidden=false;let create=mode==='register'||!account.configured;$('authTitle').textContent=create?'Создать локальный профиль':'Вход в META';$('authDescription').textContent=create?'Пароль защитит доступ к чатам на этом компьютере':'Введи пароль локального профиля';$('accountNameLabel').hidden=!create;$('accountEmailLabel').hidden=!create;$('authError').textContent='';$('accountPassword').value='';$('authForm').dataset.mode=create?'register':'login'}
+function dismissAuth(){$('authOverlay').hidden=true}
+async function loadAccount(){account=await api('/api/account');updateProfile();if(account.configured&&!account.signed_in)showAuth('login')}
+async function authSubmit(e){e.preventDefault();try{let mode=$('authForm').dataset.mode;let data={password:$('accountPassword').value};if(mode==='register'){data.name=$('accountName').value;data.email=$('accountEmail').value}await api('/api/account/'+mode,'POST',data);dismissAuth();await loadAccount();prefs=await api('/api/settings');applyPrefs();await refreshChats();renderMessages();toast('Профиль активен')}catch(err){$('authError').textContent=err.message}}
+async function logout(){try{await api('/api/account/logout','POST',{});account.signed_in=false;updateProfile();showAuth('login')}catch(e){toast(e.message)}}
+function setOnline(online){$('onlineDot').classList.toggle('offline',!online);$('connectionText').textContent=online?'Подключено':'META Core недоступен'}
+async function status(){try{setOnline((await api('/api/status')).core)}catch{setOnline(false)}}
+function showSidebar(){ $('sidebar').classList.add('open');$('sidebarShade').classList.add('show') }function hideSidebar(){ $('sidebar').classList.remove('open');$('sidebarShade').classList.remove('show') }
+async function refreshChats(){chats=await api('/api/chats');renderChats()}
+function renderChats(){let list=$('chatList');list.innerHTML='';let q=$('searchChats').value.toLowerCase();const found=chats.filter(x=>x.title.toLowerCase().includes(q));$('chatCount').textContent=chats.length;if(!found.length){list.innerHTML='<div class="notice">'+(q?'Ничего не найдено':'Пока нет разговоров')+'</div>';return}for(let c of found){let row=document.createElement('div');row.className='chat-row '+(active===c.id?'active':'');row.innerHTML=`<button class="chat-link">${icon(c.mode==='code'?'code':(c.pinned?'pin':'message'))}<span class="chat-title">${html(c.title)}</span></button><button class="chat-more" title="Действия">${icon('ellipsis')}</button>`;row.querySelector('.chat-link').onclick=()=>loadChat(c.id);row.querySelector('.chat-more').onclick=()=>chatActions(c);list.append(row)}}
+async function chatActions(c){let action=prompt(`Чат: ${c.title}\n1 — Переименовать\n2 — ${c.pinned?'Открепить':'Закрепить'}\n3 — Удалить`);try{if(action==='1'){let title=prompt('Название чата',c.title);if(title?.trim())await api(`/api/chats/${c.id}/rename`,'POST',{title})}if(action==='2')await api(`/api/chats/${c.id}/pin`,'POST',{pinned:!c.pinned});if(action==='3'){if(!confirm('Удалить чат?'))return;await api(`/api/chats/${c.id}`,'DELETE');if(active===c.id){active=null;entries=[];renderMessages()}}await refreshChats()}catch(e){toast(e.message)}}
+function newChat(mode='chat'){if(busy)return;codeMode=mode==='code';active=null;entries=[];attachment=null;$('messageInput').value='';showAttachment();renderMessages();renderChats();updateModeUI();hideSidebar();$('messageInput').focus()}
+async function loadChat(id){if(busy)return;try{active=id;codeMode=chats.find(c=>c.id===id)?.mode==='code';entries=await api(`/api/chats/${id}/messages`);renderMessages();renderChats();updateModeUI();hideSidebar()}catch(e){toast(e.message)}}
+function markdown(text){let s=html(text);let codes=[];s=s.replace(/```([^\n`]*)\n([\s\S]*?)```/g,(_,lang,code)=>{let pos=codes.length;codes.push(`<pre><code>${code.trim()}</code></pre>`);return `§§CODE${pos}§§`});s=s.replace(/`([^`\n]+)`/g,'<code>$1</code>').replace(/^### (.*)$/gm,'<h3>$1</h3>').replace(/^## (.*)$/gm,'<h2>$1</h2>').replace(/^# (.*)$/gm,'<h1>$1</h1>').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');s=s.split(/\n\n+/).map(p=>/^(<h|§§CODE)/.test(p)?p:`<p>${p.replace(/\n/g,'<br>')}</p>`).join('');return s.replace(/§§CODE(\d+)§§/g,(_,n)=>codes[Number(n)]||'')}
+function renderMessages(){let box=$('conversation');box.innerHTML='';if(!entries.length){box.innerHTML='<div class="start-space"><div class="start-caption">'+(codeMode?'META Code · проектирование, код, отладка':'')+'</div></div>';applyPrefs();return}for(let e of entries){let row=document.createElement('div');row.className='message '+e.role;let bubble=document.createElement('div');bubble.className='message-content';bubble.innerHTML=markdown(e.content);if(e.image_filename||e._image){let img=document.createElement('img');img.src=e._image||'/api/image/'+encodeURIComponent(e.image_filename);img.alt='Вложение';bubble.prepend(img)}if(e.role==='assistant'){let avatar=document.createElement('div');avatar.className='message-avatar';avatar.textContent='M';row.append(avatar)}row.append(bubble);box.append(row)}applyPrefs();renderProposalCards();scrollBottom()}
+
+// META_APPROVAL_GUI_36
+function renderProposalCards(){
+  const rows = Array.from(document.querySelectorAll('#conversation .message.assistant'));
+  entries.forEach((entry, index) => {
+    if (entry.role !== 'assistant' || !entry.content.includes('Файловая заявка')) return;
+    const match = entry.content.match(/\b[a-f0-9]{32}\b/i);
+    if (!match) return;
+    const proposalId = match[0];
+    const row = rows[entries.slice(0,index+1).filter(e=>e.role==='assistant').length-1];
+    const bubble = row?.querySelector('.message-content');
+    if (!bubble || bubble.querySelector('.meta-proposal')) return;
+    const card = document.createElement('div');
+    card.className = 'meta-proposal';
+    const title = document.createElement('strong');
+    title.textContent = 'Изменение файла — ожидает подтверждения';
+    const path = document.createElement('div');
+    path.className = 'meta-proposal-path';
+    const diff = document.createElement('pre');
+    diff.textContent = 'Загрузка предварительного просмотра…';
+    const actions = document.createElement('div');
+    actions.className = 'meta-proposal-actions';
+    const approve = document.createElement('button');
+    approve.textContent = 'Применить';
+    approve.disabled = true;
+    const reject = document.createElement('button');
+    reject.textContent = 'Отклонить';
+    reject.disabled = true;
+    actions.append(approve,reject);
+    card.append(title,path,diff,actions);
+    bubble.append(card);
+    api('/api/proposals/'+proposalId).then(data=>{
+      path.textContent = data.path || '';
+      diff.textContent = data.diff || '(нет изменений)';
+      approve.disabled = false;
+      reject.disabled = false;
+    }).catch(err=>{
+      title.textContent = 'Заявка недоступна';
+      diff.textContent = err.message;
+    });
+    async function decide(action){
+      if(action==='apply' && !window.confirm('Применить показанное изменение файла?')) return;
+      approve.disabled=true; reject.disabled=true;
+      try {
+        const result = await api('/api/proposals/'+proposalId+'/'+action,'POST',{});
+        title.textContent = result.applied ? 'Изменение применено' : (action==='reject' ? 'Заявка отклонена' : 'Изменений нет');
+        diff.textContent = result.path || result.status;
+      } catch(err){
+        diff.textContent = 'Не удалось выполнить действие: '+err.message;
+        approve.disabled=false; reject.disabled=false;
+      }
+    }
+    approve.onclick=()=>decide('apply');
+    reject.onclick=()=>decide('reject');
+  });
+}
+
+function scrollBottom(){let c=$('chatStage');c.scrollTop=c.scrollHeight}
+function resizeInput(){let ta=$('messageInput');ta.style.height='auto';ta.style.height=Math.min(190,ta.scrollHeight)+'px'}
+function showAttachment(){let preview=$('attachmentPreview');preview.hidden=!attachment;if(attachment){$('attachmentImage').src=attachment.data;$('attachmentName').textContent=attachment.name}}
+function setBusy(on){busy=on;$('sendButton').disabled=on;$('messageInput').disabled=on;$('composeStatus').textContent=on?'META отвечает…':'Локальная META'}
+async function sendMessage(){if(busy)return;let text=$('messageInput').value.trim();if(!text&&!attachment)return;let image=attachment;try{if(!active){let chat=await api('/api/chats','POST',{title:text.slice(0,62)||(codeMode?'Новый проект':'Разбор фото'),mode:codeMode?'code':'chat'});active=chat.id}entries.push({role:'user',content:text,_image:image?.data});$('messageInput').value='';attachment=null;showAttachment();resizeInput();renderMessages();setBusy(true);let pending=document.createElement('div');pending.className='message assistant';pending.id='pending';pending.innerHTML='<div class="message-avatar">M</div><div class="loading"><span></span><span></span><span></span></div>';$('conversation').append(pending);scrollBottom();await api('/api/message','POST',{conversation_id:active,text,image:image?.data||null});entries=await api(`/api/chats/${active}/messages`);renderMessages();await refreshChats();status()}catch(e){$('pending')?.remove();toast('Ошибка: '+e.message);if(active){try{entries=await api(`/api/chats/${active}/messages`);renderMessages()}catch{}}}finally{setBusy(false);$('messageInput').focus()}}
+const choose=(key,items)=>`<div class="segmented">${items.map(([v,n])=>`<button data-setting="${key}" data-value="${v}" class="${prefs[key]===v?'active':''}">${n}</button>`).join('')}</div>`;
+const switcher=(key)=>`<button class="switch ${prefs[key]?'on':''}" aria-label="Переключить" data-setting="${key}" data-value="${!prefs[key]}"></button>`;
+const row=(title,desc,control)=>`<div class="setting-row"><div class="setting-text"><strong>${title}</strong>${desc?`<small>${desc}</small>`:''}</div><div class="setting-control">${control}</div></div>`;
+const section=x=>`<div class="settings-section">${x}</div>`;
+const select=(id,values,value)=>`<select class="setting-select" id="${id}">${values.map(([v,n])=>`<option value="${v}" ${value===v?'selected':''}>${n}</option>`).join('')}</select>`;
+function openSettings(p='general'){$('overlay').hidden=false;page=p;renderSettings()}
+function closeSettings(){$('overlay').hidden=true}
+function renderSettings(){let body=$('settingsBody');document.querySelectorAll('#settingsNav button').forEach(btn=>btn.classList.toggle('active',btn.dataset.page===page));let names={general:'Общее',interface:'Интерфейс',personal:'Персонализация',memory:'Память',data:'Данные и приватность',account:'Учётная запись',connections:'Подключения',about:'О программе'};$('settingsTitle').textContent=names[page]||'Настройки';
+if(page==='general'){body.innerHTML='<h3>Общее</h3><p class="summary">Основные настройки приложения.</p>'+section(row('Тема','Светлая, тёмная или системная',choose('theme',[['dark','Тёмная'],['light','Светлая'],['system','Система']]))+row('Акцентный цвет','Спокойная палитра без лишней яркости',`<div class="swatches">${[['mono','#f0f0ed','Монохром'] ,['black','#1a1a1d','Чёрный'],['blue','#4f8be9','Синий'],['amber','#cf8c5e','Оранжево-серый'],['graphite','#a0a4b0','Графит'],['violet','#8c79e9','Фиолетовый']].map(([v,c,n])=>`<button title="${n}" class="swatch ${prefs.accent===v?'active':''}" style="background:${c}" data-setting="accent" data-value="${v}"></button>`).join('')}</div>`)+row('Размер текста','Размер сообщений, кнопок и настроек',choose('font_size',[['small','Мелкий'],['normal','Обычный'],['large','Крупный']]))+row('Плотность интерфейса','Меняет отступы и высоту элементов',choose('density',[['compact','Компактная'],['comfortable','Комфортная']])));}
+else if(page==='interface'){body.innerHTML='<h3>Интерфейс</h3><p class="summary">Управление поведением и внешним видом.</p>'+section(row('Быстрые действия','Четыре быстрые команды на главном экране',switcher('show_tips'))+row('Стартовый экран','Показывать подсказки или минимум элементов',select('startScreen',[['actions','Быстрые действия'],['minimal','Минималистичный']],prefs.start_screen))+row('Уменьшить анимации','Для комфортной работы и доступности',switcher('reduce_motion')))+section(row('Боковая панель','Свернуть список чатов',`<button class="outline-btn" id="toggleSidebarSetting">Переключить</button>`));$('startScreen').onchange=e=>saveOne('start_screen',e.target.value);$('toggleSidebarSetting').onclick=()=>{document.body.classList.toggle('sidebar-collapsed');closeSettings()}}
+else if(page==='personal'){body.innerHTML='<h3>Персонализация</h3><p class="summary">Инструкции будут отправляться твоим локальным моделям.</p>'+section(row('Имя ассистента','Как META представляется',`<input class="setting-input" id="assistantName" maxlength="40">`)+row('Как обращаться к тебе','Необязательно',`<input class="setting-input" id="displayName" maxlength="70">`)+row('Язык ответов','Настройка текста, не интерфейса',select('prefLanguage',[['ru','Русский'],['auto','Как у пользователя'],['en','English']],prefs.language))+row('Стиль ответов','Влияет на инструкцию модели',select('responseStyle',[['balanced','Сбалансированный'],['concise','Краткий'],['detailed','Подробный'],['friendly','Дружелюбный']],prefs.response_style)))+section(`<div class="setting-row"><div class="setting-text"><strong>Персональные инструкции</strong><small>Факты о тебе и предпочтения для новых сообщений</small></div></div><textarea class="setting-textarea" id="customInstructions" maxlength="2000"></textarea><div class="settings-buttons"><button class="action-primary" id="savePersonal">Сохранить персонализацию</button></div>`);$('assistantName').value=prefs.assistant_name;$('displayName').value=prefs.display_name;$('customInstructions').value=prefs.custom_instructions;$('savePersonal').onclick=async()=>{prefs.assistant_name=$('assistantName').value;prefs.display_name=$('displayName').value;prefs.language=$('prefLanguage').value;prefs.response_style=$('responseStyle').value;prefs.custom_instructions=$('customInstructions').value;await savePrefs();toast('Персонализация сохранена')}}
+else if(page==='memory'){body.innerHTML='<h3>Память META</h3><p class="summary">Реальная память находится в D:\\META\\Memory. Управление фактами доступно здесь.</p><div id="memoryContent">Загрузка…</div><p class="fineprint">Запись воспоминаний контролируется META Core. Переключатель «выключить память» пока не предлагается, потому что он не отключил бы её фактически.</p>';api('/api/memories').then(data=>{let container=$('memoryContent');if(page!=='memory')return;if(data.error){container.textContent=data.error;return}container.innerHTML='';let facts=data.memories||[];if(!facts.length){container.textContent='Нет сохранённых фактов.';return}for(let f of facts){let line=document.createElement('div');line.className='memory-row';let text=document.createElement('span');text.textContent=f.fact;let del=document.createElement('button');del.innerHTML=icon('trash');del.title='Удалить факт';del.onclick=async()=>{if(!confirm('Удалить факт из долгосрочной памяти?'))return;try{await api('/api/memories/'+f.id,'DELETE');renderSettings()}catch(e){toast(e.message)}};line.append(text,del);container.append(line)}}).catch(e=>{$('memoryContent').textContent=e.message})}
+else if(page==='data'){body.innerHTML='<h3>Данные и приватность</h3><p class="summary">Данные хранятся на компьютере, а не в облачном аккаунте.</p>'+section(row('Экспорт чатов и заметок','Загрузить JSON-копию данных приложения',`<button class="outline-btn" id="exportData">Экспорт</button>`)+row('Удалить все чаты','Не удаляет базу воспоминаний META Core',`<button class="danger-btn" id="deleteAll">Удалить чаты</button>`)+row('Изображения','Хранятся локально в папке data/images','<span class="fineprint">Локально</span>'))+section(row('Приватность','Сервер интерфейса слушает только 127.0.0.1','<span class="fineprint">Только этот ПК</span>')+row('Пароль профиля','Хэш хранится отдельно от базы чатов','<span class="fineprint">PBKDF2</span>'));$('exportData').onclick=()=>{location.href='/api/export'};$('deleteAll').onclick=async()=>{if(!confirm('Удалить ВСЮ историю чатов? Это нельзя отменить.'))return;await api('/api/chats','DELETE');active=null;entries=[];renderMessages();refreshChats();toast('История очищена')}}
+else if(page==='account'){body.innerHTML='<h3>Учётная запись</h3><p class="summary">Локальный вход с паролем. Не является облачной синхронизацией.</p>'+section(row('Профиль',account.configured?html(account.name):'Учётная запись ещё не создана',`<span class="fineprint">${account.configured?'Локальная':'Гостевой доступ'}</span>`)+row('Email',account.email?html(account.email):'Не указан',`<span class="fineprint">Не подтверждён</span>`)+row('Вход по email-коду','Потребуются сервер, доставка писем и проверка кодов','<span class="fineprint">Не подключён</span>'))+`<div class="settings-buttons">${account.configured?'<button class="outline-btn" id="signout">Выйти из профиля</button>':'<button class="action-primary" id="createAccount">Создать локальный профиль</button>'}</div><p class="fineprint">Один локальный профиль на этой установке. Данные не зашифрованы на диске, пароль защищает вход в интерфейс.</p>`;$('signout')?.addEventListener('click',logout);$('createAccount')?.addEventListener('click',()=>showAuth('register'))}
+else if(page==='connections'){body.innerHTML='<h3>Подключения</h3><p class="summary">Все модели работают через локальный META Core.</p>'+section(row('META Core','http://127.0.0.1:8000',`<span class="fineprint" id="coreConnectionStatus">Проверка…</span>`)+row('Ollama','Локальные модели на твоём компьютере','<span class="fineprint">Через Core</span>')+row('Интерфейс META','http://127.0.0.1:8767','<span class="fineprint">Локально</span>'))+`<button class="outline-btn" id="retryConnection">Проверить соединение</button>`;const test=async()=>{let data=await api('/api/status');$('coreConnectionStatus').textContent=data.core?'Подключён':'Недоступен';status()};$('retryConnection').onclick=test;test()}
+else if(page==='about'){body.innerHTML='<h3>META Desktop 1.3</h3><p class="summary">Личный интерфейс для META Core, Ollama и инструментов.</p>'+section(row('Версия','1.3','<span>Desktop</span>')+row('Приложение','Нативное окно Qt WebEngine без Chrome','<span>Windows</span>')+row('EXE','Нативный запускатель Windows + Qt','<span>Launcher</span>')+row('Облачная синхронизация','Не реализована','<span>Нет</span>'))+'<p class="fineprint">META.exe запускает локальное Qt-приложение с встроенным веб-движком. Для самодостаточной сборки используй Build_Standalone_EXE.cmd на Windows.</p>'}
+body.querySelectorAll('[data-setting]').forEach(btn=>btn.onclick=()=>{let v=btn.dataset.value;if(v==='true')v=true;if(v==='false')v=false;saveOne(btn.dataset.setting,v)})}
+async function savePrefs(){try{prefs=await api('/api/settings','POST',prefs);applyPrefs()}catch(e){toast(e.message)}}
+async function saveOne(key,value){prefs[key]=value;applyPrefs();await savePrefs();renderSettings()}
+function closeAux(){$('auxOverlay').hidden=true}
+function openAux(title){$('auxTitle').textContent=title;$('auxOverlay').hidden=false}
+async function openNotes(){openAux('Заметки');await reloadNotes()}
+async function reloadNotes(){try{notes=await api('/api/notes');drawNotes()}catch(e){$('auxBody').textContent=e.message}}
+function drawNotes(){let body=$('auxBody');body.innerHTML='<div class="notes-grid"><div class="note-list" id="noteList"><button class="outline-btn" id="addNote">+ Новая заметка</button><div id="noteRows"></div></div><div id="noteEditor" class="note-editor"><p class="notice">Выбери заметку или создай новую.</p></div></div>';$('addNote').onclick=()=>editNote(null);for(let note of notes){let row=document.createElement('div');row.className='note-row';row.textContent=note.title;row.onclick=()=>editNote(note);$('noteRows').append(row)}if(currentNote&&notes.some(n=>n.id===currentNote.id))editNote(notes.find(n=>n.id===currentNote.id))}
+function editNote(note){currentNote=note;let el=$('noteEditor');el.innerHTML='<input class="setting-input" id="noteTitle" placeholder="Название"><textarea class="setting-textarea" id="noteBody" placeholder="Текст заметки"></textarea><div class="settings-buttons"><button class="action-primary" id="saveNote">Сохранить</button><button class="danger-btn" id="deleteNote">Удалить</button></div>';$('noteTitle').value=note?.title||'';$('noteBody').value=note?.body||'';$('saveNote').onclick=async()=>{try{let result=await api('/api/notes','POST',{id:note?.id,title:$('noteTitle').value||'Без названия',body:$('noteBody').value});currentNote={id:result.id};toast('Заметка сохранена');reloadNotes()}catch(e){toast(e.message)}};$('deleteNote').onclick=async()=>{if(!note)return;if(!confirm('Удалить заметку?'))return;await api('/api/notes/'+note.id,'DELETE');currentNote=null;reloadNotes()}}
+async function openWorkspace(){openAux('Рабочее пространство');$('auxBody').innerHTML='<p class="fineprint">Папка D:\\META\\Projects. Здесь показаны реальные файлы, доступные файловому агенту.</p><div id="workspaceFiles">Загрузка…</div>';try{let data=await api('/api/workspace');$('workspaceFiles').innerHTML='';for(let x of data.files||[]){let row=document.createElement('div');row.className='note-row';row.textContent=(x.type==='folder'?'📁 ':'📄 ')+x.name;$('workspaceFiles').append(row)}if(data.error)$('workspaceFiles').textContent=data.error}catch(e){$('workspaceFiles').textContent='Пока недоступно: '+e.message}}
+async function start(){decorate();$('newChat').onclick=()=>newChat('chat');$('topNew').onclick=()=>newChat('chat');$('headerHome').onclick=()=>newChat('chat');$('searchOpen').onclick=()=>{$('searchChats').focus()};$('searchChats').oninput=renderChats;$('notesOpen').onclick=openNotes;$('workspaceOpen').onclick=openWorkspace;$('codeOpen').onclick=()=>newChat('code');$('profileOpen').onclick=()=>openSettings('general');$('closeOverlay').onclick=closeSettings;$('closeAux').onclick=closeAux;$('overlay').onclick=e=>{if(e.target===$('overlay'))closeSettings()};$('auxOverlay').onclick=e=>{if(e.target===$('auxOverlay'))closeAux()};$('settingsNav').querySelectorAll('button').forEach(el=>el.onclick=()=>{page=el.dataset.page;renderSettings()});$('collapseSidebar').onclick=()=>document.body.classList.toggle('sidebar-collapsed');$('openSidebar').onclick=showSidebar;$('sidebarShade').onclick=hideSidebar;$('sendButton').onclick=sendMessage;$('messageInput').oninput=resizeInput;$('messageInput').onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage()}};document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSettings();closeAux()}if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='n'){e.preventDefault();newChat('chat')}if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();$('searchChats').focus()}});$('quickActions').querySelectorAll('[data-prompt]').forEach(el=>el.onclick=()=>{$('messageInput').value=el.dataset.prompt;resizeInput();$('messageInput').focus()});$('quickPhoto').onclick=()=>$('imagePicker').click();$('attachButton').onclick=()=>$('imagePicker').click();$('imageButton').onclick=()=>$('imagePicker').click();$('imagePicker').onchange=e=>{let f=e.target.files?.[0];if(!f)return;if(f.size>10*1024*1024){toast('Фото максимум 10 МБ');return}if(!['image/png','image/jpeg','image/webp'].includes(f.type)){toast('Поддерживаются PNG, JPG и WebP');return}let reader=new FileReader();reader.onload=()=>{attachment={data:reader.result,name:f.name};showAttachment()};reader.readAsDataURL(f);e.target.value=''};$('removeAttachment').onclick=()=>{attachment=null;showAttachment()};$('authForm').onsubmit=authSubmit;try{await loadAccount();if(!account.configured||account.signed_in){prefs=await api('/api/settings');applyPrefs();await refreshChats();renderMessages();updateModeUI()}await status()}catch(e){if(account.configured&&!account.signed_in)showAuth('login');else toast('Ошибка запуска: '+e.message)}setInterval(status,15000);$('messageInput').focus()}
+start();
+
+// META_PROJECT_ENGINE_37
+// The 3.6 proposal card already renders multi-file diffs; improve its label.
+
+
+// META40_UI_BEGIN
+(() => {
+  const nav = document.querySelector('.nav-primary');
+  if (!nav) return;
+  const button = document.createElement('button');
+  button.className = 'nav-link'; button.textContent = '✦ Агент 4.0'; nav.append(button);
+  const panel = document.createElement('div'); panel.className = 'overlay'; panel.hidden = true;
+  panel.innerHTML = `<section role="dialog" aria-modal="true" aria-label="Агент META 4.0" style="width:min(1100px,95vw);max-height:92vh;overflow:auto;background:var(--bg,#18181c);border:1px solid #555;border-radius:16px;padding:24px">
+  <header style="display:flex;justify-content:space-between"><div><small>META CODE · LOCAL</small><h2>Агент 4.0</h2></div><button id="m40close" class="outline-btn">Закрыть</button></header>
+  <p>Изучает проект → предлагает код → проверяет → готовит заявку. Файлы меняются после твоего подтверждения.</p>
+  <div style="display:flex;gap:12px;flex-wrap:wrap"><label>Проект внутри D:\\META\\Projects<input id="m40project" class="setting-input" value="." placeholder="имя-проекта"></label>
+  <label>Модель Ollama<select id="m40model" class="setting-select"><option>qwen2.5-coder:14b</option></select></label>
+  <label>Шагов<input id="m40steps" type="number" min="1" max="30" value="16" class="setting-input"></label></div>
+  <label style="display:block;margin-top:12px"><input type="checkbox" id="m40create" checked> Создать папку проекта, если её нет</label>
+  <p class="fineprint">Укажи имя папки, например my_app. Она будет создана внутри Projects при запуске задачи. Точка (.) выбирает всю папку Projects.</p>
+  <textarea id="m40task" class="setting-textarea" style="width:100%;min-height:100px;margin:16px 0" maxlength="12000" placeholder="Например: прочитай проект, исправь ошибку и добавь unittest. Подготовь общую заявку."></textarea>
+  <label style="display:block"><input type="checkbox" id="m40tests"> Разрешить Python unittest для этой задачи</label>
+  <p class="fineprint">Тесты запускаются в временной копии, с правами твоего пользователя. Это не защитная песочница: код может обращаться к другим файлам и сети. Включай только для доверенного проекта. Лимит запуска — 30 секунд.</p>
+  <div style="display:flex;gap:12px;margin:16px 0"><button id="m40run" class="action-primary">Запустить задачу</button><button id="m40stop" class="danger-btn" disabled>Остановить</button><button id="m40history" class="outline-btn">История</button></div>
+  <strong id="m40status" role="status">Готов к работе</strong><div id="m40historylist"></div><pre id="m40log" style="white-space:pre-wrap;max-height:220px;overflow:auto;font-size:12px"></pre>
+  <div id="m40result"></div><pre id="m40diff" style="white-space:pre-wrap;max-height:360px;overflow:auto;font-size:12px"></pre><div id="m40approval"></div></section>`;
+  document.body.append(panel);
+  const el = id => document.getElementById('m40'+id);
+  let job = null, polling = false, busy40 = false, proposal = null;
+  const states = {queued:'В очереди',running:'Работает',pending:'Ожидает подтверждения',completed:'Завершено',failed:'Ошибка',cancelled:'Остановлено',interrupted:'Прервано перезапуском',step_limit:'Лимит шагов',time_limit:'Лимит времени'};
+  async function call(path, method='GET', data) {
+    const r = await fetch('/api/meta40'+path, {method,headers:{'Content-Type':'application/json'},body:data === undefined ? undefined : JSON.stringify(data)});
+    const result = await r.json(); if(!r.ok) throw Error(typeof result.error === 'string' ? result.error : JSON.stringify(result.error)); return result;
+  }
+  function error(e){el('status').textContent=e.message;}
+  function controls(){el('run').disabled=busy40;el('stop').disabled=!busy40;}
+  async function refresh(){
+    if (!job || polling) return; polling=true;
+    try {
+      const d=await call('/tasks/'+job);
+      busy40=['running','queued','cancelling'].includes(d.status); controls();
+      el('status').textContent=states[d.status]||d.status;
+      el('log').textContent=(d.events||[]).map(e=>new Date(e.at*1000).toLocaleTimeString()+' · '+e.type+' · '+JSON.stringify(e.data)).join('\n');
+      el('result').textContent=d.error||d.result?.summary||'';
+      if(d.result?.tests?.length){
+        const t=d.result.tests.at(-1);el('result').textContent+='\nПоследний запуск тестов: '+t.status+(t.superseded_by_edits?' (после него код изменён)':'');
+      }
+      const pid=d.result?.proposal?.id;
+      if(pid && proposal!==pid){proposal=pid;await preview(pid);}
+    } catch(e){error(e);} finally{polling=false;}
+  }
+  async function preview(pid){
+    const r=await fetch('/api/proposals/'+pid);const d=await r.json();if(!r.ok)throw Error(d.error||'Заявка недоступна');
+    el('diff').textContent=d.diff;el('approval').replaceChildren();
+    for(const [action,label] of [['apply','Применить показанные изменения'],['reject','Отклонить']]){
+      const b=document.createElement('button');b.className='outline-btn';b.textContent=label;
+      b.onclick=async()=>{if(!confirm(action==='apply'?'Применить все файлы из показанной заявки?':'Отклонить заявку?'))return;
+        b.disabled=true;try{const r=await fetch('/api/proposals/'+pid+'/'+action,{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});const d=await r.json();if(!r.ok)throw Error(d.error);el('status').textContent=d.status==='applied'?'Изменения применены':'Заявка отклонена';el('approval').replaceChildren();}catch(e){b.disabled=false;error(e);}};
+      el('approval').append(b);
+    }
+  }
+  button.onclick=async()=>{panel.hidden=false;try{
+    const s=await call('/status');if(s.active){job=s.active;await refresh();}
+    const d=await call('/models');const previous=el('model').value;el('model').replaceChildren();
+    for(const name of d.models){const option=document.createElement('option');option.textContent=name;option.value=name;el('model').append(option);}
+    if(d.models.includes(previous))el('model').value=previous;
+  }catch(e){error(e);}};
+  el('close').onclick=()=>{panel.hidden=true;};
+  panel.onclick=e=>{if(e.target===panel)panel.hidden=true;};
+  el('run').onclick=async()=>{busy40=true;controls();try{
+    const enabled=el('tests').checked;
+    if(enabled&&!confirm('Разрешить выполнение Python-кода этого проекта с правами твоего пользователя?')){busy40=false;controls();return;}
+    const d=await call('/tasks','POST',{project:el('project').value.trim(),create_project:el('create').checked,task:el('task').value,model:el('model').value,max_steps:Number(el('steps').value),allow_tests:enabled,test_consent:enabled?'EXECUTE_PROJECT_PYTHON':''});
+    job=d.id;localStorage.setItem('meta40-last-task',job);proposal=null;el('diff').textContent='';el('approval').replaceChildren();await refresh();
+  }catch(e){busy40=false;controls();error(e);}};
+  el('stop').onclick=async()=>{try{await call('/tasks/'+job+'/cancel','POST',{});el('status').textContent='Остановка… текущий запрос модели может занять до 60 секунд';}catch(e){error(e);}};
+  el('history').onclick=async()=>{try{const d=await call('/tasks');el('historylist').replaceChildren();for(const t of d.tasks){const b=document.createElement('button');b.className='outline-btn';b.textContent=(states[t.status]||t.status)+' · '+t.task.slice(0,80);b.onclick=()=>{job=t.id;proposal=null;el('diff').textContent='';el('approval').replaceChildren();refresh();};el('historylist').append(b);}}catch(e){error(e);}};
+  job=localStorage.getItem('meta40-last-task');
+  setInterval(()=>{if(!panel.hidden)refresh();},1500);
+})();
+// META40_UI_END

@@ -1,0 +1,30 @@
+# Local configuration and user data
+**/meta40_config.json
+**/.env
+**/.env.*
+!**/.env.example
+**/data/
+**/Memory/
+**/memory/
+**/meta40_state/
+**/meta40_receipts/
+**/pending_changes/
+*.db
+*.sqlite
+*.sqlite3
+*.log
+*.lock
+*.pem
+*.key
+*.pfx
+*.p12
+
+# Environments and generated files
+**/.venv/
+**/venv/
+**/node_modules/
+**/__pycache__/
+*.pyc
+**/Models/blobs/
+.DS_Store
+Thumbs.db
