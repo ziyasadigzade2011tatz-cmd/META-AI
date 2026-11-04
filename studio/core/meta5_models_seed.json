@@ -1,0 +1,8 @@
+{
+  "chat": "qwen3.5:4b",
+  "quality": "qwen3.5:9b",
+  "code": "qwen3.5:9b",
+  "vision": "qwen2.5vl:3b",
+  "context": 8192,
+  "source": "recommended_not_benchmarked"
+}

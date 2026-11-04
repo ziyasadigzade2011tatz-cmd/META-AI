@@ -1,0 +1,25 @@
+const fs=require('fs'),path=require('path');
+const {chromium}=require('D:/META/Tools/node_modules/playwright');
+const repo=path.resolve(__dirname,'../..'),base=path.join(repo,'build',process.env.META_VERIFY_DIR||'verification');
+(async()=>{
+ const fixture=JSON.parse(fs.readFileSync(path.join(base,'fixture.json'),'utf8'));
+ const browser=await chromium.launch({executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true});
+ const context=await browser.newContext({viewport:{width:1600,height:1000}});await context.addCookies(fixture.test_cookie);
+ const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto(fixture.url);await page.waitForSelector('#chatInput');
+ if(!await page.locator('h1').textContent())throw Error('Greeting absent');
+ await page.locator('[data-nav="settings"]').click();await page.locator('[data-preset="graphite"]').click();
+ await page.locator('#baseColor').evaluate(el=>{el.value='#26272a';el.dispatchEvent(new Event('input',{bubbles:true}));});
+ await page.locator('#temperature').fill('0.45');await page.locator('#saveSettings').click();await page.waitForSelector('#settingsResult:text-is("Настройки сохранены")');
+ await page.locator('[data-nav="code"]').click();await page.waitForSelector('.monaco-editor');
+ const initial=await page.locator('#editor').boundingBox();await page.locator('#focusCode').click();const focus=await page.locator('#editor').boundingBox();
+ if(focus.width<initial.width+200||focus.height<400)throw Error('Editor focus mode did not expand');
+ await page.screenshot({path:path.join(base,'code-focus.png')});await page.locator('#focusCode').click();
+ await page.locator('#profiles').click();await page.locator('#newProfileName').fill('Test workspace');await page.locator('#createProfile').click();await page.waitForFunction(()=>document.querySelector('#profilesList').textContent.includes('Test workspace'));await page.locator('.close-dialog').click();
+ await page.locator('[data-nav="materials"]').click();await page.waitForSelector('#uploadDoc');
+ await page.locator('[data-nav="projects"]').click();await page.waitForSelector('#projectCards');
+ await page.locator('[data-nav="chat"]').click();await page.screenshot({path:path.join(base,'chat.png')});
+ if(errors.length)throw Error(errors.join('\n'));
+ fs.writeFileSync(path.join(base,'ui-result.json'),JSON.stringify({passed:true,initial_editor:initial,focus_editor:focus,page_errors:errors,features:['greeting','themes','base color','settings save','Monaco editor','focus mode','new profile','materials','projects']},null,2));
+ await browser.close();process.stdout.write('UI integration passed\n');
+})().catch(e=>{process.stderr.write(e.stack+'\n');process.exit(1);});

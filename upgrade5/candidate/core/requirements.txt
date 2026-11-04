@@ -1,7 +1,0 @@
-# Versions verified in the installed META Core environment
-fastapi==0.162.0
-uvicorn==0.54.0
-httpx==0.28.1
-pydantic==2.14.2
-ddgs==9.16.1
-urllib3==2.8.0

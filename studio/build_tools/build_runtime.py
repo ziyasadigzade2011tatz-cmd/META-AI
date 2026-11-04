@@ -1,0 +1,46 @@
+"""Build a new runtime from the installed Full dependency bundle, without user data."""
+import argparse
+import json
+import marshal
+from pathlib import Path
+import shutil
+import struct
+import sys
+import zlib
+from PyInstaller.archive.readers import CArchiveReader
+from PyInstaller.archive.writers import CArchiveWriter
+
+parser=argparse.ArgumentParser();parser.add_argument('--base',required=True);parser.add_argument('--out',required=True);parser.add_argument('--refresh',action='store_true');args=parser.parse_args()
+source=Path(args.base).resolve();out=Path(args.out).resolve();studio=Path(__file__).resolve().parents[1]
+if sys.version_info[:2]!=(3,15):raise SystemExit('This base runtime requires Python 3.15 bytecode')
+if out==source or source in out.parents or out in source.parents:raise SystemExit('Build must be outside the installed application')
+if out.exists():
+    generated=studio.parent/'build'
+    if not args.refresh or not out.is_relative_to(generated.resolve()) or out.name!='META-Next':raise SystemExit('Refusing to replace non-generated output')
+    shutil.rmtree(out)
+out.mkdir(parents=True)
+shutil.copytree(source/'_internal',out/'_internal',ignore=shutil.ignore_patterns('__pycache__','*.log'))
+# The dependency bundle is retained; source and frontend are the current build inputs.
+target=out/'_internal/core'
+if target.exists():shutil.rmtree(target)
+shutil.copytree(studio/'core',target,ignore=shutil.ignore_patterns('__pycache__','*_state','*.sqlite*','*.db','meta40_config.json'))
+frontend=out/'_internal/frontend/dist'
+if frontend.exists():shutil.rmtree(frontend)
+shutil.copytree(studio/'frontend/dist',frontend)
+shutil.copy2(studio/'build_tools/desktop_base.bin',out/'_internal/studio_base.bin')
+reader=CArchiveReader(str(source/'META-Next.exe'))
+raw=(source/'META-Next.exe').read_bytes();start=reader._start_offset
+code=marshal.dumps(compile((studio/'build_tools/entry.py').read_text(encoding='utf-8'),'app.py','exec'))
+chunks=[];toc=[];offset=0
+for name,entry in reader.toc.items():
+    pos,packed,unpacked,compressed,kind=entry
+    data=code if name=='app' else reader.extract(name)
+    stored=zlib.compress(data,9) if compressed else data
+    chunks.append(stored);toc.append((offset,len(stored),len(data),compressed,kind,name));offset+=len(stored)
+for option in reader.options:toc.append((offset,0,0,0,'o',option))
+toc_raw=CArchiveWriter._serialize_toc(toc)
+length=offset+len(toc_raw)+CArchiveWriter._COOKIE_LENGTH
+cookie=struct.pack(CArchiveWriter._COOKIE_FORMAT,CArchiveWriter._COOKIE_MAGIC_PATTERN,length,offset,len(toc_raw),315,b'python315.dll')
+(out/'META-Next.exe').write_bytes(raw[:start]+b''.join(chunks)+toc_raw+cookie)
+(out/'VERSION.txt').write_text('5.2.0\n',encoding='utf-8')
+print(json.dumps({'output':str(out),'files':sum(1 for p in out.rglob('*') if p.is_file())}))
