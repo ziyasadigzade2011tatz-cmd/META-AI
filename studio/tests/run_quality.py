@@ -1,7 +1,7 @@
 """Offline pipeline metrics, not a measurement of free-form LLM response quality."""
 import argparse,collections,json,os,subprocess,sys,tempfile,types
 from pathlib import Path
-repo=Path(__file__).resolve().parents[2];sys.path.insert(0,str(repo/'studio/core'))
+repo=Path(__file__).resolve().parents[2];sys.path.insert(0,os.environ.get('META_QUALITY_CORE',str(repo/'studio/core')))
 
 def baseline(commit):
     package=types.ModuleType('_meta_baseline');package.__path__=[];sys.modules[package.__name__]=package
