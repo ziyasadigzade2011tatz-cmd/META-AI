@@ -32,11 +32,13 @@ def from_benchmark(report):
         candidates=groups
         if kind=='code' and any('coder' in n and any(r.get('passed') and r['test']=='code' for r in it) for n,it in groups.items()):candidates={n:it for n,it in groups.items() if 'coder' in n}
         for name,items in candidates.items():
-            relevant=[r for r in items if r['test']==kind and r.get('passed')]
-            if relevant:ranked.append((min(r['seconds'] for r in relevant),name))
-        return min(ranked)[1] if ranked else ('qwen2.5:3b' if kind=='context' else 'qwen2.5-coder:7b')
+            relevant=[r for r in items if r['test']==kind]
+            passed=[r for r in relevant if r.get('passed')]
+            if passed:ranked.append((-len(passed)/len(relevant),sum(r['seconds'] for r in relevant)/len(relevant),name))
+        return min(ranked)[2] if ranked else profiles().get('chat','qwen3.5:4b')
     # Chat suitability includes correct domain interpretation. Explicit context
     # resolution still runs before every model call and is not delegated to it.
-    result={'chat':best('grounded_context'),'quality':best('context'),'code':best('code'),'vision':'qwen2.5vl:3b','source':'local_smoke_benchmark',
+    quality_kind='context' if any(r['test']=='context' for r in rows) else 'grounded_context'
+    result={'chat':best('grounded_context'),'quality':best(quality_kind),'code':best('code'),'vision':'qwen2.5vl:3b','source':'local_smoke_benchmark',
             'context':8192,'hardware':report['hardware'],'results':rows,'benchmark_scope':report['scope']}
     atomic_json(PROFILE_FILE,result);return result

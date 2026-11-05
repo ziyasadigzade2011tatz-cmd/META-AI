@@ -67,6 +67,7 @@ class Glossary:
             register='разговорный',language='ru',confidence=confidence,status=status,source=source,
             seen_count=old.get('seen_count',0)+1,chats_count=old.get('chats_count',0),
             first_seen=old.get('first_seen') or utc(),last_seen=utc(),context_hints=[])
+        if old.get('rejected_meanings'):row['rejected_meanings']=old['rejected_meanings']
         self.put(row,'add');return row
     def command(self,text):
         rest=text[len('/slang'):].strip();parts=rest.split(maxsplit=1);verb=parts[0] if parts else '';arg=parts[1] if len(parts)>1 else ''
@@ -103,7 +104,7 @@ class Glossary:
                 options=[m['definition'] for _,m in rank[:3]]
                 questions.append('«'+record['term']+'» — '+ ' или '.join(options)+'?');continue
             domain_hints=terms(DOMAINS.get(record['domain'],''))
-            if len(meanings)==1 and domain_hints and not vocabulary&domain_hints:continue
+            if len(meanings)==1 and domain_hints and record['domain']!='интернет' and not vocabulary&domain_hints:continue
             meaning=rank[0][1]['definition']
             used.append({'term':record['term'],'meaning':meaning,'reason':'контекст' if rank[0][0] else 'однозначное общее слово'})
             for match in matches:replacements.append((match.start(),match.end(),meaning))

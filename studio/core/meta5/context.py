@@ -26,16 +26,17 @@ REFERENCE=re.compile(r'\b(?:это|он|она|оно|они|его|её|там|
 
 def entities(messages):
     from .relevance import STOP
-    found=[]
+    found=[];quoted=[]
     for message in messages:
         if message.get('role') not in ('user','assistant'):continue
         text=message.get('content','')
         if not isinstance(text,str):continue
         values=re.findall(r'[«"]([^«»"\n]{2,80})[»"]',text)
+        quoted.extend(v for v in values if v not in quoted)
         values+=re.findall(r'(?<!\w)[А-ЯЁA-Z][а-яёa-z]+(?:[ -][А-ЯЁA-Z][а-яёa-z]+)*',text)
         for value in values:
             if value.casefold() not in STOP and value not in found:found.append(value)
-    return found[-12:]
+    return (quoted or found)[-12:]
 
 def standalone(messages,client=None):
     """Resolve only against this conversation, never personal memory."""

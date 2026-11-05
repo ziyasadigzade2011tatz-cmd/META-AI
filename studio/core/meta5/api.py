@@ -85,7 +85,7 @@ def install(app,core=None):
         import threading
         from . import benchmarks
         if manager.active or benchmarks.LOCK.locked():raise HTTPException(409,'Дождись завершения текущей задачи или измерения')
-        available=installed_models()['models'];names=payload.get('models') or [n for n in available if n in ('qwen2.5:3b','qwen3:4b','qwen2.5-coder:7b','qwen2.5-coder:14b')]
+        available=installed_models()['models'];names=payload.get('models') or [n for n in available if n in ('qwen3.5:4b','qwen3.5:9b','qwen2.5:3b','qwen3:4b')][:4]
         if not isinstance(names,list) or not 1<=len(names)<=4 or any(n not in available for n in names):raise HTTPException(400,'Выбери от одной до четырёх установленных моделей')
         if not benchmarks.LOCK.acquire(blocking=False):raise HTTPException(409,'Измерение уже запущено')
         try:threading.Thread(target=benchmarks.run,args=(names,),kwargs={'lock_held':True},daemon=True).start()

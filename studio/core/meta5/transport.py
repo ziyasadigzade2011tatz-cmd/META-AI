@@ -8,10 +8,27 @@ import httpx
 import os
 from urllib.parse import urlsplit
 
-COMPUTE=threading.Semaphore(1)
+from .compute import ComputeGate
+COMPUTE=ComputeGate()
 BASE=os.environ.get('META_OLLAMA_URL','http://127.0.0.1:11434').rstrip('/')
 _target=urlsplit(BASE)
 if _target.scheme!='http' or _target.hostname!='127.0.0.1' or _target.username or _target.password or _target.path or _target.query or _target.fragment:raise ValueError('Ollama URL must be local HTTP')
+
+def prepare_model(client,model):
+    response=client.get(BASE+'/api/ps');response.raise_for_status()
+    target=model if ':' in model else model+':latest'
+    for item in response.json().get('models',[]):
+        name=item.get('name')
+        if name and name not in (model,target):
+            r=client.post(BASE+'/api/generate',json={'model':name,'keep_alive':0,'stream':False});r.raise_for_status()
+
+async def prepare_model_async(client,model):
+    response=await client.get(BASE+'/api/ps');response.raise_for_status()
+    target=model if ':' in model else model+':latest'
+    for item in response.json().get('models',[]):
+        name=item.get('name')
+        if name and name not in (model,target):
+            r=await client.post(BASE+'/api/generate',json={'model':name,'keep_alive':0,'stream':False});r.raise_for_status()
 
 
 def complete(model,messages,*,timeout=120,json_mode=False,options=None,tools=None,think=False):
@@ -21,6 +38,7 @@ def complete(model,messages,*,timeout=120,json_mode=False,options=None,tools=Non
         if json_mode:payload['format']='json'
         if tools:payload['tools']=tools
         with httpx.Client(timeout=timeout,trust_env=False) as client:
+            prepare_model(client,model)
             r=client.post(BASE+'/api/chat',json=payload);r.raise_for_status();data=r.json()
         if not isinstance(data.get('message',{}).get('content',''),str):raise ValueError('Модель вернула неверный ответ')
         return data
@@ -36,6 +54,7 @@ async def stream(model,messages,*,cancel=None,options=None,timeout=120,think=Fal
             if not owned:await asyncio.sleep(.05)
             if time.monotonic()-started>timeout:raise TimeoutError('Очередь модели занята')
         async with httpx.AsyncClient(timeout=httpx.Timeout(timeout,connect=10),trust_env=False) as client:
+            await prepare_model_async(client,model)
             async with client.stream('POST',BASE+'/api/chat',json={'model':model,'messages':messages,'stream':True,'think':think,'keep_alive':'3m','options':options or {'num_ctx':8192,'num_predict':1600,'temperature':.3}}) as r:
                 r.raise_for_status()
                 iterator=r.aiter_lines().__aiter__();pending=None

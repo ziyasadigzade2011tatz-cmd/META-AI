@@ -28,5 +28,14 @@ class LearningTests(unittest.TestCase):
     def test_no_private_observations(self):
         self.assertIsNone(self.l.observe('шурум','chat-a','пароль не записывай'))
         self.assertIsNone(self.l.explicit('шурум это адрес улица неизвестна','chat-a'))
+    def test_unknown_observation_and_short_confirmation(self):
+        analysis={'private':False,'unknown_terms':['шурум'],'confidence':.5}
+        question=self.l.process_unknown(analysis,['что значит шурум'],'chat-a')
+        self.assertIn('шурум',question)
+        self.l.observe('шурум','chat-a','условное обозначение',confidence=.8)
+        self.assertEqual(self.l.explicit('да','chat-a')['status'],'confirmed')
+    def test_web_disabled_does_not_send_anything(self):
+        def fail(_):raise AssertionError('Network used')
+        self.assertEqual(self.l.web_lookup('шурум',fetch=fail),[])
 
 if __name__=='__main__':unittest.main()

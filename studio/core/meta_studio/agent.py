@@ -44,6 +44,15 @@ def check_files(files):
     return results
 
 def complete_stream(model,messages,cancel,emit,context=4096):
+    from meta5 import transport
+    import httpx
+    if not transport.COMPUTE.acquire(timeout=60):raise TimeoutError('Очередь локальной модели занята')
+    try:
+        with httpx.Client(timeout=15,trust_env=False) as client:transport.prepare_model(client,model)
+        return _complete_stream(model,messages,cancel,emit,context)
+    finally:transport.COMPUTE.release()
+
+def _complete_stream(model,messages,cancel,emit,context=4096):
     import httpx
     from meta5.native_tools import supports
     payload={'model':model,'messages':messages,'format':'json','think':False,'stream':True,'keep_alive':'3m',

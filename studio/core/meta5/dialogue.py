@@ -89,6 +89,12 @@ async def converse(request,manager=None):
             yield {'type':'done','data':{'session_id':session,'sources':[],'clarification_required':True}}
             return
         memory.capture(original_last);prefs=memory.relevant(last);ctx=resolve(messages,prefs)
+        if understanding_settings()['slang_learning']:
+            clarification=await asyncio.to_thread(Learner().process_unknown,understanding,users,session,parse_local,not ctx['web_disabled'])
+            if clarification:
+                yield {'type':'token','content':clarification}
+                yield {'type':'done','data':{'session_id':session,'sources':[],'clarification_required':True}}
+                return
         debug_queries=[]
         yield {'type':'context','data':ctx}
         if manager and code_action(last):
@@ -116,6 +122,7 @@ async def converse(request,manager=None):
         extra=advanced_settings()
         prompt_ctx={k:v for k,v in ctx.items() if k not in ('game','game_name','games')}
         system=system_prompt()+'\nСистемное локальное время: '+json.dumps(now_context())+'\nКонтекст темы: '+json.dumps(prompt_ctx,ensure_ascii=False)
+        if understanding.get('candidate_hints'):system+='\nНеподтверждённые предположения о словах, не факты: '+json.dumps(understanding['candidate_hints'],ensure_ascii=False)[:2000]
         from .relevance import score
         project_data=project_context(request.get('project','.'))
         project_data={k:v for k,v in project_data.items() if score(last,json.dumps(v,ensure_ascii=False))>=.65}

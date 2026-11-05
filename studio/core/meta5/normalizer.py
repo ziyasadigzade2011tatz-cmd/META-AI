@@ -21,7 +21,19 @@ def vocabulary():
         for m in r['meaning']:words.update(re.findall(r'[а-яё]{3,}',m['definition'].casefold().replace('ё','е')))
     return words
 
-def known(word):return word.casefold().replace('ё','е') in vocabulary()
+@lru_cache(maxsize=1)
+def known_stems():
+    from .relevance import terms
+    return set().union(*(terms(word) for word in vocabulary()))
+
+def known(word):
+    word=word.casefold().replace('ё','е')
+    if word in vocabulary():return True
+    if re.fullmatch('[а-я]{5,}',word):
+        from .relevance import terms
+        stems=terms(word)
+        return bool(stems and stems<=known_stems())
+    return False
 
 def transliterate(word):
     result='';s=word.casefold();i=0
@@ -33,7 +45,7 @@ def transliterate(word):
     return result
 
 def split_joined(word):
-    if len(word)<6 or len(word)>32:return word
+    if len(word)<5 or len(word)>32:return word
     best={0:[]}
     for end in range(1,len(word)+1):
         for start in range(max(0,end-20),end):
@@ -81,6 +93,9 @@ def schema(value,original):
         if not isinstance(value.get(key),list) or len(value[key])>20 or any(not isinstance(x,str) or len(x)>100 for x in value[key]):raise ValueError('Invalid '+key)
     # Entity names must occur in the input; parser cannot invent anchors.
     value['entities']=[x for x in value['entities'] if x.casefold() in original.casefold()]
+    if difflib.SequenceMatcher(None,original.casefold(),value['normalized'].casefold()).ratio()<.65:raise ValueError('Rewrite changed too much')
+    added=re.findall(r'\b[А-ЯЁA-Z][а-яёa-z]{2,}\b',value['normalized'])
+    if any(x.casefold() not in original.casefold() for x in added):raise ValueError('New named entity')
     return value
 
 def normalize(text,context='',client=None,glossary=None):
@@ -90,8 +105,14 @@ def normalize(text,context='',client=None,glossary=None):
     # Opaque fragments are preserved verbatim, including URLs, paths and code.
     chunks=re.split(r'(```[\s\S]*?```|`[^`]*`|https?://\S+|\b[\w./-]+\.(?:py|js|json|md|txt|exe)\b)',text)
     cleaned=''.join(re.sub(r'[A-Za-zА-Яа-яЁё]+',fix_word,s) if i%2==0 else s for i,s in enumerate(chunks))
-    result=(glossary or Glossary()).resolve(cleaned,context)
+    g=glossary or Glossary();parts=[];used=[];candidates=[];question=None
+    for i,s in enumerate(chunks):
+        if i%2:parts.append(s);continue
+        r=g.resolve(re.sub(r'[A-Za-zА-Яа-яЁё]+',fix_word,s),context)
+        parts.append(r['normalized']);used.extend(r['used']);candidates.extend(r['candidates']);question=question or r['question']
+    result={'normalized':''.join(parts),'used':used,'candidates':candidates,'question':question}
     base.update(normalized=result['normalized'],used_slang=result['used'],question=result['question'],ambiguous=bool(result['question']))
+    base['candidate_hints']=result['candidates']
     tokens=re.findall(r'\b[а-яё]{4,}\b',cleaned)
     base['unknown_terms']=list(dict.fromkeys(t for t in tokens if not known(t) and safe_term(t)))[:10]
     base['confidence']=.95 if not base['unknown_terms'] and not base['ambiguous'] else .55

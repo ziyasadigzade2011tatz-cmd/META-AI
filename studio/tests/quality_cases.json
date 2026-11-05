@@ -1,0 +1,1578 @@
+[
+  {
+    "id": 1,
+    "category": "slang",
+    "topic": "общение",
+    "messages": [
+      {
+        "role": "user",
+        "content": "хз"
+      }
+    ],
+    "contains": "не знаю"
+  },
+  {
+    "id": 2,
+    "category": "slang",
+    "topic": "интернет",
+    "messages": [
+      {
+        "role": "user",
+        "content": "имхо"
+      }
+    ],
+    "contains": "по моему мнению"
+  },
+  {
+    "id": 3,
+    "category": "slang",
+    "topic": "компьютеры",
+    "messages": [
+      {
+        "role": "user",
+        "content": "ща"
+      }
+    ],
+    "contains": "сейчас"
+  },
+  {
+    "id": 4,
+    "category": "slang",
+    "topic": "программирование",
+    "messages": [
+      {
+        "role": "user",
+        "content": "чо"
+      }
+    ],
+    "contains": "что"
+  },
+  {
+    "id": 5,
+    "category": "slang",
+    "topic": "музыка",
+    "messages": [
+      {
+        "role": "user",
+        "content": "норм"
+      }
+    ],
+    "contains": "нормально"
+  },
+  {
+    "id": 6,
+    "category": "slang",
+    "topic": "спорт",
+    "messages": [
+      {
+        "role": "user",
+        "content": "спс"
+      }
+    ],
+    "contains": "спасибо"
+  },
+  {
+    "id": 7,
+    "category": "slang",
+    "topic": "учёба",
+    "messages": [
+      {
+        "role": "user",
+        "content": "пжл"
+      }
+    ],
+    "contains": "пожалуйста"
+  },
+  {
+    "id": 8,
+    "category": "slang",
+    "topic": "работа",
+    "messages": [
+      {
+        "role": "user",
+        "content": "ваще"
+      }
+    ],
+    "contains": "вообще"
+  },
+  {
+    "id": 9,
+    "category": "slang",
+    "topic": "еда",
+    "messages": [
+      {
+        "role": "user",
+        "content": "щас"
+      }
+    ],
+    "contains": "сейчас"
+  },
+  {
+    "id": 10,
+    "category": "slang",
+    "topic": "транспорт",
+    "messages": [
+      {
+        "role": "user",
+        "content": "ок"
+      }
+    ],
+    "contains": "хорошо"
+  },
+  {
+    "id": 11,
+    "category": "slang",
+    "topic": "покупки",
+    "messages": [
+      {
+        "role": "user",
+        "content": "сорян"
+      }
+    ],
+    "contains": "извини"
+  },
+  {
+    "id": 12,
+    "category": "slang",
+    "topic": "быт",
+    "messages": [
+      {
+        "role": "user",
+        "content": "прив"
+      }
+    ],
+    "contains": "привет"
+  },
+  {
+    "id": 13,
+    "category": "slang",
+    "topic": "путешествия",
+    "messages": [
+      {
+        "role": "user",
+        "content": "лол"
+      }
+    ],
+    "contains": "смех"
+  },
+  {
+    "id": 14,
+    "category": "slang",
+    "topic": "одежда",
+    "messages": [
+      {
+        "role": "user",
+        "content": "рофл"
+      }
+    ],
+    "contains": "шутка"
+  },
+  {
+    "id": 15,
+    "category": "slang",
+    "topic": "книги",
+    "messages": [
+      {
+        "role": "user",
+        "content": "кринж"
+      }
+    ],
+    "contains": "неловкость"
+  },
+  {
+    "id": 16,
+    "category": "slang",
+    "topic": "кино",
+    "messages": [
+      {
+        "role": "user",
+        "content": "респект"
+      }
+    ],
+    "contains": "уважение"
+  },
+  {
+    "id": 17,
+    "category": "slang",
+    "topic": "природа",
+    "messages": [
+      {
+        "role": "user",
+        "content": "пофиг"
+      }
+    ],
+    "contains": "безразлично"
+  },
+  {
+    "id": 18,
+    "category": "slang",
+    "topic": "творчество",
+    "messages": [
+      {
+        "role": "user",
+        "content": "плиз"
+      }
+    ],
+    "contains": "пожалуйста"
+  },
+  {
+    "id": 19,
+    "category": "slang",
+    "topic": "отношения",
+    "messages": [
+      {
+        "role": "user",
+        "content": "пасиб"
+      }
+    ],
+    "contains": "спасибо"
+  },
+  {
+    "id": 20,
+    "category": "slang",
+    "topic": "игры",
+    "messages": [
+      {
+        "role": "user",
+        "content": "оке"
+      }
+    ],
+    "contains": "хорошо"
+  },
+  {
+    "id": 21,
+    "category": "rough",
+    "topic": "общение",
+    "messages": [
+      {
+        "role": "user",
+        "content": "бля"
+      }
+    ],
+    "original_preserved": true,
+    "not_moralizing": true
+  },
+  {
+    "id": 22,
+    "category": "rough",
+    "topic": "интернет",
+    "messages": [
+      {
+        "role": "user",
+        "content": "блять"
+      }
+    ],
+    "original_preserved": true,
+    "not_moralizing": true
+  },
+  {
+    "id": 23,
+    "category": "rough",
+    "topic": "компьютеры",
+    "messages": [
+      {
+        "role": "user",
+        "content": "ебать"
+      }
+    ],
+    "original_preserved": true,
+    "not_moralizing": true
+  },
+  {
+    "id": 24,
+    "category": "rough",
+    "topic": "программирование",
+    "messages": [
+      {
+        "role": "user",
+        "content": "нахуй"
+      }
+    ],
+    "original_preserved": true,
+    "not_moralizing": true
+  },
+  {
+    "id": 25,
+    "category": "rough",
+    "topic": "музыка",
+    "messages": [
+      {
+        "role": "user",
+        "content": "похуй"
+      }
+    ],
+    "original_preserved": true,
+    "not_moralizing": true
+  },
+  {
+    "id": 26,
+    "category": "rough",
+    "topic": "спорт",
+    "messages": [
+      {
+        "role": "user",
+        "content": "ёпт"
+      }
+    ],
+    "original_preserved": true,
+    "not_moralizing": true
+  },
+  {
+    "id": 27,
+    "category": "rough",
+    "topic": "учёба",
+    "messages": [
+      {
+        "role": "user",
+        "content": "заебись"
+      }
+    ],
+    "original_preserved": true,
+    "not_moralizing": true
+  },
+  {
+    "id": 28,
+    "category": "rough",
+    "topic": "работа",
+    "messages": [
+      {
+        "role": "user",
+        "content": "блин"
+      }
+    ],
+    "original_preserved": true,
+    "not_moralizing": true
+  },
+  {
+    "id": 29,
+    "category": "typo",
+    "topic": "еда",
+    "messages": [
+      {
+        "role": "user",
+        "content": "тюея"
+      }
+    ],
+    "contains": "тебя"
+  },
+  {
+    "id": 30,
+    "category": "typo",
+    "topic": "транспорт",
+    "messages": [
+      {
+        "role": "user",
+        "content": "мнэ"
+      }
+    ],
+    "contains": "мне"
+  },
+  {
+    "id": 31,
+    "category": "typo",
+    "topic": "покупки",
+    "messages": [
+      {
+        "role": "user",
+        "content": "ваще"
+      }
+    ],
+    "contains": "вообще"
+  },
+  {
+    "id": 32,
+    "category": "typo",
+    "topic": "быт",
+    "messages": [
+      {
+        "role": "user",
+        "content": "чё"
+      }
+    ],
+    "contains": "что"
+  },
+  {
+    "id": 33,
+    "category": "typo",
+    "topic": "путешествия",
+    "messages": [
+      {
+        "role": "user",
+        "content": "сяс"
+      }
+    ],
+    "contains": "сейчас"
+  },
+  {
+    "id": 34,
+    "category": "typo",
+    "topic": "одежда",
+    "messages": [
+      {
+        "role": "user",
+        "content": "здрв"
+      }
+    ],
+    "contains": "здравствуй"
+  },
+  {
+    "id": 35,
+    "category": "typo",
+    "topic": "книги",
+    "messages": [
+      {
+        "role": "user",
+        "content": "пнтн"
+      }
+    ],
+    "contains": "понятно"
+  },
+  {
+    "id": 36,
+    "category": "typo",
+    "topic": "кино",
+    "messages": [
+      {
+        "role": "user",
+        "content": "привeт"
+      }
+    ],
+    "contains": "привет"
+  },
+  {
+    "id": 37,
+    "category": "typo",
+    "topic": "природа",
+    "messages": [
+      {
+        "role": "user",
+        "content": "пoгода"
+      }
+    ],
+    "contains": "погода"
+  },
+  {
+    "id": 38,
+    "category": "typo",
+    "topic": "творчество",
+    "messages": [
+      {
+        "role": "user",
+        "content": "прeдмет"
+      }
+    ],
+    "contains": "предмет"
+  },
+  {
+    "id": 39,
+    "category": "typo",
+    "topic": "отношения",
+    "messages": [
+      {
+        "role": "user",
+        "content": "сeгодня"
+      }
+    ],
+    "contains": "сегодня"
+  },
+  {
+    "id": 40,
+    "category": "typo",
+    "topic": "игры",
+    "messages": [
+      {
+        "role": "user",
+        "content": "oчень"
+      }
+    ],
+    "contains": "очень"
+  },
+  {
+    "id": 41,
+    "category": "typo",
+    "topic": "общение",
+    "messages": [
+      {
+        "role": "user",
+        "content": "дeла"
+      }
+    ],
+    "contains": "дела"
+  },
+  {
+    "id": 42,
+    "category": "typo",
+    "topic": "интернет",
+    "messages": [
+      {
+        "role": "user",
+        "content": "спасибo"
+      }
+    ],
+    "contains": "спасибо"
+  },
+  {
+    "id": 43,
+    "category": "layout",
+    "topic": "компьютеры",
+    "messages": [
+      {
+        "role": "user",
+        "content": "ghbdtn"
+      }
+    ],
+    "contains": "привет"
+  },
+  {
+    "id": 44,
+    "category": "layout",
+    "topic": "программирование",
+    "messages": [
+      {
+        "role": "user",
+        "content": "rfr"
+      }
+    ],
+    "contains": "как"
+  },
+  {
+    "id": 45,
+    "category": "layout",
+    "topic": "музыка",
+    "messages": [
+      {
+        "role": "user",
+        "content": "gjrf"
+      }
+    ],
+    "contains": "пока"
+  },
+  {
+    "id": 46,
+    "category": "layout",
+    "topic": "спорт",
+    "messages": [
+      {
+        "role": "user",
+        "content": "privet"
+      }
+    ],
+    "contains": "привет"
+  },
+  {
+    "id": 47,
+    "category": "layout",
+    "topic": "учёба",
+    "messages": [
+      {
+        "role": "user",
+        "content": "spasibo"
+      }
+    ],
+    "contains": "спасибо"
+  },
+  {
+    "id": 48,
+    "category": "layout",
+    "topic": "работа",
+    "messages": [
+      {
+        "role": "user",
+        "content": "kak"
+      }
+    ],
+    "contains": "как"
+  },
+  {
+    "id": 49,
+    "category": "layout",
+    "topic": "еда",
+    "messages": [
+      {
+        "role": "user",
+        "content": "gde"
+      }
+    ],
+    "contains": "где"
+  },
+  {
+    "id": 50,
+    "category": "layout",
+    "topic": "транспорт",
+    "messages": [
+      {
+        "role": "user",
+        "content": "tebya"
+      }
+    ],
+    "contains": "тебя"
+  },
+  {
+    "id": 51,
+    "category": "layout",
+    "topic": "покупки",
+    "messages": [
+      {
+        "role": "user",
+        "content": "mne"
+      }
+    ],
+    "contains": "мне"
+  },
+  {
+    "id": 52,
+    "category": "layout",
+    "topic": "быт",
+    "messages": [
+      {
+        "role": "user",
+        "content": "poka"
+      }
+    ],
+    "contains": "пока"
+  },
+  {
+    "id": 53,
+    "category": "stretch",
+    "topic": "путешествия",
+    "messages": [
+      {
+        "role": "user",
+        "content": "оооочень"
+      }
+    ],
+    "contains": "очень"
+  },
+  {
+    "id": 54,
+    "category": "stretch",
+    "topic": "одежда",
+    "messages": [
+      {
+        "role": "user",
+        "content": "прииивет"
+      }
+    ],
+    "contains": "привет"
+  },
+  {
+    "id": 55,
+    "category": "stretch",
+    "topic": "книги",
+    "messages": [
+      {
+        "role": "user",
+        "content": "спасииибо"
+      }
+    ],
+    "contains": "спасибо"
+  },
+  {
+    "id": 56,
+    "category": "stretch",
+    "topic": "кино",
+    "messages": [
+      {
+        "role": "user",
+        "content": "даааа"
+      }
+    ],
+    "contains": "да"
+  },
+  {
+    "id": 57,
+    "category": "stretch",
+    "topic": "природа",
+    "messages": [
+      {
+        "role": "user",
+        "content": "неееет"
+      }
+    ],
+    "contains": "нет"
+  },
+  {
+    "id": 58,
+    "category": "stretch",
+    "topic": "творчество",
+    "messages": [
+      {
+        "role": "user",
+        "content": "хооорошо"
+      }
+    ],
+    "contains": "хорошо"
+  },
+  {
+    "id": 59,
+    "category": "stretch",
+    "topic": "отношения",
+    "messages": [
+      {
+        "role": "user",
+        "content": "какдела"
+      }
+    ],
+    "contains": "как дела"
+  },
+  {
+    "id": 60,
+    "category": "stretch",
+    "topic": "игры",
+    "messages": [
+      {
+        "role": "user",
+        "content": "гдеты"
+      }
+    ],
+    "contains": "где ты"
+  },
+  {
+    "id": 61,
+    "category": "reference",
+    "topic": "общение",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Обсуждаем «общение»"
+      },
+      {
+        "role": "assistant",
+        "content": "Продолжим."
+      },
+      {
+        "role": "user",
+        "content": "А это?"
+      }
+    ],
+    "entity": "общение"
+  },
+  {
+    "id": 62,
+    "category": "reference",
+    "topic": "интернет",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Обсуждаем «интернет»"
+      },
+      {
+        "role": "assistant",
+        "content": "Продолжим."
+      },
+      {
+        "role": "user",
+        "content": "А это?"
+      }
+    ],
+    "entity": "интернет"
+  },
+  {
+    "id": 63,
+    "category": "reference",
+    "topic": "компьютеры",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Обсуждаем «компьютеры»"
+      },
+      {
+        "role": "assistant",
+        "content": "Продолжим."
+      },
+      {
+        "role": "user",
+        "content": "А это?"
+      }
+    ],
+    "entity": "компьютеры"
+  },
+  {
+    "id": 64,
+    "category": "reference",
+    "topic": "программирование",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Обсуждаем «программирование»"
+      },
+      {
+        "role": "assistant",
+        "content": "Продолжим."
+      },
+      {
+        "role": "user",
+        "content": "А это?"
+      }
+    ],
+    "entity": "программирование"
+  },
+  {
+    "id": 65,
+    "category": "reference",
+    "topic": "музыка",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Обсуждаем «музыка»"
+      },
+      {
+        "role": "assistant",
+        "content": "Продолжим."
+      },
+      {
+        "role": "user",
+        "content": "А это?"
+      }
+    ],
+    "entity": "музыка"
+  },
+  {
+    "id": 66,
+    "category": "reference",
+    "topic": "спорт",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Обсуждаем «спорт»"
+      },
+      {
+        "role": "assistant",
+        "content": "Продолжим."
+      },
+      {
+        "role": "user",
+        "content": "А это?"
+      }
+    ],
+    "entity": "спорт"
+  },
+  {
+    "id": 67,
+    "category": "reference",
+    "topic": "учёба",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Обсуждаем «учёба»"
+      },
+      {
+        "role": "assistant",
+        "content": "Продолжим."
+      },
+      {
+        "role": "user",
+        "content": "А это?"
+      }
+    ],
+    "entity": "учёба"
+  },
+  {
+    "id": 68,
+    "category": "reference",
+    "topic": "работа",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Обсуждаем «работа»"
+      },
+      {
+        "role": "assistant",
+        "content": "Продолжим."
+      },
+      {
+        "role": "user",
+        "content": "А это?"
+      }
+    ],
+    "entity": "работа"
+  },
+  {
+    "id": 69,
+    "category": "reference",
+    "topic": "еда",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Обсуждаем «еда»"
+      },
+      {
+        "role": "assistant",
+        "content": "Продолжим."
+      },
+      {
+        "role": "user",
+        "content": "А это?"
+      }
+    ],
+    "entity": "еда"
+  },
+  {
+    "id": 70,
+    "category": "reference",
+    "topic": "транспорт",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Обсуждаем «транспорт»"
+      },
+      {
+        "role": "assistant",
+        "content": "Продолжим."
+      },
+      {
+        "role": "user",
+        "content": "А это?"
+      }
+    ],
+    "entity": "транспорт"
+  },
+  {
+    "id": 71,
+    "category": "reference",
+    "topic": "покупки",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Обсуждаем «покупки»"
+      },
+      {
+        "role": "assistant",
+        "content": "Продолжим."
+      },
+      {
+        "role": "user",
+        "content": "А это?"
+      }
+    ],
+    "entity": "покупки"
+  },
+  {
+    "id": 72,
+    "category": "reference",
+    "topic": "быт",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Обсуждаем «быт»"
+      },
+      {
+        "role": "assistant",
+        "content": "Продолжим."
+      },
+      {
+        "role": "user",
+        "content": "А это?"
+      }
+    ],
+    "entity": "быт"
+  },
+  {
+    "id": 73,
+    "category": "reference",
+    "topic": "путешествия",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Обсуждаем «путешествия»"
+      },
+      {
+        "role": "assistant",
+        "content": "Продолжим."
+      },
+      {
+        "role": "user",
+        "content": "А это?"
+      }
+    ],
+    "entity": "путешествия"
+  },
+  {
+    "id": 74,
+    "category": "reference",
+    "topic": "одежда",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Обсуждаем «одежда»"
+      },
+      {
+        "role": "assistant",
+        "content": "Продолжим."
+      },
+      {
+        "role": "user",
+        "content": "А это?"
+      }
+    ],
+    "entity": "одежда"
+  },
+  {
+    "id": 75,
+    "category": "ambiguous",
+    "topic": "книги",
+    "messages": [
+      {
+        "role": "user",
+        "content": "кк"
+      }
+    ],
+    "clarify": true
+  },
+  {
+    "id": 76,
+    "category": "ambiguous",
+    "topic": "кино",
+    "messages": [
+      {
+        "role": "user",
+        "content": "лук"
+      }
+    ],
+    "clarify": true
+  },
+  {
+    "id": 77,
+    "category": "ambiguous",
+    "topic": "природа",
+    "messages": [
+      {
+        "role": "user",
+        "content": "пара"
+      }
+    ],
+    "clarify": true
+  },
+  {
+    "id": 78,
+    "category": "ambiguous",
+    "topic": "творчество",
+    "messages": [
+      {
+        "role": "user",
+        "content": "бит"
+      }
+    ],
+    "clarify": true
+  },
+  {
+    "id": 79,
+    "category": "ambiguous",
+    "topic": "отношения",
+    "messages": [
+      {
+        "role": "user",
+        "content": "кк"
+      }
+    ],
+    "clarify": true
+  },
+  {
+    "id": 80,
+    "category": "ambiguous",
+    "topic": "игры",
+    "messages": [
+      {
+        "role": "user",
+        "content": "лук"
+      }
+    ],
+    "clarify": true
+  },
+  {
+    "id": 81,
+    "category": "ambiguous",
+    "topic": "общение",
+    "messages": [
+      {
+        "role": "user",
+        "content": "пара"
+      }
+    ],
+    "clarify": true
+  },
+  {
+    "id": 82,
+    "category": "ambiguous",
+    "topic": "интернет",
+    "messages": [
+      {
+        "role": "user",
+        "content": "бит"
+      }
+    ],
+    "clarify": true
+  },
+  {
+    "id": 83,
+    "category": "learning",
+    "topic": "компьютеры",
+    "messages": [
+      {
+        "role": "user",
+        "content": "шурум"
+      }
+    ],
+    "mode": "explicit"
+  },
+  {
+    "id": 84,
+    "category": "learning",
+    "topic": "программирование",
+    "messages": [
+      {
+        "role": "user",
+        "content": "шурум"
+      }
+    ],
+    "mode": "promote"
+  },
+  {
+    "id": 85,
+    "category": "learning",
+    "topic": "музыка",
+    "messages": [
+      {
+        "role": "user",
+        "content": "шурум"
+      }
+    ],
+    "mode": "contradiction"
+  },
+  {
+    "id": 86,
+    "category": "learning",
+    "topic": "спорт",
+    "messages": [
+      {
+        "role": "user",
+        "content": "шурум"
+      }
+    ],
+    "mode": "private"
+  },
+  {
+    "id": 87,
+    "category": "learning",
+    "topic": "учёба",
+    "messages": [
+      {
+        "role": "user",
+        "content": "шурум"
+      }
+    ],
+    "mode": "one_chat"
+  },
+  {
+    "id": 88,
+    "category": "learning",
+    "topic": "работа",
+    "messages": [
+      {
+        "role": "user",
+        "content": "шурум"
+      }
+    ],
+    "mode": "expire"
+  },
+  {
+    "id": 89,
+    "category": "learning",
+    "topic": "еда",
+    "messages": [
+      {
+        "role": "user",
+        "content": "шурум"
+      }
+    ],
+    "mode": "explicit"
+  },
+  {
+    "id": 90,
+    "category": "learning",
+    "topic": "транспорт",
+    "messages": [
+      {
+        "role": "user",
+        "content": "шурум"
+      }
+    ],
+    "mode": "promote"
+  },
+  {
+    "id": 91,
+    "category": "learning",
+    "topic": "покупки",
+    "messages": [
+      {
+        "role": "user",
+        "content": "шурум"
+      }
+    ],
+    "mode": "contradiction"
+  },
+  {
+    "id": 92,
+    "category": "learning",
+    "topic": "быт",
+    "messages": [
+      {
+        "role": "user",
+        "content": "шурум"
+      }
+    ],
+    "mode": "private"
+  },
+  {
+    "id": 93,
+    "category": "learning",
+    "topic": "путешествия",
+    "messages": [
+      {
+        "role": "user",
+        "content": "шурум"
+      }
+    ],
+    "mode": "one_chat"
+  },
+  {
+    "id": 94,
+    "category": "learning",
+    "topic": "одежда",
+    "messages": [
+      {
+        "role": "user",
+        "content": "шурум"
+      }
+    ],
+    "mode": "expire"
+  },
+  {
+    "id": 95,
+    "category": "anti_bias",
+    "topic": "книги",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Расскажи про книги"
+      }
+    ],
+    "unrelated_fact": "Предпочитаю интернет. Объясняй подробно.",
+    "forbidden_topic": "интернет"
+  },
+  {
+    "id": 96,
+    "category": "anti_bias",
+    "topic": "кино",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Расскажи про кино"
+      }
+    ],
+    "unrelated_fact": "Предпочитаю компьютеры. Объясняй подробно.",
+    "forbidden_topic": "компьютеры"
+  },
+  {
+    "id": 97,
+    "category": "anti_bias",
+    "topic": "природа",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Расскажи про природа"
+      }
+    ],
+    "unrelated_fact": "Предпочитаю программирование. Объясняй подробно.",
+    "forbidden_topic": "программирование"
+  },
+  {
+    "id": 98,
+    "category": "anti_bias",
+    "topic": "творчество",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Расскажи про творчество"
+      }
+    ],
+    "unrelated_fact": "Предпочитаю музыка. Объясняй подробно.",
+    "forbidden_topic": "музыка"
+  },
+  {
+    "id": 99,
+    "category": "anti_bias",
+    "topic": "отношения",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Расскажи про отношения"
+      }
+    ],
+    "unrelated_fact": "Предпочитаю спорт. Объясняй подробно.",
+    "forbidden_topic": "спорт"
+  },
+  {
+    "id": 100,
+    "category": "anti_bias",
+    "topic": "игры",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Расскажи про игры"
+      }
+    ],
+    "unrelated_fact": "Предпочитаю учёба. Объясняй подробно.",
+    "forbidden_topic": "учёба"
+  },
+  {
+    "id": 101,
+    "category": "anti_bias",
+    "topic": "общение",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Расскажи про общение"
+      }
+    ],
+    "unrelated_fact": "Предпочитаю работа. Объясняй подробно.",
+    "forbidden_topic": "работа"
+  },
+  {
+    "id": 102,
+    "category": "anti_bias",
+    "topic": "интернет",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Расскажи про интернет"
+      }
+    ],
+    "unrelated_fact": "Предпочитаю еда. Объясняй подробно.",
+    "forbidden_topic": "еда"
+  },
+  {
+    "id": 103,
+    "category": "anti_bias",
+    "topic": "компьютеры",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Расскажи про компьютеры"
+      }
+    ],
+    "unrelated_fact": "Предпочитаю транспорт. Объясняй подробно.",
+    "forbidden_topic": "транспорт"
+  },
+  {
+    "id": 104,
+    "category": "anti_bias",
+    "topic": "программирование",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Расскажи про программирование"
+      }
+    ],
+    "unrelated_fact": "Предпочитаю покупки. Объясняй подробно.",
+    "forbidden_topic": "покупки"
+  },
+  {
+    "id": 105,
+    "category": "anti_bias",
+    "topic": "музыка",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Расскажи про музыка"
+      }
+    ],
+    "unrelated_fact": "Предпочитаю быт. Объясняй подробно.",
+    "forbidden_topic": "быт"
+  },
+  {
+    "id": 106,
+    "category": "anti_bias",
+    "topic": "спорт",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Расскажи про спорт"
+      }
+    ],
+    "unrelated_fact": "Предпочитаю путешествия. Объясняй подробно.",
+    "forbidden_topic": "путешествия"
+  },
+  {
+    "id": 107,
+    "category": "anti_bias",
+    "topic": "учёба",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Расскажи про учёба"
+      }
+    ],
+    "unrelated_fact": "Предпочитаю одежда. Объясняй подробно.",
+    "forbidden_topic": "одежда"
+  },
+  {
+    "id": 108,
+    "category": "anti_bias",
+    "topic": "работа",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Расскажи про работа"
+      }
+    ],
+    "unrelated_fact": "Предпочитаю книги. Объясняй подробно.",
+    "forbidden_topic": "книги"
+  },
+  {
+    "id": 109,
+    "category": "anti_bias",
+    "topic": "еда",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Расскажи про еда"
+      }
+    ],
+    "unrelated_fact": "Предпочитаю кино. Объясняй подробно.",
+    "forbidden_topic": "кино"
+  },
+  {
+    "id": 110,
+    "category": "anti_bias",
+    "topic": "транспорт",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Расскажи про транспорт"
+      }
+    ],
+    "unrelated_fact": "Предпочитаю природа. Объясняй подробно.",
+    "forbidden_topic": "природа"
+  },
+  {
+    "id": 111,
+    "category": "clean",
+    "topic": "покупки",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Привет"
+      }
+    ],
+    "exact": "Привет"
+  },
+  {
+    "id": 112,
+    "category": "clean",
+    "topic": "быт",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Спасибо за ответ"
+      }
+    ],
+    "exact": "Спасибо за ответ"
+  },
+  {
+    "id": 113,
+    "category": "clean",
+    "topic": "путешествия",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Сколько стоит билет?"
+      }
+    ],
+    "exact": "Сколько стоит билет?"
+  },
+  {
+    "id": 114,
+    "category": "clean",
+    "topic": "одежда",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Где лежит книга?"
+      }
+    ],
+    "exact": "Где лежит книга?"
+  },
+  {
+    "id": 115,
+    "category": "clean",
+    "topic": "книги",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Не меняй файл Python"
+      }
+    ],
+    "exact": "Не меняй файл Python"
+  },
+  {
+    "id": 116,
+    "category": "clean",
+    "topic": "кино",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Хочу узнать время"
+      }
+    ],
+    "exact": "Хочу узнать время"
+  },
+  {
+    "id": 117,
+    "category": "clean",
+    "topic": "природа",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Погода сегодня"
+      }
+    ],
+    "exact": "Погода сегодня"
+  },
+  {
+    "id": 118,
+    "category": "clean",
+    "topic": "творчество",
+    "messages": [
+      {
+        "role": "user",
+        "content": "У меня новая лампа"
+      }
+    ],
+    "exact": "У меня новая лампа"
+  },
+  {
+    "id": 119,
+    "category": "clean",
+    "topic": "отношения",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Расскажи коротко"
+      }
+    ],
+    "exact": "Расскажи коротко"
+  },
+  {
+    "id": 120,
+    "category": "clean",
+    "topic": "игры",
+    "messages": [
+      {
+        "role": "user",
+        "content": "🙂 Всё хорошо"
+      }
+    ],
+    "exact": "🙂 Всё хорошо"
+  }
+]
