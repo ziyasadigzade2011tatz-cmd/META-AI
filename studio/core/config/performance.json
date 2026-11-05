@@ -1,0 +1,8 @@
+{
+  "enabled": true,
+  "keep_alive_seconds": 900,
+  "simple_turn_fast_path": true,
+  "greeting_limit_seconds": 20,
+  "preferred_chat_model": "qwen3.5:4b",
+  "fallback_chat_model": "qwen2.5:3b"
+}

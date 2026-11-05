@@ -88,7 +88,9 @@ async def converse(request,manager=None):
                 return transport.complete(models.select('understand')[0],parser_messages,json_mode=True,
                     timeout=understanding_settings()['understand_timeout'],options={'num_ctx':4096,'num_predict':400,'temperature':0})['message']['content']
             except Exception as exc:raise OSError('Локальный разбор недоступен') from exc
-        understanding=await asyncio.to_thread(normalize,last,'\n'.join(users[-8:]),parse_local)
+        from .performance import simple_turn
+        parser=None if simple_turn(last) else parse_local
+        understanding=await asyncio.to_thread(normalize,last,'\n'.join(users[-8:]),parser)
         if understanding.get('question'):
             yield {'type':'token','content':understanding['question']}
             yield {'type':'done','data':{'session_id':session,'sources':[],'clarification_required':True}}

@@ -9,6 +9,7 @@ import os
 from urllib.parse import urlsplit
 
 from .compute import ComputeGate
+from .performance import keep_alive
 COMPUTE=ComputeGate()
 BASE=os.environ.get('META_OLLAMA_URL','http://127.0.0.1:11434').rstrip('/')
 _target=urlsplit(BASE)
@@ -34,7 +35,7 @@ async def prepare_model_async(client,model):
 def complete(model,messages,*,timeout=120,json_mode=False,options=None,tools=None,think=False):
     if not COMPUTE.acquire(timeout=timeout):raise TimeoutError('Очередь локальной модели занята')
     try:
-        payload={'model':model,'messages':messages,'stream':False,'think':think,'keep_alive':'3m','options':options or {'num_ctx':8192,'num_predict':2400,'temperature':.15}}
+        payload={'model':model,'messages':messages,'stream':False,'think':think,'keep_alive':keep_alive(),'options':options or {'num_ctx':8192,'num_predict':2400,'temperature':.15}}
         if json_mode:payload['format']='json'
         if tools:payload['tools']=tools
         with httpx.Client(timeout=timeout,trust_env=False) as client:
@@ -55,7 +56,7 @@ async def stream(model,messages,*,cancel=None,options=None,timeout=120,think=Fal
             if time.monotonic()-started>timeout:raise TimeoutError('Очередь модели занята')
         async with httpx.AsyncClient(timeout=httpx.Timeout(timeout,connect=10),trust_env=False) as client:
             await prepare_model_async(client,model)
-            async with client.stream('POST',BASE+'/api/chat',json={'model':model,'messages':messages,'stream':True,'think':think,'keep_alive':'3m','options':options or {'num_ctx':8192,'num_predict':1600,'temperature':.3}}) as r:
+            async with client.stream('POST',BASE+'/api/chat',json={'model':model,'messages':messages,'stream':True,'think':think,'keep_alive':keep_alive(),'options':options or {'num_ctx':8192,'num_predict':1600,'temperature':.3}}) as r:
                 r.raise_for_status()
                 iterator=r.aiter_lines().__aiter__();pending=None
                 try:
