@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 class Setup : Form {
  TextBox target; Button install; ProgressBar progress; Label status; CheckBox shortcut,launch;
- const string Version="5.2.0";
+ const string Version="5.2.1";
  Setup(){
   Text="META Studio · Установка "+Version;ClientSize=new Size(690,450);StartPosition=FormStartPosition.CenterScreen;BackColor=Color.FromArgb(35,36,39);ForeColor=Color.FromArgb(237,234,225);Font=new Font("Segoe UI",10);FormBorderStyle=FormBorderStyle.FixedDialog;MaximizeBox=false;
   Controls.Add(new Label{Text="ᴍ  META Studio",Font=new Font("Segoe UI",26,FontStyle.Bold),ForeColor=Color.FromArgb(220,149,93),Location=new Point(30,25),Size=new Size(600,60)});

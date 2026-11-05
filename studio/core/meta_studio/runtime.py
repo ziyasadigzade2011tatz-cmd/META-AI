@@ -196,6 +196,9 @@ def boot(namespace):
                 else:raise ValueError('Неизвестный маршрут')
                 self.json_response(result)
             except (ValueError,KeyError,OSError,TypeError) as exc:self.json_response({'error':str(exc)[:500]},400)
+    # Legacy streaming resolves its database helpers through type(self).__module__.
+    # Retain that module when extending the handler, as the original shell does.
+    StudioHandler.__module__=original.__module__
     namespace['Handler']=StudioHandler
     if '--studio-server' in sys.argv:
         from http.server import ThreadingHTTPServer
