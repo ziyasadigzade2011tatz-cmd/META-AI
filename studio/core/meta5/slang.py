@@ -26,8 +26,9 @@ DOMAINS={
  'отношения':'отношения общение друг свидание человек', 'игры':'игра игрок играть персонаж матч',
  'интернет':'интернет сообщение форум сеть эфир', 'общение':''}
 
-def private(text):
-    return bool(re.search(r'парол|password|api[ _-]?key|секрет|токен|паспорт|номер карты|cvv|github_pat_|gh[pousr]_|sk-[\w-]{8,}|[\w.+-]+@[\w.-]+|[A-Za-z]:[\\/]|\b(?:улица|адрес|телефон)\b|\d',str(text),re.I))
+def private(text,numbers=True):
+    pattern=r'парол|password|api[ _-]?key|секрет|токен|паспорт|номер карты|cvv|github_pat_|gh[pousr]_|sk-[\w-]{8,}|[\w.+-]+@[\w.-]+|[A-Za-z]:[\\/]|\b(?:улица|адрес|телефон)\b'
+    return bool(re.search(pattern,str(text),re.I) or re.search(r'\d' if numbers else r'(?<!\d)(?:\d[ -]?){13,19}(?!\d)',str(text)))
 
 def safe_term(term):
     return bool(re.fullmatch(r'[a-zа-яё][a-zа-яё-]{1,31}',term)) and not private(term) and term not in {

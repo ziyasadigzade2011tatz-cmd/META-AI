@@ -3,9 +3,9 @@ from .context import search_plan,rank_sources
 from meta40.web_research import web_search,web_fetch,WebError
 
 
-def research(messages,preferences=(),emit=lambda *a:None):
-    from .search_planner import plan as build_plan
-    plan=build_plan(messages,preferences);emit('research_plan',plan)
+def research(messages,preferences=(),emit=lambda *a:None,plan_override=None):
+    from .search_query_builder import plan as build_plan
+    plan=plan_override or build_plan(messages,preferences);emit('research_plan',plan)
     from .advanced import settings
     if settings()['deep_research']:
         from .deep_research import expand

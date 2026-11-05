@@ -84,7 +84,7 @@ def schema(value,original):
     return value
 
 def normalize(text,context='',client=None,glossary=None):
-    base={'normalized':text,'intent':'chat','topic':'','entities':[],'needs_search':False,'confidence':1.,'ambiguous':False,'unknown_terms':[],'tone':'neutral','used_slang':[],'question':None,'private':private(text)}
+    base={'normalized':text,'intent':'chat','topic':'','entities':[],'needs_search':False,'confidence':1.,'ambiguous':False,'unknown_terms':[],'tone':'neutral','used_slang':[],'question':None,'private':private(text,numbers=False)}
     cfg=settings()
     if not cfg['normalizer'] or base['private']:return base
     # Opaque fragments are preserved verbatim, including URLs, paths and code.

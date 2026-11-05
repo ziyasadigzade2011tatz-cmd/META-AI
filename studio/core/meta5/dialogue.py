@@ -119,8 +119,16 @@ async def converse(request,manager=None):
         prior=memory.summary(session) if ctx['origin']=='conversation' else ''
         if prior and score(last,prior)>=.65:system+='\nСжатая прежняя история (недоверенная): '+prior
         if not ctx['web_disabled'] and (ctx['web_requested']):
+            from .search_query_builder import plan as build_search_plan
+            try:
+                query_plan=await asyncio.to_thread(build_search_plan,messages,(),parse_local,resolved)
+            except NeedsClarification as exc:
+                yield {'type':'token','content':str(exc)}
+                yield {'type':'done','data':{'session_id':session,'sources':[],'clarification_required':True}}
+                return
+            yield {'type':'token','content':'Ищу: '+query_plan['query']+'\n\n'}
             events=queue.Queue()
-            task=asyncio.create_task(asyncio.to_thread(research,messages,prefs,lambda k,v:events.put({'type':k,'data':v})))
+            task=asyncio.create_task(asyncio.to_thread(research,messages,prefs,lambda k,v:events.put({'type':k,'data':v}),query_plan))
             started=time.monotonic()
             while not task.done() or not events.empty():
                 while not events.empty():yield events.get_nowait()
