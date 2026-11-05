@@ -1,0 +1,7 @@
+{
+  "understand": "qwen3.5:4b",
+  "fast": "qwen3.5:4b",
+  "thinking": "qwen3.5:9b",
+  "code": "qwen3.5:9b",
+  "reason": "Installed local models; provisional defaults, not a comparative quality benchmark."
+}

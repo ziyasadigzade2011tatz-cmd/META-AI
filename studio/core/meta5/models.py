@@ -12,6 +12,11 @@ def profiles():
 
 def select(mode='chat',explicit='auto'):
     data=profiles()
+    if mode=='understand' and explicit in ('auto','meta-core',None):
+        from .advanced import settings
+        from .understanding_config import ROOT
+        selected=settings().get('understand_model') or read_json(ROOT/'models.json',{}).get('understand') or data['chat']
+        return selected,'local_understand_profile'
     if explicit=='auto-quality':return data.get('quality',data.get(mode,data['chat'])),'local_quality_profile'
     if explicit and explicit not in ('auto','meta-core'):
         if not re.fullmatch(r'[A-Za-z0-9_.:/-]{1,100}',explicit):raise ValueError('Неверное имя модели')

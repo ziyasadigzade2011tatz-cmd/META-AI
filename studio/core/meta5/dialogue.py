@@ -165,14 +165,14 @@ async def converse(request,manager=None):
         if usage['summary'] and len([m for m in messages if m.get('role')!='system'])%6==0:memory.summary(session,usage['summary'])
         mode='chat'
         chosen=request.get('model','auto')
-        if chosen=='auto' and extra.get('chat_model'):chosen=extra['chat_model']
-        if extra['thinking']:chosen=extra['thinking_model']
+        thinking=bool(extra['thinking'] and chosen in ('auto','meta-core'))
+        if chosen in ('auto','meta-core'):chosen=extra['thinking_model'] if thinking else extra.get('chat_model') or 'auto'
         model,reason=models.select(mode,chosen)
         yield {'type':'model_selected','data':{'model':model,'reason':reason,'mode':mode}}
         from .citations import LinkFilter
         links=LinkFilter(evidence['sources'] if evidence else []) if not ctx['web_disabled'] and (ctx['web_requested']) else None
         try:
-            async for event in transport.stream(model,grounded,cancel=cancel,think=extra['thinking'],options={'num_ctx':request.get('context',models.profiles().get('context',8192)),'num_predict':2000,'temperature':request.get('temperature',.3)}):
+            async for event in transport.stream(model,grounded,cancel=cancel,think=thinking,options={'num_ctx':request.get('context',models.profiles().get('context',8192)),'num_predict':2000,'temperature':request.get('temperature',.3)}):
                 if event['type']=='token':
                     if links:event={**event,'content':links.feed(event['content'])}
                     answer+=event['content']
