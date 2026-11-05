@@ -56,6 +56,13 @@ def similarity(query,text):
     a,b=terms(query),terms(text)
     return len(a&b)/max(1,len(a))
 
+def primary_required(query):return bool(load('search')['require_primary_for_official'] and re.search(r'официальн|\bofficial\b',query,re.I))
+def primary(url,query,policy=None):
+    policy=policy or domains();domain=host(url)
+    known=[*policy['trusted'].get('official',[]),*policy['trusted'].get('documentation',[]),*policy['allowed']]
+    explicit=[host(u) for u in re.findall(r'https?://[^\s<>"\)]+',query)]
+    return any(matches(domain,d) for d in known+explicit if d)
+
 def rank(result_sets,query,engine=None,recent=False):
     cfg=load('search');policy=domains();merged={};excluded=[]
     for results in result_sets[:max(1,min(3,int(cfg['max_queries'])))]:
@@ -63,6 +70,7 @@ def rank(result_sets,query,engine=None,recent=False):
         for rank,hit in enumerate(results[:20],1):
             url=canonical(hit.get('url',''))
             if not allowed(url,query,policy):excluded.append({'url':url,'reason':'domain_policy'});continue
+            if primary_required(query) and not primary(url,query,policy):excluded.append({'url':url,'reason':'official_domain_not_verified'});continue
             if url in seen:continue
             seen.add(url)
             if url not in merged:merged[url]={**hit,'url':url,'rrf':0.}

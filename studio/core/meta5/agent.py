@@ -11,6 +11,7 @@ from . import extra_tools
 from .storage import atomic_json
 from .changes import stage
 from .research import research
+from .task_brief import build as task_brief,POLICY as BRIEF_POLICY
 
 SYSTEM='''Ты META Code, локальный помощник программиста. Отвечай по-русски.
 Работай по циклу понять задачу -> изучить -> подготовить изменения -> проверить -> итог.
@@ -30,6 +31,7 @@ SYSTEM='''Ты META Code, локальный помощник программи
 Уточняй неоднозначные термины по текущей задаче и источникам.
 Не повторяй уже выполненное чтение без причины; сохраняй прогресс и используй результат. При препятствии объясни его.
 '''
+SYSTEM+='\n'+BRIEF_POLICY
 
 
 def execute(ctx,request,checkpoint=None,model_client=None,stage_callback=None):
@@ -46,7 +48,7 @@ def execute(ctx,request,checkpoint=None,model_client=None,stage_callback=None):
     from .time_context import now_context
     messages=(checkpoint or {}).get('messages') or [
         {'role':'system','content':SYSTEM+'\nИнструменты:\n'+json.dumps(REGISTRY.manifest(),ensure_ascii=False)},
-        {'role':'user','content':json.dumps({'task':request['task'],'context':hints,
+        {'role':'user','content':json.dumps({'task':request['task'],'brief':task_brief(request['task']),'context':hints,
             'files':index['files'][:60],'file_count':len(index['files']),'relevant_files':ctx.work.relevant(request['task'],index),
             'project_memory_untrusted':project_notes,'instructions_untrusted':index['instructions_untrusted'][:3],'execution_allowed':ctx.allow_run,'backend':ctx.backend,
             'time_context':now_context(),'history_untrusted':request.get('history',[])[-10:],'previous_project_summary_untrusted':project_summary[:2500] if project_summary else ''},ensure_ascii=False)}]
@@ -93,7 +95,7 @@ def execute(ctx,request,checkpoint=None,model_client=None,stage_callback=None):
                 needs_edits=not constraints(request['task'])['readonly'] and bool(re.search(r'создай|создать|напиши код|исправь|почини|переименуй|удали|реализуй|добавь функцию',request['task'],re.I))
                 if needs_edits and not ctx.edits:
                     save();return {'status':'paused','summary':'Задача требует изменений, но правки ещё не подготовлены. Продолжи задачу или уточни цель.','proposal':None,'tests':tests}
-                if hints['web_requested'] and request.get('allow_web',True) and not found_sources:
+                if (hints['web_requested'] or task_brief(request['task'])['web_requested']) and request.get('allow_web',True) and not found_sources:
                     save();return {'status':'paused','summary':'Веб-источники не подтверждены. Поиск не объявляется выполненным.','proposal':None,'tests':tests}
                 if ctx.edits and ctx.allow_run:
                     current_test=tests[-1] if tests else None
@@ -126,8 +128,8 @@ def execute(ctx,request,checkpoint=None,model_client=None,stage_callback=None):
                     if web_count>=4:raise ValueError('Бюджет веб-поиска исчерпан')
                     web_count+=1
                     query=str(args.get('query',request['task']))[:280]
-                    result=research([*request.get('history',[]),{'role':'user','content':request['task']},{'role':'user','content':'Найди '+query}],emit=emit)
-                    found_sources=bool(result.get('sources')) or found_sources
+                    result=research([{'role':'user','content':'Найди '+query}],emit=emit)
+                    found_sources=any(s.get('opened') for s in result.get('sources',[])) or found_sources
                 elif name in ('self_inspect','self_assess'):
                     if not request.get('allow_self_inspect',True):raise PermissionError('Чтение исходников выключено')
                     from meta40.selfdev import self_inspect,self_assess

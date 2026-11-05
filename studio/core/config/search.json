@@ -1,5 +1,6 @@
 {
   "domain_filter": true,
+  "require_primary_for_official": true,
   "web_verify": true,
   "max_queries": 3,
   "max_sources": 6,

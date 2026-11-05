@@ -2,7 +2,7 @@
 import hashlib,time,sqlite3
 from .phase11_config import load
 from .privacy import sensitive
-from .search_ranking import rank,chunks,allowed
+from .search_ranking import rank,chunks,allowed,primary_required,primary
 from .knowledge import cache,database
 from .embeddings import Embeddings
 from meta40.web_research import web_search,web_fetch,WebError
@@ -18,6 +18,7 @@ def research(messages,preferences=(),emit=lambda *a:None,plan_override=None):
     try:saved=cache(query,max_age=ttl)
     except (OSError,sqlite3.Error,ValueError):saved=[]
     saved=[s for s in saved if s.get('opened') and allowed(s['url'],query) and allowed(s.get('resolved_url') or s['url'],query)]
+    if primary_required(query):saved=[s for s in saved if primary(s.get('resolved_url') or s['url'],query)]
     if saved:return {'query':query,'sources':saved,'cached':True,'excluded':[]}
     started=time.monotonic();results=[];warnings=[]
     queries=list(dict.fromkeys(plan.get('queries') or [plan['query'],plan.get('alternative')]))
@@ -38,6 +39,7 @@ def research(messages,preferences=(),emit=lambda *a:None,plan_override=None):
         try:
             page=web_fetch(hit['url']);resolved=page.get('url') or hit['url']
             if not allowed(resolved,query):excluded.append({'url':resolved,'reason':'redirect_domain_policy'});continue
+            if primary_required(query) and not primary(resolved,query):excluded.append({'url':resolved,'reason':'official_redirect_not_verified'});continue
             text=page.get('text','')[:max(1000,min(20000,int(cfg['page_characters'])))]
             if sensitive(text):excluded.append({'url':hit['url'],'reason':'private_page_data'});continue
             pieces=chunks(text,query,engine)

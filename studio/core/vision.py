@@ -31,6 +31,11 @@ def parse_image(url):
     if len(raw) > MAX_IMAGE_BYTES:
         raise ValueError("Image exceeds 10 MB")
 
+    formats={'data:image/png;base64':raw.startswith(b'\x89PNG\r\n\x1a\n'),
+             'data:image/jpeg;base64':raw.startswith(b'\xff\xd8\xff'),
+             'data:image/webp;base64':raw.startswith(b'RIFF') and raw[8:12]==b'WEBP'}
+    if not formats.get(header.casefold(),False):raise ValueError('Нужна настоящая фотография PNG, JPEG или WebP')
+
     return encoded
 
 

@@ -30,11 +30,11 @@ class AgentTests(unittest.TestCase):
         self.assertNotEqual(d['status'],'completed');self.assertFalse(d['applied'])
     def test_existing_project_requires_apply(self):
         folder=self.root/'projects/existing';folder.mkdir();file=folder/'main.py';file.write_text('x=1\n')
-        s,r,d=self.run_task([call('write',path='main.py',content='x=2\n'),call('check'),call('finish',summary='Изменено')],{'task':'Исправь код','project':'existing'})
+        s,r,d=self.run_task([call('read',path='main.py'),call('write',path='main.py',content='x=2\n'),call('check'),call('finish',summary='Изменено')],{'task':'Исправь код','project':'existing'})
         self.assertEqual(file.read_text(),'x=1\n');self.assertEqual(d['status'],'review');s.apply(r['id']);self.assertEqual(file.read_text(),'x=2\n')
     def test_apply_rejects_changed_source(self):
         folder=self.root/'projects/existing';folder.mkdir();file=folder/'main.py';file.write_text('x=1\n')
-        s,r,_=self.run_task([call('write',path='main.py',content='x=2\n'),call('check'),call('finish')],{'task':'Исправь код','project':'existing'})
+        s,r,_=self.run_task([call('read',path='main.py'),call('write',path='main.py',content='x=2\n'),call('check'),call('finish')],{'task':'Исправь код','project':'existing'})
         file.write_text('x=3\n')
         with self.assertRaises(ValueError):s.apply(r['id'])
         self.assertEqual(file.read_text(),'x=3\n')

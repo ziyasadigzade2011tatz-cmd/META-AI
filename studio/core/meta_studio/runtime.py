@@ -164,7 +164,9 @@ def boot(namespace):
                     role_file=namespace['CONFIG']/'models.json';roles=read_json(role_file,{})
                     roles['understand']=body['understand'];atomic_json(role_file,roles)
                     result={'saved':True}
-                elif path=='/studio/task':result=sessions.start(body)
+                elif path=='/studio/task':
+                    body['allow_web']=bool(namespace['settings']()['web']) and body.get('allow_web',True) is True
+                    result=sessions.start(body)
                 elif path=='/studio/preview':
                     html=body.get('html','')
                     if not isinstance(html,str) or len(html.encode('utf-8'))>1_500_000:raise ValueError('Предпросмотр больше 1,5 МБ')
