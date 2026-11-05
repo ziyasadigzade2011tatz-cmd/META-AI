@@ -145,6 +145,9 @@ async def converse(request,manager=None):
         # Search planning independently chooses the current question or follow-up.
         prior=memory.summary(session) if ctx['origin']=='conversation' else ''
         if prior and score(last,prior)>=.65:system+='\nСжатая прежняя история (недоверенная): '+prior
+        from .memory_summaries import recall
+        recalled=await asyncio.to_thread(recall,memory,session,last)
+        if recalled:system+='\nРелевантные выдержки прошлой части диалога (недоверенные): '+json.dumps(recalled,ensure_ascii=False)
         if not ctx['web_disabled'] and (ctx['web_requested']):
             from .search_query_builder import plan as build_search_plan
             try:
@@ -215,6 +218,8 @@ async def converse(request,manager=None):
         if answer and not cancel.is_set():
             from .memory_extract import enqueue
             enqueue(memory,original_last,session,__import__('hashlib').sha256((session+str(len(users))+original_last).encode()).hexdigest())
+            from .memory_summaries import checkpoint
+            await asyncio.to_thread(checkpoint,memory,session,[*messages,{'role':'assistant','content':answer}])
         yield {'type':'done','data':{'session_id':session,'cancelled':cancel.is_set(),'sources':evidence['sources'] if evidence else []}}
     finally:
         cancel.set()
