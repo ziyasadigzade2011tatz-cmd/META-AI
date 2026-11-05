@@ -18,12 +18,12 @@ class AgentTests(unittest.TestCase):
     def tearDown(self):self.temp.cleanup()
     def run_task(self,actions,request=None):
         it=iter(actions);s=Sessions(self.root/'projects',self.root/'state',client=lambda _:next(it))
-        result=s.start(request or {'task':'Создай сайт для кофейни'})
+        result=s.start(request or {'task':'Создай сайт для новой идеи'})
         deadline=time.monotonic()+5
         while s.active and time.monotonic()<deadline:time.sleep(.01)
         self.assertIsNone(s.active);return s,result,s.get(result['id'])
     def test_new_project_creates_real_files(self):
-        s,r,d=self.run_task([call('plan',steps=['создать сайт']),call('write',path='index.html',content='<h1>Coffee</h1>'),call('check'),call('finish',summary='Создан сайт')])
+        s,r,d=self.run_task([call('plan',steps=['создать сайт']),call('write',path='index.html',content='<h1>Project</h1>'),call('check'),call('finish',summary='Создан сайт')])
         self.assertEqual(d['status'],'completed');self.assertTrue((self.root/'projects'/r['project']/'index.html').exists())
     def test_analysis_is_not_creation_success(self):
         _,_,d=self.run_task([call('finish',summary='Анализ проекта завершён')]*4)

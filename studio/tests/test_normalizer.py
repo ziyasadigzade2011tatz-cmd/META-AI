@@ -19,6 +19,8 @@ class NormalizerTests(unittest.TestCase):
     def test_clean_text_skips_model(self):
         def fail(_):raise AssertionError('Unnecessary model call')
         self.assertEqual(normalize('Привет',client=fail)['normalized'],'Привет')
+    def test_ambiguous_form_not_replaced_without_domain(self):
+        self.assertEqual(normalize('В бане тепло')['normalized'],'В бане тепло')
     def test_private_text_never_calls_parser(self):
         def fail(_):raise AssertionError('Private text parsed')
         self.assertEqual(normalize('пароль ghbdtn',client=fail)['normalized'],'пароль ghbdtn')

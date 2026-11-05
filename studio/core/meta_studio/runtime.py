@@ -36,7 +36,7 @@ def boot(namespace):
     code=marshal.loads((root/'studio_base.bin').read_bytes())
     def retitle(c):
         return c.replace(co_consts=tuple(retitle(x) if isinstance(x,types.CodeType) else
-            'META Studio 5.2' if isinstance(x,str) and x in ('META — Desktop Preview','META — Next Desktop') else x for x in c.co_consts))
+            'META Studio 5.3' if isinstance(x,str) and x in ('META — Desktop Preview','META — Next Desktop') else x for x in c.co_consts))
     code=retitle(code)
     # Only disable the original entry guard; module definitions remain unchanged.
     code=code.replace(co_consts=tuple('__studio_base__' if x=='__main__' else x for x in code.co_consts))
@@ -50,6 +50,14 @@ def boot(namespace):
     from meta5.storage import read_json,atomic_json
     enhanced=read_json(extra_file,{'preset':'graphite','baseColor':'#222326','accent':'#d48a52','motion':True,'sidebarCollapsed':False})
     original=namespace['Handler']
+    original_messages=legacy.core_messages
+    def studio_messages(cid,prefs):
+        # Transfer the web preference to Core without editing persisted user text.
+        from meta5.understanding_config import OFFLINE_MARKER
+        result=original_messages(cid,prefs)
+        if not namespace['settings']()['web']:result=[*result,{'role':'system','content':OFFLINE_MARKER}]
+        return result
+    legacy.core_messages=studio_messages
     lock=threading.RLock()
     download={'status':'idle'}
     previews={}
@@ -68,6 +76,14 @@ def boot(namespace):
         except Exception:download.update(status='failed',message='Загрузка не завершена. Проверь Ollama, интернет и свободное место.')
 
     class StudioHandler(original):
+        def body(self):
+            if urlsplit(self.path).path!='/api/message/stream':return super().body()
+            with namespace['SETTINGS_LOCK']:
+                no_web=not namespace['settings']()['web']
+                value=super().body()
+                prefix='Без интернета. '
+                if no_web and isinstance(value.get('text'),str) and value['text'].startswith(prefix):value['text']=value['text'][len(prefix):]
+                return value
         def studio_guard(self,post=False):
             host=self.headers.get('Host','')
             if host!=f'127.0.0.1:{legacy.PORT}' or (post and self.headers.get('Origin')!=f'http://127.0.0.1:{legacy.PORT}'):
@@ -94,6 +110,9 @@ def boot(namespace):
                     profiles[:]=read_json(registry,profiles)
                     result={'version':VERSION,'profile':profile,'profiles':profiles,'preferences':enhanced,'projects_root':config['projects']}
                 elif path=='/studio/download-status':result=dict(download)
+                elif path=='/studio/role-models':
+                    from meta5 import models,advanced
+                    result={'profiles':models.profiles(),'settings':{**advanced.settings(),'understand_model':models.select('understand')[0]}}
                 elif path=='/studio/projects':
                     base=Path(config['projects']);result={'projects':[p.name for p in sorted(base.iterdir()) if p.is_dir() and not p.name.startswith('.') and not p.is_symlink()]}
                 elif path=='/studio/files':
@@ -128,7 +147,24 @@ def boot(namespace):
             if not self.studio_guard(True):return
             try:
                 body=self.body()
-                if path=='/studio/task':result=sessions.start(body)
+                if path=='/studio/role-models':
+                    import httpx
+                    from meta5 import models,advanced
+                    from meta5.native_tools import supports
+                    with httpx.Client(timeout=10,trust_env=False) as http:
+                        response=http.get('http://127.0.0.1:11434/api/tags');response.raise_for_status()
+                        available={m['name'] for m in response.json().get('models',[])}
+                    for role in ('fast','thinking','code','understand'):
+                        if not isinstance(body.get(role),str) or body[role] not in available:raise ValueError('Выбери установленную модель для '+role)
+                    if type(body.get('thinking_enabled')) is not bool:raise ValueError('Нужен режим Thinking')
+                    if body['thinking_enabled'] and not supports(body['thinking'],'thinking'):raise ValueError('Модель не объявляет поддержку Thinking')
+                    current=models.profiles();current.update(chat=body['fast'],quality=body['thinking'],code=body['code'],source='user_configured')
+                    advanced.configure({'chat_model':body['fast'],'thinking_model':body['thinking'],'thinking':body['thinking_enabled']})
+                    atomic_json(models.PROFILE_FILE,current)
+                    role_file=namespace['CONFIG']/'models.json';roles=read_json(role_file,{})
+                    roles['understand']=body['understand'];atomic_json(role_file,roles)
+                    result={'saved':True}
+                elif path=='/studio/task':result=sessions.start(body)
                 elif path=='/studio/preview':
                     html=body.get('html','')
                     if not isinstance(html,str) or len(html.encode('utf-8'))>1_500_000:raise ValueError('Предпросмотр больше 1,5 МБ')

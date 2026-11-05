@@ -102,21 +102,26 @@ def normalize(text,context='',client=None,glossary=None):
     base={'normalized':text,'intent':'chat','topic':'','entities':[],'needs_search':False,'confidence':1.,'ambiguous':False,'unknown_terms':[],'tone':'neutral','used_slang':[],'question':None,'private':private(text,numbers=False)}
     cfg=settings()
     if not cfg['normalizer'] or base['private']:return base
+    g=glossary or Glossary();records=g.records()
+    protected={f.casefold() for r in records for f in r.get('forms',[r['term']])}
+    confirmed={f.casefold() for r in records if r['status']=='confirmed' for f in r.get('forms',[r['term']])}
+    def local_fix(match):return match[0] if match[0].casefold() in protected else fix_word(match)
     # Opaque fragments are preserved verbatim, including URLs, paths and code.
     chunks=re.split(r'(```[\s\S]*?```|`[^`]*`|https?://\S+|\b[\w./-]+\.(?:py|js|json|md|txt|exe)\b)',text)
-    cleaned=''.join(re.sub(r'[A-Za-zА-Яа-яЁё]+',fix_word,s) if i%2==0 else s for i,s in enumerate(chunks))
-    g=glossary or Glossary();parts=[];used=[];candidates=[];question=None
+    cleaned=''.join(re.sub(r'[A-Za-zА-Яа-яЁё]+',local_fix,s) if i%2==0 else s for i,s in enumerate(chunks))
+    parts=[];used=[];candidates=[];question=None
     for i,s in enumerate(chunks):
         if i%2:parts.append(s);continue
-        r=g.resolve(re.sub(r'[A-Za-zА-Яа-яЁё]+',fix_word,s),context)
+        r=g.resolve(re.sub(r'[A-Za-zА-Яа-яЁё]+',local_fix,s),context)
         parts.append(r['normalized']);used.extend(r['used']);candidates.extend(r['candidates']);question=question or r['question']
     result={'normalized':''.join(parts),'used':used,'candidates':candidates,'question':question}
     base.update(normalized=result['normalized'],used_slang=result['used'],question=result['question'],ambiguous=bool(result['question']))
-    base['candidate_hints']=result['candidates']
-    tokens=re.findall(r'\b[а-яё]{4,}\b',cleaned)
-    base['unknown_terms']=list(dict.fromkeys(t for t in tokens if not known(t) and safe_term(t)))[:10]
+    base['candidate_hints']=[r for r in result['candidates'] if r['possible_meaning'][0]['definition']!='значение не установлено']
+    lexical_text=' '.join(re.sub(r'[A-Za-zА-Яа-яЁё]+',local_fix,s) for i,s in enumerate(chunks) if i%2==0)
+    tokens=re.findall(r'\b[а-яё]{4,}\b',lexical_text)
+    base['unknown_terms']=list(dict.fromkeys(t for t in tokens if t not in confirmed and not known(t) and safe_term(t)))[:10]
     base['confidence']=.95 if not base['unknown_terms'] and not base['ambiguous'] else .55
-    base['tone']='rough' if re.search(r'\b(?:бля|блять|ебать|нахуй|похуй)\b',text,re.I) else 'friendly' if re.search('[🙂😊😄❤]',text) else 'neutral'
+    base['tone']='rough' if re.search(r'\b(?:бля|блять|ебать|нахуй|похуй|ёпт|заебись)\b',text,re.I) else 'friendly' if re.search('[🙂😊😄❤]',text) else 'neutral'
     if re.search(r'найди|поищи|веб.?поиск|интернет|search',cleaned,re.I):base.update(intent='search',needs_search=True)
     elif re.search(r'(?:создай|напиши|исправь).{0,80}(?:код|файл|сайт|программу)',cleaned,re.I):base['intent']='code'
     elif re.search(r'запомни|память',cleaned,re.I):base['intent']='memory'
@@ -125,7 +130,9 @@ def normalize(text,context='',client=None,glossary=None):
         for attempt in range(2):
             try:
                 parsed=schema(json.loads(client(messages)),cleaned)
-                if parsed['confidence']>=.6:base.update(parsed)
+                if parsed['confidence']>=.6:
+                    unknown=base['unknown_terms'];base.update(parsed)
+                    base['unknown_terms']=list(dict.fromkeys(unknown+[t for t in parsed['unknown_terms'] if safe_term(t) and t in lexical_text]))[:10]
                 break
             except (ValueError,KeyError,TypeError,OSError,TimeoutError):
                 if attempt==1:base.update(normalized=text,confidence=.3,parser_failed=True)

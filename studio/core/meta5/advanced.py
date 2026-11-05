@@ -7,7 +7,6 @@ from .storage import STATE,atomic_json,read_json
 from . import transport,models
 DEFAULT={'semantic_memory':False,'embed_model':'embeddinggemma:latest','thinking':False,'thinking_model':'qwen3.5:4b','chat_model':'','deep_research':False,'schedules_enabled':False,'mcp_servers':{},'blocked_domains':['t.me','telegram.me'],'hooks':True}
 LOCK=threading.RLock()
-DEFAULT['understand_model']=''
 def settings():return {**DEFAULT,**read_json(STATE/'advanced.json',{})}
 def configure(value):
  if not isinstance(value,dict) or set(value)-set(DEFAULT):raise ValueError('Unknown settings')

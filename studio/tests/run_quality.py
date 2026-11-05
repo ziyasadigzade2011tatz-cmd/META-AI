@@ -47,11 +47,13 @@ def evaluate(case,old=None):
                 for _ in range(3):r=learner.observe('шурум','a',meaning,confidence=.9)
                 return r['status']=='candidate'
             learner.observe('шурум','a');return learner.expire(datetime.now(timezone.utc)+timedelta(days=91))==1
-    if old:result={'normalized':text,'question':None}
+    if old:result={'normalized':text,'question':None,'tone':'neutral','used_slang':[]}
     else:
         from meta5.normalizer import normalize
         result=normalize(text)
-    if category=='rough':return text==case['messages'][-1]['content'] and not any(w in result['normalized'].casefold() for w in ('нельзя так','не ругай','не матерись'))
+    if category=='rough':
+        expected_tone='neutral' if text=='блин' else 'rough'
+        return bool(result.get('used_slang')) and result.get('tone')==expected_tone
     if category=='ambiguous':return bool(result.get('question'))
     if 'exact' in case:return result['normalized']==case['exact']
     return case['contains'].casefold() in result['normalized'].casefold()

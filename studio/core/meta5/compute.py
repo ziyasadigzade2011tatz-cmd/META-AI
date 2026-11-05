@@ -3,32 +3,35 @@ import hashlib,os,threading,time
 from pathlib import Path
 
 class ComputeGate:
-    def __init__(self):
-        self.fallback=threading.Semaphore(1)
-        self.handle=None
-        if os.name=='nt':
-            import ctypes
-            from ctypes import wintypes
-            self.ctypes=ctypes;self.kernel=ctypes.WinDLL('kernel32',use_last_error=True)
-            self.kernel.CreateMutexW.argtypes=(ctypes.c_void_p,wintypes.BOOL,wintypes.LPCWSTR);self.kernel.CreateMutexW.restype=wintypes.HANDLE
-            self.kernel.WaitForSingleObject.argtypes=(wintypes.HANDLE,wintypes.DWORD);self.kernel.WaitForSingleObject.restype=wintypes.DWORD
-            self.kernel.ReleaseMutex.argtypes=(wintypes.HANDLE,);self.kernel.ReleaseMutex.restype=wintypes.BOOL
-            name='Local\\META-Compute-'+hashlib.sha256(str(Path.home()).casefold().encode()).hexdigest()[:20]
-            self.handle=self.kernel.CreateMutexW(None,False,name)
-            if not self.handle:raise ctypes.WinError(ctypes.get_last_error())
+    def __init__(self,name=None,folder=None):
+        self.fallback=threading.Semaphore(1);self.file=None
+        base=Path(folder or Path(os.environ.get('LOCALAPPDATA',str(Path.home())))/'META Compute')
+        name=name or 'model-'+hashlib.sha256(str(Path.home()).casefold().encode()).hexdigest()[:20]
+        self.path=base/(hashlib.sha256(name.encode()).hexdigest()+'.lock')
     def acquire(self,blocking=True,timeout=None):
         started=time.monotonic()
         if not self.fallback.acquire(blocking,timeout):return False
-        if self.handle:
-            remaining=None if timeout is None else max(0,timeout-(time.monotonic()-started))
-            milliseconds=0 if not blocking else 0xffffffff if remaining is None else max(0,min(0xfffffffe,int(remaining*1000)))
-            result=self.kernel.WaitForSingleObject(self.handle,milliseconds)
-            if result in (0,0x80):return True
-            self.fallback.release()
-            if result==0x102:return False
-            raise self.ctypes.WinError(self.ctypes.get_last_error())
-        return True
+        if os.name!='nt':return True
+        import msvcrt
+        try:
+            self.path.parent.mkdir(parents=True,exist_ok=True)
+            file=self.path.open('a+b');file.seek(0,2)
+            if file.tell()==0:file.write(b'0');file.flush()
+            while True:
+                try:
+                    file.seek(0);msvcrt.locking(file.fileno(),msvcrt.LK_NBLCK,1)
+                    self.file=file;return True
+                except OSError:
+                    if not blocking or (timeout is not None and time.monotonic()-started>=timeout):
+                        file.close();self.fallback.release();return False
+                    time.sleep(.05)
+        except BaseException:
+            self.fallback.release();raise
     def release(self):
-        if self.handle:
-            if not self.kernel.ReleaseMutex(self.handle):raise self.ctypes.WinError(self.ctypes.get_last_error())
-        self.fallback.release()
+        try:
+            if self.file is not None:
+                import msvcrt
+                file=self.file;self.file=None
+                try:file.seek(0);msvcrt.locking(file.fileno(),msvcrt.LK_UNLCK,1)
+                finally:file.close()
+        finally:self.fallback.release()

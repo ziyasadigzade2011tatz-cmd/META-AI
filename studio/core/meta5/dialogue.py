@@ -34,6 +34,9 @@ async def converse(request,manager=None):
         if session in SESSIONS:raise ValueError('В этом разговоре уже идёт генерация')
         SESSIONS[session]=cancel
     messages=copy.deepcopy(request['messages']);users=texts(messages);last=users[-1] if users else ''
+    from .understanding_config import OFFLINE_MARKER
+    offline=any(m.get('role')=='system' and m.get('content')==OFFLINE_MARKER for m in messages)
+    messages=[m for m in messages if not (m.get('role')=='system' and m.get('content')==OFFLINE_MARKER)]
     memory=Memory();evidence=None;answer='';job=None
     try:
         from vision import has_images,convert_messages
@@ -83,13 +86,17 @@ async def converse(request,manager=None):
         for message in reversed(messages):
             if message.get('role')=='user':message['content']=last;break
         from .context import standalone
-        resolved=await asyncio.to_thread(standalone,messages,parse_local)
+        current_summary=await asyncio.to_thread(memory.summary,session)
+        resolved=await asyncio.to_thread(standalone,messages,parse_local,current_summary)
         if resolved['ambiguous']:
             yield {'type':'token','content':resolved['question']}
             yield {'type':'done','data':{'session_id':session,'sources':[],'clarification_required':True}}
             return
-        memory.capture(original_last);prefs=memory.relevant(last);ctx=resolve(messages,prefs)
+        if not understanding.get('private'):memory.capture(original_last)
+        prefs=memory.relevant(last);ctx=resolve(messages,prefs)
+        if offline:ctx['web_disabled']=True
         if understanding_settings()['slang_learning']:
+            for item in understanding.get('used_slang',[]):await asyncio.to_thread(Learner().observe,item['term'],session)
             clarification=await asyncio.to_thread(Learner().process_unknown,understanding,users,session,parse_local,not ctx['web_disabled'])
             if clarification:
                 yield {'type':'token','content':clarification}
@@ -122,6 +129,7 @@ async def converse(request,manager=None):
         extra=advanced_settings()
         prompt_ctx={k:v for k,v in ctx.items() if k not in ('game','game_name','games')}
         system=system_prompt()+'\nСистемное локальное время: '+json.dumps(now_context())+'\nКонтекст темы: '+json.dumps(prompt_ctx,ensure_ascii=False)
+        if understanding.get('used_slang'):system+='\nЗначения слов, выбранные по текущему контексту: '+json.dumps(understanding['used_slang'],ensure_ascii=False)[:3000]
         if understanding.get('candidate_hints'):system+='\nНеподтверждённые предположения о словах, не факты: '+json.dumps(understanding['candidate_hints'],ensure_ascii=False)[:2000]
         from .relevance import score
         project_data=project_context(request.get('project','.'))

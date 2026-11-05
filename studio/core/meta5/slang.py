@@ -104,10 +104,13 @@ class Glossary:
                 options=[m['definition'] for _,m in rank[:3]]
                 questions.append('«'+record['term']+'» — '+ ' или '.join(options)+'?');continue
             domain_hints=terms(DOMAINS.get(record['domain'],''))
-            if len(meanings)==1 and domain_hints and record['domain']!='интернет' and not vocabulary&domain_hints:continue
+            general_internet=record['domain']=='интернет' and record['term'] in ('имхо','лол','рофл','кринж','хейт','респект','пруф','фейк','флекс')
+            if len(meanings)==1 and domain_hints and not general_internet and not vocabulary&domain_hints:continue
             meaning=rank[0][1]['definition']
             used.append({'term':record['term'],'meaning':meaning,'reason':'контекст' if rank[0][0] else 'однозначное общее слово'})
-            for match in matches:replacements.append((match.start(),match.end(),meaning))
+            # A normal polysemous word is kept verbatim; its selected sense is a hint.
+            if len(meanings)==1 or record['term']=='кк':
+                for match in matches:replacements.append((match.start(),match.end(),meaning))
         # Prefer longer matched phrases and never apply overlapping substitutions.
         accepted=[]
         for start,end,value in sorted(replacements,key=lambda x:-(x[1]-x[0])):

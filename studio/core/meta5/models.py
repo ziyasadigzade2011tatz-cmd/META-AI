@@ -13,9 +13,11 @@ def profiles():
 def select(mode='chat',explicit='auto'):
     data=profiles()
     if mode=='understand' and explicit in ('auto','meta-core',None):
-        from .advanced import settings
+        import os
+        from pathlib import Path
         from .understanding_config import ROOT
-        selected=settings().get('understand_model') or read_json(ROOT/'models.json',{}).get('understand') or data['chat']
+        local=Path(os.environ.get('META_CORE_CONFIG_DIR',str(ROOT)))/'models.json'
+        selected=read_json(local,{}).get('understand') or read_json(ROOT/'models.json',{}).get('understand') or data['chat']
         return selected,'local_understand_profile'
     if explicit=='auto-quality':return data.get('quality',data.get(mode,data['chat'])),'local_quality_profile'
     if explicit and explicit not in ('auto','meta-core'):

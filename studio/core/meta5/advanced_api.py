@@ -23,7 +23,7 @@ def install(router,manager,checked_project):
     # Model names must exist; never trigger downloads or switch to cloud.
     with __import__('httpx').Client(timeout=5,trust_env=False) as c:
      response=c.get(transport.BASE+'/api/tags');response.raise_for_status();available={m['name'] for m in response.json().get('models',[])}
-    for name in ('embed_model','thinking_model','chat_model','understand_model'):
+    for name in ('embed_model','thinking_model','chat_model'):
      if value.get(name) and value[name] not in available and value[name]+':latest' not in available:raise ValueError('Model not installed: '+value[name])
     if value.get('thinking',advanced.settings()['thinking']) and not supports(value.get('thinking_model',advanced.settings()['thinking_model']),'thinking'):raise ValueError('Selected model does not advertise thinking')
     return advanced.configure(value)

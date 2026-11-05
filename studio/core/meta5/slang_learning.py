@@ -21,11 +21,13 @@ class Learner:
                     domain='общение',register='разговорный',language='ru',confidence=confidence,status='candidate',source=source,
                     seen_count=0,chats_count=0,first_seen=utc(),last_seen=utc(),context_hints=[])
             else:record=dict(previous)
+            record['first_seen']=record.get('first_seen') or utc()
             sense=hashlib.sha256((meaning or '').casefold().strip().encode()).hexdigest()
             key=chat_key(chat)
             c.execute('INSERT INTO observations VALUES(?,?,?,1) ON CONFLICT(term,chat,sense) DO UPDATE SET count=count+1',(term,key,sense))
             count,chats=c.execute('SELECT sum(count),count(distinct chat) FROM observations WHERE term=? AND sense=?',(term,sense)).fetchone()
-            record.update(seen_count=record.get('seen_count',0)+1,chats_count=chats,last_seen=utc())
+            total_chats=c.execute('SELECT count(distinct chat) FROM observations WHERE term=?',(term,)).fetchone()[0]
+            record.update(seen_count=record.get('seen_count',0)+1,chats_count=total_chats,last_seen=utc())
             if contradiction:
                 rejected=list(record.get('rejected_meanings',[]))
                 for item in record['meaning']:
@@ -94,6 +96,8 @@ class Learner:
                 r=json.loads(raw)
                 if r['status']=='candidate' and r.get('last_seen') and datetime.fromisoformat(r['last_seen'])<now-timedelta(days=90):
                     c.execute('DELETE FROM entries WHERE term=?',(term,));expired+=1
+                    for table in ('observations','pending'):
+                        if c.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name=?",(table,)).fetchone():c.execute('DELETE FROM '+table+' WHERE term=?',(term,))
                     with self.glossary.path.with_name('slang_changes.log').open('a',encoding='utf-8') as f:f.write(json.dumps({'word':term,'action':'expire','source':r['source']},ensure_ascii=False)+'\n')
         return expired
     def infer(self,term,contexts,chat,client):
