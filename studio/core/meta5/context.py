@@ -6,6 +6,20 @@ WEB=re.compile(r'найди|поищи|ищи|поиск|источник|веб
 FOLLOW=re.compile(r'^(?:а(?:\s|,)|(?:он|она|они|это|его|её)\b|нет\b|неверно\b|ты ошиб|(?:я )?(?:говорю|имел|имею)|уточн|подробнее|продолжи|расскажи ещё)',re.I)
 def texts(messages,role='user'):
     return [m['content'] for m in messages if m.get('role')==role and isinstance(m.get('content'),str)]
+
+def topic_state(messages):
+    """Recomputed from this chat only. No profile, memory or process-wide state."""
+    from .relevance import terms
+    topic=set();misses=0
+    for text in texts(messages):
+        current=terms(text)
+        if current and not FOLLOW.search(text):
+            topic=current;misses=0
+        elif topic and current&topic:misses=0
+        else:
+            misses+=1
+            if misses>=3:topic=set()
+    return ' '.join(sorted(topic)[:8]) or None
 def resolve(messages,preferences=()):
     users=texts(messages);last=users[-1] if users else ''
     from datetime import datetime
@@ -18,7 +32,7 @@ def resolve(messages,preferences=()):
     if follow and len(users)>1:
         previous=users[-2]
         recent=recent or bool(re.search(r'сегодня|сейчас|актуальн|последни|в этом году',previous,re.I)) or any(int(y)>=year-1 for y in re.findall(r'\b20\d{2}\b',previous))
-    return dict(game=None,game_name=None,games=[],origin='conversation' if follow else 'current',topic=None,web_requested=bool(WEB.search(last)) or recent or follow,web_disabled=bool(OFFLINE.search(last)),verification_required=recent)
+    return dict(game=None,game_name=None,games=[],origin='conversation' if follow else 'current',topic=topic_state(messages),web_requested=bool(WEB.search(last)) or recent or follow,web_disabled=bool(OFFLINE.search(last)),verification_required=recent)
 def search_plan(messages,preferences=()):
     users=texts(messages);q=users[-1].strip()
     if resolve(messages)['origin']=='conversation' and len(users)>1:q=users[-2][:120]+' '+q

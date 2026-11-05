@@ -38,22 +38,12 @@ class Memory:
     def delete(self,pid):
         with self.db() as c:c.execute('DELETE FROM facts WHERE id=?',(pid,))
     def relevant(self,query,limit=30):
-        """Retrieve personal definitions and response preferences without topic bleed."""
-        words=set(re.findall(r'\w{3,}',query.casefold()))
-        stop={'что','это','как','мне','про','такое','значит','ответ','почему'}
-        ranked=[]
-        for fact in self.list():
-            terms=set(re.findall(r'\w{3,}',fact['value'].casefold()))-stop
-            score=len((words-stop)&terms)
-            style=fact['kind']=='preference' and bool(re.search(r'кратк|подробн|стиль ответ|язык общени|объясн',fact['value'],re.I))
-            if score or style:ranked.append((score+int(style),fact))
-        lexical=[fact for _,fact in sorted(ranked,key=lambda pair:-pair[0])[:limit]]
-        try:
-            from .advanced import semantic
-            meaning=semantic(query,self.list())
-            merged={f['id']:f for f in [*meaning,*lexical]}
-            return list(merged.values())[:limit]
-        except Exception:return lexical
+        """Phase 10 uses a strict lexical gate, without unconditional preferences."""
+        from .understanding_config import settings
+        from .relevance import select
+        cfg=settings()
+        return select(query,self.list(),float(cfg['memory_gate_threshold']),
+                      min(limit,int(cfg['memory_limit'])),int(cfg['memory_characters']))
     def update(self,pid,value,kind='fact'):
         if not isinstance(value,str) or not 1<=len(value)<=600:raise ValueError('Память: 1–600 символов')
         if re.search(r'пароль|password|api.?key|секрет|паспорт|cvv|github_pat_|ghp_|sk-',value,re.I):raise ValueError('Секреты не сохраняются')

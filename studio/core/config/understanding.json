@@ -1,0 +1,14 @@
+{
+  "normalizer": true,
+  "slang_learning": true,
+  "web_slang_lookup": false,
+  "debug": false,
+  "memory_gate_threshold": 0.65,
+  "memory_limit": 5,
+  "memory_characters": 2400,
+  "topic_decay": 3,
+  "llm_understanding": true,
+  "understand_timeout": 20,
+  "web_slang_hourly": 5,
+  "web_slang_daily": 30
+}
