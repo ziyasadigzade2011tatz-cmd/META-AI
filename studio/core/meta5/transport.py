@@ -32,7 +32,38 @@ async def prepare_model_async(client,model):
             r=await client.post(BASE+'/api/generate',json={'model':name,'keep_alive':0,'stream':False});r.raise_for_status()
 
 
-def complete(model,messages,*,timeout=120,json_mode=False,options=None,tools=None,think=False):
+async def _complete_cancellable(model,messages,cancel,timeout,json_mode,options,tools,think):
+    started=time.monotonic();owned=False;task=None
+    try:
+        while not owned:
+            if cancel.is_set():raise InterruptedError('Генерация остановлена')
+            if time.monotonic()-started>=timeout:raise TimeoutError('Очередь локальной модели занята')
+            owned=COMPUTE.acquire(blocking=False)
+            if not owned:await asyncio.sleep(.1)
+        async with httpx.AsyncClient(timeout=httpx.Timeout(timeout,connect=10),trust_env=False) as client:
+            async def request():
+                await prepare_model_async(client,model)
+                payload={'model':model,'messages':messages,'stream':False,'think':think,'keep_alive':keep_alive(),'options':options or {'num_ctx':8192,'num_predict':2400,'temperature':.15}}
+                if json_mode:payload['format']='json'
+                if tools:payload['tools']=tools
+                response=await client.post(BASE+'/api/chat',json=payload);response.raise_for_status();return response.json()
+            task=asyncio.create_task(request())
+            try:
+                while not task.done():
+                    if cancel.is_set():raise InterruptedError('Генерация остановлена')
+                    if time.monotonic()-started>=timeout:raise TimeoutError('Превышено время локального разбора')
+                    await asyncio.wait({task},timeout=.1)
+                result=await task
+                if not isinstance(result.get('message',{}).get('content',''),str):raise ValueError('Модель вернула неверный ответ')
+                return result
+            finally:
+                if not task.done():task.cancel()
+                with contextlib.suppress(asyncio.CancelledError):await task
+    finally:
+        if owned:COMPUTE.release()
+
+def complete(model,messages,*,timeout=120,json_mode=False,options=None,tools=None,think=False,cancel=None):
+    if cancel is not None:return asyncio.run(_complete_cancellable(model,messages,cancel,timeout,json_mode,options,tools,think))
     if not COMPUTE.acquire(timeout=timeout):raise TimeoutError('Очередь локальной модели занята')
     try:
         payload={'model':model,'messages':messages,'stream':False,'think':think,'keep_alive':keep_alive(),'options':options or {'num_ctx':8192,'num_predict':2400,'temperature':.15}}

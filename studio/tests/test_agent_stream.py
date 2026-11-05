@@ -72,6 +72,19 @@ class StreamTests(unittest.TestCase):
             with self.assertRaises(TimeoutError):agent_stream.generate('fixture',[],threading.Event(),lambda *a:None,deadline=started+.1)
         self.assertLess(time.monotonic()-started,.5)
         self.assertTrue(transport.COMPUTE.acquire(blocking=False));transport.COMPUTE.release()
+    def test_cancel_during_understanding_request(self):
+        actual=httpx.AsyncClient
+        async def response(req):
+            if req.url.path=='/api/ps':return httpx.Response(200,json={'models':[]})
+            await asyncio.sleep(10);return httpx.Response(200,json={'message':{'content':'{}'}})
+        factory=lambda **kw:actual(transport=httpx.MockTransport(response))
+        cancel=threading.Event();timer=threading.Timer(.15,cancel.set);timer.start();started=time.monotonic()
+        try:
+            with patch.object(transport.httpx,'AsyncClient',side_effect=factory):
+                with self.assertRaises(InterruptedError):transport.complete('fixture',[],cancel=cancel)
+        finally:timer.join()
+        self.assertLess(time.monotonic()-started,1)
+        self.assertTrue(transport.COMPUTE.acquire(blocking=False));transport.COMPUTE.release()
     def test_history_marks_orphaned_running_session(self):
         with tempfile.TemporaryDirectory() as d:
             sessions=Sessions(Path(d)/'projects',Path(d)/'sessions');ident='a'*32

@@ -40,6 +40,7 @@ async def converse(request,manager=None):
     memory=Memory();evidence=None;answer='';job=None
     try:
         yield {'type':'status','data':{'message':'Разбираю запрос','session_id':session}}
+        if cancel.is_set():return
         from vision import has_images,convert_messages
         if has_images(messages):
             model,reason=models.select('vision');yield {'type':'model_selected','data':{'model':model,'reason':reason,'mode':'vision'}}
@@ -86,12 +87,14 @@ async def converse(request,manager=None):
         from .normalizer import normalize
         def parse_local(parser_messages):
             try:
+                if cancel.is_set():raise InterruptedError('Разбор остановлен')
                 return transport.complete(models.select('understand')[0],parser_messages,json_mode=True,
-                    timeout=understanding_settings()['understand_timeout'],options={'num_ctx':4096,'num_predict':400,'temperature':0})['message']['content']
+                    timeout=understanding_settings()['understand_timeout'],options={'num_ctx':4096,'num_predict':400,'temperature':0},cancel=cancel)['message']['content']
             except Exception as exc:raise OSError('Локальный разбор недоступен') from exc
         from .performance import simple_turn
         parser=None if simple_turn(last) else parse_local
         understanding=await asyncio.to_thread(normalize,last,'\n'.join(users[-8:]),parser)
+        if cancel.is_set():return
         if understanding.get('question'):
             yield {'type':'token','content':understanding['question']}
             yield {'type':'done','data':{'session_id':session,'sources':[],'clarification_required':True}}
@@ -102,11 +105,13 @@ async def converse(request,manager=None):
         from .context import standalone
         current_summary=await asyncio.to_thread(memory.summary,session)
         resolved=await asyncio.to_thread(standalone,messages,parse_local,current_summary)
+        if cancel.is_set():return
         if resolved['ambiguous']:
             yield {'type':'token','content':resolved['question']}
             yield {'type':'done','data':{'session_id':session,'sources':[],'clarification_required':True}}
             return
         prefs=await asyncio.to_thread(memory.relevant,last);ctx=resolve(messages,prefs)
+        if cancel.is_set():return
         if offline:ctx['web_disabled']=True
         if understanding_settings()['slang_learning']:
             for item in understanding.get('used_slang',[]):await asyncio.to_thread(Learner().observe,item['term'],session)
