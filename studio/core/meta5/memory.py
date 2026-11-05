@@ -8,9 +8,14 @@ from .storage import STATE
 
 
 class Memory:
-    def __init__(self,path=None):self.path=path or STATE/'memory.sqlite'
+    def __init__(self,path=None):
+        from pathlib import Path
+        self.path=Path(path or STATE/'memory.sqlite').resolve();self._ready=False
     @contextmanager
     def db(self):
+        if not self._ready:
+            from .memory_schema import migrate
+            migrate(self.path);self._ready=True
         from pathlib import Path
         Path(self.path).parent.mkdir(parents=True,exist_ok=True)
         c=sqlite3.connect(self.path,timeout=10)
@@ -33,8 +38,9 @@ class Memory:
         if re.search(r'пароль|password|api.?key|секрет|паспорт|cvv|github_pat_|ghp_|sk-',value,re.I):raise ValueError('Секреты не сохраняются в памяти')
         if kind not in ('fact','preference'):raise ValueError('Неверный тип памяти')
         pid=uuid.uuid4().hex
-        with self.db() as c:c.execute('INSERT OR IGNORE INTO facts VALUES(?,?,?,?)',(pid,kind,value,time.time()))
-        return pid
+        with self.db() as c:
+            c.execute('INSERT OR IGNORE INTO facts(id,kind,value,created) VALUES(?,?,?,?)',(pid,kind,value,time.time()))
+            return c.execute('SELECT id FROM facts WHERE value=?',(value,)).fetchone()[0]
     def delete(self,pid):
         with self.db() as c:c.execute('DELETE FROM facts WHERE id=?',(pid,))
     def relevant(self,query,limit=30):
@@ -64,4 +70,16 @@ class Memory:
             if value is None:
                 r=c.execute('SELECT value FROM summaries WHERE session=?',(session,)).fetchone();return r[0] if r else ''
             c.execute('INSERT OR REPLACE INTO summaries VALUES(?,?,?)',(session,str(value)[:5000],time.time()))
+
+    def records(self):
+        with self.db() as c:
+            c.row_factory=sqlite3.Row
+            return [dict(r) for r in c.execute('SELECT * FROM facts ORDER BY created DESC')]
+
+    def indexable(self):
+        from .privacy import sensitive
+        with self.db() as c:
+            facts=[{'type':'fact','id':r[0],'text':r[1]} for r in c.execute("SELECT id,value FROM facts WHERE status='confirmed' AND (expires IS NULL OR expires>?)",(time.time(),))]
+            summaries=[{'type':'summary','id':r[0],'text':r[1]} for r in c.execute('SELECT session,value FROM summaries')]
+        return [r for r in facts+summaries if r['text'] and not sensitive(r['text'])]
 

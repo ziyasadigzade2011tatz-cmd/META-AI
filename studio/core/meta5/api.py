@@ -166,6 +166,8 @@ def install(app,core=None):
     from .advanced_api import install as install_advanced
     install_advanced(router,manager,checked_project)
     app.include_router(router)
+    from .embeddings import start_indexer
+    start_indexer(Memory())
 
 
 def transport_url():

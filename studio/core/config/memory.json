@@ -1,0 +1,17 @@
+{
+  "embeddings_enabled": true,
+  "model": "embeddinggemma:latest",
+  "embedding_timeout": 8,
+  "embedding_batch": 8,
+  "memory_gate_threshold": 0.72,
+  "cosine_weight": 0.7,
+  "lexical_weight": 0.3,
+  "semantic_only_threshold": 0.88,
+  "top_k": 5,
+  "token_budget": 600,
+  "candidate_repeat_count": 2,
+  "duplicate_threshold": 0.94,
+  "background_interval": 15,
+  "sensitive_categories": ["health", "identity", "finances", "relationships"],
+  "extract_enabled": true
+}
