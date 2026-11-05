@@ -3,7 +3,7 @@ from pathlib import Path
 from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'core'))
 import httpx
-from meta5 import memory_extract,debug_state
+from meta5 import memory_extract,debug_state,transport
 from meta5.memory import Memory
 from meta5.embeddings import Embeddings,unpack
 from meta5.search_ranking import command,domains
@@ -14,7 +14,8 @@ class IntegrationTests(unittest.TestCase):
         def respond(req):
             if req.url.path=='/api/ps':return httpx.Response(200,json={'models':[{'name':'qwen3.5:4b'}]})
             calls.append(json.loads(req.content));return httpx.Response(200,json={'message':{'content':'{"facts":[]}'}})
-        with patch.object(memory_extract.httpx,'Client',side_effect=lambda **kw:actual(transport=httpx.MockTransport(respond))),patch('meta5.models.select',return_value=('qwen3.5:4b','test')):
+        import threading
+        with patch.object(transport,'COMPUTE',threading.Semaphore(1)),patch.object(memory_extract.httpx,'Client',side_effect=lambda **kw:actual(transport=httpx.MockTransport(respond))),patch('meta5.models.select',return_value=('qwen3.5:4b','test')):
             self.assertEqual(memory_extract.local_parser([]),'{"facts":[]}')
         self.assertEqual(calls[0]['keep_alive'],900)
     def test_domain_command_persists_and_is_read(self):

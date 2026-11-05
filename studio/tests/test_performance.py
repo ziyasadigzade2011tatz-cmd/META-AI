@@ -30,7 +30,8 @@ class PerformanceTests(unittest.TestCase):
         actual=httpx.Client
         def client(**kwargs):return actual(transport=httpx.MockTransport(respond))
         options={'num_ctx':8192,'num_predict':2000,'temperature':.3};messages=[{'role':'user','content':'Тест'}];tools=[{'type':'function','function':{'name':'read'}}]
-        with patch.object(transport.httpx,'Client',side_effect=client):transport.complete('qwen3.5:9b',messages,options=options,tools=tools,think=True)
+        import threading
+        with patch.object(transport,'COMPUTE',threading.Semaphore(1)),patch.object(transport.httpx,'Client',side_effect=client):transport.complete('qwen3.5:9b',messages,options=options,tools=tools,think=True)
         self.assertEqual(calls[0]['options'],options);self.assertEqual(calls[0]['messages'],messages)
         self.assertEqual(calls[0]['model'],'qwen3.5:9b');self.assertTrue(calls[0]['think']);self.assertEqual(calls[0]['tools'],tools)
         self.assertEqual(calls[0]['keep_alive'],900)

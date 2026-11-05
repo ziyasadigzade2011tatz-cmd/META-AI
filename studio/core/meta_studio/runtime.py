@@ -189,6 +189,12 @@ def boot(namespace):
                     download.update(status='running',model=model,message='Подключение к Ollama',completed=0,total=0)
                     threading.Thread(target=pull_model,args=(model,),daemon=True).start();result={'started':True}
                 elif path=='/studio/cancel':result=sessions.stop(body['id'])
+                elif path=='/studio/cancel-chat':
+                    import httpx
+                    session=str(body.get('session_id',''))
+                    if not re.fullmatch('[A-Za-z0-9_:-]{1,100}',session):raise ValueError('Нет активного сеанса чата')
+                    with httpx.Client(timeout=10,trust_env=False) as client:
+                        response=client.post(legacy.CORE_URL+'/agent40/dialogue/'+session+'/cancel',headers={'X-Meta40-Token':config['token']});response.raise_for_status();result=response.json()
                 elif path=='/studio/resume':result=sessions.resume(body['id'])
                 elif path=='/studio/apply':result=sessions.apply(body['id'])
                 elif path=='/studio/run-tests':

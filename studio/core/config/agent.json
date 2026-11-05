@@ -1,0 +1,9 @@
+{
+  "step_seconds": 300,
+  "queue_seconds": 300,
+  "total_seconds": 1800,
+  "max_steps": 72,
+  "transient_retries": 2,
+  "heartbeat_seconds": 1,
+  "progress_seconds": 0.75
+}

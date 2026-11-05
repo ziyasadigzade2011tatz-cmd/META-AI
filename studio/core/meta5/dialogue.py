@@ -39,6 +39,7 @@ async def converse(request,manager=None):
     messages=[m for m in messages if not (m.get('role')=='system' and m.get('content')==OFFLINE_MARKER)]
     memory=Memory();evidence=None;answer='';job=None
     try:
+        yield {'type':'status','data':{'message':'Разбираю запрос','session_id':session}}
         from vision import has_images,convert_messages
         if has_images(messages):
             model,reason=models.select('vision');yield {'type':'model_selected','data':{'model':model,'reason':reason,'mode':'vision'}}

@@ -2,7 +2,7 @@
 import re
 
 WEB=re.compile(r'\bweb[\s_-]*(?:search(?:ing)?|research)\b|веб[ -]?(?:поиск|с[её]рфинг)|(?:поищи|посмотри|найди).{0,35}(?:интернет|сети)|(?:search|browse)\s+(?:the\s+)?(?:web|internet)',re.I)
-NEGATIVE_WEB=re.compile(r'без интернета|не (?:ищи|используй интернет)|no web|offline',re.I)
+NEGATIVE_WEB=re.compile(r'без\s+(?:интернета|(?:веб[ -]?|web[ -]?)?(?:поиск\w*|с[её]рфинг\w*))|не\s+(?:ищи|используй\s+(?:интернет|веб[ -]?поиск\w*))|no\s+web|offline',re.I)
 REFERENCE=re.compile(r'(?:по подобию|по образцу|в стиле|похож\w* на|как у|inspired by|similar to)\s+[«"“]?([^\n,;()»"”]{2,90})',re.I)
 TITLE=re.compile(r'(?:назови(?:\s+(?:сайт|проект|его))?|название(?:\s+(?:сайта|проекта))?\s*[:—-]?|named|call it)\s*[«"“]([^\n»"”]{1,70})[»"”]',re.I)
 

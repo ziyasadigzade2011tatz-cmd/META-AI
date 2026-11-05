@@ -46,6 +46,13 @@ class CodingReliabilityTests(unittest.TestCase):
         def network(*args,**kwargs):self.fail('Network must not be called')
         _,data,_=self.run_task([], 'Сделай сайт в стиле Atlas Museum (Web searching)',False,network)
         self.assertNotEqual(data['status'],'completed');self.assertFalse(data['edits'])
+    def test_negative_search_directive_allows_offline_creation(self):
+        for directive in ('Без веб-поиска','Без веб поиска','Без поиска','Не используй веб-поиск'):
+            brief=build('Создай страницу. '+directive)
+            self.assertTrue(brief['web_forbidden']);self.assertFalse(brief['web_requested'])
+        def network(*args,**kwargs):self.fail('Offline task must not access network')
+        _,data,_=self.run_task([call('write',path='index.html',content='<title>Meta</title>'),call('check'),call('finish')], 'Создай страницу. Без веб-поиска.',False,network)
+        self.assertEqual(data['status'],'completed')
     def test_unopened_search_results_do_not_count(self):
         _,data,_=self.run_task([], 'Сделай сайт по подобию Nova Lab (Web searching)',researcher=lambda *a,**k:{'sources':[{'url':'https://example.org','opened':False}]})
         self.assertFalse(data['applied']);self.assertNotEqual(data['status'],'completed')
