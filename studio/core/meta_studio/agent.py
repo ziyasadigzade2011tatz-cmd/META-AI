@@ -308,6 +308,7 @@ class Sessions:
                     elif name in ('write','edit'):
                         if readonly:raise ValueError('Пользователь разрешил только анализ; запись запрещена')
                         path=str(args['path']);file=project.path(path);old=file.read_bytes() if file.exists() else None
+                        if any(n!=path and n.casefold()==path.casefold() for n in edits):raise ValueError('Два имени одного файла Windows: используй одинаковый регистр пути')
                         if old is not None and path not in read_paths:raise ValueError('Сначала прочитай существующий файл; запись вслепую запрещена')
                         if name=='write' and old is not None and path not in full_read_paths:raise ValueError('Большой файл прочитан не полностью; используй точный edit вместо перезаписи')
                         if path not in expected:expected[path]=digest(old)

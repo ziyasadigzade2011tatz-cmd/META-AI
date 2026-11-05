@@ -4,11 +4,12 @@ from urllib.parse import urlsplit
 import httpx
 
 def validate_server(name,server):
- if not re.fullmatch('[A-Za-z0-9_-]{1,40}',name) or not isinstance(server,dict) or set(server)-{'url','tools','token_env'}:raise ValueError('Invalid MCP configuration')
+ if not isinstance(name,str) or not re.fullmatch('[A-Za-z0-9_-]{1,40}',name) or not isinstance(server,dict) or set(server)-{'url','tools','token_env'}:raise ValueError('Invalid MCP configuration')
+ if not isinstance(server.get('url'),str):raise ValueError('MCP URL must be a string')
  url=urlsplit(server.get('url',''))
  if url.scheme!='http' or url.hostname!='127.0.0.1' or url.username or url.password or not url.port or url.query or url.fragment:raise ValueError('MCP requires explicit http://127.0.0.1:port/path')
  allowed=server.get('tools',[])
- if not isinstance(allowed,list) or len(allowed)>30 or any(not re.fullmatch('[A-Za-z0-9_.-]{1,100}',n) for n in allowed):raise ValueError('Invalid MCP tool allowlist')
+ if not isinstance(allowed,list) or len(allowed)>30 or any(not isinstance(n,str) or not re.fullmatch('[A-Za-z0-9_.-]{1,100}',n) for n in allowed):raise ValueError('Invalid MCP tool allowlist')
  if server.get('token_env') and not re.fullmatch('[A-Z][A-Z0-9_]{0,80}',server['token_env']):raise ValueError('Use an environment variable name, never a token')
  return server
 

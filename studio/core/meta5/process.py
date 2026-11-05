@@ -9,6 +9,7 @@ import threading
 import time
 from pathlib import Path
 from meta40.runner import WindowsJob
+from .python_child import argv as python_argv
 
 BOOT="""import os,time,sys,json,subprocess
 while not os.path.exists(sys.argv[1]):time.sleep(.01)
@@ -20,6 +21,8 @@ sys.exit(p.wait())
 
 class Managed:
     def __init__(self,argv,cwd,*,seconds=60):
+        if argv and os.path.normcase(os.path.abspath(argv[0]))==os.path.normcase(os.path.abspath(sys.executable)) and len(argv)>1 and argv[1] in ('-I','-B','-u','-c','-m'):
+            argv=python_argv(*argv[1:])
         self.argv=argv;self.cwd=Path(cwd);self.seconds=seconds;self.output=bytearray();self.lock=threading.Lock();self.started=time.monotonic();self.reason=None
         self.temp=tempfile.TemporaryDirectory(prefix='meta5-process-');self.gate=Path(self.temp.name)/'go';self.job=None;self.process=None;self.closed=threading.Event();self.close_lock=threading.Lock()
         env={k:v for k,v in os.environ.items() if k.upper() in {'PATH','SYSTEMROOT','WINDIR','COMSPEC','PATHEXT','TEMP','TMP','USERPROFILE','LOCALAPPDATA','APPDATA','HOMEDRIVE','HOMEPATH'}}
@@ -29,7 +32,7 @@ class Managed:
         env.update(HOME=self.temp.name,PYTHONUTF8='1',PYTHONUNBUFFERED='1',NO_COLOR='1')
         try:
             self.job=WindowsJob(max_processes=20,memory_mb=768,total_memory_mb=2048)
-            self.process=subprocess.Popen([sys.executable,'-I','-u','-c',BOOT,str(self.gate),json.dumps(argv)],cwd=self.cwd,env=env,
+            self.process=subprocess.Popen(python_argv('-I','-u','-c',BOOT,str(self.gate),json.dumps(argv)),cwd=self.cwd,env=env,
                 stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,
                 creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0),start_new_session=os.name!='nt')
             self.job.assign(self.process);self.gate.touch()
@@ -95,9 +98,13 @@ def capabilities():
     import importlib.util
     from .storage import CORE,read_json
     config=read_json(CORE/'meta5_tools.json',{})
-    return {'python':sys.executable,'node':config.get('node') or shutil.which('node'),
-            'npm':config.get('npm'),'typescript':config.get('typescript'),
-            'playwright':config.get('playwright'),'edge':config.get('edge'),
+    def present(name,fallback=None):
+        value=config.get(name)
+        if isinstance(value,str) and Path(value).exists():return value
+        return fallback
+    return {'python':sys.executable,'node':present('node',shutil.which('node')),
+            'npm':present('npm'),'typescript':present('typescript'),
+            'playwright':present('playwright'),'edge':present('edge'),
             'pytest':bool(importlib.util.find_spec('pytest')),'git':shutil.which('git'),
             'docker':shutil.which('docker'),'docker_ready':False,
             'native_warning':'Код запускается с правами пользователя; это не OS sandbox.'}

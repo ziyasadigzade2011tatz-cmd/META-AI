@@ -89,7 +89,8 @@ def run_tests(snapshot, edits, enabled, cancel, timeout=30, profile='python-unit
             bootstrap = "import os,time,sys;\nwhile not os.path.exists(sys.argv[2]): time.sleep(.01)\n" + BOOT
             env = {k:v for k,v in os.environ.items() if k.upper() in
                    {'SYSTEMROOT','WINDIR','TEMP','TMP','PATH','COMSPEC'}}
-            process = subprocess.Popen([sys.executable, '-I', '-c', bootstrap, str(root), str(gate)],
+            from meta5.python_child import argv as python_argv
+            process = subprocess.Popen(python_argv('-I', '-c', bootstrap, str(root), str(gate)),
                 cwd=root, env=env, stdin=subprocess.DEVNULL, stdout=subprocess.PIPE,
                 stderr=subprocess.STDOUT, shell=False,
                 creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0),

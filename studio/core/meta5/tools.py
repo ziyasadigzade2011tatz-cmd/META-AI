@@ -234,6 +234,7 @@ def prepare_environment(ctx,language='python'):
     if not ctx.allow_install:raise PermissionError('Скачивание зависимостей не разрешено для этой задачи')
     if ctx.backend!='native':raise ValueError('Подготовь контейнерный образ отдельно; автоматический выход из Docker запрещён')
     if language=='python':
+        if getattr(sys,'frozen',False):raise ValueError('Для создания отдельного venv нужен установленный Python. Встроенный Core выполняет проверки, но не является дистрибутивом Python для venv.')
         folder=ctx.work.root/'.meta5/venv';folder.parent.mkdir(parents=True,exist_ok=True)
         result=run([sys.executable,'-m','venv',str(folder)],ctx.work.root,ctx.cancel,90)
         if result['exit_code']!=0:return result
