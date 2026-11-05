@@ -1,0 +1,249 @@
+{
+  "scope": "Direct Ollama generation after actual retrieval; exact activity phrase leakage proxy, not full conversation/UI or semantic evaluation; 180 output tokens max",
+  "model": "qwen3.5:4b",
+  "cases": 30,
+  "completed": 30,
+  "leakage_cases": 0,
+  "rows": [
+    {
+      "case": 1,
+      "memory_selected": 0,
+      "unrelated_activity_mentions": [],
+      "characters": 24,
+      "seconds": 14.06,
+      "error": null
+    },
+    {
+      "case": 2,
+      "memory_selected": 0,
+      "unrelated_activity_mentions": [],
+      "characters": 24,
+      "seconds": 1.885,
+      "error": null
+    },
+    {
+      "case": 3,
+      "memory_selected": 0,
+      "unrelated_activity_mentions": [],
+      "characters": 32,
+      "seconds": 2.29,
+      "error": null
+    },
+    {
+      "case": 4,
+      "memory_selected": 0,
+      "unrelated_activity_mentions": [],
+      "characters": 49,
+      "seconds": 2.442,
+      "error": null
+    },
+    {
+      "case": 5,
+      "memory_selected": 0,
+      "unrelated_activity_mentions": [],
+      "characters": 25,
+      "seconds": 2.022,
+      "error": null
+    },
+    {
+      "case": 6,
+      "memory_selected": 0,
+      "unrelated_activity_mentions": [],
+      "characters": 73,
+      "seconds": 3.324,
+      "error": null
+    },
+    {
+      "case": 7,
+      "memory_selected": 0,
+      "unrelated_activity_mentions": [],
+      "characters": 84,
+      "seconds": 3.269,
+      "error": null
+    },
+    {
+      "case": 8,
+      "memory_selected": 0,
+      "unrelated_activity_mentions": [],
+      "characters": 29,
+      "seconds": 2.207,
+      "error": null
+    },
+    {
+      "case": 9,
+      "memory_selected": 0,
+      "unrelated_activity_mentions": [],
+      "characters": 30,
+      "seconds": 2.149,
+      "error": null
+    },
+    {
+      "case": 10,
+      "memory_selected": 0,
+      "unrelated_activity_mentions": [],
+      "characters": 25,
+      "seconds": 2.246,
+      "error": null
+    },
+    {
+      "case": 11,
+      "memory_selected": 0,
+      "unrelated_activity_mentions": [],
+      "characters": 216,
+      "seconds": 6.013,
+      "error": null
+    },
+    {
+      "case": 12,
+      "memory_selected": 0,
+      "unrelated_activity_mentions": [],
+      "characters": 247,
+      "seconds": 6.98,
+      "error": null
+    },
+    {
+      "case": 13,
+      "memory_selected": 0,
+      "unrelated_activity_mentions": [],
+      "characters": 458,
+      "seconds": 12.278,
+      "error": null
+    },
+    {
+      "case": 14,
+      "memory_selected": 0,
+      "unrelated_activity_mentions": [],
+      "characters": 216,
+      "seconds": 5.274,
+      "error": null
+    },
+    {
+      "case": 15,
+      "memory_selected": 0,
+      "unrelated_activity_mentions": [],
+      "characters": 148,
+      "seconds": 5.463,
+      "error": null
+    },
+    {
+      "case": 16,
+      "memory_selected": 0,
+      "unrelated_activity_mentions": [],
+      "characters": 225,
+      "seconds": 8.089,
+      "error": null
+    },
+    {
+      "case": 17,
+      "memory_selected": 0,
+      "unrelated_activity_mentions": [],
+      "characters": 240,
+      "seconds": 7.271,
+      "error": null
+    },
+    {
+      "case": 18,
+      "memory_selected": 0,
+      "unrelated_activity_mentions": [],
+      "characters": 212,
+      "seconds": 6.708,
+      "error": null
+    },
+    {
+      "case": 19,
+      "memory_selected": 0,
+      "unrelated_activity_mentions": [],
+      "characters": 286,
+      "seconds": 7.804,
+      "error": null
+    },
+    {
+      "case": 20,
+      "memory_selected": 0,
+      "unrelated_activity_mentions": [],
+      "characters": 220,
+      "seconds": 6.574,
+      "error": null
+    },
+    {
+      "case": 21,
+      "memory_selected": 0,
+      "unrelated_activity_mentions": [],
+      "characters": 640,
+      "seconds": 20.757,
+      "error": null
+    },
+    {
+      "case": 22,
+      "memory_selected": 0,
+      "unrelated_activity_mentions": [],
+      "characters": 246,
+      "seconds": 8.146,
+      "error": null
+    },
+    {
+      "case": 23,
+      "memory_selected": 0,
+      "unrelated_activity_mentions": [],
+      "characters": 716,
+      "seconds": 21.179,
+      "error": null
+    },
+    {
+      "case": 24,
+      "memory_selected": 0,
+      "unrelated_activity_mentions": [],
+      "characters": 460,
+      "seconds": 14.145,
+      "error": null
+    },
+    {
+      "case": 25,
+      "memory_selected": 0,
+      "unrelated_activity_mentions": [],
+      "characters": 448,
+      "seconds": 14.384,
+      "error": null
+    },
+    {
+      "case": 26,
+      "memory_selected": 0,
+      "unrelated_activity_mentions": [],
+      "characters": 424,
+      "seconds": 13.701,
+      "error": null
+    },
+    {
+      "case": 27,
+      "memory_selected": 0,
+      "unrelated_activity_mentions": [],
+      "characters": 191,
+      "seconds": 5.703,
+      "error": null
+    },
+    {
+      "case": 28,
+      "memory_selected": 0,
+      "unrelated_activity_mentions": [],
+      "characters": 177,
+      "seconds": 6.606,
+      "error": null
+    },
+    {
+      "case": 29,
+      "memory_selected": 0,
+      "unrelated_activity_mentions": [],
+      "characters": 556,
+      "seconds": 16.83,
+      "error": null
+    },
+    {
+      "case": 30,
+      "memory_selected": 0,
+      "unrelated_activity_mentions": [],
+      "characters": 63,
+      "seconds": 3.125,
+      "error": null
+    }
+  ]
+}

@@ -1,0 +1,166 @@
+{
+  "model": "embeddinggemma:latest",
+  "digest": "85462619ee721b466c5927d109d4cb765861907d5417b9109caebc4e614679f1",
+  "indexed": 20,
+  "index_seconds": 0.031,
+  "query_batch_seconds": 0.004,
+  "query_embeddings_available": true,
+  "embedding_rows": 20,
+  "embedding_blob_bytes": 61440,
+  "cache_rows": 40,
+  "cache_blob_bytes": 122880,
+  "database_bytes": 319488,
+  "resident_before": [
+    "qwen3.5:4b"
+  ],
+  "resident_after": [
+    "qwen3.5:4b"
+  ],
+  "synthetic_paraphrases": [
+    {
+      "topic": "astronomy",
+      "expected_selected": true,
+      "selected_count": 2,
+      "expected_score": 0.5254,
+      "expected_cosine": 0.6568
+    },
+    {
+      "topic": "craft",
+      "expected_selected": true,
+      "selected_count": 1,
+      "expected_score": 0.5842,
+      "expected_cosine": 0.7302
+    },
+    {
+      "topic": "cooking",
+      "expected_selected": true,
+      "selected_count": 1,
+      "expected_score": 0.5581,
+      "expected_cosine": 0.6977
+    },
+    {
+      "topic": "music",
+      "expected_selected": true,
+      "selected_count": 1,
+      "expected_score": 0.5196,
+      "expected_cosine": 0.6495
+    },
+    {
+      "topic": "language",
+      "expected_selected": true,
+      "selected_count": 1,
+      "expected_score": 0.5325,
+      "expected_cosine": 0.6656
+    },
+    {
+      "topic": "transport",
+      "expected_selected": true,
+      "selected_count": 1,
+      "expected_score": 0.5978,
+      "expected_cosine": 0.7473
+    },
+    {
+      "topic": "garden",
+      "expected_selected": true,
+      "selected_count": 1,
+      "expected_score": 0.5794,
+      "expected_cosine": 0.7242
+    },
+    {
+      "topic": "exercise",
+      "expected_selected": true,
+      "selected_count": 1,
+      "expected_score": 0.546,
+      "expected_cosine": 0.6824
+    },
+    {
+      "topic": "geology",
+      "expected_selected": true,
+      "selected_count": 2,
+      "expected_score": 0.5405,
+      "expected_cosine": 0.6756
+    },
+    {
+      "topic": "animals",
+      "expected_selected": true,
+      "selected_count": 3,
+      "expected_score": 0.5509,
+      "expected_cosine": 0.6886
+    },
+    {
+      "topic": "photo",
+      "expected_selected": true,
+      "selected_count": 1,
+      "expected_score": 0.643,
+      "expected_cosine": 0.8037
+    },
+    {
+      "topic": "architecture",
+      "expected_selected": true,
+      "selected_count": 1,
+      "expected_score": 0.5506,
+      "expected_cosine": 0.6883
+    },
+    {
+      "topic": "math",
+      "expected_selected": true,
+      "selected_count": 1,
+      "expected_score": 0.5277,
+      "expected_cosine": 0.6596
+    },
+    {
+      "topic": "board",
+      "expected_selected": false,
+      "selected_count": 0,
+      "expected_score": 0.4631,
+      "expected_cosine": 0.5789
+    },
+    {
+      "topic": "fashion",
+      "expected_selected": false,
+      "selected_count": 0,
+      "expected_score": 0.5054,
+      "expected_cosine": 0.6317
+    },
+    {
+      "topic": "writing",
+      "expected_selected": true,
+      "selected_count": 1,
+      "expected_score": 0.556,
+      "expected_cosine": 0.695
+    },
+    {
+      "topic": "collections",
+      "expected_selected": true,
+      "selected_count": 1,
+      "expected_score": 0.6151,
+      "expected_cosine": 0.7688
+    },
+    {
+      "topic": "literature",
+      "expected_selected": false,
+      "selected_count": 0,
+      "expected_score": 0.4774,
+      "expected_cosine": 0.5968
+    },
+    {
+      "topic": "history",
+      "expected_selected": true,
+      "selected_count": 1,
+      "expected_score": 0.5773,
+      "expected_cosine": 0.7216
+    },
+    {
+      "topic": "theatre",
+      "expected_selected": true,
+      "selected_count": 1,
+      "expected_score": 0.5897,
+      "expected_cosine": 0.7372
+    }
+  ],
+  "recall": 17,
+  "total": 20,
+  "scope": "Real local embedding model; synthetic retrieval, no generated answers and no user memory",
+  "unrelated_zero": 30,
+  "unrelated_total": 30
+}
