@@ -44,6 +44,12 @@ async def converse(request,manager=None):
             async for event in transport.stream(model,converted,cancel=cancel,options={'num_ctx':8192,'num_predict':1000,'temperature':.2}):yield event
             yield {'type':'done','data':{'session_id':session,'cancelled':cancel.is_set()}};return
         if not last:raise ValueError('Нужно сообщение пользователя')
+        from . import debug_state
+        if last.strip() in ('/debug on','/debug off'):
+            await asyncio.to_thread(debug_state.toggle,session,last.strip().endswith('on'))
+            yield {'type':'token','content':'Диагностика '+('включена.' if last.strip().endswith('on') else 'выключена.')}
+            yield {'type':'done','data':{'session_id':session,'sources':[],'cancelled':False}}
+            return
         if last.startswith('/slang'):
             from .slang import Glossary
             try:reply=await asyncio.to_thread(Glossary().command,last)
@@ -83,6 +89,7 @@ async def converse(request,manager=None):
             yield {'type':'done','data':{'session_id':session,'sources':[],'clarification_required':True}}
             return
         memory.capture(original_last);prefs=memory.relevant(last);ctx=resolve(messages,prefs)
+        debug_queries=[]
         yield {'type':'context','data':ctx}
         if manager and code_action(last):
             code_req={'task':last,'history':[m for m in messages[:-1] if m.get('role') in ('user','assistant')][-20:],
@@ -127,6 +134,7 @@ async def converse(request,manager=None):
                 yield {'type':'done','data':{'session_id':session,'sources':[],'clarification_required':True}}
                 return
             yield {'type':'token','content':'Ищу: '+query_plan['query']+'\n\n'}
+            debug_queries=query_plan.get('queries',[query_plan['query']])
             events=queue.Queue()
             task=asyncio.create_task(asyncio.to_thread(research,messages,prefs,lambda k,v:events.put({'type':k,'data':v}),query_plan))
             started=time.monotonic()
@@ -183,6 +191,7 @@ async def converse(request,manager=None):
             if not any(s['url'] in answer for s in evidence['sources']):
                 footer=source_footer(evidence);answer+=footer;yield {'type':'token','content':footer}
         if not answer and not cancel.is_set():yield {'type':'token','content':'Модель не вернула текст. Повтори запрос или выбери другую модель.'}
+        if debug_state.enabled(session):yield {'type':'token','content':debug_state.render(understanding,resolved,debug_queries,prefs)}
         yield {'type':'done','data':{'session_id':session,'cancelled':cancel.is_set(),'sources':evidence['sources'] if evidence else []}}
     finally:
         cancel.set()
