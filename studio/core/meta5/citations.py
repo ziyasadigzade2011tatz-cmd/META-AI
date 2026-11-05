@@ -10,8 +10,9 @@ def canonical(url):
 
 
 class LinkFilter:
-    def __init__(self,sources):
-        self.allowed={canonical(s[k]) for s in sources for k in ('url','resolved_url') if s.get(k)}
+    def __init__(self,sources,strict=False):
+        self.strict=strict
+        self.allowed={canonical(s[k]) for s in sources for k in ('url','resolved_url') if s.get(k) and (not strict or s.get('opened'))}
         self.buffer='';self.fences=0;self.removed=0
     def feed(self,text,final=False):
         self.buffer+=text;out=[]
@@ -31,7 +32,7 @@ class LinkFilter:
             if not match:break
             if match.end()==len(self.buffer) and not final and len(self.buffer)<2200:break
             raw=match.group();url=raw.rstrip('.,;!?');tail=raw[len(url):]
-            if self.fences%2 or canonical(url) in self.allowed:emit(url+tail)
+            if (self.fences%2 and not self.strict) or canonical(url) in self.allowed:emit(url+tail)
             else:self.removed+=1;emit('[неподтверждённая ссылка]'+tail)
             self.buffer=self.buffer[match.end():]
         if final and self.buffer:emit(self.buffer);self.buffer=''

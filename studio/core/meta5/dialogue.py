@@ -66,6 +66,11 @@ async def converse(request,manager=None):
             yield {'type':'token','content':reply}
             yield {'type':'done','data':{'session_id':session,'sources':[],'cancelled':False}}
             return
+        if last.startswith('/domains'):
+            from .search_ranking import command
+            yield {'type':'token','content':await asyncio.to_thread(command,last)}
+            yield {'type':'done','data':{'session_id':session,'sources':[],'cancelled':False}}
+            return
         from .slang_learning import Learner
         from .understanding_config import settings as understanding_settings
         if understanding_settings()['slang_learning']:
@@ -152,7 +157,7 @@ async def converse(request,manager=None):
             from .search_query_builder import plan as build_search_plan
             try:
                 query_plan=await asyncio.to_thread(build_search_plan,messages,(),parse_local,resolved)
-            except NeedsClarification as exc:
+            except (NeedsClarification,ValueError) as exc:
                 yield {'type':'token','content':str(exc)}
                 yield {'type':'done','data':{'session_id':session,'sources':[],'clarification_required':True}}
                 return
@@ -193,23 +198,38 @@ async def converse(request,manager=None):
         model,reason=models.select(mode,chosen)
         yield {'type':'model_selected','data':{'model':model,'reason':reason,'mode':mode}}
         from .citations import LinkFilter
-        links=LinkFilter(evidence['sources'] if evidence else []) if not ctx['web_disabled'] and (ctx['web_requested']) else None
+        links=LinkFilter(evidence['sources'] if evidence else [],strict=True) if not ctx['web_disabled'] and (ctx['web_requested']) else None
+        from .phase11_config import load as phase11_settings
+        verify_web=bool(evidence and phase11_settings('search')['web_verify'])
+        verification=None
+        if verify_web:yield {'type':'status','data':{'message':'Готовлю ответ и проверяю утверждения по прочитанным страницам'}}
         try:
             async for event in transport.stream(model,grounded,cancel=cancel,think=thinking,options={'num_ctx':request.get('context',models.profiles().get('context',8192)),'num_predict':2000,'temperature':request.get('temperature',.3)}):
                 if event['type']=='token':
-                    if links:event={**event,'content':links.feed(event['content'])}
+                    if links and not verify_web:event={**event,'content':links.feed(event['content'])}
                     answer+=event['content']
+                    if verify_web:continue
                 yield event
         except Exception as exc:
             yield {'type':'model_error','data':{'message':type(exc).__name__+': '+str(exc)[:400]}}
             if not answer:
                 answer='Не удалось получить ответ локальной модели.'
                 yield {'type':'token','content':answer}
-        if links:
+        if verify_web and not cancel.is_set():
+            from .web_verify import verify
+            def check_claims(check_messages):
+                try:
+                    return transport.complete(models.select('understand')[0],check_messages,json_mode=True,
+                        timeout=max(5,min(60,phase11_settings('search')['verify_timeout'])),options={'num_ctx':8192,'num_predict':1800,'temperature':0})['message']['content']
+                except Exception as exc:raise OSError('Проверка источников недоступна') from exc
+            answer,verification=await asyncio.to_thread(verify,answer,evidence,check_claims)
+            answer=links.feed(answer,final=True)
+            yield {'type':'token','content':answer}
+        if links and not verify_web:
             tail=links.feed('',final=True)
             if tail:answer+=tail;yield {'type':'token','content':tail}
             if links.removed:yield {'type':'citation_warning','data':{'message':'Неподтверждённые ссылки модели исключены','count':links.removed}}
-        if evidence:
+        if evidence and not verify_web:
             missing=[s for s in evidence['sources'] if s['url'] not in answer]
             if not any(s['url'] in answer for s in evidence['sources']):
                 footer=source_footer(evidence);answer+=footer;yield {'type':'token','content':footer}

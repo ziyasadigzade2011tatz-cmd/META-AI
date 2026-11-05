@@ -168,6 +168,8 @@ def install(app,core=None):
     app.include_router(router)
     from .embeddings import start_indexer
     start_indexer(Memory())
+    from .knowledge import start_cleanup
+    start_cleanup()
 
 
 def transport_url():

@@ -1,5 +1,5 @@
 """Hybrid retrieval with explicit profile/category gates and auditable exclusions."""
-import hashlib,math,re,time
+import hashlib,math,re,time,sqlite3,httpx
 from .relevance import terms
 from .privacy import sensitive
 from .phase11_config import load
@@ -61,7 +61,7 @@ def retrieve(memory,query,limit=5,engine=None):
             vector=engine.vectors([query]) if valid else None
             if vector:
                 semantic={pid:max(0.,cosine(vector[0],unpack(r[1],r[2]))) for pid,r in valid.items()}
-        except (OSError,ValueError,KeyError,TypeError):pass
+        except (OSError,ValueError,KeyError,TypeError,sqlite3.Error,httpx.HTTPError):pass
     documents=[terms(r['value']) for r in eligible];ranked=[]
     for row in eligible:
         lex=lexical(query,row['value'],documents);sem=semantic.get(row['id'])

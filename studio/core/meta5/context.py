@@ -77,11 +77,14 @@ def resolve(messages,preferences=()):
     if follow and len(users)>1:
         previous=users[-2]
         recent=recent or bool(re.search(r'сегодня|сейчас|актуальн|последни|в этом году',previous,re.I)) or any(int(y)>=year-1 for y in re.findall(r'\b20\d{2}\b',previous))
-    return dict(game=None,game_name=None,games=[],origin='conversation' if follow else 'current',topic=topic_state(messages),web_requested=bool(WEB.search(last)) or recent or follow,web_disabled=bool(OFFLINE.search(last)),verification_required=recent)
+    from .privacy import sensitive
+    general=bool(re.fullmatch(r'\s*(?:расскажи о себе|что ты умеешь|как дела)[?!.\s]*',last,re.I))
+    return dict(game=None,game_name=None,games=[],origin='conversation' if follow else 'current',topic=topic_state(messages),web_requested=not general and (bool(WEB.search(last)) or recent or follow),web_disabled=bool(OFFLINE.search(last)) or sensitive(last),verification_required=recent)
 def search_plan(messages,preferences=()):
     users=texts(messages);q=users[-1].strip()
     if resolve(messages)['origin']=='conversation' and len(users)>1:q=users[-2][:120]+' '+q
-    if re.search(r'gh[pousr]_|github_pat_|sk-|password|пароль|токен|api.?key|[\w.+-]+@[\w.-]+|[A-Za-z]:[\\/]',q,re.I):raise ValueError('Запрос содержит личные данные')
+    from .privacy import sensitive
+    if sensitive(q):raise ValueError('Запрос содержит личные данные')
     return dict(query=q[:280],alternative=None,preferred_domains=[],context=resolve(messages),allow_social=False)
 def rank_sources(hits,plan):
     terms=set(re.findall(r'[\w-]{3,}',plan['query'].casefold()))-set('что такое значит найди расскажи про мне поиск интернете'.split())

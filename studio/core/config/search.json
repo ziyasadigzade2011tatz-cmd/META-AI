@@ -1,0 +1,21 @@
+{
+  "domain_filter": true,
+  "web_verify": true,
+  "max_queries": 3,
+  "max_sources": 6,
+  "max_per_domain": 2,
+  "max_open_pages": 4,
+  "search_seconds": 45,
+  "page_characters": 12000,
+  "chunk_characters": 1000,
+  "chunks_per_page": 3,
+  "semantic_weight": 0.5,
+  "lexical_weight": 0.25,
+  "reputation_weight": 0.15,
+  "freshness_weight": 0.1,
+  "ttl_current": 300,
+  "ttl_general": 86400,
+  "cache_max_mb": 128,
+  "verify_timeout": 25,
+  "max_claims": 24
+}

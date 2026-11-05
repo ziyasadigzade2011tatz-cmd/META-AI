@@ -1,0 +1,10 @@
+{
+  "blocked": ["t.me", "telegram.me", "vk.com", "ok.ru", "facebook.com", "instagram.com", "tiktok.com", "pinterest.com"],
+  "allowed": [],
+  "trusted": {
+    "documentation": ["docs.python.org", "developer.mozilla.org", "docs.ollama.com", "learn.microsoft.com"],
+    "encyclopedia": ["wikipedia.org", "wiktionary.org", "britannica.com"],
+    "official": ["who.int", "un.org", "nasa.gov", "europa.eu"],
+    "news": ["reuters.com", "apnews.com"]
+  }
+}
