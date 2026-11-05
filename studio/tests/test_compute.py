@@ -11,7 +11,7 @@ class ComputeTests(unittest.TestCase):
         gate=ComputeGate('META-Test-'+uuid.uuid4().hex,folder=self.temp.name);self.assertTrue(gate.acquire(timeout=2))
         try:self.assertFalse(gate.acquire(blocking=False))
         finally:gate.release()
-    @unittest.skipUnless(os.name=='nt','Windows named mutex')
+    @unittest.skipUnless(os.name=='nt','Windows file locking')
     def test_gate_shared_across_processes(self):
         name='META-Test-'+uuid.uuid4().hex;gate=ComputeGate(name,folder=self.temp.name);self.assertTrue(gate.acquire(timeout=2))
         try:
