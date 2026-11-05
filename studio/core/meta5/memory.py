@@ -44,12 +44,9 @@ class Memory:
     def delete(self,pid):
         with self.db() as c:c.execute('DELETE FROM facts WHERE id=?',(pid,))
     def relevant(self,query,limit=30):
-        """Phase 10 uses a strict lexical gate, without unconditional preferences."""
-        from .understanding_config import settings
-        from .relevance import select
-        cfg=settings()
-        return select(query,self.list(),float(cfg['memory_gate_threshold']),
-                      min(limit,int(cfg['memory_limit'])),int(cfg['memory_characters']))
+        from .memory_retrieval import retrieve
+        selected,self.last_trace=retrieve(self,query,limit)
+        return selected
     def update(self,pid,value,kind='fact'):
         if not isinstance(value,str) or not 1<=len(value)<=600:raise ValueError('Память: 1–600 символов')
         if re.search(r'пароль|password|api.?key|секрет|паспорт|cvv|github_pat_|ghp_|sk-',value,re.I):raise ValueError('Секреты не сохраняются')
