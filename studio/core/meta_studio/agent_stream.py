@@ -5,6 +5,20 @@ from meta5 import transport
 from meta5.performance import keep_alive
 from meta5.phase11_config import load
 
+def action_schema():
+    """Constrain model output to one executable action, including its arguments."""
+    text={'type':'string'};path={'type':'string','minLength':1}
+    arguments={'list':{},'read':{'path':path},'search':{'query':text},
+               'plan':{'steps':{'type':'array','items':text,'minItems':1,'maxItems':8}},
+               'write':{'path':path,'content':text},'edit':{'path':path,'old':text,'new':text},
+               'check':{},'finish':{'summary':text},'web_search':{'query':text},'clarify':{'question':text}}
+    variants=[]
+    for name,properties in arguments.items():
+        args={'type':'object','properties':dict(properties),'required':list(properties),'additionalProperties':False}
+        if name=='read':args['properties'].update(start={'type':'integer','minimum':1},end={'type':'integer','minimum':1})
+        variants.append({'type':'object','properties':{'action':{'const':name},'args':args},'required':['action','args'],'additionalProperties':False})
+    return {'oneOf':variants}
+
 def preview(raw):
     value={}
     for key in ('action','path'):
@@ -19,7 +33,7 @@ def preview(raw):
     return value
 
 def payload(model,messages,context):
-    return {'model':model,'messages':messages,'format':'json','think':False,'stream':True,'keep_alive':keep_alive(),
+    return {'model':model,'messages':messages,'format':action_schema(),'think':False,'stream':True,'keep_alive':keep_alive(),
             'options':{'num_ctx':context,'num_predict':3200,'temperature':.1}}
 
 async def _exchange(model,messages,cancel,emit,context):
