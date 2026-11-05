@@ -51,6 +51,16 @@ async def converse(request,manager=None):
             yield {'type':'token','content':reply}
             yield {'type':'done','data':{'session_id':session,'cancelled':False,'sources':[]}}
             return
+        from .slang_learning import Learner
+        from .understanding_config import settings as understanding_settings
+        if understanding_settings()['slang_learning']:
+            learner=Learner()
+            await asyncio.to_thread(learner.expire)
+            learned=await asyncio.to_thread(learner.explicit,last,session)
+            if learned and learned['status']=='confirmed':
+                yield {'type':'token','content':'Понял: «'+learned['term']+'» — '+learned['meaning'][0]['definition']+'.'}
+                yield {'type':'done','data':{'session_id':session,'sources':[],'cancelled':False}}
+                return
         memory.capture(last);prefs=memory.relevant(last);ctx=resolve(messages,prefs)
         yield {'type':'context','data':ctx}
         if manager and code_action(last):
