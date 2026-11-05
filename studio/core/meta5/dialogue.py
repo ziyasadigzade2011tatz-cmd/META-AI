@@ -61,7 +61,22 @@ async def converse(request,manager=None):
                 yield {'type':'token','content':'Понял: «'+learned['term']+'» — '+learned['meaning'][0]['definition']+'.'}
                 yield {'type':'done','data':{'session_id':session,'sources':[],'cancelled':False}}
                 return
-        memory.capture(last);prefs=memory.relevant(last);ctx=resolve(messages,prefs)
+        original_last=last
+        from .normalizer import normalize
+        def parse_local(parser_messages):
+            try:
+                return transport.complete(models.select('understand')[0],parser_messages,json_mode=True,
+                    timeout=understanding_settings()['understand_timeout'],options={'num_ctx':4096,'num_predict':400,'temperature':0})['message']['content']
+            except Exception as exc:raise OSError('Локальный разбор недоступен') from exc
+        understanding=await asyncio.to_thread(normalize,last,'\n'.join(users[-8:]),parse_local)
+        if understanding.get('question'):
+            yield {'type':'token','content':understanding['question']}
+            yield {'type':'done','data':{'session_id':session,'sources':[],'clarification_required':True}}
+            return
+        last=understanding['normalized']
+        for message in reversed(messages):
+            if message.get('role')=='user':message['content']=last;break
+        memory.capture(original_last);prefs=memory.relevant(last);ctx=resolve(messages,prefs)
         yield {'type':'context','data':ctx}
         if manager and code_action(last):
             code_req={'task':last,'history':[m for m in messages[:-1] if m.get('role') in ('user','assistant')][-20:],
