@@ -76,6 +76,12 @@ async def converse(request,manager=None):
         last=understanding['normalized']
         for message in reversed(messages):
             if message.get('role')=='user':message['content']=last;break
+        from .context import standalone
+        resolved=await asyncio.to_thread(standalone,messages,parse_local)
+        if resolved['ambiguous']:
+            yield {'type':'token','content':resolved['question']}
+            yield {'type':'done','data':{'session_id':session,'sources':[],'clarification_required':True}}
+            return
         memory.capture(original_last);prefs=memory.relevant(last);ctx=resolve(messages,prefs)
         yield {'type':'context','data':ctx}
         if manager and code_action(last):
@@ -140,7 +146,7 @@ async def converse(request,manager=None):
         messages=[m for m in messages if m.get('role')!='system' or score(last,str(m.get('content','')))>=.65]
         grounded,usage=await asyncio.to_thread(compress,[{'role':'system','content':system},*messages],min(22000,max(4000,request.get('context',8192)*3-len(system))))
         yield {'type':'context_usage','data':{k:v for k,v in usage.items() if k!='summary'}}
-        if usage['summary']:memory.summary(session,usage['summary'])
+        if usage['summary'] and len([m for m in messages if m.get('role')!='system'])%6==0:memory.summary(session,usage['summary'])
         mode='chat'
         chosen=request.get('model','auto')
         if chosen=='auto' and extra.get('chat_model'):chosen=extra['chat_model']
