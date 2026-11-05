@@ -35,5 +35,14 @@ class FinalAuditTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d,patch.object(storage,'CORE',Path(d)),patch.object(process.shutil,'which',side_effect=lambda name:'available-node.exe' if name=='node' else None):
             (Path(d)/'meta5_tools.json').write_text(json.dumps({'node':'Z:/missing/node.exe','edge':'Z:/missing/edge.exe'}))
             cap=process.capabilities();self.assertEqual(cap['node'],'available-node.exe');self.assertIsNone(cap['edge'])
+    def test_legacy_database_closes_and_rejects_private_values(self):
+        import importlib.util,os,sqlite3
+        with tempfile.TemporaryDirectory() as d,patch.dict(os.environ,{'META_DATA_DIR':d}):
+            spec=importlib.util.spec_from_file_location('legacy_memory_fixture',Path(__file__).resolve().parents[1]/'core/memory.py')
+            module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+            self.assertFalse(module.remember('Мой пароль: fixture'))
+            self.assertTrue(module.remember('Предпочитаю краткие ответы'))
+            with module.connect() as connection:self.assertEqual(connection.execute('SELECT count(*) FROM memories').fetchone()[0],1)
+            with self.assertRaises(sqlite3.ProgrammingError):connection.execute('SELECT 1')
 
 if __name__=='__main__':unittest.main()

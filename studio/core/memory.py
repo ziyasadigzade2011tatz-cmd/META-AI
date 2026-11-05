@@ -3,6 +3,7 @@ import re
 import sqlite3
 from pathlib import Path
 from datetime import datetime, timezone
+from contextlib import contextmanager
 
 DB_PATH = Path(os.environ.get('META_DATA_DIR',str(Path.home()/'META')))/'legacy_memory.db'
 DB_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -33,6 +34,7 @@ AUTO_PATTERNS = [
 ]
 
 
+@contextmanager
 def connect():
     db = sqlite3.connect(str(DB_PATH), timeout=15)
     db.execute("PRAGMA busy_timeout = 15000")
@@ -55,10 +57,14 @@ def connect():
     """)
 
     db.commit()
-    return db
+    try:
+        with db:yield db
+    finally:db.close()
 
 
 def safe_to_store(text):
+    from meta5.privacy import sensitive
+    if sensitive(text):return False
     lower = text.lower()
     return not any(word in lower for word in PRIVATE_WORDS)
 
@@ -248,7 +254,7 @@ def prepare_messages(messages):
     return prepared
 
 
-connect()
+with connect():pass
 
 
 # META_SEMANTIC_V3
