@@ -44,6 +44,13 @@ async def converse(request,manager=None):
             async for event in transport.stream(model,converted,cancel=cancel,options={'num_ctx':8192,'num_predict':1000,'temperature':.2}):yield event
             yield {'type':'done','data':{'session_id':session,'cancelled':cancel.is_set()}};return
         if not last:raise ValueError('Нужно сообщение пользователя')
+        if last.startswith('/slang'):
+            from .slang import Glossary
+            try:reply=await asyncio.to_thread(Glossary().command,last)
+            except ValueError as exc:reply=str(exc)
+            yield {'type':'token','content':reply}
+            yield {'type':'done','data':{'session_id':session,'cancelled':False,'sources':[]}}
+            return
         memory.capture(last);prefs=memory.relevant(last);ctx=resolve(messages,prefs)
         yield {'type':'context','data':ctx}
         if manager and code_action(last):

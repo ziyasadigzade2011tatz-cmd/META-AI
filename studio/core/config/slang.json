@@ -1,0 +1,7545 @@
+[
+  {
+    "term": "хз",
+    "forms": [
+      "хз"
+    ],
+    "meaning": [
+      {
+        "definition": "не знаю",
+        "context_hints": []
+      }
+    ],
+    "domain": "общение",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "ща",
+    "forms": [
+      "ща",
+      "щас",
+      "сяс"
+    ],
+    "meaning": [
+      {
+        "definition": "сейчас",
+        "context_hints": []
+      }
+    ],
+    "domain": "общение",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "чо",
+    "forms": [
+      "чо",
+      "чё",
+      "че"
+    ],
+    "meaning": [
+      {
+        "definition": "что",
+        "context_hints": []
+      }
+    ],
+    "domain": "общение",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "норм",
+    "forms": [
+      "норм",
+      "нормас"
+    ],
+    "meaning": [
+      {
+        "definition": "нормально",
+        "context_hints": []
+      }
+    ],
+    "domain": "общение",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "спс",
+    "forms": [
+      "спс",
+      "пасиб",
+      "пасиба"
+    ],
+    "meaning": [
+      {
+        "definition": "спасибо",
+        "context_hints": []
+      }
+    ],
+    "domain": "общение",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "пжл",
+    "forms": [
+      "пжл",
+      "пж",
+      "плиз"
+    ],
+    "meaning": [
+      {
+        "definition": "пожалуйста",
+        "context_hints": []
+      }
+    ],
+    "domain": "общение",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "ваще",
+    "forms": [
+      "ваще",
+      "ващще"
+    ],
+    "meaning": [
+      {
+        "definition": "вообще",
+        "context_hints": []
+      }
+    ],
+    "domain": "общение",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "ок",
+    "forms": [
+      "ок",
+      "окей",
+      "оке"
+    ],
+    "meaning": [
+      {
+        "definition": "хорошо",
+        "context_hints": []
+      }
+    ],
+    "domain": "общение",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "прив",
+    "forms": [
+      "прив",
+      "ку"
+    ],
+    "meaning": [
+      {
+        "definition": "привет",
+        "context_hints": []
+      }
+    ],
+    "domain": "общение",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "сорян",
+    "forms": [
+      "сорян",
+      "сори"
+    ],
+    "meaning": [
+      {
+        "definition": "извини",
+        "context_hints": []
+      }
+    ],
+    "domain": "общение",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "пофиг",
+    "forms": [
+      "пофиг",
+      "похуй"
+    ],
+    "meaning": [
+      {
+        "definition": "безразлично",
+        "context_hints": []
+      }
+    ],
+    "domain": "общение",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "блин",
+    "forms": [
+      "блин",
+      "ёмаё"
+    ],
+    "meaning": [
+      {
+        "definition": "выражение досады",
+        "context_hints": []
+      }
+    ],
+    "domain": "общение",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "бля",
+    "forms": [
+      "бля",
+      "блять"
+    ],
+    "meaning": [
+      {
+        "definition": "грубое выражение эмоции",
+        "context_hints": []
+      }
+    ],
+    "domain": "общение",
+    "register": "мат",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "нахуй",
+    "forms": [
+      "нахуй",
+      "нафиг"
+    ],
+    "meaning": [
+      {
+        "definition": "грубое выражение отказа или усиления",
+        "context_hints": []
+      }
+    ],
+    "domain": "общение",
+    "register": "мат",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "заебись",
+    "forms": [
+      "заебись",
+      "зашибись"
+    ],
+    "meaning": [
+      {
+        "definition": "очень хорошо, грубо или разговорно",
+        "context_hints": []
+      }
+    ],
+    "domain": "общение",
+    "register": "мат",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "ебать",
+    "forms": [
+      "ебать",
+      "ёпт"
+    ],
+    "meaning": [
+      {
+        "definition": "грубое выражение сильной эмоции",
+        "context_hints": []
+      }
+    ],
+    "domain": "общение",
+    "register": "мат",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "имхо",
+    "forms": [
+      "имхо",
+      "imho"
+    ],
+    "meaning": [
+      {
+        "definition": "по моему мнению",
+        "context_hints": []
+      }
+    ],
+    "domain": "интернет",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "лол",
+    "forms": [
+      "лол",
+      "lol"
+    ],
+    "meaning": [
+      {
+        "definition": "смех или ироническая реакция",
+        "context_hints": []
+      }
+    ],
+    "domain": "интернет",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "рофл",
+    "forms": [
+      "рофл",
+      "рофлы"
+    ],
+    "meaning": [
+      {
+        "definition": "шутка или ирония",
+        "context_hints": []
+      }
+    ],
+    "domain": "интернет",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "кринж",
+    "forms": [
+      "кринж",
+      "кринжа"
+    ],
+    "meaning": [
+      {
+        "definition": "неловкость из-за чужого поведения",
+        "context_hints": []
+      }
+    ],
+    "domain": "интернет",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "хейт",
+    "forms": [
+      "хейт",
+      "хейта"
+    ],
+    "meaning": [
+      {
+        "definition": "враждебная критика",
+        "context_hints": []
+      }
+    ],
+    "domain": "интернет",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "респект",
+    "forms": [
+      "респект"
+    ],
+    "meaning": [
+      {
+        "definition": "уважение",
+        "context_hints": []
+      }
+    ],
+    "domain": "интернет",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "бан",
+    "forms": [
+      "бан",
+      "бана",
+      "бане"
+    ],
+    "meaning": [
+      {
+        "definition": "блокировка доступа",
+        "context_hints": []
+      }
+    ],
+    "domain": "интернет",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "донат",
+    "forms": [
+      "донат",
+      "доната"
+    ],
+    "meaning": [
+      {
+        "definition": "добровольное денежное пожертвование",
+        "context_hints": []
+      }
+    ],
+    "domain": "интернет",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "стрим",
+    "forms": [
+      "стрим",
+      "стрима"
+    ],
+    "meaning": [
+      {
+        "definition": "прямая трансляция",
+        "context_hints": []
+      }
+    ],
+    "domain": "интернет",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "лайв",
+    "forms": [
+      "лайв",
+      "live"
+    ],
+    "meaning": [
+      {
+        "definition": "прямой эфир",
+        "context_hints": []
+      }
+    ],
+    "domain": "интернет",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "фейк",
+    "forms": [
+      "фейк",
+      "фейка"
+    ],
+    "meaning": [
+      {
+        "definition": "подделка или ложное сообщение",
+        "context_hints": []
+      }
+    ],
+    "domain": "интернет",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "пруф",
+    "forms": [
+      "пруф",
+      "пруфы"
+    ],
+    "meaning": [
+      {
+        "definition": "доказательство",
+        "context_hints": []
+      }
+    ],
+    "domain": "интернет",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "тред",
+    "forms": [
+      "тред",
+      "треда"
+    ],
+    "meaning": [
+      {
+        "definition": "цепочка сообщений",
+        "context_hints": []
+      }
+    ],
+    "domain": "интернет",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "флуд",
+    "forms": [
+      "флуд"
+    ],
+    "meaning": [
+      {
+        "definition": "много однотипных сообщений",
+        "context_hints": []
+      }
+    ],
+    "domain": "интернет",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "оффтоп",
+    "forms": [
+      "оффтоп"
+    ],
+    "meaning": [
+      {
+        "definition": "сообщение вне темы обсуждения",
+        "context_hints": []
+      }
+    ],
+    "domain": "интернет",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "репост",
+    "forms": [
+      "репост"
+    ],
+    "meaning": [
+      {
+        "definition": "повторная публикация",
+        "context_hints": []
+      }
+    ],
+    "domain": "интернет",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "комп",
+    "forms": [
+      "комп",
+      "компа",
+      "компе"
+    ],
+    "meaning": [
+      {
+        "definition": "компьютер",
+        "context_hints": []
+      }
+    ],
+    "domain": "компьютеры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "ноут",
+    "forms": [
+      "ноут",
+      "ноута"
+    ],
+    "meaning": [
+      {
+        "definition": "ноутбук",
+        "context_hints": []
+      }
+    ],
+    "domain": "компьютеры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "клава",
+    "forms": [
+      "клава",
+      "клавы"
+    ],
+    "meaning": [
+      {
+        "definition": "клавиатура",
+        "context_hints": []
+      }
+    ],
+    "domain": "компьютеры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "видюха",
+    "forms": [
+      "видюха",
+      "видюхи"
+    ],
+    "meaning": [
+      {
+        "definition": "видеокарта",
+        "context_hints": []
+      }
+    ],
+    "domain": "компьютеры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "оперативка",
+    "forms": [
+      "оперативка",
+      "озу"
+    ],
+    "meaning": [
+      {
+        "definition": "оперативная память",
+        "context_hints": []
+      }
+    ],
+    "domain": "компьютеры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "проц",
+    "forms": [
+      "проц",
+      "проца"
+    ],
+    "meaning": [
+      {
+        "definition": "процессор",
+        "context_hints": []
+      }
+    ],
+    "domain": "компьютеры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "винда",
+    "forms": [
+      "винда",
+      "винды"
+    ],
+    "meaning": [
+      {
+        "definition": "операционная система Windows",
+        "context_hints": []
+      }
+    ],
+    "domain": "компьютеры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "дрова",
+    "forms": [
+      "дрова"
+    ],
+    "meaning": [
+      {
+        "definition": "драйверы устройств",
+        "context_hints": []
+      }
+    ],
+    "domain": "компьютеры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "флешка",
+    "forms": [
+      "флешка"
+    ],
+    "meaning": [
+      {
+        "definition": "USB-накопитель",
+        "context_hints": []
+      }
+    ],
+    "domain": "компьютеры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "винт",
+    "forms": [
+      "винт"
+    ],
+    "meaning": [
+      {
+        "definition": "жёсткий диск",
+        "context_hints": []
+      }
+    ],
+    "domain": "компьютеры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "перезагрузка",
+    "forms": [
+      "перезагрузка",
+      "ребут"
+    ],
+    "meaning": [
+      {
+        "definition": "повторный запуск системы",
+        "context_hints": []
+      }
+    ],
+    "domain": "компьютеры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "скрин",
+    "forms": [
+      "скрин",
+      "скрина"
+    ],
+    "meaning": [
+      {
+        "definition": "снимок экрана",
+        "context_hints": []
+      }
+    ],
+    "domain": "компьютеры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "лаг",
+    "forms": [
+      "лаг",
+      "лаги"
+    ],
+    "meaning": [
+      {
+        "definition": "задержка работы",
+        "context_hints": []
+      }
+    ],
+    "domain": "компьютеры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "фриз",
+    "forms": [
+      "фриз",
+      "фризы"
+    ],
+    "meaning": [
+      {
+        "definition": "краткое зависание",
+        "context_hints": []
+      }
+    ],
+    "domain": "компьютеры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "апдейт",
+    "forms": [
+      "апдейт",
+      "апдейта"
+    ],
+    "meaning": [
+      {
+        "definition": "обновление",
+        "context_hints": []
+      }
+    ],
+    "domain": "компьютеры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "девайс",
+    "forms": [
+      "девайс",
+      "девайса"
+    ],
+    "meaning": [
+      {
+        "definition": "устройство",
+        "context_hints": []
+      }
+    ],
+    "domain": "компьютеры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "баг",
+    "forms": [
+      "баг",
+      "бага",
+      "баги"
+    ],
+    "meaning": [
+      {
+        "definition": "ошибка программы",
+        "context_hints": []
+      }
+    ],
+    "domain": "программирование",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "фикс",
+    "forms": [
+      "фикс",
+      "фикса"
+    ],
+    "meaning": [
+      {
+        "definition": "исправление ошибки",
+        "context_hints": []
+      }
+    ],
+    "domain": "программирование",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "дебаг",
+    "forms": [
+      "дебаг",
+      "дебага"
+    ],
+    "meaning": [
+      {
+        "definition": "поиск ошибок в программе",
+        "context_hints": []
+      }
+    ],
+    "domain": "программирование",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "репа",
+    "forms": [
+      "репа",
+      "репы"
+    ],
+    "meaning": [
+      {
+        "definition": "репозиторий исходного кода",
+        "context_hints": []
+      }
+    ],
+    "domain": "программирование",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "коммит",
+    "forms": [
+      "коммит",
+      "коммита"
+    ],
+    "meaning": [
+      {
+        "definition": "зафиксированный набор изменений",
+        "context_hints": []
+      }
+    ],
+    "domain": "программирование",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "пулреквест",
+    "forms": [
+      "пулреквест",
+      "пр"
+    ],
+    "meaning": [
+      {
+        "definition": "предложение объединить изменения кода",
+        "context_hints": []
+      }
+    ],
+    "domain": "программирование",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "мерж",
+    "forms": [
+      "мерж",
+      "мержа"
+    ],
+    "meaning": [
+      {
+        "definition": "объединение веток",
+        "context_hints": []
+      }
+    ],
+    "domain": "программирование",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "деплой",
+    "forms": [
+      "деплой",
+      "деплоя"
+    ],
+    "meaning": [
+      {
+        "definition": "развёртывание приложения",
+        "context_hints": []
+      }
+    ],
+    "domain": "программирование",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "билд",
+    "forms": [
+      "билд",
+      "билда"
+    ],
+    "meaning": [
+      {
+        "definition": "собранная версия программы",
+        "context_hints": []
+      }
+    ],
+    "domain": "программирование",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "фронт",
+    "forms": [
+      "фронт",
+      "фронтенд"
+    ],
+    "meaning": [
+      {
+        "definition": "клиентская часть приложения",
+        "context_hints": []
+      }
+    ],
+    "domain": "программирование",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "бэк",
+    "forms": [
+      "бэк",
+      "бэкенд"
+    ],
+    "meaning": [
+      {
+        "definition": "серверная часть приложения",
+        "context_hints": []
+      }
+    ],
+    "domain": "программирование",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "энв",
+    "forms": [
+      "энв"
+    ],
+    "meaning": [
+      {
+        "definition": "окружение или переменные окружения",
+        "context_hints": []
+      }
+    ],
+    "domain": "программирование",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "рефакторинг",
+    "forms": [
+      "рефакторинг",
+      "рефактор"
+    ],
+    "meaning": [
+      {
+        "definition": "изменение структуры кода без изменения поведения",
+        "context_hints": []
+      }
+    ],
+    "domain": "программирование",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "костыль",
+    "forms": [
+      "костыль"
+    ],
+    "meaning": [
+      {
+        "definition": "временное обходное решение",
+        "context_hints": []
+      }
+    ],
+    "domain": "программирование",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "хардкод",
+    "forms": [
+      "хардкод"
+    ],
+    "meaning": [
+      {
+        "definition": "жёстко заданное значение в коде",
+        "context_hints": []
+      }
+    ],
+    "domain": "программирование",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "зависимость",
+    "forms": [
+      "зависимость",
+      "депенденси"
+    ],
+    "meaning": [
+      {
+        "definition": "внешний компонент программы",
+        "context_hints": []
+      }
+    ],
+    "domain": "программирование",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "трек",
+    "forms": [
+      "трек",
+      "трека"
+    ],
+    "meaning": [
+      {
+        "definition": "музыкальная запись",
+        "context_hints": []
+      }
+    ],
+    "domain": "музыка",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "бит",
+    "forms": [
+      "бит",
+      "бита"
+    ],
+    "meaning": [
+      {
+        "definition": "единица цифровой информации",
+        "context_hints": [
+          "байт",
+          "данные",
+          "память"
+        ]
+      },
+      {
+        "definition": "ритмическая основа",
+        "context_hints": [
+          "ритм",
+          "музыка",
+          "композиция"
+        ]
+      }
+    ],
+    "domain": "музыка",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "плейлист",
+    "forms": [
+      "плейлист"
+    ],
+    "meaning": [
+      {
+        "definition": "список записей для воспроизведения",
+        "context_hints": []
+      }
+    ],
+    "domain": "музыка",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "репит",
+    "forms": [
+      "репит"
+    ],
+    "meaning": [
+      {
+        "definition": "повторное воспроизведение",
+        "context_hints": []
+      }
+    ],
+    "domain": "музыка",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "кавер",
+    "forms": [
+      "кавер"
+    ],
+    "meaning": [
+      {
+        "definition": "исполнение чужой композиции",
+        "context_hints": []
+      }
+    ],
+    "domain": "музыка",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "ремикс",
+    "forms": [
+      "ремикс"
+    ],
+    "meaning": [
+      {
+        "definition": "переработанная версия композиции",
+        "context_hints": []
+      }
+    ],
+    "domain": "музыка",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "минус",
+    "forms": [
+      "минус",
+      "минусовка"
+    ],
+    "meaning": [
+      {
+        "definition": "фонограмма без основного вокала",
+        "context_hints": []
+      }
+    ],
+    "domain": "музыка",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "плюс",
+    "forms": [
+      "плюс",
+      "плюсовка"
+    ],
+    "meaning": [
+      {
+        "definition": "фонограмма с вокалом",
+        "context_hints": []
+      }
+    ],
+    "domain": "музыка",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "джем",
+    "forms": [
+      "джем"
+    ],
+    "meaning": [
+      {
+        "definition": "совместная музыкальная импровизация",
+        "context_hints": []
+      }
+    ],
+    "domain": "музыка",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "саунд",
+    "forms": [
+      "саунд",
+      "саунда"
+    ],
+    "meaning": [
+      {
+        "definition": "характер звучания",
+        "context_hints": []
+      }
+    ],
+    "domain": "музыка",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "дроп",
+    "forms": [
+      "дроп"
+    ],
+    "meaning": [
+      {
+        "definition": "резкий переход к основной части электронной композиции",
+        "context_hints": []
+      }
+    ],
+    "domain": "музыка",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "куплет",
+    "forms": [
+      "куплет",
+      "куплета"
+    ],
+    "meaning": [
+      {
+        "definition": "часть песни между припевами",
+        "context_hints": []
+      }
+    ],
+    "domain": "музыка",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "демка",
+    "forms": [
+      "демка"
+    ],
+    "meaning": [
+      {
+        "definition": "предварительная запись композиции",
+        "context_hints": []
+      }
+    ],
+    "domain": "музыка",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "мастеринг",
+    "forms": [
+      "мастеринг"
+    ],
+    "meaning": [
+      {
+        "definition": "финальная обработка музыкальной записи",
+        "context_hints": []
+      }
+    ],
+    "domain": "музыка",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "фит",
+    "forms": [
+      "фит",
+      "фита"
+    ],
+    "meaning": [
+      {
+        "definition": "совместная композиция исполнителей",
+        "context_hints": []
+      }
+    ],
+    "domain": "музыка",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "акустика",
+    "forms": [
+      "акустика"
+    ],
+    "meaning": [
+      {
+        "definition": "исполнение без электрического усиления инструментов",
+        "context_hints": []
+      }
+    ],
+    "domain": "музыка",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "треня",
+    "forms": [
+      "треня",
+      "трени"
+    ],
+    "meaning": [
+      {
+        "definition": "тренировка",
+        "context_hints": []
+      }
+    ],
+    "domain": "спорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "разминка",
+    "forms": [
+      "разминка"
+    ],
+    "meaning": [
+      {
+        "definition": "подготовительные упражнения",
+        "context_hints": []
+      }
+    ],
+    "domain": "спорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "заминка",
+    "forms": [
+      "заминка"
+    ],
+    "meaning": [
+      {
+        "definition": "упражнения после основной нагрузки",
+        "context_hints": []
+      }
+    ],
+    "domain": "спорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "кардио",
+    "forms": [
+      "кардио"
+    ],
+    "meaning": [
+      {
+        "definition": "тренировка выносливости",
+        "context_hints": []
+      }
+    ],
+    "domain": "спорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "силовуха",
+    "forms": [
+      "силовуха"
+    ],
+    "meaning": [
+      {
+        "definition": "силовая тренировка",
+        "context_hints": []
+      }
+    ],
+    "domain": "спорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "подход",
+    "forms": [
+      "подход",
+      "сеты"
+    ],
+    "meaning": [
+      {
+        "definition": "серия повторений упражнения",
+        "context_hints": []
+      }
+    ],
+    "domain": "спорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "повтор",
+    "forms": [
+      "повтор",
+      "повторы"
+    ],
+    "meaning": [
+      {
+        "definition": "одно выполнение упражнения",
+        "context_hints": []
+      }
+    ],
+    "domain": "спорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "личник",
+    "forms": [
+      "личник"
+    ],
+    "meaning": [
+      {
+        "definition": "личный лучший результат",
+        "context_hints": []
+      }
+    ],
+    "domain": "спорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "зал",
+    "forms": [
+      "зал",
+      "качалка"
+    ],
+    "meaning": [
+      {
+        "definition": "место силовых тренировок",
+        "context_hints": []
+      }
+    ],
+    "domain": "спорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "растяжка",
+    "forms": [
+      "растяжка"
+    ],
+    "meaning": [
+      {
+        "definition": "упражнения на гибкость",
+        "context_hints": []
+      }
+    ],
+    "domain": "спорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "плиометрика",
+    "forms": [
+      "плиометрика"
+    ],
+    "meaning": [
+      {
+        "definition": "прыжковые упражнения на взрывную силу",
+        "context_hints": []
+      }
+    ],
+    "domain": "спорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "спарринг",
+    "forms": [
+      "спарринг"
+    ],
+    "meaning": [
+      {
+        "definition": "учебный поединок",
+        "context_hints": []
+      }
+    ],
+    "domain": "спорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "финалка",
+    "forms": [
+      "финалка"
+    ],
+    "meaning": [
+      {
+        "definition": "финальная часть соревнования",
+        "context_hints": []
+      }
+    ],
+    "domain": "спорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "овертайм",
+    "forms": [
+      "овертайм"
+    ],
+    "meaning": [
+      {
+        "definition": "дополнительное время матча",
+        "context_hints": []
+      }
+    ],
+    "domain": "спорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "ассист",
+    "forms": [
+      "ассист"
+    ],
+    "meaning": [
+      {
+        "definition": "результативная передача",
+        "context_hints": []
+      }
+    ],
+    "domain": "спорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "трансфер",
+    "forms": [
+      "трансфер"
+    ],
+    "meaning": [
+      {
+        "definition": "переход спортсмена между командами",
+        "context_hints": []
+      }
+    ],
+    "domain": "спорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "домашка",
+    "forms": [
+      "домашка",
+      "дз"
+    ],
+    "meaning": [
+      {
+        "definition": "домашнее задание",
+        "context_hints": []
+      }
+    ],
+    "domain": "учёба",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "контроша",
+    "forms": [
+      "контроша",
+      "кр"
+    ],
+    "meaning": [
+      {
+        "definition": "контрольная работа",
+        "context_hints": []
+      }
+    ],
+    "domain": "учёба",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "лаба",
+    "forms": [
+      "лаба",
+      "лабы"
+    ],
+    "meaning": [
+      {
+        "definition": "лабораторная работа",
+        "context_hints": []
+      }
+    ],
+    "domain": "учёба",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "курсач",
+    "forms": [
+      "курсач"
+    ],
+    "meaning": [
+      {
+        "definition": "курсовая работа",
+        "context_hints": []
+      }
+    ],
+    "domain": "учёба",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "дипломка",
+    "forms": [
+      "дипломка"
+    ],
+    "meaning": [
+      {
+        "definition": "дипломная работа",
+        "context_hints": []
+      }
+    ],
+    "domain": "учёба",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "зачётка",
+    "forms": [
+      "зачётка"
+    ],
+    "meaning": [
+      {
+        "definition": "зачётная книжка",
+        "context_hints": []
+      }
+    ],
+    "domain": "учёба",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "пара",
+    "forms": [
+      "пара",
+      "пары"
+    ],
+    "meaning": [
+      {
+        "definition": "учебное занятие",
+        "context_hints": [
+          "занятие",
+          "университет",
+          "расписание"
+        ]
+      },
+      {
+        "definition": "два предмета",
+        "context_hints": [
+          "два",
+          "носки",
+          "ботинки"
+        ]
+      }
+    ],
+    "domain": "учёба",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "общага",
+    "forms": [
+      "общага",
+      "общаге"
+    ],
+    "meaning": [
+      {
+        "definition": "общежитие",
+        "context_hints": []
+      }
+    ],
+    "domain": "учёба",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "шпора",
+    "forms": [
+      "шпора",
+      "шпоры"
+    ],
+    "meaning": [
+      {
+        "definition": "шпаргалка",
+        "context_hints": []
+      }
+    ],
+    "domain": "учёба",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "препод",
+    "forms": [
+      "препод",
+      "препода"
+    ],
+    "meaning": [
+      {
+        "definition": "преподаватель",
+        "context_hints": []
+      }
+    ],
+    "domain": "учёба",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "физра",
+    "forms": [
+      "физра"
+    ],
+    "meaning": [
+      {
+        "definition": "физическая культура как предмет",
+        "context_hints": []
+      }
+    ],
+    "domain": "учёба",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "матеша",
+    "forms": [
+      "матеша"
+    ],
+    "meaning": [
+      {
+        "definition": "математика как учебный предмет",
+        "context_hints": []
+      }
+    ],
+    "domain": "учёба",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "инфа",
+    "forms": [
+      "инфа"
+    ],
+    "meaning": [
+      {
+        "definition": "информатика как учебный предмет",
+        "context_hints": []
+      }
+    ],
+    "domain": "учёба",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "пересдача",
+    "forms": [
+      "пересдача",
+      "пересдачка"
+    ],
+    "meaning": [
+      {
+        "definition": "повторная сдача проверки знаний",
+        "context_hints": []
+      }
+    ],
+    "domain": "учёба",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "автомат",
+    "forms": [
+      "автомат"
+    ],
+    "meaning": [
+      {
+        "definition": "оценка без отдельного итогового испытания",
+        "context_hints": []
+      }
+    ],
+    "domain": "учёба",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "хвост",
+    "forms": [
+      "хвост",
+      "хвосты"
+    ],
+    "meaning": [
+      {
+        "definition": "несданная учебная работа",
+        "context_hints": []
+      }
+    ],
+    "domain": "учёба",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "созвон",
+    "forms": [
+      "созвон"
+    ],
+    "meaning": [
+      {
+        "definition": "обсуждение по звонку",
+        "context_hints": []
+      }
+    ],
+    "domain": "работа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "митинг",
+    "forms": [
+      "митинг",
+      "мит"
+    ],
+    "meaning": [
+      {
+        "definition": "рабочее совещание",
+        "context_hints": []
+      }
+    ],
+    "domain": "работа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "дейлик",
+    "forms": [
+      "дейлик"
+    ],
+    "meaning": [
+      {
+        "definition": "короткая ежедневная встреча",
+        "context_hints": []
+      }
+    ],
+    "domain": "работа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "дедлайн",
+    "forms": [
+      "дедлайн"
+    ],
+    "meaning": [
+      {
+        "definition": "крайний срок",
+        "context_hints": []
+      }
+    ],
+    "domain": "работа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "таска",
+    "forms": [
+      "таска",
+      "таски"
+    ],
+    "meaning": [
+      {
+        "definition": "рабочая задача",
+        "context_hints": []
+      }
+    ],
+    "domain": "работа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "фидбек",
+    "forms": [
+      "фидбек"
+    ],
+    "meaning": [
+      {
+        "definition": "обратная связь",
+        "context_hints": []
+      }
+    ],
+    "domain": "работа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "онбординг",
+    "forms": [
+      "онбординг"
+    ],
+    "meaning": [
+      {
+        "definition": "введение нового сотрудника в работу",
+        "context_hints": []
+      }
+    ],
+    "domain": "работа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "оффер",
+    "forms": [
+      "оффер"
+    ],
+    "meaning": [
+      {
+        "definition": "предложение работы",
+        "context_hints": []
+      }
+    ],
+    "domain": "работа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "эйчар",
+    "forms": [
+      "эйчар",
+      "hr"
+    ],
+    "meaning": [
+      {
+        "definition": "специалист по персоналу",
+        "context_hints": []
+      }
+    ],
+    "domain": "работа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "собес",
+    "forms": [
+      "собес"
+    ],
+    "meaning": [
+      {
+        "definition": "собеседование",
+        "context_hints": []
+      }
+    ],
+    "domain": "работа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "отгул",
+    "forms": [
+      "отгул"
+    ],
+    "meaning": [
+      {
+        "definition": "свободный от работы день",
+        "context_hints": []
+      }
+    ],
+    "domain": "работа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "удалёнка",
+    "forms": [
+      "удалёнка",
+      "удаленка"
+    ],
+    "meaning": [
+      {
+        "definition": "работа вне офиса",
+        "context_hints": []
+      }
+    ],
+    "domain": "работа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "гибрид",
+    "forms": [
+      "гибрид"
+    ],
+    "meaning": [
+      {
+        "definition": "сочетание офисной и удалённой работы",
+        "context_hints": []
+      }
+    ],
+    "domain": "работа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "планёрка",
+    "forms": [
+      "планёрка",
+      "планерка"
+    ],
+    "meaning": [
+      {
+        "definition": "короткое рабочее совещание",
+        "context_hints": []
+      }
+    ],
+    "domain": "работа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "фултайм",
+    "forms": [
+      "фултайм"
+    ],
+    "meaning": [
+      {
+        "definition": "полная занятость",
+        "context_hints": []
+      }
+    ],
+    "domain": "работа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "парттайм",
+    "forms": [
+      "парттайм"
+    ],
+    "meaning": [
+      {
+        "definition": "неполная занятость",
+        "context_hints": []
+      }
+    ],
+    "domain": "работа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "перекус",
+    "forms": [
+      "перекус"
+    ],
+    "meaning": [
+      {
+        "definition": "небольшой приём пищи",
+        "context_hints": []
+      }
+    ],
+    "domain": "еда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "вкусняшка",
+    "forms": [
+      "вкусняшка"
+    ],
+    "meaning": [
+      {
+        "definition": "вкусное угощение",
+        "context_hints": []
+      }
+    ],
+    "domain": "еда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "пюрешка",
+    "forms": [
+      "пюрешка"
+    ],
+    "meaning": [
+      {
+        "definition": "картофельное пюре",
+        "context_hints": []
+      }
+    ],
+    "domain": "еда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "макарошки",
+    "forms": [
+      "макарошки"
+    ],
+    "meaning": [
+      {
+        "definition": "макаронные изделия",
+        "context_hints": []
+      }
+    ],
+    "domain": "еда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "греча",
+    "forms": [
+      "греча"
+    ],
+    "meaning": [
+      {
+        "definition": "гречневая крупа",
+        "context_hints": []
+      }
+    ],
+    "domain": "еда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "картоха",
+    "forms": [
+      "картоха"
+    ],
+    "meaning": [
+      {
+        "definition": "картофель",
+        "context_hints": []
+      }
+    ],
+    "domain": "еда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "овсянка",
+    "forms": [
+      "овсянка"
+    ],
+    "meaning": [
+      {
+        "definition": "каша из овса",
+        "context_hints": []
+      }
+    ],
+    "domain": "еда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "молочка",
+    "forms": [
+      "молочка"
+    ],
+    "meaning": [
+      {
+        "definition": "молочные продукты",
+        "context_hints": []
+      }
+    ],
+    "domain": "еда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "газировка",
+    "forms": [
+      "газировка"
+    ],
+    "meaning": [
+      {
+        "definition": "газированный напиток",
+        "context_hints": []
+      }
+    ],
+    "domain": "еда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "минералка",
+    "forms": [
+      "минералка"
+    ],
+    "meaning": [
+      {
+        "definition": "минеральная вода",
+        "context_hints": []
+      }
+    ],
+    "domain": "еда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "дошик",
+    "forms": [
+      "дошик"
+    ],
+    "meaning": [
+      {
+        "definition": "лапша быстрого приготовления",
+        "context_hints": []
+      }
+    ],
+    "domain": "еда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "пп",
+    "forms": [
+      "пп"
+    ],
+    "meaning": [
+      {
+        "definition": "сбалансированное питание в разговорной речи",
+        "context_hints": []
+      }
+    ],
+    "domain": "еда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "заготовка",
+    "forms": [
+      "заготовка"
+    ],
+    "meaning": [
+      {
+        "definition": "продукты для последующего приготовления",
+        "context_hints": []
+      }
+    ],
+    "domain": "еда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "доставка",
+    "forms": [
+      "доставка"
+    ],
+    "meaning": [
+      {
+        "definition": "доставка готовой еды",
+        "context_hints": []
+      }
+    ],
+    "domain": "еда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "шведка",
+    "forms": [
+      "шведка"
+    ],
+    "meaning": [
+      {
+        "definition": "питание по системе шведского стола",
+        "context_hints": []
+      }
+    ],
+    "domain": "еда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "навынос",
+    "forms": [
+      "навынос",
+      "тейкэвей"
+    ],
+    "meaning": [
+      {
+        "definition": "еда для употребления вне заведения",
+        "context_hints": []
+      }
+    ],
+    "domain": "еда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "маршрутка",
+    "forms": [
+      "маршрутка"
+    ],
+    "meaning": [
+      {
+        "definition": "маршрутное такси",
+        "context_hints": []
+      }
+    ],
+    "domain": "транспорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "электричка",
+    "forms": [
+      "электричка"
+    ],
+    "meaning": [
+      {
+        "definition": "пригородный электропоезд",
+        "context_hints": []
+      }
+    ],
+    "domain": "транспорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "тачка",
+    "forms": [
+      "тачка",
+      "тачки"
+    ],
+    "meaning": [
+      {
+        "definition": "автомобиль",
+        "context_hints": []
+      }
+    ],
+    "domain": "транспорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "велик",
+    "forms": [
+      "велик",
+      "велика"
+    ],
+    "meaning": [
+      {
+        "definition": "велосипед",
+        "context_hints": []
+      }
+    ],
+    "domain": "транспорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "самокат",
+    "forms": [
+      "самокат",
+      "самоката"
+    ],
+    "meaning": [
+      {
+        "definition": "двухколёсное средство передвижения с платформой",
+        "context_hints": []
+      }
+    ],
+    "domain": "транспорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "пробка",
+    "forms": [
+      "пробка"
+    ],
+    "meaning": [
+      {
+        "definition": "затор на дороге",
+        "context_hints": []
+      }
+    ],
+    "domain": "транспорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "запаска",
+    "forms": [
+      "запаска"
+    ],
+    "meaning": [
+      {
+        "definition": "запасное колесо",
+        "context_hints": []
+      }
+    ],
+    "domain": "транспорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "ручник",
+    "forms": [
+      "ручник"
+    ],
+    "meaning": [
+      {
+        "definition": "стояночный тормоз",
+        "context_hints": []
+      }
+    ],
+    "domain": "транспорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "аварийка",
+    "forms": [
+      "аварийка"
+    ],
+    "meaning": [
+      {
+        "definition": "аварийная световая сигнализация",
+        "context_hints": []
+      }
+    ],
+    "domain": "транспорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "поворотник",
+    "forms": [
+      "поворотник"
+    ],
+    "meaning": [
+      {
+        "definition": "указатель поворота",
+        "context_hints": []
+      }
+    ],
+    "domain": "транспорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "заправка",
+    "forms": [
+      "заправка"
+    ],
+    "meaning": [
+      {
+        "definition": "станция снабжения автомобиля топливом",
+        "context_hints": []
+      }
+    ],
+    "domain": "транспорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "попутка",
+    "forms": [
+      "попутка"
+    ],
+    "meaning": [
+      {
+        "definition": "попутный автомобиль",
+        "context_hints": []
+      }
+    ],
+    "domain": "транспорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "каршеринг",
+    "forms": [
+      "каршеринг"
+    ],
+    "meaning": [
+      {
+        "definition": "краткосрочная аренда автомобиля",
+        "context_hints": []
+      }
+    ],
+    "domain": "транспорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "пересадка",
+    "forms": [
+      "пересадка"
+    ],
+    "meaning": [
+      {
+        "definition": "смена транспорта в пути",
+        "context_hints": []
+      }
+    ],
+    "domain": "транспорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "безнал",
+    "forms": [
+      "безнал"
+    ],
+    "meaning": [
+      {
+        "definition": "безналичная оплата проезда",
+        "context_hints": []
+      }
+    ],
+    "domain": "транспорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "проездной",
+    "forms": [
+      "проездной"
+    ],
+    "meaning": [
+      {
+        "definition": "билет на несколько поездок",
+        "context_hints": []
+      }
+    ],
+    "domain": "транспорт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "скидос",
+    "forms": [
+      "скидос"
+    ],
+    "meaning": [
+      {
+        "definition": "скидка",
+        "context_hints": []
+      }
+    ],
+    "domain": "покупки",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "промик",
+    "forms": [
+      "промик"
+    ],
+    "meaning": [
+      {
+        "definition": "промокод",
+        "context_hints": []
+      }
+    ],
+    "domain": "покупки",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "кэшбэк",
+    "forms": [
+      "кэшбэк",
+      "кешбэк"
+    ],
+    "meaning": [
+      {
+        "definition": "возврат части потраченных денег",
+        "context_hints": []
+      }
+    ],
+    "domain": "покупки",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "рассрочка",
+    "forms": [
+      "рассрочка"
+    ],
+    "meaning": [
+      {
+        "definition": "оплата частями по установленному графику",
+        "context_hints": []
+      }
+    ],
+    "domain": "покупки",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "бэушка",
+    "forms": [
+      "бэушка",
+      "бу"
+    ],
+    "meaning": [
+      {
+        "definition": "вещь, бывшая в употреблении",
+        "context_hints": []
+      }
+    ],
+    "domain": "покупки",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "новьё",
+    "forms": [
+      "новьё"
+    ],
+    "meaning": [
+      {
+        "definition": "новая вещь",
+        "context_hints": []
+      }
+    ],
+    "domain": "покупки",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "ориг",
+    "forms": [
+      "ориг",
+      "оригинал"
+    ],
+    "meaning": [
+      {
+        "definition": "подлинный товар",
+        "context_hints": []
+      }
+    ],
+    "domain": "покупки",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "паль",
+    "forms": [
+      "паль",
+      "палёнка"
+    ],
+    "meaning": [
+      {
+        "definition": "поддельный товар",
+        "context_hints": []
+      }
+    ],
+    "domain": "покупки",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "ноунейм",
+    "forms": [
+      "ноунейм"
+    ],
+    "meaning": [
+      {
+        "definition": "товар без известного бренда",
+        "context_hints": []
+      }
+    ],
+    "domain": "покупки",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "возвратка",
+    "forms": [
+      "возвратка"
+    ],
+    "meaning": [
+      {
+        "definition": "товар после возврата покупателем",
+        "context_hints": []
+      }
+    ],
+    "domain": "покупки",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "самовывоз",
+    "forms": [
+      "самовывоз"
+    ],
+    "meaning": [
+      {
+        "definition": "получение заказа покупателем самостоятельно",
+        "context_hints": []
+      }
+    ],
+    "domain": "покупки",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "пункт выдачи",
+    "forms": [
+      "пункт выдачи",
+      "пвз"
+    ],
+    "meaning": [
+      {
+        "definition": "место получения заказа",
+        "context_hints": []
+      }
+    ],
+    "domain": "покупки",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "корзина",
+    "forms": [
+      "корзина"
+    ],
+    "meaning": [
+      {
+        "definition": "список выбранных покупок",
+        "context_hints": []
+      }
+    ],
+    "domain": "покупки",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "вишлист",
+    "forms": [
+      "вишлист"
+    ],
+    "meaning": [
+      {
+        "definition": "список желаемых покупок",
+        "context_hints": []
+      }
+    ],
+    "domain": "покупки",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "оверпрайс",
+    "forms": [
+      "оверпрайс"
+    ],
+    "meaning": [
+      {
+        "definition": "завышенная цена",
+        "context_hints": []
+      }
+    ],
+    "domain": "покупки",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "анбоксинг",
+    "forms": [
+      "анбоксинг"
+    ],
+    "meaning": [
+      {
+        "definition": "распаковка товара",
+        "context_hints": []
+      }
+    ],
+    "domain": "покупки",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "коммуналка",
+    "forms": [
+      "коммуналка"
+    ],
+    "meaning": [
+      {
+        "definition": "коммунальные платежи или коммунальная квартира",
+        "context_hints": []
+      }
+    ],
+    "domain": "быт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "платёжка",
+    "forms": [
+      "платёжка",
+      "платежка"
+    ],
+    "meaning": [
+      {
+        "definition": "документ для оплаты",
+        "context_hints": []
+      }
+    ],
+    "domain": "быт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "стиралка",
+    "forms": [
+      "стиралка"
+    ],
+    "meaning": [
+      {
+        "definition": "стиральная машина",
+        "context_hints": []
+      }
+    ],
+    "domain": "быт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "посудомойка",
+    "forms": [
+      "посудомойка"
+    ],
+    "meaning": [
+      {
+        "definition": "посудомоечная машина",
+        "context_hints": []
+      }
+    ],
+    "domain": "быт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "микроволновка",
+    "forms": [
+      "микроволновка"
+    ],
+    "meaning": [
+      {
+        "definition": "микроволновая печь",
+        "context_hints": []
+      }
+    ],
+    "domain": "быт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "духовка",
+    "forms": [
+      "духовка"
+    ],
+    "meaning": [
+      {
+        "definition": "духовой шкаф",
+        "context_hints": []
+      }
+    ],
+    "domain": "быт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "удлинитель",
+    "forms": [
+      "удлинитель"
+    ],
+    "meaning": [
+      {
+        "definition": "электрический кабель с дополнительными розетками",
+        "context_hints": []
+      }
+    ],
+    "domain": "быт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "переноска",
+    "forms": [
+      "переноска"
+    ],
+    "meaning": [
+      {
+        "definition": "переносной электрический удлинитель",
+        "context_hints": []
+      }
+    ],
+    "domain": "быт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "лампочка",
+    "forms": [
+      "лампочка"
+    ],
+    "meaning": [
+      {
+        "definition": "электрическая лампа",
+        "context_hints": []
+      }
+    ],
+    "domain": "быт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "пылесосить",
+    "forms": [
+      "пылесосить"
+    ],
+    "meaning": [
+      {
+        "definition": "убирать пылесосом",
+        "context_hints": []
+      }
+    ],
+    "domain": "быт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "генералка",
+    "forms": [
+      "генералка"
+    ],
+    "meaning": [
+      {
+        "definition": "генеральная уборка",
+        "context_hints": []
+      }
+    ],
+    "domain": "быт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "кондей",
+    "forms": [
+      "кондей"
+    ],
+    "meaning": [
+      {
+        "definition": "кондиционер",
+        "context_hints": []
+      }
+    ],
+    "domain": "быт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "холодос",
+    "forms": [
+      "холодос"
+    ],
+    "meaning": [
+      {
+        "definition": "холодильник",
+        "context_hints": []
+      }
+    ],
+    "domain": "быт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "квартплата",
+    "forms": [
+      "квартплата"
+    ],
+    "meaning": [
+      {
+        "definition": "платёж за жильё",
+        "context_hints": []
+      }
+    ],
+    "domain": "быт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "квиток",
+    "forms": [
+      "квиток"
+    ],
+    "meaning": [
+      {
+        "definition": "квитанция",
+        "context_hints": []
+      }
+    ],
+    "domain": "быт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "барахло",
+    "forms": [
+      "барахло"
+    ],
+    "meaning": [
+      {
+        "definition": "разнородные ненужные вещи",
+        "context_hints": []
+      }
+    ],
+    "domain": "быт",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "покатушки",
+    "forms": [
+      "покатушки"
+    ],
+    "meaning": [
+      {
+        "definition": "неформальная поездка ради отдыха",
+        "context_hints": []
+      }
+    ],
+    "domain": "путешествия",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "трип",
+    "forms": [
+      "трип"
+    ],
+    "meaning": [
+      {
+        "definition": "путешествие",
+        "context_hints": []
+      }
+    ],
+    "domain": "путешествия",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "бэкпэкинг",
+    "forms": [
+      "бэкпэкинг"
+    ],
+    "meaning": [
+      {
+        "definition": "самостоятельное путешествие с рюкзаком",
+        "context_hints": []
+      }
+    ],
+    "domain": "путешествия",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "лоукостер",
+    "forms": [
+      "лоукостер"
+    ],
+    "meaning": [
+      {
+        "definition": "авиакомпания с низкими базовыми тарифами",
+        "context_hints": []
+      }
+    ],
+    "domain": "путешествия",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "стыковка",
+    "forms": [
+      "стыковка"
+    ],
+    "meaning": [
+      {
+        "definition": "пересадка между рейсами",
+        "context_hints": []
+      }
+    ],
+    "domain": "путешествия",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "чартер",
+    "forms": [
+      "чартер"
+    ],
+    "meaning": [
+      {
+        "definition": "заказной рейс",
+        "context_hints": []
+      }
+    ],
+    "domain": "путешествия",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "посадочный",
+    "forms": [
+      "посадочный"
+    ],
+    "meaning": [
+      {
+        "definition": "посадочный талон",
+        "context_hints": []
+      }
+    ],
+    "domain": "путешествия",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "ручная кладь",
+    "forms": [
+      "ручная кладь"
+    ],
+    "meaning": [
+      {
+        "definition": "багаж в салоне транспорта",
+        "context_hints": []
+      }
+    ],
+    "domain": "путешествия",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "хостел",
+    "forms": [
+      "хостел"
+    ],
+    "meaning": [
+      {
+        "definition": "недорогой объект размещения с общими комнатами",
+        "context_hints": []
+      }
+    ],
+    "domain": "путешествия",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "гестхаус",
+    "forms": [
+      "гестхаус"
+    ],
+    "meaning": [
+      {
+        "definition": "гостевой дом",
+        "context_hints": []
+      }
+    ],
+    "domain": "путешествия",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "апарты",
+    "forms": [
+      "апарты"
+    ],
+    "meaning": [
+      {
+        "definition": "апартаменты для проживания",
+        "context_hints": []
+      }
+    ],
+    "domain": "путешествия",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "оллинклюзив",
+    "forms": [
+      "оллинклюзив"
+    ],
+    "meaning": [
+      {
+        "definition": "система обслуживания «всё включено»",
+        "context_hints": []
+      }
+    ],
+    "domain": "путешествия",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "горящий тур",
+    "forms": [
+      "горящий тур"
+    ],
+    "meaning": [
+      {
+        "definition": "тур с близкой датой выезда",
+        "context_hints": []
+      }
+    ],
+    "domain": "путешествия",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "путёвка",
+    "forms": [
+      "путёвка",
+      "путевка"
+    ],
+    "meaning": [
+      {
+        "definition": "документ или пакет услуг поездки",
+        "context_hints": []
+      }
+    ],
+    "domain": "путешествия",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "набережка",
+    "forms": [
+      "набережка"
+    ],
+    "meaning": [
+      {
+        "definition": "набережная",
+        "context_hints": []
+      }
+    ],
+    "domain": "путешествия",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "турик",
+    "forms": [
+      "турик"
+    ],
+    "meaning": [
+      {
+        "definition": "турист в разговорной речи",
+        "context_hints": []
+      }
+    ],
+    "domain": "путешествия",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "шмот",
+    "forms": [
+      "шмот",
+      "шмотки"
+    ],
+    "meaning": [
+      {
+        "definition": "одежда",
+        "context_hints": []
+      }
+    ],
+    "domain": "одежда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "лук",
+    "forms": [
+      "лук",
+      "лука"
+    ],
+    "meaning": [
+      {
+        "definition": "растение, используемое в пищу",
+        "context_hints": [
+          "овощ",
+          "суп",
+          "нарезать"
+        ]
+      },
+      {
+        "definition": "сочетание одежды",
+        "context_hints": [
+          "одежда",
+          "образ",
+          "стиль"
+        ]
+      }
+    ],
+    "domain": "одежда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "аутфит",
+    "forms": [
+      "аутфит"
+    ],
+    "meaning": [
+      {
+        "definition": "комплект одежды",
+        "context_hints": []
+      }
+    ],
+    "domain": "одежда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "оверсайз",
+    "forms": [
+      "оверсайз"
+    ],
+    "meaning": [
+      {
+        "definition": "свободный увеличенный крой",
+        "context_hints": []
+      }
+    ],
+    "domain": "одежда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "худи",
+    "forms": [
+      "худи"
+    ],
+    "meaning": [
+      {
+        "definition": "толстовка с капюшоном",
+        "context_hints": []
+      }
+    ],
+    "domain": "одежда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "свитшот",
+    "forms": [
+      "свитшот"
+    ],
+    "meaning": [
+      {
+        "definition": "трикотажная кофта без застёжки",
+        "context_hints": []
+      }
+    ],
+    "domain": "одежда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "бомбер",
+    "forms": [
+      "бомбер"
+    ],
+    "meaning": [
+      {
+        "definition": "короткая куртка с эластичными манжетами",
+        "context_hints": []
+      }
+    ],
+    "domain": "одежда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "косуха",
+    "forms": [
+      "косуха"
+    ],
+    "meaning": [
+      {
+        "definition": "куртка с косой застёжкой",
+        "context_hints": []
+      }
+    ],
+    "domain": "одежда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "кроссы",
+    "forms": [
+      "кроссы"
+    ],
+    "meaning": [
+      {
+        "definition": "кроссовки",
+        "context_hints": []
+      }
+    ],
+    "domain": "одежда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "кеды",
+    "forms": [
+      "кеды"
+    ],
+    "meaning": [
+      {
+        "definition": "лёгкая спортивная обувь",
+        "context_hints": []
+      }
+    ],
+    "domain": "одежда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "джоггеры",
+    "forms": [
+      "джоггеры"
+    ],
+    "meaning": [
+      {
+        "definition": "брюки с манжетами внизу",
+        "context_hints": []
+      }
+    ],
+    "domain": "одежда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "скинни",
+    "forms": [
+      "скинни"
+    ],
+    "meaning": [
+      {
+        "definition": "узкий облегающий крой брюк",
+        "context_hints": []
+      }
+    ],
+    "domain": "одежда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "винтаж",
+    "forms": [
+      "винтаж"
+    ],
+    "meaning": [
+      {
+        "definition": "вещь прежнего времени с характерным стилем",
+        "context_hints": []
+      }
+    ],
+    "domain": "одежда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "секонд",
+    "forms": [
+      "секонд"
+    ],
+    "meaning": [
+      {
+        "definition": "магазин бывшей в употреблении одежды",
+        "context_hints": []
+      }
+    ],
+    "domain": "одежда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "капсула",
+    "forms": [
+      "капсула"
+    ],
+    "meaning": [
+      {
+        "definition": "взаимосочетаемый набор одежды",
+        "context_hints": []
+      }
+    ],
+    "domain": "одежда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "слои",
+    "forms": [
+      "слои",
+      "многослойка"
+    ],
+    "meaning": [
+      {
+        "definition": "сочетание нескольких слоёв одежды",
+        "context_hints": []
+      }
+    ],
+    "domain": "одежда",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "буккроссинг",
+    "forms": [
+      "буккроссинг"
+    ],
+    "meaning": [
+      {
+        "definition": "обмен прочитанными книгами",
+        "context_hints": []
+      }
+    ],
+    "domain": "книги",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "букток",
+    "forms": [
+      "букток"
+    ],
+    "meaning": [
+      {
+        "definition": "обсуждение книг в коротких видео",
+        "context_hints": []
+      }
+    ],
+    "domain": "книги",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "ридер",
+    "forms": [
+      "ридер"
+    ],
+    "meaning": [
+      {
+        "definition": "устройство для чтения электронных книг",
+        "context_hints": []
+      }
+    ],
+    "domain": "книги",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "электронка",
+    "forms": [
+      "электронка"
+    ],
+    "meaning": [
+      {
+        "definition": "электронная книга",
+        "context_hints": []
+      }
+    ],
+    "domain": "книги",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "аудиокнига",
+    "forms": [
+      "аудиокнига"
+    ],
+    "meaning": [
+      {
+        "definition": "звуковая запись чтения книги",
+        "context_hints": []
+      }
+    ],
+    "domain": "книги",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "лонгрид",
+    "forms": [
+      "лонгрид"
+    ],
+    "meaning": [
+      {
+        "definition": "длинный материал для чтения",
+        "context_hints": []
+      }
+    ],
+    "domain": "книги",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "сборник",
+    "forms": [
+      "сборник"
+    ],
+    "meaning": [
+      {
+        "definition": "издание нескольких произведений",
+        "context_hints": []
+      }
+    ],
+    "domain": "книги",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "переиздание",
+    "forms": [
+      "переиздание"
+    ],
+    "meaning": [
+      {
+        "definition": "новое издание ранее опубликованной книги",
+        "context_hints": []
+      }
+    ],
+    "domain": "книги",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "покетбук",
+    "forms": [
+      "покетбук"
+    ],
+    "meaning": [
+      {
+        "definition": "карманное издание книги",
+        "context_hints": []
+      }
+    ],
+    "domain": "книги",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "твёрдый переплёт",
+    "forms": [
+      "твёрдый переплёт"
+    ],
+    "meaning": [
+      {
+        "definition": "жёсткая книжная обложка",
+        "context_hints": []
+      }
+    ],
+    "domain": "книги",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "суперобложка",
+    "forms": [
+      "суперобложка"
+    ],
+    "meaning": [
+      {
+        "definition": "съёмная внешняя обложка книги",
+        "context_hints": []
+      }
+    ],
+    "domain": "книги",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "читалка",
+    "forms": [
+      "читалка"
+    ],
+    "meaning": [
+      {
+        "definition": "программа для чтения книг",
+        "context_hints": []
+      }
+    ],
+    "domain": "книги",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "книжка-малышка",
+    "forms": [
+      "книжка-малышка"
+    ],
+    "meaning": [
+      {
+        "definition": "книга небольшого формата",
+        "context_hints": []
+      }
+    ],
+    "domain": "книги",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "книжник",
+    "forms": [
+      "книжник"
+    ],
+    "meaning": [
+      {
+        "definition": "человек, увлечённый книгами",
+        "context_hints": []
+      }
+    ],
+    "domain": "книги",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "нечитун",
+    "forms": [
+      "нечитун"
+    ],
+    "meaning": [
+      {
+        "definition": "период отсутствия желания читать",
+        "context_hints": []
+      }
+    ],
+    "domain": "книги",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "читательский дневник",
+    "forms": [
+      "читательский дневник"
+    ],
+    "meaning": [
+      {
+        "definition": "записи о прочитанном",
+        "context_hints": []
+      }
+    ],
+    "domain": "книги",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "сериалка",
+    "forms": [
+      "сериалка"
+    ],
+    "meaning": [
+      {
+        "definition": "сериал в разговорной речи",
+        "context_hints": []
+      }
+    ],
+    "domain": "кино",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "короткометражка",
+    "forms": [
+      "короткометражка"
+    ],
+    "meaning": [
+      {
+        "definition": "короткометражный фильм",
+        "context_hints": []
+      }
+    ],
+    "domain": "кино",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "полнометражка",
+    "forms": [
+      "полнометражка"
+    ],
+    "meaning": [
+      {
+        "definition": "полнометражный фильм",
+        "context_hints": []
+      }
+    ],
+    "domain": "кино",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "документалка",
+    "forms": [
+      "документалка"
+    ],
+    "meaning": [
+      {
+        "definition": "документальный фильм",
+        "context_hints": []
+      }
+    ],
+    "domain": "кино",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "озвучка",
+    "forms": [
+      "озвучка"
+    ],
+    "meaning": [
+      {
+        "definition": "звуковое сопровождение речи в фильме",
+        "context_hints": []
+      }
+    ],
+    "domain": "кино",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "сабы",
+    "forms": [
+      "сабы",
+      "субтитры"
+    ],
+    "meaning": [
+      {
+        "definition": "текстовое отображение речи",
+        "context_hints": []
+      }
+    ],
+    "domain": "кино",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "спойлер",
+    "forms": [
+      "спойлер"
+    ],
+    "meaning": [
+      {
+        "definition": "раскрытие сюжетной информации заранее",
+        "context_hints": []
+      }
+    ],
+    "domain": "кино",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "тизер",
+    "forms": [
+      "тизер"
+    ],
+    "meaning": [
+      {
+        "definition": "короткий анонс произведения",
+        "context_hints": []
+      }
+    ],
+    "domain": "кино",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "трейлер",
+    "forms": [
+      "трейлер"
+    ],
+    "meaning": [
+      {
+        "definition": "рекламный ролик фильма",
+        "context_hints": []
+      }
+    ],
+    "domain": "кино",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "сиквел",
+    "forms": [
+      "сиквел"
+    ],
+    "meaning": [
+      {
+        "definition": "продолжение произведения",
+        "context_hints": []
+      }
+    ],
+    "domain": "кино",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "приквел",
+    "forms": [
+      "приквел"
+    ],
+    "meaning": [
+      {
+        "definition": "произведение о событиях до основной истории",
+        "context_hints": []
+      }
+    ],
+    "domain": "кино",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "ребут франшизы",
+    "forms": [
+      "ребут франшизы"
+    ],
+    "meaning": [
+      {
+        "definition": "перезапуск истории с новой версией",
+        "context_hints": []
+      }
+    ],
+    "domain": "кино",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "режиссёрка",
+    "forms": [
+      "режиссёрка"
+    ],
+    "meaning": [
+      {
+        "definition": "режиссёрская версия фильма",
+        "context_hints": []
+      }
+    ],
+    "domain": "кино",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "камео",
+    "forms": [
+      "камео"
+    ],
+    "meaning": [
+      {
+        "definition": "короткое появление известного лица",
+        "context_hints": []
+      }
+    ],
+    "domain": "кино",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "флешбэк",
+    "forms": [
+      "флешбэк"
+    ],
+    "meaning": [
+      {
+        "definition": "эпизод воспоминания о прошлом",
+        "context_hints": []
+      }
+    ],
+    "domain": "кино",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "посткредиты",
+    "forms": [
+      "посткредиты"
+    ],
+    "meaning": [
+      {
+        "definition": "сцена после титров",
+        "context_hints": []
+      }
+    ],
+    "domain": "кино",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "погодка",
+    "forms": [
+      "погодка"
+    ],
+    "meaning": [
+      {
+        "definition": "погода в разговорной речи",
+        "context_hints": []
+      }
+    ],
+    "domain": "природа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "морось",
+    "forms": [
+      "морось"
+    ],
+    "meaning": [
+      {
+        "definition": "мелкий дождь",
+        "context_hints": []
+      }
+    ],
+    "domain": "природа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "ливняк",
+    "forms": [
+      "ливняк"
+    ],
+    "meaning": [
+      {
+        "definition": "сильный дождь",
+        "context_hints": []
+      }
+    ],
+    "domain": "природа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "снегопад",
+    "forms": [
+      "снегопад"
+    ],
+    "meaning": [
+      {
+        "definition": "выпадение снега",
+        "context_hints": []
+      }
+    ],
+    "domain": "природа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "слякоть",
+    "forms": [
+      "слякоть"
+    ],
+    "meaning": [
+      {
+        "definition": "мокрая грязь со снегом",
+        "context_hints": []
+      }
+    ],
+    "domain": "природа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "гололёд",
+    "forms": [
+      "гололёд",
+      "гололед"
+    ],
+    "meaning": [
+      {
+        "definition": "слой льда на поверхности",
+        "context_hints": []
+      }
+    ],
+    "domain": "природа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "жарища",
+    "forms": [
+      "жарища"
+    ],
+    "meaning": [
+      {
+        "definition": "сильная жара",
+        "context_hints": []
+      }
+    ],
+    "domain": "природа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "дубак",
+    "forms": [
+      "дубак"
+    ],
+    "meaning": [
+      {
+        "definition": "сильный холод",
+        "context_hints": []
+      }
+    ],
+    "domain": "природа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "ветрище",
+    "forms": [
+      "ветрище"
+    ],
+    "meaning": [
+      {
+        "definition": "сильный ветер",
+        "context_hints": []
+      }
+    ],
+    "domain": "природа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "солнышко",
+    "forms": [
+      "солнышко"
+    ],
+    "meaning": [
+      {
+        "definition": "солнце в ласковой речи",
+        "context_hints": []
+      }
+    ],
+    "domain": "природа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "облачность",
+    "forms": [
+      "облачность"
+    ],
+    "meaning": [
+      {
+        "definition": "покрытие неба облаками",
+        "context_hints": []
+      }
+    ],
+    "domain": "природа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "рассвет",
+    "forms": [
+      "рассвет"
+    ],
+    "meaning": [
+      {
+        "definition": "начало утреннего освещения",
+        "context_hints": []
+      }
+    ],
+    "domain": "природа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "закат",
+    "forms": [
+      "закат"
+    ],
+    "meaning": [
+      {
+        "definition": "вечерний заход солнца",
+        "context_hints": []
+      }
+    ],
+    "domain": "природа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "половодье",
+    "forms": [
+      "половодье"
+    ],
+    "meaning": [
+      {
+        "definition": "сезонное повышение уровня реки",
+        "context_hints": []
+      }
+    ],
+    "domain": "природа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "лесок",
+    "forms": [
+      "лесок"
+    ],
+    "meaning": [
+      {
+        "definition": "небольшой лес",
+        "context_hints": []
+      }
+    ],
+    "domain": "природа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "рощица",
+    "forms": [
+      "рощица"
+    ],
+    "meaning": [
+      {
+        "definition": "небольшая роща",
+        "context_hints": []
+      }
+    ],
+    "domain": "природа",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "скетч",
+    "forms": [
+      "скетч"
+    ],
+    "meaning": [
+      {
+        "definition": "быстрый рисунок-набросок",
+        "context_hints": []
+      }
+    ],
+    "domain": "творчество",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "реф",
+    "forms": [
+      "реф",
+      "референс"
+    ],
+    "meaning": [
+      {
+        "definition": "образец для творческой работы",
+        "context_hints": []
+      }
+    ],
+    "domain": "творчество",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "палитра",
+    "forms": [
+      "палитра"
+    ],
+    "meaning": [
+      {
+        "definition": "набор используемых цветов",
+        "context_hints": []
+      }
+    ],
+    "domain": "творчество",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "лайнарт",
+    "forms": [
+      "лайнарт"
+    ],
+    "meaning": [
+      {
+        "definition": "контурный рисунок",
+        "context_hints": []
+      }
+    ],
+    "domain": "творчество",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "раскрас",
+    "forms": [
+      "раскрас"
+    ],
+    "meaning": [
+      {
+        "definition": "добавление цвета рисунку",
+        "context_hints": []
+      }
+    ],
+    "domain": "творчество",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "стикерпак",
+    "forms": [
+      "стикерпак"
+    ],
+    "meaning": [
+      {
+        "definition": "набор графических наклеек",
+        "context_hints": []
+      }
+    ],
+    "domain": "творчество",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "коллаж",
+    "forms": [
+      "коллаж"
+    ],
+    "meaning": [
+      {
+        "definition": "композиция из нескольких изображений",
+        "context_hints": []
+      }
+    ],
+    "domain": "творчество",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "леттеринг",
+    "forms": [
+      "леттеринг"
+    ],
+    "meaning": [
+      {
+        "definition": "рисование букв",
+        "context_hints": []
+      }
+    ],
+    "domain": "творчество",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "каллиграфия",
+    "forms": [
+      "каллиграфия"
+    ],
+    "meaning": [
+      {
+        "definition": "искусство выразительного письма",
+        "context_hints": []
+      }
+    ],
+    "domain": "творчество",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "хендмейд",
+    "forms": [
+      "хендмейд"
+    ],
+    "meaning": [
+      {
+        "definition": "изделие ручной работы",
+        "context_hints": []
+      }
+    ],
+    "domain": "творчество",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "крафт",
+    "forms": [
+      "крафт"
+    ],
+    "meaning": [
+      {
+        "definition": "ручное изготовление предметов",
+        "context_hints": []
+      }
+    ],
+    "domain": "творчество",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "оригами",
+    "forms": [
+      "оригами"
+    ],
+    "meaning": [
+      {
+        "definition": "складывание фигур из бумаги",
+        "context_hints": []
+      }
+    ],
+    "domain": "творчество",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "аппликация",
+    "forms": [
+      "аппликация"
+    ],
+    "meaning": [
+      {
+        "definition": "изображение из наклеенных частей",
+        "context_hints": []
+      }
+    ],
+    "domain": "творчество",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "макраме",
+    "forms": [
+      "макраме"
+    ],
+    "meaning": [
+      {
+        "definition": "плетение узелками",
+        "context_hints": []
+      }
+    ],
+    "domain": "творчество",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "вышивка",
+    "forms": [
+      "вышивка"
+    ],
+    "meaning": [
+      {
+        "definition": "создание узора нитками",
+        "context_hints": []
+      }
+    ],
+    "domain": "творчество",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "бисероплетение",
+    "forms": [
+      "бисероплетение"
+    ],
+    "meaning": [
+      {
+        "definition": "плетение из бисера",
+        "context_hints": []
+      }
+    ],
+    "domain": "творчество",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "дружбан",
+    "forms": [
+      "дружбан",
+      "кореш"
+    ],
+    "meaning": [
+      {
+        "definition": "близкий приятель",
+        "context_hints": []
+      }
+    ],
+    "domain": "отношения",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "подруга",
+    "forms": [
+      "подруга",
+      "подружка"
+    ],
+    "meaning": [
+      {
+        "definition": "близкая знакомая женского пола",
+        "context_hints": []
+      }
+    ],
+    "domain": "отношения",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "краш",
+    "forms": [
+      "краш"
+    ],
+    "meaning": [
+      {
+        "definition": "человек, вызывающий романтическую симпатию",
+        "context_hints": []
+      }
+    ],
+    "domain": "отношения",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "симп",
+    "forms": [
+      "симп",
+      "симпатия"
+    ],
+    "meaning": [
+      {
+        "definition": "романтическое расположение к человеку",
+        "context_hints": []
+      }
+    ],
+    "domain": "отношения",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "свиданка",
+    "forms": [
+      "свиданка"
+    ],
+    "meaning": [
+      {
+        "definition": "свидание",
+        "context_hints": []
+      }
+    ],
+    "domain": "отношения",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "туса",
+    "forms": [
+      "туса",
+      "тусовка"
+    ],
+    "meaning": [
+      {
+        "definition": "неформальное общение компании",
+        "context_hints": []
+      }
+    ],
+    "domain": "отношения",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "вписка",
+    "forms": [
+      "вписка"
+    ],
+    "meaning": [
+      {
+        "definition": "неформальная встреча с возможностью переночевать",
+        "context_hints": []
+      }
+    ],
+    "domain": "отношения",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "обнимашки",
+    "forms": [
+      "обнимашки"
+    ],
+    "meaning": [
+      {
+        "definition": "объятия",
+        "context_hints": []
+      }
+    ],
+    "domain": "отношения",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "гостинг",
+    "forms": [
+      "гостинг"
+    ],
+    "meaning": [
+      {
+        "definition": "прекращение общения без объяснения",
+        "context_hints": []
+      }
+    ],
+    "domain": "отношения",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "игнор",
+    "forms": [
+      "игнор"
+    ],
+    "meaning": [
+      {
+        "definition": "намеренное отсутствие ответа",
+        "context_hints": []
+      }
+    ],
+    "domain": "отношения",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "редфлаг",
+    "forms": [
+      "редфлаг"
+    ],
+    "meaning": [
+      {
+        "definition": "тревожный признак в отношениях",
+        "context_hints": []
+      }
+    ],
+    "domain": "отношения",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "гринфлаг",
+    "forms": [
+      "гринфлаг"
+    ],
+    "meaning": [
+      {
+        "definition": "благоприятный признак в отношениях",
+        "context_hints": []
+      }
+    ],
+    "domain": "отношения",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "токсик",
+    "forms": [
+      "токсик"
+    ],
+    "meaning": [
+      {
+        "definition": "человек с вредной манерой общения",
+        "context_hints": []
+      }
+    ],
+    "domain": "отношения",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "буллинг",
+    "forms": [
+      "буллинг"
+    ],
+    "meaning": [
+      {
+        "definition": "систематическая травля",
+        "context_hints": []
+      }
+    ],
+    "domain": "отношения",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "поддержка",
+    "forms": [
+      "поддержка"
+    ],
+    "meaning": [
+      {
+        "definition": "эмоциональная помощь другому",
+        "context_hints": []
+      }
+    ],
+    "domain": "отношения",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "примирение",
+    "forms": [
+      "примирение"
+    ],
+    "meaning": [
+      {
+        "definition": "восстановление добрых отношений",
+        "context_hints": []
+      }
+    ],
+    "domain": "отношения",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "афк",
+    "forms": [
+      "афк",
+      "afk"
+    ],
+    "meaning": [
+      {
+        "definition": "временно не участвует, отошёл от устройства",
+        "context_hints": []
+      }
+    ],
+    "domain": "игры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "гг",
+    "forms": [
+      "гг",
+      "gg"
+    ],
+    "meaning": [
+      {
+        "definition": "хорошая игра или завершение матча",
+        "context_hints": []
+      }
+    ],
+    "domain": "игры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "гл",
+    "forms": [
+      "гл",
+      "gl"
+    ],
+    "meaning": [
+      {
+        "definition": "пожелание удачи",
+        "context_hints": []
+      }
+    ],
+    "domain": "игры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "нуб",
+    "forms": [
+      "нуб"
+    ],
+    "meaning": [
+      {
+        "definition": "неопытный игрок",
+        "context_hints": []
+      }
+    ],
+    "domain": "игры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "тиммейт",
+    "forms": [
+      "тиммейт"
+    ],
+    "meaning": [
+      {
+        "definition": "участник своей команды",
+        "context_hints": []
+      }
+    ],
+    "domain": "игры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "соло",
+    "forms": [
+      "соло"
+    ],
+    "meaning": [
+      {
+        "definition": "игра без команды",
+        "context_hints": []
+      }
+    ],
+    "domain": "игры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "кооп",
+    "forms": [
+      "кооп"
+    ],
+    "meaning": [
+      {
+        "definition": "совместная игра",
+        "context_hints": []
+      }
+    ],
+    "domain": "игры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "пвп",
+    "forms": [
+      "пвп",
+      "pvp"
+    ],
+    "meaning": [
+      {
+        "definition": "противостояние игроков",
+        "context_hints": []
+      }
+    ],
+    "domain": "игры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "пве",
+    "forms": [
+      "пве",
+      "pve"
+    ],
+    "meaning": [
+      {
+        "definition": "игра против управляемого программой окружения",
+        "context_hints": []
+      }
+    ],
+    "domain": "игры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "лут",
+    "forms": [
+      "лут"
+    ],
+    "meaning": [
+      {
+        "definition": "добыча в игре",
+        "context_hints": []
+      }
+    ],
+    "domain": "игры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "квест",
+    "forms": [
+      "квест"
+    ],
+    "meaning": [
+      {
+        "definition": "игровое задание",
+        "context_hints": []
+      }
+    ],
+    "domain": "игры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "респаун",
+    "forms": [
+      "респаун"
+    ],
+    "meaning": [
+      {
+        "definition": "повторное появление персонажа",
+        "context_hints": []
+      }
+    ],
+    "domain": "игры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "сейв",
+    "forms": [
+      "сейв"
+    ],
+    "meaning": [
+      {
+        "definition": "сохранение игрового состояния",
+        "context_hints": []
+      }
+    ],
+    "domain": "игры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "нерф",
+    "forms": [
+      "нерф"
+    ],
+    "meaning": [
+      {
+        "definition": "ослабление игровой характеристики",
+        "context_hints": []
+      }
+    ],
+    "domain": "игры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "бафф",
+    "forms": [
+      "бафф"
+    ],
+    "meaning": [
+      {
+        "definition": "усиление игровой характеристики",
+        "context_hints": []
+      }
+    ],
+    "domain": "игры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "гринд",
+    "forms": [
+      "гринд"
+    ],
+    "meaning": [
+      {
+        "definition": "повторение однотипных игровых действий",
+        "context_hints": []
+      }
+    ],
+    "domain": "игры",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  },
+  {
+    "term": "кк",
+    "forms": [
+      "кк"
+    ],
+    "meaning": [
+      {
+        "definition": "тысяча тысяч, миллион",
+        "context_hints": [
+          "число",
+          "сумма",
+          "миллион"
+        ]
+      },
+      {
+        "definition": "краткое подтверждение согласия",
+        "context_hints": [
+          "согласен",
+          "ладно",
+          "договорились"
+        ]
+      }
+    ],
+    "domain": "общение",
+    "register": "разговорный",
+    "language": "ru",
+    "confidence": 0.9,
+    "status": "confirmed",
+    "source": "seed",
+    "seen_count": 0,
+    "chats_count": 0,
+    "first_seen": null,
+    "last_seen": null,
+    "context_hints": []
+  }
+]
