@@ -19,7 +19,11 @@ if out.exists():
     if not args.refresh or not out.is_relative_to(generated.resolve()) or out.name!='META-Next':raise SystemExit('Refusing to replace non-generated output')
     shutil.rmtree(out)
 out.mkdir(parents=True)
-shutil.copytree(source/'_internal',out/'_internal',ignore=shutil.ignore_patterns('__pycache__','*.log'))
+def dependencies_only(folder,names):
+    skipped=set(shutil.ignore_patterns('__pycache__','*.log')(folder,names))
+    if Path(folder).resolve()==(source/'_internal').resolve():skipped.update({'core','frontend'})
+    return skipped
+shutil.copytree(source/'_internal',out/'_internal',ignore=dependencies_only)
 # The dependency bundle is retained; source and frontend are the current build inputs.
 target=out/'_internal/core'
 if target.exists():shutil.rmtree(target)
@@ -42,5 +46,5 @@ toc_raw=CArchiveWriter._serialize_toc(toc)
 length=offset+len(toc_raw)+CArchiveWriter._COOKIE_LENGTH
 cookie=struct.pack(CArchiveWriter._COOKIE_FORMAT,CArchiveWriter._COOKIE_MAGIC_PATTERN,length,offset,len(toc_raw),315,b'python315.dll')
 (out/'META-Next.exe').write_bytes(raw[:start]+b''.join(chunks)+toc_raw+cookie)
-(out/'VERSION.txt').write_text('5.2.0\n',encoding='utf-8')
+(out/'VERSION.txt').write_text(json.loads((studio/'frontend/package.json').read_text('utf-8'))['version']+'\n',encoding='utf-8',newline='\n')
 print(json.dumps({'output':str(out),'files':sum(1 for p in out.rglob('*') if p.is_file())}))

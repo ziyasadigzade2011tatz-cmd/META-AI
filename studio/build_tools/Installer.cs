@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 class Setup : Form {
  TextBox target; Button install; ProgressBar progress; Label status; CheckBox shortcut,launch;
- const string Version="5.3.0";
+ const string Version="5.3.1";
  Setup(){
   Text="META Studio · Установка "+Version;ClientSize=new Size(690,450);StartPosition=FormStartPosition.CenterScreen;BackColor=Color.FromArgb(35,36,39);ForeColor=Color.FromArgb(237,234,225);Font=new Font("Segoe UI",10);FormBorderStyle=FormBorderStyle.FixedDialog;MaximizeBox=false;
   Controls.Add(new Label{Text="ᴍ  META Studio",Font=new Font("Segoe UI",26,FontStyle.Bold),ForeColor=Color.FromArgb(220,149,93),Location=new Point(30,25),Size=new Size(600,60)});
@@ -61,7 +61,7 @@ class Setup : Form {
    foreach(string file in Directory.GetFiles(current)){if((File.GetAttributes(file)&FileAttributes.ReparsePoint)!=0)continue;string relative=file.Substring(folder.TrimEnd((char)92).Length+1).Replace((char)92,'/');string extension=Path.GetExtension(file).ToLowerInvariant();if(!hashes.ContainsKey(relative)&&Array.IndexOf(new[]{".js",".css",".ttf",".svg",".html",".map"},extension)>=0){File.SetAttributes(file,FileAttributes.Normal);File.Delete(file);}}
   }
  }
- static void MakeShortcut(string path,string exe,string folder){Type type=Type.GetTypeFromProgID("WScript.Shell");object shell=Activator.CreateInstance(type);object link=type.InvokeMember("CreateShortcut",BindingFlags.InvokeMethod,null,shell,new object[]{path});Type lt=link.GetType();lt.InvokeMember("TargetPath",BindingFlags.SetProperty,null,link,new object[]{exe});lt.InvokeMember("WorkingDirectory",BindingFlags.SetProperty,null,link,new object[]{folder});lt.InvokeMember("Description",BindingFlags.SetProperty,null,link,new object[]{"META Studio 5.2"});lt.InvokeMember("Save",BindingFlags.InvokeMethod,null,link,null);}
+ static void MakeShortcut(string path,string exe,string folder){Type type=Type.GetTypeFromProgID("WScript.Shell");object shell=Activator.CreateInstance(type);object link=type.InvokeMember("CreateShortcut",BindingFlags.InvokeMethod,null,shell,new object[]{path});Type lt=link.GetType();lt.InvokeMember("TargetPath",BindingFlags.SetProperty,null,link,new object[]{exe});lt.InvokeMember("WorkingDirectory",BindingFlags.SetProperty,null,link,new object[]{folder});lt.InvokeMember("Description",BindingFlags.SetProperty,null,link,new object[]{"META Studio "+Version});lt.InvokeMember("Save",BindingFlags.InvokeMethod,null,link,null);}
  [STAThread]static int Main(string[] args){
   if(args.Length>=2&&args[0]=="--install-to"){try{Install(args[1],false,(n,total)=>{});Console.WriteLine("Installed and payload hashes verified.");return 0;}catch(Exception ex){Console.Error.WriteLine(ex.Message);return 1;}}
   Application.EnableVisualStyles();Application.SetCompatibleTextRenderingDefault(false);Application.Run(new Setup());return 0;
