@@ -60,6 +60,12 @@ async def converse(request,manager=None):
             yield {'type':'token','content':reply}
             yield {'type':'done','data':{'session_id':session,'cancelled':False,'sources':[]}}
             return
+        if last.startswith('/memory'):
+            from .memory_extract import command
+            reply=await asyncio.to_thread(command,memory,last)
+            yield {'type':'token','content':reply}
+            yield {'type':'done','data':{'session_id':session,'sources':[],'cancelled':False}}
+            return
         from .slang_learning import Learner
         from .understanding_config import settings as understanding_settings
         if understanding_settings()['slang_learning']:
@@ -92,8 +98,7 @@ async def converse(request,manager=None):
             yield {'type':'token','content':resolved['question']}
             yield {'type':'done','data':{'session_id':session,'sources':[],'clarification_required':True}}
             return
-        if not understanding.get('private'):memory.capture(original_last)
-        prefs=memory.relevant(last);ctx=resolve(messages,prefs)
+        prefs=await asyncio.to_thread(memory.relevant,last);ctx=resolve(messages,prefs)
         if offline:ctx['web_disabled']=True
         if understanding_settings()['slang_learning']:
             for item in understanding.get('used_slang',[]):await asyncio.to_thread(Learner().observe,item['term'],session)
@@ -207,6 +212,9 @@ async def converse(request,manager=None):
                 footer=source_footer(evidence);answer+=footer;yield {'type':'token','content':footer}
         if not answer and not cancel.is_set():yield {'type':'token','content':'Модель не вернула текст. Повтори запрос или выбери другую модель.'}
         if debug_state.enabled(session):yield {'type':'token','content':debug_state.render(understanding,resolved,debug_queries,prefs)}
+        if answer and not cancel.is_set():
+            from .memory_extract import enqueue
+            enqueue(memory,original_last,session,__import__('hashlib').sha256((session+str(len(users))+original_last).encode()).hexdigest())
         yield {'type':'done','data':{'session_id':session,'cancelled':cancel.is_set(),'sources':evidence['sources'] if evidence else []}}
     finally:
         cancel.set()

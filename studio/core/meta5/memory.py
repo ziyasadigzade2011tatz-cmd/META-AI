@@ -35,21 +35,29 @@ class Memory:
         return [dict(zip(('id','kind','value','created'),r)) for r in rows]
     def add(self,value,kind='fact'):
         if not isinstance(value,str) or not 1<=len(value)<=600:raise ValueError('Память: 1–600 символов')
-        if re.search(r'пароль|password|api.?key|секрет|паспорт|cvv|github_pat_|ghp_|sk-',value,re.I):raise ValueError('Секреты не сохраняются в памяти')
+        from .privacy import sensitive
+        if sensitive(value):raise ValueError('Личные реквизиты и секреты не сохраняются в памяти')
         if kind not in ('fact','preference'):raise ValueError('Неверный тип памяти')
         pid=uuid.uuid4().hex
         with self.db() as c:
             c.execute('INSERT OR IGNORE INTO facts(id,kind,value,created) VALUES(?,?,?,?)',(pid,kind,value,time.time()))
             return c.execute('SELECT id FROM facts WHERE value=?',(value,)).fetchone()[0]
     def delete(self,pid):
-        with self.db() as c:c.execute('DELETE FROM facts WHERE id=?',(pid,))
+        with self.db() as c:
+            c.execute('DELETE FROM facts WHERE id=?',(pid,))
+            c.execute("DELETE FROM embeddings WHERE owner_type='fact' AND owner_id=?",(pid,))
+            c.execute('DELETE FROM memory_history WHERE fact_id=?',(pid,))
+            # Query cache is derived and may contain embeddings of the forgotten fact.
+            c.execute('DELETE FROM embedding_cache')
+            if c.execute("SELECT 1 FROM sqlite_master WHERE name='memory_observations'").fetchone():c.execute('DELETE FROM memory_observations WHERE fact_id=?',(pid,))
     def relevant(self,query,limit=30):
         from .memory_retrieval import retrieve
         selected,self.last_trace=retrieve(self,query,limit)
         return selected
     def update(self,pid,value,kind='fact'):
         if not isinstance(value,str) or not 1<=len(value)<=600:raise ValueError('Память: 1–600 символов')
-        if re.search(r'пароль|password|api.?key|секрет|паспорт|cvv|github_pat_|ghp_|sk-',value,re.I):raise ValueError('Секреты не сохраняются')
+        from .privacy import sensitive
+        if sensitive(value):raise ValueError('Личные реквизиты и секреты не сохраняются')
         if kind not in ('fact','preference'):raise ValueError('Неверный тип памяти')
         try:
             with self.db() as c:c.execute('UPDATE facts SET value=?,kind=? WHERE id=?',(value,kind,pid))

@@ -17,7 +17,7 @@ def migrate(path):
             with closing(sqlite3.connect(path.as_uri()+'?mode=ro',uri=True)) as source:
                 columns={r[1] for r in source.execute('PRAGMA table_info(facts)')}
                 tables={r[0] for r in source.execute("SELECT name FROM sqlite_master WHERE type='table'")}
-                if set(COLUMNS)<=columns and {'embeddings','embedding_cache','memory_history','schema_metadata'}<=tables:
+                if set(COLUMNS)<=columns and {'embeddings','embedding_cache','memory_history','memory_observations','schema_metadata'}<=tables:
                     return {'backup':str(backup) if backup.exists() else None,'version':11}
                 needed=not set(COLUMNS)<=columns
                 if needed and not backup.exists():
@@ -33,6 +33,7 @@ def migrate(path):
             for name,definition in COLUMNS.items():
                 if name not in columns:c.execute('ALTER TABLE facts ADD COLUMN '+name+' '+definition)
             c.execute('CREATE TABLE IF NOT EXISTS memory_history(id TEXT PRIMARY KEY,fact_id TEXT,old_value TEXT,new_value TEXT,at REAL,reason TEXT)')
+            c.execute('CREATE TABLE IF NOT EXISTS memory_observations(fact_id TEXT,event_id TEXT,at REAL,PRIMARY KEY(fact_id,event_id))')
             c.execute('CREATE TABLE IF NOT EXISTS embeddings(owner_type TEXT,owner_id TEXT,model TEXT,version TEXT,dimensions INTEGER,vector BLOB,text_hash TEXT,updated REAL,PRIMARY KEY(owner_type,owner_id,model,version))')
             c.execute('CREATE TABLE IF NOT EXISTS embedding_cache(key TEXT PRIMARY KEY,model TEXT,version TEXT,dimensions INTEGER,vector BLOB,updated REAL)')
             c.execute('CREATE TABLE IF NOT EXISTS schema_metadata(key TEXT PRIMARY KEY,value TEXT)')
