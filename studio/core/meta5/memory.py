@@ -31,7 +31,7 @@ class Memory:
     def set_enabled(self,value):
         with self.db() as c:c.execute("INSERT OR REPLACE INTO settings VALUES('capture',?)",('true' if value else 'false',))
     def list(self):
-        with self.db() as c:rows=c.execute('SELECT id,kind,value,created FROM facts ORDER BY created DESC LIMIT 100').fetchall()
+        with self.db() as c:rows=c.execute("SELECT id,kind,value,created FROM facts WHERE status='confirmed' AND (expires IS NULL OR expires>?) ORDER BY created DESC LIMIT 100",(time.time(),)).fetchall()
         return [dict(zip(('id','kind','value','created'),r)) for r in rows]
     def add(self,value,kind='fact'):
         if not isinstance(value,str) or not 1<=len(value)<=600:raise ValueError('Память: 1–600 символов')
@@ -44,9 +44,11 @@ class Memory:
             return c.execute('SELECT id FROM facts WHERE value=?',(value,)).fetchone()[0]
     def delete(self,pid):
         with self.db() as c:
+            old=c.execute('SELECT value FROM facts WHERE id=?',(pid,)).fetchone()
             c.execute('DELETE FROM facts WHERE id=?',(pid,))
             c.execute("DELETE FROM embeddings WHERE owner_type='fact' AND owner_id=?",(pid,))
             c.execute('DELETE FROM memory_history WHERE fact_id=?',(pid,))
+            if old:c.execute('DELETE FROM memory_history WHERE old_value=? OR new_value=?',(old[0],old[0]))
             # Query cache is derived and may contain embeddings of the forgotten fact.
             c.execute('DELETE FROM embedding_cache')
             if c.execute("SELECT 1 FROM sqlite_master WHERE name='memory_observations'").fetchone():c.execute('DELETE FROM memory_observations WHERE fact_id=?',(pid,))
@@ -60,7 +62,14 @@ class Memory:
         if sensitive(value):raise ValueError('Личные реквизиты и секреты не сохраняются')
         if kind not in ('fact','preference'):raise ValueError('Неверный тип памяти')
         try:
-            with self.db() as c:c.execute('UPDATE facts SET value=?,kind=? WHERE id=?',(value,kind,pid))
+            with self.db() as c:
+                from .memory_retrieval import category
+                from .memory_extract import slot
+                old=c.execute('SELECT value FROM facts WHERE id=?',(pid,)).fetchone()
+                if old and old[0]!=value:
+                    c.execute('INSERT INTO memory_history VALUES(?,?,?,?,?,?)',(uuid.uuid4().hex,pid,old[0],value,time.time(),'user_edit'))
+                c.execute("UPDATE facts SET value=?,kind=?,category=?,slot=?,status='confirmed',source='user',confidence=1 WHERE id=?",(value,kind,category(value),slot(value),pid))
+                c.execute("DELETE FROM embeddings WHERE owner_type='fact' AND owner_id=?",(pid,))
         except sqlite3.IntegrityError as exc:raise ValueError('Такое сведение уже сохранено') from exc
     def capture(self,text):
         if not self.enabled():return
@@ -71,6 +80,8 @@ class Memory:
             try:self.add(explicit.group(1) if explicit else text.strip(),'fact' if explicit else 'preference')
             except ValueError:pass
     def summary(self,session,value=None):
+        from .privacy import sensitive
+        if value is not None and sensitive(value):return False
         with self.db() as c:
             if value is None:
                 r=c.execute('SELECT value FROM summaries WHERE session=?',(session,)).fetchone();return r[0] if r else ''

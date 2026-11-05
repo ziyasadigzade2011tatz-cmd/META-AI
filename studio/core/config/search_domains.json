@@ -1,5 +1,5 @@
 {
-  "blocked": ["t.me", "telegram.me", "vk.com", "ok.ru", "facebook.com", "instagram.com", "tiktok.com", "pinterest.com"],
+  "blocked": ["t.me", "telegram.me", "vk.com", "ok.ru", "facebook.com", "instagram.com", "tiktok.com", "pinterest.com", "reddit.com", "x.com", "twitter.com", "rutube.ru"],
   "allowed": [],
   "trusted": {
     "documentation": ["docs.python.org", "developer.mozilla.org", "docs.ollama.com", "learn.microsoft.com"],

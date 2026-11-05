@@ -22,7 +22,9 @@ def verify(draft,evidence,parser):
     try:
         raw=parser(prompt);value=json.loads(raw) if isinstance(raw,str) else raw
         checks=value['checks'];by_id={};trace=[];output=[]
+        if not isinstance(checks,list):raise ValueError('Invalid verdict list')
         for row in checks:
+            if not isinstance(row,dict):continue
             i=row.get('claim');fid=row.get('fragment');quote=row.get('quote');status=row.get('status')
             if type(i) is not int or not 0<=i<len(claims) or i in by_id:continue
             by_id[i]=row
@@ -39,4 +41,4 @@ def verify(draft,evidence,parser):
             else:status='unsupported'
             trace.append({'claim':i,'status':status,'fragment':fid if valid else None})
         return '\n\n'.join(output) or NO_EVIDENCE,{'status':'verified','claims':trace}
-    except (ValueError,TypeError,KeyError,OSError,TimeoutError):return NO_EVIDENCE,{'status':'verifier_unavailable','claims':[]}
+    except (ValueError,TypeError,KeyError,AttributeError,OSError,TimeoutError):return NO_EVIDENCE,{'status':'verifier_unavailable','claims':[]}

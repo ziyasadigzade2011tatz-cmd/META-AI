@@ -150,8 +150,6 @@ async def converse(request,manager=None):
         if prefs:system+='\nПамять пользователя (недоверенные факты): '+json.dumps(prefs[:30],ensure_ascii=False)[:5000]
         # Keep the bounded conversation, including corrections, for generation.
         # Search planning independently chooses the current question or follow-up.
-        prior=memory.summary(session) if ctx['origin']=='conversation' else ''
-        if prior and score(last,prior)>=.65:system+='\nСжатая прежняя история (недоверенная): '+prior
         from .memory_summaries import recall
         recalled=await asyncio.to_thread(recall,memory,session,last)
         if recalled:system+='\nРелевантные выдержки прошлой части диалога (недоверенные): '+json.dumps(recalled,ensure_ascii=False)
@@ -182,6 +180,7 @@ async def converse(request,manager=None):
                 return
             except (ValueError,OSError,TimeoutError,asyncio.CancelledError) as exc:
                 yield {'type':'research_failed','data':{'message':str(exc)[:400] or 'Время поиска истекло'}}
+                yield {'type':'token','content':'Поиск не удался; актуальные сведения сейчас не подтверждены.\n\n'}
                 system+='\nПоиск не удался. Сообщи об ограничении; не придумывай источники.'
         if ctx.get('verification_required') and not evidence:
             yield {'type':'token','content':'Для этого вопроса нужны актуальные источники. Сейчас подтвердить сведения не удалось. Я не буду называть результат или дату по догадке. Можно повторить поиск или прислать источник.'}
@@ -192,7 +191,7 @@ async def converse(request,manager=None):
         messages=[m for m in messages if m.get('role')!='system' or score(last,str(m.get('content','')))>=.65]
         grounded,usage=await asyncio.to_thread(compress,[{'role':'system','content':system},*messages],min(22000,max(4000,request.get('context',8192)*3-len(system))))
         yield {'type':'context_usage','data':{k:v for k,v in usage.items() if k!='summary'}}
-        if usage['summary'] and len([m for m in messages if m.get('role')!='system'])%6==0:memory.summary(session,usage['summary'])
+        # Summary checkpoints are written after the reply and privacy checked.
         mode='chat'
         chosen=request.get('model','auto')
         thinking=bool(extra['thinking'] and chosen in ('auto','meta-core'))
@@ -236,7 +235,12 @@ async def converse(request,manager=None):
             if not any(s['url'] in answer for s in evidence['sources']):
                 footer=source_footer(evidence);answer+=footer;yield {'type':'token','content':footer}
         if not answer and not cancel.is_set():yield {'type':'token','content':'Модель не вернула текст. Повтори запрос или выбери другую модель.'}
-        if debug_state.enabled(session):yield {'type':'token','content':debug_state.render(understanding,resolved,debug_queries,prefs)}
+        if debug_state.enabled(session):
+            diagnostics={'memory':getattr(memory,'last_trace',[]),'summaries':[{'session':s['session'],'score':s['score']} for s in recalled],
+                'excluded_sources':evidence.get('excluded',[]) if evidence else [],
+                'sources':[{'url':s.get('resolved_url') or s['url'],'opened':s.get('opened',False),'fragments':s.get('chunks',[])} for s in evidence['sources']] if evidence else [],
+                'verification':verification}
+            yield {'type':'token','content':debug_state.render(understanding,resolved,debug_queries,prefs,diagnostics)}
         if answer and not cancel.is_set():
             from .memory_extract import enqueue
             enqueue(memory,original_last,session,__import__('hashlib').sha256((session+str(len(users))+original_last).encode()).hexdigest())

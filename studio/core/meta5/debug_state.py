@@ -11,6 +11,7 @@ def enabled(session):
     path=STATE/'understanding.sqlite'
     if not path.exists():return bool(settings()['debug'])
     with closing(sqlite3.connect(path)) as c:
+        if not c.execute("SELECT 1 FROM sqlite_master WHERE name='debug_sessions'").fetchone():return bool(settings()['debug'])
         row=c.execute('SELECT enabled FROM debug_sessions WHERE chat=?',(key(session),)).fetchone()
     return bool(row[0]) if row else bool(settings()['debug'])
 
@@ -20,7 +21,7 @@ def toggle(session,value):
         c.execute('CREATE TABLE IF NOT EXISTS debug_sessions(chat TEXT PRIMARY KEY,enabled INTEGER)')
         c.execute('INSERT OR REPLACE INTO debug_sessions VALUES(?,?)',(key(session),int(value)))
 
-def render(understanding,resolved,queries,memory):
+def render(understanding,resolved,queries,memory,diagnostics=None):
     if understanding.get('private'):return '\n\nДиагностика: личное сообщение, подробности скрыты.'
     from .relevance import score
     value={'normalized':understanding['normalized'],'topic':resolved['topic'],'intent':understanding['intent'],
@@ -28,4 +29,9 @@ def render(understanding,resolved,queries,memory):
            'search_queries':queries,'dictionary':understanding.get('used_slang',[]),
            'memory':[{'id':r['id'],'text':'***' if private(r['value'],numbers=False) else r['value'],
                       'score':score(understanding['normalized'],r['value']),'reason':'строгая лексическая релевантность'} for r in memory]}
+    if diagnostics:
+        value['phase11']=diagnostics
+        selected={r['id']:r for r in diagnostics.get('memory',[]) if r.get('selected')}
+        for row in value['memory']:
+            detail=selected.get(row['id'],{});row.update(score=detail.get('score',row['score']),reason=detail.get('reason',row['reason']))
     return '\n\nДиагностика понимания:\n```json\n'+json.dumps(value,ensure_ascii=False,indent=2)+'\n```'

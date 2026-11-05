@@ -3,10 +3,12 @@ import hashlib,re,time
 from .privacy import sensitive
 from .embeddings import Embeddings,unpack,cosine
 from .relevance import score
+from .phase11_config import load
 
 PAST=re.compile(r'помнишь.{0,50}(?:говорили|обсуждали|разговаривали)|(?:прошл\w+|друг\w+)\s+чат|в прошлый раз',re.I)
 
 def checkpoint(memory,session,messages):
+    if not load('memory')['summary_enabled'] or not memory.enabled():return False
     turns=[m for m in messages if m.get('role') in ('user','assistant')]
     if len(turns)<6 or len(turns)%6:return False
     # Extractive baseline retains only user evidence, without inventing a summary.
@@ -16,7 +18,8 @@ def checkpoint(memory,session,messages):
     memory.summary(session,'\n'.join(lines)[:3500]);return True
 
 def recall(memory,session,query):
-    if sensitive(query):return []
+    cfg=load('memory')
+    if not cfg['summary_enabled'] or sensitive(query):return []
     with memory.db() as c:
         if PAST.search(query):rows=c.execute('SELECT session,value FROM summaries').fetchall()
         else:rows=c.execute('SELECT session,value FROM summaries WHERE session=?',(session,)).fetchall()
@@ -31,4 +34,4 @@ def recall(memory,session,query):
             semantic={sid:cosine(vectors[0],unpack(stored[sid][0],stored[sid][1])) for sid,value in rows if sid in stored and stored[sid][2]==hashlib.sha256(value.encode()).hexdigest()}
     except Exception:pass
     ranked=[(max(score(query,value),semantic.get(sid,0)),sid,value) for sid,value in rows]
-    return [{'session':sid,'value':value[:1800],'score':round(weight,4)} for weight,sid,value in sorted(ranked,reverse=True)[:2] if weight>=.88]
+    return [{'session':sid,'value':value[:max(100,min(3000,int(cfg['summary_characters'])))],'score':round(weight,4)} for weight,sid,value in sorted(ranked,reverse=True)[:max(0,min(5,int(cfg['summary_limit'])))] if weight>=cfg['summary_threshold']]

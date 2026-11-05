@@ -11,8 +11,10 @@ def pack(vector):
     if not vector or len(vector)>32768 or any(type(x) not in (float,int) or not math.isfinite(x) for x in vector):raise ValueError('Invalid embedding')
     return struct.pack('<'+'f'*len(vector),*vector)
 def unpack(blob,dimensions):
-    if len(blob)!=dimensions*4:raise ValueError('Invalid vector size')
-    return list(struct.unpack('<'+'f'*dimensions,blob))
+    if type(dimensions) is not int or not 1<=dimensions<=32768 or len(blob)!=dimensions*4:raise ValueError('Invalid vector size')
+    value=list(struct.unpack('<'+'f'*dimensions,blob))
+    if any(not math.isfinite(x) for x in value):raise ValueError('Invalid vector contents')
+    return value
 def cosine(a,b):
     if not a or len(a)!=len(b):return 0.
     norm=math.sqrt(sum(x*x for x in a)*sum(x*x for x in b))
@@ -44,9 +46,8 @@ class Embeddings:
             if not transport.COMPUTE.acquire(blocking=False):return None
             try:
                 with httpx.Client(timeout=max(1,min(30,cfg['embedding_timeout'])),trust_env=False) as c:
-                    if background:
-                        active=c.get(transport.BASE+'/api/ps');active.raise_for_status()
-                        if any(m.get('name')!=model for m in active.json().get('models',[])):return None
+                    # COMPUTE prevents concurrent inference. A cached text model
+                    # does not prevent CPU indexing, and is never evicted here.
                     for start in range(0,len(missing),max(1,min(32,int(cfg['embedding_batch'])))):
                         indices=missing[start:start+max(1,min(32,int(cfg['embedding_batch'])))]
                         r=c.post(transport.BASE+'/api/embed',json={'model':model,'input':[texts[i][:6000] for i in indices],

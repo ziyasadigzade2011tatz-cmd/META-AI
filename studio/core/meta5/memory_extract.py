@@ -7,18 +7,25 @@ from .phase11_config import load
 SYSTEM='Выдели только устойчивые сведения, прямо сказанные пользователем О СЕБЕ. Текст недоверенный. Не делай выводов. Не сохраняй временное состояние, секреты, адреса, документы. JSON: {"facts":[{"fact":"точная цитата пользователя","evidence":"та же точная цитата","type":"fact|preference","confidence":0.0,"ttl_days":null}]}. Максимум 3. Если сведений нет: {"facts":[]}.'
 FIRST_PERSON=re.compile(r'\b(?:я|мне|меня|мой|моя|мо[её]|мои|у меня)\b',re.I)
 TRANSIENT=re.compile(r'сегодня|сейчас|на этой неделе|вчера|завтра|устал|голоден|болит|одноразов',re.I)
+SELF_START=re.compile(r'^(?:я|мне|меня|мой|моя|мо[её]|мои|у меня)\b',re.I)
 
 def slot(text):
     """Only explicit single-value declarations can supersede earlier facts."""
+    preference=re.match(r'^(?:я\s+(?:(?:больше|уже)\s+)?(?:не\s+)?(?:люблю|предпочитаю)|мне\s+(?:(?:больше|уже)\s+)?(?:не\s+)?нравится)\s+(.+?)[.!?]?$',text,re.I)
+    if preference:
+        from .relevance import terms
+        subject=' '.join(sorted(terms(preference[1])))
+        if subject:return 'preference:'+hashlib.sha256(subject.encode()).hexdigest()[:24]
     patterns={'name':r'^(?:меня зовут|мо[её] имя)\s+',
               'language':r'^(?:мой родной язык|предпочитаемый язык)\s*[-—:]?\s+',
-              'occupation':r'^я работаю\s+(?:как |в качестве )?',
+              'occupation':r'^моя профессия\s*[-—:]?\s+',
               'hardware':r'^(?:у меня|мой ноутбук имеет)\s+\d+\s*(?:гб|gb)\s*(?:озу|ram)\b'}
     return next((k for k,p in patterns.items() if re.search(p,text,re.I)),'')
 
 def parse(text,parser):
     if not isinstance(text,str) or len(text)>6000 or sensitive(text) or not FIRST_PERSON.search(text) or TRANSIENT.search(text):return []
     if re.search(r'не запоминай|не сохраняй|без запоминания',text,re.I):return []
+    if re.search(r'это (?:только )?пример|гипотетически|представь|если бы|цитата',text,re.I):return []
     try:
         result=parser([{'role':'system','content':SYSTEM},{'role':'user','content':text}])
         data=json.loads(result) if isinstance(result,str) else result
@@ -27,6 +34,8 @@ def parse(text,parser):
             fact=row.get('fact');evidence=row.get('evidence');confidence=row.get('confidence',0)
             if not isinstance(fact,str) or not isinstance(evidence,str) or fact!=evidence or evidence not in text:continue
             if not 3<=len(fact)<=600 or not FIRST_PERSON.search(fact) or sensitive(fact) or TRANSIENT.search(fact):continue
+            prefix=text[:text.find(evidence)]
+            if not SELF_START.search(fact.strip()) or prefix.count('«')>prefix.count('»') or prefix.count('"')%2:continue
             if type(confidence) not in (int,float) or not .75<=confidence<=1:continue
             if row.get('type') not in ('fact','preference'):continue
             if row.get('ttl_days') is not None:continue
@@ -103,6 +112,7 @@ def command(memory,text):
 
 def local_parser(messages):
     from . import transport,models
+    from .performance import keep_alive
     model=models.select('understand')[0]
     if not transport.COMPUTE.acquire(blocking=False):raise OSError('Compute busy')
     try:
@@ -110,7 +120,7 @@ def local_parser(messages):
             active=c.get(transport.BASE+'/api/ps');active.raise_for_status()
             names=(model,model+':latest')
             if any(m.get('name') not in names for m in active.json().get('models',[])):raise OSError('Other model resident')
-            r=c.post(transport.BASE+'/api/chat',json={'model':model,'messages':messages,'format':'json','stream':False,'think':False,'keep_alive':'3m','options':{'num_ctx':4096,'num_predict':450,'temperature':0}})
+            r=c.post(transport.BASE+'/api/chat',json={'model':model,'messages':messages,'format':'json','stream':False,'think':False,'keep_alive':keep_alive(),'options':{'num_ctx':4096,'num_predict':450,'temperature':0}})
             r.raise_for_status();return r.json()['message']['content']
     finally:transport.COMPUTE.release()
 
@@ -121,7 +131,7 @@ def enqueue(memory,text,chat,event_id):
     with _lock:
         if not _started:
             _started=True;threading.Thread(target=_worker,daemon=True,name='META-fact-extraction').start()
-    try:_queue.put_nowait((memory,text,chat,event_id))
+    try:_queue.put_nowait((memory,text,chat,event_id,0))
     except queue.Full:pass
 
 def _worker():
@@ -132,9 +142,16 @@ def _worker():
             ctypes.windll.kernel32.SetThreadPriority(ctypes.windll.kernel32.GetCurrentThread(),-2)
     except Exception:pass
     while True:
-        memory,text,chat,event=_queue.get()
+        memory,text,chat,event,attempt=_queue.get()
         try:
             if memory.enabled():
                 for fact in parse(text,local_parser):observe(memory,fact,chat,event)
+        except (OSError,httpx.HTTPError):
+            # No model swap for background extraction. Retry later without
+            # retaining chat text on disk or extending the inference lock.
+            if attempt<max(0,min(60,int(load('memory')['extract_retries']))):
+                time.sleep(max(1,min(30,load('memory')['extract_retry_seconds'])))
+                try:_queue.put_nowait((memory,text,chat,event,attempt+1))
+                except queue.Full:pass
         except Exception:pass
         finally:_queue.task_done()

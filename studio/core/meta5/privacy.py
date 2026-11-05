@@ -6,5 +6,8 @@ PATTERN=re.compile(r'github_pat_[\w]+|gh[pousr]_[\w]+|sk-[\w-]{12,}|AIza[\w-]{20
 def sensitive(text):
     value=str(text)
     if PATTERN.search(value):return True
+    if re.search(r'\b(?:secret|access_key|auth_token|credential)\s*[:=]\s*\S+',value,re.I):return True
+    for word in re.findall(r'\b[A-Za-z0-9_+/=-]{32,}\b',value):
+        if len(set(word))>=12 and sum(c.isdigit() for c in word)>=4:return True
     return bool(re.search(r'\b(?:пароль|password|секретный ключ)\s+\S+',value,re.I))
 def redact(text):return '***' if sensitive(text) else str(text)

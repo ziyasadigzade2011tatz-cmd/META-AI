@@ -16,6 +16,9 @@ CATEGORY_PATTERNS={
  'relationships':r'\b(?:моя жена|мой муж|развод|отношени)\w*'}
 
 def category(text):
+    sensitive_categories=('health','identity','finances','relationships')
+    for k in sensitive_categories:
+        if re.search(CATEGORY_PATTERNS[k],text,re.I):return k
     return next((k for k,p in CATEGORY_PATTERNS.items() if re.search(p,text,re.I)),'general')
 
 def personal(query):
@@ -63,11 +66,16 @@ def retrieve(memory,query,limit=5,engine=None):
                 semantic={pid:max(0.,cosine(vector[0],unpack(r[1],r[2]))) for pid,r in valid.items()}
         except (OSError,ValueError,KeyError,TypeError,sqlite3.Error,httpx.HTTPError):pass
     documents=[terms(r['value']) for r in eligible];ranked=[]
+    semantic_order=sorted(semantic.items(),key=lambda pair:-pair[1])
+    best_id=semantic_order[0][0] if semantic_order else None
+    semantic_gap=semantic_order[0][1]-(semantic_order[1][1] if len(semantic_order)>1 else 0) if semantic_order else 0
     for row in eligible:
         lex=lexical(query,row['value'],documents);sem=semantic.get(row['id'])
         w=max(.001,cfg['cosine_weight']+cfg['lexical_weight'])
         weight=(cfg['cosine_weight']*sem+cfg['lexical_weight']*lex)/w if sem is not None else lex
-        allowed=weight>=cfg['memory_gate_threshold'] and (lex>0 or sem is not None and sem>=cfg['semantic_only_threshold'])
+        semantic_only=lex==0 and sem is not None
+        allowed=(weight>=cfg['memory_gate_threshold'] if sem is not None else lex>=cfg['lexical_gate_threshold'])
+        if semantic_only:allowed=allowed and sem>=cfg['semantic_only_threshold'] and row['id']==best_id and semantic_gap>=cfg['semantic_margin']
         detail={'id':row['id'],'score':round(weight,4),'lexical':round(lex,4),'cosine':round(sem,4) if sem is not None else None,'selected':False,'reason':'below_threshold'}
         trace.append(detail)
         if allowed:ranked.append((weight,row,detail))

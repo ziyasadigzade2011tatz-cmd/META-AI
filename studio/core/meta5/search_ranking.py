@@ -3,12 +3,13 @@ import json,re,math,os,time
 from pathlib import Path
 from urllib.parse import urlsplit,urlunsplit,parse_qsl,urlencode
 from .understanding_config import ROOT
+from .storage import STATE
 from .phase11_config import load
 from .relevance import terms
 
 def domains():
     default=json.loads((ROOT/'search_domains.json').read_text('utf-8'))
-    local=Path(os.environ.get('META_CORE_CONFIG_DIR',str(ROOT)))/'search_domains.json'
+    local=Path(os.environ.get('META_CORE_CONFIG_DIR',str(STATE/'config')))/'search_domains.json'
     try:value=json.loads(local.read_text('utf-8'))
     except (OSError,ValueError):return default
     for key in ('blocked','allowed'):
@@ -18,7 +19,7 @@ def domains():
             if isinstance(items,list) and all(valid_domain(d) for d in items):default['trusted'][key]=items[:100]
     return default
 
-def valid_domain(value):return isinstance(value,str) and bool(re.fullmatch(r'[a-z0-9][a-z0-9.-]{1,250}\.[a-z]{2,30}',value)) and '..' not in value
+def valid_domain(value):return isinstance(value,str) and bool(re.fullmatch(r'[a-z0-9][a-z0-9.-]{0,250}\.[a-z]{2,30}',value)) and '..' not in value
 def host(url):
     try:return (urlsplit(url).hostname or '').casefold().removeprefix('www.')
     except ValueError:return ''
