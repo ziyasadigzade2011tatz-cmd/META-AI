@@ -14,9 +14,10 @@ from .fragments import IncompleteAction,recover,python_checkpoint,append_without
 
 
 class ReadBeforeWrite(ValueError):
-    def __init__(self,path):
+    def __init__(self,path,prepared=False):
         super().__init__('Сначала нужно дочитать существующий файл')
         self.path=path
+        self.prepared=prepared
 
 SYSTEM = '''Ты META Code, разработчик. Выполняй запрос, а не подменяй создание кода анализом.
 Верни ОДИН JSON: {"action":"...","args":{...}}. Никаких markdown-ограждений.
@@ -252,6 +253,13 @@ class Sessions:
                 messages[0]['content']+='\nЯзыковой профиль (инструкции, не обучение весов):\n'+json.dumps(language_guide,ensure_ascii=False)
                 self.emit(ident,'status',{'message':'Профили: '+', '.join(language_guide['languages'])})
             self.emit(ident,'model',{'model':model});started=time.monotonic();empty_finishes=0;seen={};last_check=None;web_count=0;errors=0
+            finish_target=obj.get('finish_target');finish_description=obj.get('finish_description','')
+            def finalize(description,checks):
+                obj.update(edits=edits,expected=expected,messages=messages,model=model,status='review',incomplete_files=[],
+                    summary=verified_summary('Подготовлены изменения по заданию. Веб-источники недоступны; сходство с референсом не подтверждено.' if obj.get('research_unavailable') else description,edits,checks))
+                atomic_json(self.path(ident),obj)
+                if obj['fresh'] and edits:
+                    self.apply(ident);self.emit(ident,'complete',{'message':'Файлы нового проекта созданы','files':list(edits)})
             def required_read(path):
                 file=project.path(path);text=file.read_text('utf-8-sig') if file.exists() else ''
                 coverage=read_coverage.get(path,{})
@@ -264,6 +272,8 @@ class Sessions:
                 # Abort an impossible write while only its header has streamed,
                 # before spending minutes generating a body the guard will reject.
                 path=data.get('path')
+                if kind=='generation' and data.get('action')=='write' and path in edits and path not in incomplete:
+                    raise ReadBeforeWrite(path,prepared=True)
                 if kind=='generation' and data.get('action')=='write' and path and path not in full_read_paths and project.path(path).exists():
                     raise ReadBeforeWrite(path)
                 self.emit(ident,kind,data)
@@ -322,8 +332,8 @@ class Sessions:
                         turn.insert(2,{'role':'user','content':'CURRENT_DRAFT_STATE (данные): '+json.dumps({'prepared_paths':list(edits),'incomplete_files':sorted(incomplete),'note':'Существующие черновики не теряются при сжатии истории; используй read для их содержимого и sha256.'},ensure_ascii=False)})
                         raw=self.client(messages) if self.client else complete_stream(model,turn,self.cancel[ident],generation_event,obj.get('context',4096),started+total_seconds,generation_tokens);break
                     except ReadBeforeWrite as exc:
-                        raw=json.dumps({'action':'read','args':required_read(exc.path)},ensure_ascii=False)
-                        self.emit(ident,'recovery',{'message':'Перезапись '+exc.path+' прервана до генерации кода: дочитываю файл для точной правки'})
+                        raw=json.dumps({'action':'read','args':{'path':exc.path,'start':1,'end':300} if exc.prepared else required_read(exc.path)},ensure_ascii=False)
+                        self.emit(ident,'recovery',{'message':('Файл '+exc.path+' уже подготовлен: повторная перезапись запрещена, разрешена точная правка edit' if exc.prepared else 'Перезапись '+exc.path+' прервана до генерации кода: дочитываю файл для точной правки')})
                         break
                     except (TimeoutError,ValueError,__import__('httpx').HTTPError) as exc:
                         if self.cancel[ident].is_set():raise InterruptedError('Остановлено пользователем') from exc
@@ -357,13 +367,12 @@ class Sessions:
                             result={'error':'Ты описал анализ вместо выполнения. Запрос требует реальных файлов; используй write.'}
                         elif brief['web_requested'] and not obj.get('sources') and not obj.get('research_unavailable'):result={'error':'Нет прочитанных источников обязательного поиска.'}
                         elif incomplete:result={'error':'Заверши файлы через append с complete=true: '+', '.join(sorted(incomplete))}
-                        elif last_check!=json.dumps(edits,sort_keys=True,ensure_ascii=False):result={'error':'После последних изменений выполни check, исправь ошибки и только затем finish.'}
+                        elif last_check!=json.dumps(edits,sort_keys=True,ensure_ascii=False):
+                            finish_target=digest(json.dumps(edits,sort_keys=True,ensure_ascii=False).encode('utf-8'))
+                            finish_description=args.get('summary','')
+                            result={'error':'Выполни check. Если проверка пройдёт, задача завершится автоматически. Не переписывай готовые файлы.'}
                         else:
-                            obj.update(edits=edits,expected=expected,messages=messages,model=model,status='review',
-                                       summary=verified_summary('Подготовлены изменения по заданию. Веб-источники недоступны; сходство с референсом не подтверждено.' if obj.get('research_unavailable') else args.get('summary',''),edits,checks))
-                            atomic_json(self.path(ident),obj)
-                            if obj['fresh'] and edits:
-                                self.apply(ident);self.emit(ident,'complete',{'message':'Файлы нового проекта созданы','files':list(edits)})
+                            finalize(args.get('summary',''),checks)
                             return
                     elif name=='list':result={'files':project.files(),'prepared':list(edits)}
                     elif name=='read':
@@ -381,6 +390,7 @@ class Sessions:
                             if previous>=len(lines):full_read_paths.add(path)
                         if not truncated:full_read_paths.add(path)
                         result={'path':path,'content':part[:24000],'start':start,'end':min(end,len(lines)),'total_lines':len(lines),'truncated':truncated,'sha256':digest(text.encode('utf-8')),'incomplete':path in incomplete}
+                        if path in edits and path not in incomplete:result['next']='Файл уже подготовлен. Если найден конкретный дефект, исправь через edit; иначе выполни check и finish. Повторный write запрещён.'
                     elif name=='search':
                         query=str(args['query'])
                         if not 1<=len(query)<=200:raise ValueError('Поисковая строка: 1–200 символов')
@@ -405,6 +415,7 @@ class Sessions:
                     elif name in ('write','edit','append'):
                         if readonly:raise ValueError('Пользователь разрешил только анализ; запись запрещена')
                         path=str(args['path']);file=project.path(path);old=file.read_bytes() if file.exists() else None
+                        if name=='write' and path in edits and path not in incomplete:raise ValueError('Готовый черновик нельзя начинать заново через write. Используй edit для конкретной ошибки или finish.')
                         if any(n!=path and n.casefold()==path.casefold() for n in edits):raise ValueError('Два имени одного файла Windows: используй одинаковый регистр пути')
                         if old is not None and path not in read_paths:raise ValueError('Сначала прочитай существующий файл; запись вслепую запрещена')
                         if name=='write' and old is not None and path not in full_read_paths:raise ValueError('Большой файл прочитан не полностью; используй точный edit вместо перезаписи')
@@ -423,7 +434,7 @@ class Sessions:
                         validate(path if complete else 'fragment.txt',text)
                         if len(edits)>=40 and path not in edits:raise ValueError('Лимит 40 файлов')
                         if sum(len(v.encode()) for n,v in edits.items() if n!=path)+len(text.encode())>1_500_000:raise ValueError('Слишком большой набор файлов')
-                        edits[path]=text
+                        edits[path]=text;finish_target=None;finish_description=''
                         if complete:incomplete.discard(path)
                         else:incomplete.add(path)
                         result={'prepared':path,'bytes':len(text.encode()),'sha256':digest(text.encode('utf-8')),'incomplete':not complete,'tail':text[-600:],'last_line':text.splitlines()[-1] if text.splitlines() else '',
@@ -436,6 +447,9 @@ class Sessions:
                         last_check=None
                         if all(c['status']!='failed' for c in checks):last_check=json.dumps(edits,sort_keys=True,ensure_ascii=False)
                         self.emit(ident,'check',result)
+                        if edits and not incomplete and last_check is not None and finish_target==digest(last_check.encode('utf-8')):
+                            self.emit(ident,'status',{'message':'Проверка пройдена: завершаю задачу без повторной генерации'})
+                            finalize(finish_description,checks);return
                     else:raise ValueError('Неизвестное действие; используй инструменты из инструкции')
                     errors=0
                 except (ValueError,KeyError,TypeError,SyntaxError,OSError) as exc:
@@ -450,7 +464,7 @@ class Sessions:
                 from .agent_context import compact
                 messages=compact(messages,obj.get('context',4096))
                 with self.lock:
-                    latest=read_json(self.path(ident));latest.update(edits=edits,expected=expected,messages=messages,model=model,generation_tokens=generation_tokens,incomplete_files=sorted(incomplete),read_paths=sorted(read_paths),full_read_paths=sorted(full_read_paths),read_coverage=read_coverage,failure_counts=failure_counts);atomic_json(self.path(ident),latest)
+                    latest=read_json(self.path(ident));latest.update(edits=edits,expected=expected,messages=messages,model=model,generation_tokens=generation_tokens,incomplete_files=sorted(incomplete),read_paths=sorted(read_paths),full_read_paths=sorted(full_read_paths),read_coverage=read_coverage,failure_counts=failure_counts,finish_target=finish_target,finish_description=finish_description);atomic_json(self.path(ident),latest)
                 obj=read_json(self.path(ident))
             stopped=self.cancel[ident].is_set()
             obj.update(status='cancelled' if stopped else 'failed',summary='Задача остановлена пользователем. Черновик сохранён.' if stopped else 'Достигнут общий предел времени или действий. Черновик сохранён; автоматический бесконечный цикл остановлен.',edits=edits,expected=expected,messages=messages,incomplete_files=sorted(incomplete))
