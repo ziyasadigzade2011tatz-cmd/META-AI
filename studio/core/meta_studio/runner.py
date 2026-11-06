@@ -16,7 +16,14 @@ def child(project):
         if time.monotonic()>deadline:return 4
         time.sleep(.02)
     import unittest
+    support=Path(__file__).resolve().parents[2]/'test_support/unittest'
+    if support.is_dir():unittest.__path__.insert(0,str(support))
     root=Path(project).resolve();os.chdir(root);sys.path.insert(0,str(root))
+    if (root/'META_SOURCE_MANIFEST.json').is_file() and (root/'core').is_dir():
+        # Test the edited source tree, not packages already imported by the launcher.
+        sys.path.insert(0,str(root/'core'))
+        for name in list(sys.modules):
+            if name in ('meta5','meta40','meta_studio') or name.startswith(('meta5.','meta40.','meta_studio.')):sys.modules.pop(name,None)
     start=root/'tests' if (root/'tests').is_dir() else root
     suite=unittest.TestLoader().discover(str(start),pattern='test*.py')
     if suite.countTestCases()==0:

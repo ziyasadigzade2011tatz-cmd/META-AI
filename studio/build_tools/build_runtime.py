@@ -5,6 +5,7 @@ import marshal
 from pathlib import Path
 import shutil
 import struct
+import subprocess
 import sys
 import zlib
 from PyInstaller.archive.readers import CArchiveReader
@@ -31,6 +32,20 @@ shutil.copytree(studio/'core',target,dirs_exist_ok=args.update_code,ignore=shuti
 frontend=out/'_internal/frontend/dist'
 if frontend.exists() and not args.update_code:shutil.rmtree(frontend)
 shutil.copytree(studio/'frontend/dist',frontend,dirs_exist_ok=args.update_code)
+native=out/'_internal/native';native.mkdir(exist_ok=True)
+subprocess.run([r'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe','/nologo','/utf8output','/codepage:65001','/target:exe','/platform:x64','/optimize+',
+    '/out:'+str(native/'Meta.DesktopBridge.exe'),'/reference:System.Drawing.dll','/reference:System.Web.Extensions.dll',str(studio/'native/DesktopBridge.cs')],check=True)
+sources=out/'_internal/source'
+import unittest
+test_support=out/'_internal/test_support';test_support.mkdir(exist_ok=True)
+shutil.copytree(Path(unittest.__file__).parent,test_support/'unittest',dirs_exist_ok=True,ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
+license_path=Path(sys.base_prefix)/'LICENSE.txt'
+if license_path.is_file():shutil.copy2(license_path,test_support/'PYTHON_LICENSE.txt')
+for group in ('frontend','tests','native'):
+    folder=sources/group;folder.mkdir(parents=True,exist_ok=True)
+    allowed={'src.ts','activity.js','extensions.ts','contracts.ts','tsconfig.json','index.html','style.css','package.json','package-lock.json'}
+    for file in (studio/group).iterdir():
+        if file.is_file() and ((group=='frontend' and file.name in allowed) or (group=='tests' and file.suffix in ('.py','.json')) or (group=='native' and file.suffix=='.cs')):shutil.copy2(file,folder/file.name)
 shutil.copy2(studio/'build_tools/desktop_base.bin',out/'_internal/studio_base.bin')
 reader=CArchiveReader(str(source/'META-Next.exe'))
 raw=(source/'META-Next.exe').read_bytes();start=reader._start_offset

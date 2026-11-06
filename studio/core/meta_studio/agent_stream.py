@@ -14,6 +14,7 @@ def action_schema():
                'write':{'path':path,'content':text},'edit':{'path':path,'old':text,'new':text},
                'append':{'path':path,'sha256':{'type':'string','pattern':'^[a-f0-9]{64}$'},'content':text,'complete':{'type':'boolean'}},
                'language_help':{'language':{'enum':['python','javascript','css','csharp','cpp']},'topic':text},
+               'self_inspect':{'path':text,'start':{'type':'integer','minimum':1},'end':{'type':'integer','minimum':1}},
                'check':{},'finish':{'summary':text},'web_search':{'query':text},'clarify':{'question':text}}
     variants=[]
     for name,properties in arguments.items():

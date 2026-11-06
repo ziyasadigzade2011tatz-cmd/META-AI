@@ -29,6 +29,8 @@ complete=true только когда файл закончен; для пром
 Не повторяй план вместо кода. После плана переходи к файлам, затем к проверкам.
 Не раздувай комментарии и docstrings. В продолжении не повторяй объявления существующих функций.
 Доступна локальная справка language_help {language,topic}: python, javascript, css, csharp, cpp.
+Для чтения собственного установленного кода доступен self_inspect {path,start,end}; пустой path даёт список файлов.
+Установленные исходники только для чтения. Самоизменения готовь в отдельном Git-проекте, не подменяй работающий Core.
 Обращайся к ней по необходимости, не перечитывай справку вместо выполнения задачи.
 finish допустим только после выполнения задачи. Не утверждай успешный запуск, если его не было.
 Пиши ответы пользователю по-русски. Инструменты исполняются приложением, а не описываются словами.'''
@@ -79,7 +81,7 @@ def parse_action(raw):
     action=json.loads(raw)
     if not isinstance(action,dict) or not isinstance(action.get('action'),str):raise ValueError('Нужен объект action/args')
     fields={'list':(), 'read':('path','start','end'),'search':('query',),'plan':('steps',),'write':('path','content'),
-            'append':('path','sha256','content','complete'),'language_help':('language','topic'),'edit':('path','old','new'),'check':(),'finish':('summary',),'web_search':('query',),'clarify':('question',)}
+            'append':('path','sha256','content','complete'),'self_inspect':('path','start','end'),'language_help':('language','topic'),'edit':('path','old','new'),'check':(),'finish':('summary',),'web_search':('query',),'clarify':('question',)}
     name=action['action']
     if name not in fields:raise ValueError('Неизвестное действие; используй инструменты из инструкции')
     args=action.get('args')
@@ -343,6 +345,9 @@ class Sessions:
                             for number,line in enumerate(text.splitlines(),1):
                                 if query.casefold() in line.casefold():matches.append({'path':path,'line':number,'text':line[:400]})
                         result={'matches':matches[:60]}
+                    elif name=='self_inspect':
+                        from .self_source import SelfSource
+                        reader=SelfSource();result=reader.read(args['path'],args.get('start',1),args.get('end',100)) if args.get('path') else reader.index()
                     elif name=='language_help':
                         from .coding_languages import reference
                         result=reference(str(args['language']),str(args.get('topic',''))[:100])

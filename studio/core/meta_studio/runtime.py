@@ -36,7 +36,7 @@ def boot(namespace):
     code=marshal.loads((root/'studio_base.bin').read_bytes())
     def retitle(c):
         return c.replace(co_consts=tuple(retitle(x) if isinstance(x,types.CodeType) else
-            'META Studio 5.3' if isinstance(x,str) and x in ('META — Desktop Preview','META — Next Desktop') else x for x in c.co_consts))
+            'META Studio 5.4' if isinstance(x,str) and x in ('META — Desktop Preview','META — Next Desktop') else x for x in c.co_consts))
     code=retitle(code)
     # Only disable the original entry guard; module definitions remain unchanged.
     code=code.replace(co_consts=tuple('__studio_base__' if x=='__main__' else x for x in code.co_consts))
@@ -46,6 +46,12 @@ def boot(namespace):
     data=namespace['DATA'];config=json.loads((namespace['CONFIG']/'meta40_config.json').read_text(encoding='utf-8'))
     from .agent import Sessions
     sessions=Sessions(config['projects'],data/'studio_sessions')
+    from .memory_transfer import MemoryTransfer
+    from .desktop_access import DesktopAccess
+    from .self_source import SelfSource
+    from meta5.memory import Memory
+    memory_transfer=MemoryTransfer(Memory(data/'core_state/memory.sqlite'))
+    desktop_access=DesktopAccess();self_source=SelfSource()
     extra_file=data/'studio_preferences.json'
     from meta5.storage import read_json,atomic_json
     enhanced=read_json(extra_file,{'preset':'graphite','baseColor':'#222326','accent':'#d48a52','motion':True,'sidebarCollapsed':False})
@@ -125,6 +131,9 @@ def boot(namespace):
                     p=Project(project_root(config['projects'],query['project']));result={'matches':p.search(query['query'])}
                 elif path=='/studio/sessions':result={'sessions':[{k:s.get(k) for k in ('id','project','task','status','created')} for s in sessions.history()]}
                 elif path=='/studio/task':result=sessions.detail(query['id'])
+                elif path=='/studio/computer/windows':result=desktop_access.windows()
+                elif path=='/studio/self/index':result=self_source.index()
+                elif path=='/studio/capabilities':result={'version':VERSION,'frontend':'TypeScript','core':'Python','native_desktop':'C# / Win32','inference':'Ollama','desktop_bridge':desktop_access.bridge.is_file(),'self_install':False}
                 elif path=='/studio/models':
                     from urllib.request import urlopen
                     with urlopen('http://127.0.0.1:11434/api/tags',timeout=10) as response:obj=json.load(response)
@@ -147,7 +156,17 @@ def boot(namespace):
             if not self.studio_guard(True):return
             try:
                 body=self.body()
-                if path=='/studio/role-models':
+                if path=='/studio/memory-import/preview':
+                    import base64,binascii
+                    try:raw=base64.b64decode(body.get('data',''),validate=True)
+                    except (binascii.Error,ValueError):raise ValueError('Неверные данные файла')
+                    result=memory_transfer.preview(raw,str(body.get('name','memory.txt')))
+                elif path=='/studio/memory-import/apply':result=memory_transfer.apply(body.get('preview_id'),body.get('selected'),body.get('approved'))
+                elif path=='/studio/computer/request':result=desktop_access.request(body.get('action'),body.get('target'))
+                elif path=='/studio/computer/approve':result=desktop_access.approve(body.get('request_id'),body.get('approved'))
+                elif path=='/studio/self/read':result=self_source.read(body.get('path'),body.get('start',1),body.get('end',100))
+                elif path=='/studio/self/workspace':result=self_source.workspace(config['projects'],body.get('approved'))
+                elif path=='/studio/role-models':
                     import httpx
                     from meta5 import models,advanced
                     from meta5.native_tools import supports
