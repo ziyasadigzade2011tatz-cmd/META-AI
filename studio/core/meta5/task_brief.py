@@ -38,4 +38,8 @@ def build(task):
 def reference_query(brief):
     target=' '.join(brief['reference_targets'])
     if target:return (target+' interface layout documentation' if brief['website'] else target+' official documentation')[:280]
-    return brief['goal'][:280]
+    urls=re.findall(r'https?://[^\s<>"()]+',brief.get('original_task',''))
+    if urls:return urls[0][:280]
+    # A development specification is not a public-web query. No inferred brand.
+    if brief.get('website'):return 'HTML CSS JavaScript responsive layout official documentation MDN'
+    return ''
