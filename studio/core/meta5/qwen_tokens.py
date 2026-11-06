@@ -11,6 +11,8 @@ import re
 import struct
 import unicodedata
 
+WHITE_SPACE='\t\n\v\f\r \x85\xa0\u1680\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u2028\u2029\u202f\u205f\u3000'
+
 
 def _read(handle, fmt):
     size=struct.calcsize(fmt);data=handle.read(size)
@@ -72,14 +74,14 @@ def pieces(text):
             yield text[start:i];continue
         if cat(text[i])=='N':i+=1;yield text[start:i];continue
         pos=i+1 if text[i]==' ' and i+1<n else i
-        if not text[pos].isspace() and cat(text[pos]) not in ('L','M','N'):
+        if text[pos] not in WHITE_SPACE and cat(text[pos]) not in ('L','M','N'):
             i=pos+1
-            while i<n and not text[i].isspace() and cat(text[i]) not in ('L','M','N'):i+=1
+            while i<n and text[i] not in WHITE_SPACE and cat(text[i]) not in ('L','M','N'):i+=1
             while i<n and text[i] in '\r\n':i+=1
             yield text[start:i];continue
-        if text[i].isspace():
+        if text[i] in WHITE_SPACE:
             end=i+1
-            while end<n and text[end].isspace():end+=1
+            while end<n and text[end] in WHITE_SPACE:end+=1
             newline=max(text.rfind('\n',i,end),text.rfind('\r',i,end))
             i=newline+1 if newline>=i else end if end==n or end-i==1 else end-1
             yield text[start:i];continue
@@ -104,6 +106,7 @@ class Qwen35:
 
     @functools.lru_cache(maxsize=12000)
     def word(self,text):
+        if len(text.encode('utf-8'))>8192:raise ValueError('Tokenizer word limit')
         word=tuple(self.bytes[b] for b in text.encode('utf-8'))
         while len(word)>1:
             ranked=[(self.ranks.get(pair,float('inf')),pair) for pair in zip(word,word[1:])]
@@ -129,10 +132,12 @@ def render(messages,think=False):
     for i,message in enumerate(messages):
         role=message.get('role');content=message.get('content','')
         if role not in ('system','user','assistant') or not isinstance(content,str) or message.get('images') or message.get('tool_calls'):raise ValueError('Text messages only')
-        content=content.strip()
+        content=content.strip(WHITE_SPACE)
         if role=='assistant' and '</think>' in content:content=content.split('</think>',1)[1].lstrip('\n')
         parts.append('<|im_start|>'+role+'\n'+content+('<|im_end|>\n' if role!='assistant' or i!=len(messages)-1 else ''))
-    if messages and messages[-1].get('role')!='assistant':parts.append('<|im_start|>assistant\n'+('<think>\n' if think else ''))
+    # Ollama's qwen3.5 factory sets emitEmptyThinkOnNoThink=true. The empty
+    # block is part of the *input*, even when no reasoning is generated.
+    if messages and messages[-1].get('role')!='assistant':parts.append('<|im_start|>assistant\n'+('<think>\n' if think else '<think>\n\n</think>\n\n'))
     return ''.join(parts)
 
 
@@ -141,8 +146,10 @@ def for_model(model):
     import httpx
     from .transport import BASE
     with httpx.Client(timeout=15,trust_env=False) as client:
+        version=client.get(BASE+'/api/version');version.raise_for_status()
+        if version.json().get('version')!='0.40.15':raise ValueError('Ollama chat framing version not validated')
         response=client.post(BASE+'/api/show',json={'model':model});response.raise_for_status();data=response.json()
-    if data.get('renderer')!='qwen3.5':raise ValueError('Unsupported chat renderer')
+    if data.get('renderer')!='qwen3.5' or data.get('messages'):raise ValueError('Unsupported chat renderer or model messages')
     line=next((line[5:].strip().strip('"') for line in data.get('modelfile','').splitlines() if line.startswith('FROM ')),None)
     if not line or not Path(line).is_file():raise ValueError('Local model vocabulary unavailable')
     return Qwen35(line)

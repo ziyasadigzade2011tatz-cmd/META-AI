@@ -192,11 +192,8 @@ async def converse(request,manager=None):
             yield {'type':'token','content':'Для этого вопроса нужны актуальные источники. Сейчас подтвердить сведения не удалось. Я не буду называть результат или дату по догадке. Можно повторить поиск или прислать источник.'}
             yield {'type':'done','data':{'session_id':session,'cancelled':cancel.is_set(),'sources':[],'verification':'unconfirmed'}}
             return
-        from .context_manager import compress
         # Desktop persona/material messages are untrusted and relevance-gated too.
         messages=[m for m in messages if m.get('role')!='system' or score(last,str(m.get('content','')))>=.65]
-        grounded,usage=await asyncio.to_thread(compress,[{'role':'system','content':system},*messages],min(22000,max(4000,request.get('context',8192)*3-len(system))))
-        yield {'type':'context_usage','data':{k:v for k,v in usage.items() if k!='summary'}}
         # Summary checkpoints are written after the reply and privacy checked.
         mode='chat'
         chosen=request.get('model','auto')
@@ -204,14 +201,28 @@ async def converse(request,manager=None):
         if chosen in ('auto','meta-core'):chosen=extra['thinking_model'] if thinking else extra.get('chat_model') or 'auto'
         model,reason=models.select(mode,chosen)
         yield {'type':'model_selected','data':{'model':model,'reason':reason,'mode':mode}}
+        from .phase11_config import load as phase11_settings
+        if phase11_settings('context_budget')['enabled']:
+            from .token_budget import prepare,system_blocks,BudgetExceeded
+            try:
+                grounded,usage=await asyncio.to_thread(prepare,[*system_blocks(system_prompt(),system),*messages],model,request.get('context',8192),thinking)
+            except BudgetExceeded as exc:
+                yield {'type':'token','content':str(exc)}
+                yield {'type':'done','data':{'session_id':session,'sources':[],'cancelled':False,'context_rejected':True}}
+                return
+            output_limit=usage['output_limit']
+        else:
+            from .context_manager import compress
+            grounded,usage=await asyncio.to_thread(compress,[{'role':'system','content':system},*messages],min(22000,max(4000,request.get('context',8192)*3-len(system))))
+            output_limit=2000
+        yield {'type':'context_usage','data':{k:v for k,v in usage.items() if k!='summary'}}
         from .citations import LinkFilter
         links=LinkFilter(evidence['sources'] if evidence else [],strict=True) if not ctx['web_disabled'] and (ctx['web_requested']) else None
-        from .phase11_config import load as phase11_settings
         verify_web=bool(evidence and phase11_settings('search')['web_verify'])
         verification=None
         if verify_web:yield {'type':'status','data':{'message':'Готовлю ответ и проверяю утверждения по прочитанным страницам'}}
         try:
-            async for event in transport.stream(model,grounded,cancel=cancel,think=thinking,options={'num_ctx':request.get('context',models.profiles().get('context',8192)),'num_predict':2000,'temperature':request.get('temperature',.3)}):
+            async for event in transport.stream(model,grounded,cancel=cancel,think=thinking,options={'num_ctx':request.get('context',models.profiles().get('context',8192)),'num_predict':output_limit,'temperature':request.get('temperature',.3)}):
                 if event['type']=='token':
                     if links and not verify_web:event={**event,'content':links.feed(event['content'])}
                     answer+=event['content']

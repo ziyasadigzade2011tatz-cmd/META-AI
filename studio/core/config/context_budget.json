@@ -1,5 +1,5 @@
 {
-  "enabled": false,
+  "enabled": true,
   "base_context": 8192,
   "chat_input": 5500,
   "chat_output": 2000,

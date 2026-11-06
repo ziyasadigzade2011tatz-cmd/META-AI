@@ -16,8 +16,9 @@ class SelfSource:
                     if any(any(word in part.lower() for word in ('secret','credential','token')) or part.endswith('_state') for part in p.relative_to(self.core).parts):continue
                     if '__pycache__' not in p.parts and not any(linked(v) for v in [p,*list(p.parents)[:len(p.relative_to(self.core).parts)-1]]):out['core/'+p.relative_to(self.core).as_posix()]=p
         root_sources=[p.name for p in self.core.glob('*.py') if not any(w in p.name.lower() for w in ('secret','credential','token'))]
-        defaults=['config/'+name for name in ('system.md','agent.json','domains.json','search_domains.json','memory.json','models.json','performance.json','search.json','slang.json','understanding.json')]
-        for name in (*root_sources,'requirements.txt','meta5_models_seed.json',*defaults):
+        defaults=['config/'+name for name in ('system.md','agent.json','context_budget.json','domains.json','search_domains.json','memory.json','models.json','performance.json','search.json','slang.json','understanding.json')]
+        # Explicit public code files: "token" here means tokenizer, not a key.
+        for name in (*root_sources,'requirements.txt','meta5_models_seed.json','meta5/token_budget.py','meta5/qwen_tokens.py',*defaults):
             p=self.core/name
             if p.is_file() and not linked(p):out['core/'+name]=p
         folder=self.core/'config/coding'
@@ -29,7 +30,7 @@ class SelfSource:
                 if not p.is_file() or p.suffix not in ('.ts','.js','.css','.html','.json','.md','.py','.cs') or linked(p):continue
                 rel=p.relative_to(self.source)
                 if any(v in ('node_modules','.git','__pycache__') or v.endswith('_state') for v in rel.parts):continue
-                if any(v in p.name.lower() for v in ('secret','credential','token','preferences','meta40_config')):continue
+                if any(v in p.name.lower() for v in ('secret','credential','token','preferences','meta40_config')) and rel.as_posix()!='tests/test_token_budget.py':continue
                 if any(linked(v) for v in p.parents if v!=self.source and self.source in v.parents):continue
                 out[rel.as_posix()]=p
         return out
