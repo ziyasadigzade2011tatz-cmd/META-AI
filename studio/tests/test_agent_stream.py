@@ -33,6 +33,18 @@ class StreamTests(unittest.TestCase):
         self.assertEqual(json.loads(raw)['args']['path'],'index.html')
         self.assertTrue(any(e['phase']=='generating' and e['characters']==0 for e in events))
         self.assertTrue(any(e.get('path')=='index.html' and e.get('code_preview') for e in events))
+    def test_token_ceiling_returns_a_recoverable_fragment(self):
+        actual=httpx.AsyncClient
+        def response(req):
+            if req.url.path=='/api/ps':return httpx.Response(200,json={'models':[]})
+            line=json.dumps({'message':{'content':'{"action":"write","args":{"path":"a.py","content":"x = ('},'done':True,'done_reason':'length'})+'\n'
+            return httpx.Response(200,content=line)
+        factory=lambda **kw:actual(transport=httpx.MockTransport(response))
+        from meta_studio.fragments import IncompleteAction,recover
+        with patch.object(agent_stream.httpx,'AsyncClient',side_effect=factory):
+            with self.assertRaises(IncompleteAction) as result:agent_stream.generate('fixture',[],threading.Event(),lambda *a:None)
+        self.assertEqual(recover(result.exception.raw)['args']['content'],'x = (')
+        self.assertTrue(transport.COMPUTE.acquire(blocking=False));transport.COMPUTE.release()
     def test_cancel_during_silent_stream_releases_compute(self):
         cancel=threading.Event();timer=threading.Timer(.1,cancel.set);timer.start();factory=self.client();started=time.monotonic()
         try:

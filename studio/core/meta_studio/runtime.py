@@ -198,7 +198,7 @@ def boot(namespace):
                             response=client.post(legacy.CORE_URL+'/agent40/dialogue/'+session+'/cancel',headers={'X-Meta40-Token':config['token']});response.raise_for_status();result=response.json()
                         except httpx.HTTPError:
                             self.json_response({'error':'Core не подтвердил остановку. Проверь его состояние.'},503);return
-                elif path=='/studio/resume':result=sessions.resume(body['id'])
+                elif path=='/studio/resume':result=sessions.resume(body['id'],body.get('model'))
                 elif path=='/studio/apply':result=sessions.apply(body['id'])
                 elif path=='/studio/run-tests':
                     from meta40.workspace import project_root

@@ -50,7 +50,8 @@ class AgentTests(unittest.TestCase):
         self.assertEqual(d['status'],'completed')
     def test_syntax_is_not_faked(self):
         checks=check_files({'bad.py':'def broken(', 'app.js':'const x = 1;'})
-        self.assertEqual(checks[0]['status'],'failed');self.assertEqual(checks[1]['status'],'not_run')
+        self.assertEqual(checks[0]['status'],'failed');self.assertIn(checks[1]['status'],('passed','not_run'))
+        self.assertIn('syntax',checks[1]['scope'].lower())
     def test_ascii_project_slug(self):self.assertRegex(slug('сделай сайт'),r'^[a-z0-9-]+$')
     def test_invalid_session_id(self):
         s=Sessions(self.root/'projects',self.root/'state')

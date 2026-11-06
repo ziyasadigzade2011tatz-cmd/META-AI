@@ -5,7 +5,7 @@ import os
 import re
 from pathlib import Path,PureWindowsPath
 
-TEXT={'.py','.js','.ts','.tsx','.jsx','.json','.toml','.yaml','.yml','.md','.txt','.html','.css','.csv','.lua','.ini','.cfg','.xml','.sql','.sh','.ps1','.cmd','.bat','.cs','.c','.h','.cpp','.rs'}
+TEXT={'.py','.pyi','.js','.ts','.tsx','.jsx','.mjs','.cjs','.json','.toml','.yaml','.yml','.md','.txt','.html','.css','.svg','.csv','.lua','.ini','.cfg','.xml','.sql','.sh','.ps1','.cmd','.bat','.cs','.csproj','.sln','.slnx','.props','.targets','.resx','.c','.h','.cpp','.cc','.cxx','.hpp','.hxx','.rs'}
 SKIP={'.git','.venv','venv','node_modules','__pycache__','.meta5','.meta40','dist','build'}
 SPECIAL={'.gitignore','.editorconfig','.gitattributes'}
 MAX_EDIT=256000

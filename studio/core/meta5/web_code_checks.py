@@ -25,7 +25,7 @@ def brief_check(text,brief):
         if any(h.casefold().strip() in references for h in page.headings):problems.append('Имя референса стало названием продукта без явного запроса. Используй самостоятельное рабочее название.')
     return problems
 
-def javascript(text):
+def javascript(text,module=True):
     import os,shutil,subprocess
     from pathlib import Path
     node=shutil.which('node')
@@ -33,7 +33,7 @@ def javascript(text):
     if not node:return {'status':'not_run','scope':'JavaScript syntax: Node.js не установлен'}
     env={k:v for k,v in os.environ.items() if k.upper() not in ('NODE_OPTIONS','NODE_PATH')}
     try:
-        result=subprocess.run([node,'--check','--input-type=module'],input=text,text=True,encoding='utf-8',capture_output=True,timeout=5,env=env,
+        result=subprocess.run([node,'--check','--input-type='+('module' if module else 'commonjs')],input=text,text=True,encoding='utf-8',capture_output=True,timeout=5,env=env,
             creationflags=subprocess.CREATE_NO_WINDOW if os.name=='nt' else 0)
         return {'status':'passed' if result.returncode==0 else 'failed','scope':'Node.js syntax only; code not executed','error':result.stderr[-1200:] if result.returncode else ''}
     except (OSError,subprocess.TimeoutExpired):return {'status':'not_run','scope':'JavaScript syntax checker unavailable'}
