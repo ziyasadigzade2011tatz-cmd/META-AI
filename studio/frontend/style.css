@@ -4,3 +4,7 @@
 .run-consent{font-size:9px;margin:8px 0}.test-tools{display:flex;gap:5px}.test-tools select{font-size:10px;flex:1;padding:6px}.test-tools button{font-size:10px;padding:6px}
 
 .activity-panel{border:1px solid var(--line);border-radius:12px;margin:10px 0;background:color-mix(in srgb,var(--base) 94%,white);overflow:hidden;flex-shrink:0}.activity-bar{display:flex;align-items:center;gap:5px;padding:5px 8px}.activity-bar button:first-child{flex:1;text-align:left}.activity-bar small{color:var(--muted);font-size:10px;margin-left:8px}.activity-stage{font-size:11px;padding:6px 12px;color:var(--muted);overflow-wrap:anywhere}.activity-stage small{white-space:nowrap}.activity-body{max-height:260px;overflow:auto;padding:0 12px 10px}.activity-entry{font:11px/1.6 Consolas,monospace;padding:5px 0;overflow-wrap:anywhere;border-top:1px solid var(--line)}.activity-entry.warning{color:var(--accent)}.activity-code{white-space:pre-wrap;word-break:break-word;font:11px/1.5 Consolas,monospace;max-height:200px;overflow:auto}.draft-label{font-size:10px;color:var(--muted);margin-top:10px}.view-chat>.activity-panel,.view-chat>#activity-chat,.view-chat>#activity-code{width:min(900px,calc(100% - 40px));margin:0 auto 8px}.view-chat .activity-body{max-height:180px}
+
+.activity-panel [hidden]{display:none!important}.activity-code{overflow-anchor:none}.activity-body{overflow-anchor:none}
+
+.activity-stage small{white-space:normal}

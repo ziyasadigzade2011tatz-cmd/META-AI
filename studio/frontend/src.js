@@ -18,7 +18,7 @@ wireActivity(async kind=>{
  try{if(activityRuns.chat.session)await api('/studio/cancel-chat',{session_id:activityRuns.chat.session});}
  finally{state.chatController?.abort();activityRuns.chat.status='cancelled';refreshActivity('chat');}
 });
-setInterval(()=>{if(state.nav==='chat'&&state.busy)refreshActivity('chat');},1000);
+
 
 function icon(name){return ({chat:'◉',code:'⌘',projects:'◇',materials:'▤',settings:'⚙'})[name]||'·';}
 function renderShell(){
@@ -85,7 +85,7 @@ function renderCode(){
 function drag(handle,variable,min,max,reverse){handle.onpointerdown=e=>{e.preventDefault();const start=e.clientX,old=parseInt(getComputedStyle(document.documentElement).getPropertyValue(variable));handle.setPointerCapture(e.pointerId);handle.onpointermove=x=>{const value=Math.min(max,Math.max(min,old+(x.clientX-start)*(reverse?-1:1)));document.documentElement.style.setProperty(variable,value+'px');};handle.onpointerup=()=>handle.onpointermove=null;};}
 async function loadFiles(){if(state.nav!=='code')return;const epoch=state.epoch,project=state.project;if(!state.project){state.files=[];$('#fileTree').innerHTML='<p class="empty-small">Новый проект появится после запуска задачи.</p>';return;}const obj=await api('/studio/files?'+new URLSearchParams({project:state.project}));if(state.epoch!==epoch||state.project!==project||state.nav!=='code')return;state.files=obj.files||[];$('#fileTree').innerHTML=state.files.length?state.files.map(f=>`<button class="file" data-file="${esc(f.path)}" title="${esc(f.path)}"><span>${f.path.includes('/')?'└':'·'}</span> ${esc(f.path)}</button>`).join(''):'<p class="empty-small">Пока нет файлов. Запусти задачу.</p>';document.querySelectorAll('[data-file]').forEach(b=>b.onclick=action(()=>openFile(b.dataset.file)));}
 function language(path){return ({py:'python',js:'javascript',ts:'typescript',tsx:'typescript',jsx:'javascript',html:'html',css:'css',json:'json',md:'markdown',yml:'yaml',yaml:'yaml',rs:'rust',cs:'csharp',cpp:'cpp'})[path.split('.').pop()]||'plaintext';}
-function showFile(path,tab){if(!state.editor)return;rememberEditor();state.file=path;state.tabs.set(path,tab);tab.loading=true;state.editor.updateOptions({readOnly:!!tab.draft});state.editor.setValue(tab.content);monaco.editor.setModelLanguage(state.editor.getModel(),language(path));tab.loading=false;$('#fileStatus').textContent=path+(tab.draft?' · черновик агента':tab.dirty?' · не сохранён':' · UTF-8');$('#saveFile').disabled=!!tab.draft;$('#fileTabs').innerHTML=[...state.tabs].map(([p,t])=>`<button data-tab="${esc(p)}" class="${p===path?'selected':''}">${esc(p.split('/').pop())}${t.dirty?' ●':''}</button>`).join('');document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>showFile(b.dataset.tab,state.tabs.get(b.dataset.tab)));}
+function showFile(path,tab){if(!state.editor)return;const view=state.file===path?state.editor.saveViewState():null;rememberEditor();state.file=path;state.tabs.set(path,tab);tab.loading=true;state.editor.updateOptions({readOnly:!!tab.draft});state.editor.setValue(tab.content);if(view)state.editor.restoreViewState(view);monaco.editor.setModelLanguage(state.editor.getModel(),language(path));tab.loading=false;$('#fileStatus').textContent=path+(tab.draft?' · черновик агента':tab.dirty?' · не сохранён':' · UTF-8');$('#saveFile').disabled=!!tab.draft;$('#fileTabs').innerHTML=[...state.tabs].map(([p,t])=>`<button data-tab="${esc(p)}" class="${p===path?'selected':''}">${esc(p.split('/').pop())}${t.dirty?' ●':''}</button>`).join('');document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>showFile(b.dataset.tab,state.tabs.get(b.dataset.tab)));}
 async function openFile(path){const epoch=state.epoch,project=state.project;if(state.tabs.has(path)&&!state.tabs.get(path).draft){showFile(path,state.tabs.get(path));return;}const obj=await api('/studio/read?'+new URLSearchParams({project:state.project,path}));if(state.epoch!==epoch||state.project!==project||state.nav!=='code'||state.tabs.get(path)?.dirty)return;showFile(path,{content:obj.content,hash:obj.hash,dirty:false,draft:false});}
 async function saveFile(){
  if(!state.file||!state.editor||state.editor.getOption(monaco.editor.EditorOption.readOnly))return;
@@ -98,14 +98,41 @@ async function saveFile(){
  toast('Файл сохранён');}finally{tab.saving=false;}
 }
 async function startTask(e){e?.preventDefault();const task=$('#taskInput').value.trim();if(!task)return;const obj=await api('/studio/task',{task,image:state.codeImage,project:state.project,model:$('#modelSelect').value,context:Number(state.settings.context||4096)});beginActivity('code');state.codeImage=null;if($('#codeImageLabel'))$('#codeImageLabel').textContent='';state.task=obj.id;state.project=obj.project;if(![...$('#projectSelect').options].some(o=>o.value===obj.project))$('#projectSelect').add(new Option(obj.project,obj.project));$('#projectSelect').value=obj.project;$('#runTask').disabled=true;$('#taskFeed').innerHTML='<p class="activity">Создаю сессию…</p>';pollTask();}
-function pollTask(){clearInterval(state.taskTimer);const expectedId=state.task,expectedEpoch=state.epoch;const tick=action(async()=>{const obj=await api('/studio/task?id='+expectedId);if(state.task!==expectedId)return;activityRuns.code.events=obj.events||[];activityRuns.code.progress=obj.progress;activityRuns.code.status=obj.status;activityRuns.code.started=1000*(obj.run_started_at||obj.created||Date.now()/1000);if(state.nav==='chat')refreshActivity('code');if(state.nav!=='code'||state.epoch!==expectedEpoch){if(obj.status!=='running')clearInterval(state.taskTimer);return;}state.project=obj.project;if(![...$('#projectSelect').options].some(o=>o.value===obj.project))$('#projectSelect').add(new Option(obj.project,obj.project));$('#projectSelect').value=obj.project;
- $('#taskFeed').innerHTML=`<div class="task-heading"><strong>${esc(obj.task)}</strong><small>${esc(obj.project)} · ${esc(obj.model)}</small></div>`+activityMarkup('code')+`<p class="task-summary">${esc(obj.summary)}</p>`;
- const last=[...obj.events].reverse().find(e=>e.type==='file');if(last&&!state.tabs.get(state.file)?.dirty&&(!state.file||state.tabs.get(last.data.path)?.content!==last.data.content)){showFile(last.data.path,{content:last.data.content,draft:!obj.applied,dirty:false,hash:null});}
- $('#taskFeed').scrollTop=$('#taskFeed').scrollHeight;$('#taskActions').innerHTML='';
- if(obj.status==='review'){$('#taskActions').innerHTML='<button class="primary" id="applyChanges">Применить изменения</button><button id="reviewChanges">Посмотреть изменения</button>';$('#applyChanges').onclick=action(async()=>{await api('/studio/apply',{id:obj.id});toast('Файлы обновлены');tick();});$('#reviewChanges').onclick=()=>dialog('<h2>Изменения по файлам</h2>'+obj.diffs.map(d=>`<h3>${esc(d.path)}</h3><pre class="diff">${esc(d.diff)}</pre>`).join(''));}
- if(['failed','interrupted','cancelled'].includes(obj.status)){$('#taskActions').innerHTML='<button id="resumeTask">Повторить после остановки</button>';$('#resumeTask').onclick=action(async()=>{await api('/studio/resume',{id:obj.id});pollTask();});}
- if(obj.status!=='running'){clearInterval(state.taskTimer);$('#runTask').disabled=false;if(obj.applied){for(const [p,t] of state.tabs){if(!t.dirty)state.tabs.delete(p);}await loadFiles();if(state.file&&!state.tabs.has(state.file)){await openFile(state.file);}}}
- });tick();state.taskTimer=setInterval(tick,1500);}
+function pollTask(){
+ clearTimeout(state.taskTimer);state.taskPollController?.abort();
+ const expectedId=state.task,generation=(state.pollGeneration||0)+1;state.pollGeneration=generation;
+ let busy=false,ended=false;
+ const current=()=>state.task===expectedId&&state.pollGeneration===generation;
+ const tick=async()=>{
+  if(!current()||busy)return;busy=true;clearTimeout(state.taskTimer);
+  const controller=new AbortController();state.taskPollController=controller;const timeout=setTimeout(()=>controller.abort(),8000);
+  try{
+   const response=await fetch('/studio/task?id='+encodeURIComponent(expectedId),{signal:controller.signal});
+   if(!response.ok)throw Error('Core вернул '+response.status);const obj=await response.json();if(!current())return;
+   const run=activityRuns.code;Object.assign(run,{events:obj.events||[],progress:obj.progress,status:obj.status,started:1000*(obj.run_started_at||obj.created||Date.now()/1000),lastContact:Date.now(),pollError:null});
+   ended=obj.status!=='running';if(ended){run.stopping=false;if(obj.summary)run.progress={...run.progress,message:obj.summary};}
+   if(state.nav==='chat')refreshActivity('code');
+   if(state.nav!=='code')return;state.project=obj.project;
+   if(![...$('#projectSelect').options].some(o=>o.value===obj.project))$('#projectSelect').add(new Option(obj.project,obj.project));$('#projectSelect').value=obj.project;
+   const feed=$('#taskFeed'),follow=feed.scrollHeight-feed.clientHeight-feed.scrollTop<24;
+   if(feed.dataset.task!==obj.id){feed.innerHTML='<div class="task-heading"><strong></strong><small></small></div>'+activityMarkup('code')+'<p class="task-summary"></p>';feed.dataset.task=obj.id;}
+   feed.querySelector('.task-heading strong').textContent=obj.task;feed.querySelector('.task-heading small').textContent=obj.project+' · '+obj.model;
+   feed.querySelector('.task-summary').textContent=obj.summary||'';refreshActivity('code');
+   const last=[...(obj.events||[])].reverse().find(e=>e.type==='file');
+   if(last&&(!state.file||(state.file===last.data.path&&state.tabs.get(state.file)?.draft))&&!state.tabs.get(state.file)?.dirty&&state.tabs.get(last.data.path)?.content!==last.data.content){showFile(last.data.path,{content:last.data.content,draft:!obj.applied,dirty:false,hash:null});}
+   if(follow)feed.scrollTop=feed.scrollHeight;
+   const actions=$('#taskActions'),key=obj.id+':'+obj.status+':'+obj.applied;
+   if(actions.dataset.state!==key){actions.dataset.state=key;actions.innerHTML='';
+    if(obj.status==='review'){actions.innerHTML='<button class="primary" id="applyChanges">Применить изменения</button><button id="reviewChanges">Посмотреть изменения</button>';$('#applyChanges').onclick=action(async()=>{await api('/studio/apply',{id:obj.id});toast('Файлы обновлены');ended=false;tick();});$('#reviewChanges').onclick=()=>dialog('<h2>Изменения по файлам</h2>'+obj.diffs.map(d=>`<h3>${esc(d.path)}</h3><pre class="diff">${esc(d.diff)}</pre>`).join(''));}
+    if(['failed','interrupted','cancelled'].includes(obj.status)){actions.innerHTML='<button id="resumeTask">Продолжить с черновика</button>';$('#resumeTask').onclick=action(async()=>{await api('/studio/resume',{id:obj.id,model:$('#modelSelect').value});pollTask();});}
+   }
+   $('#runTask').disabled=!ended;
+   if(ended&&obj.applied&&run.loadedTask!==obj.id){run.loadedTask=obj.id;for(const [p,t] of state.tabs){if(!t.dirty)state.tabs.delete(p);}await loadFiles();if(state.file&&!state.tabs.has(state.file))await openFile(state.file);}
+  }catch(error){if(current()){activityRuns.code.pollError=error.name==='AbortError'?'Core не ответил за 8 секунд. Восстанавливаю связь; задача не перезапускается.':error.message;refreshActivity('code');}}
+  finally{clearTimeout(timeout);busy=false;if(current()&&!ended)state.taskTimer=setTimeout(tick,1500);}
+ };
+ tick();
+}
 async function preview(){let files={};if(state.task){const obj=await api('/studio/task?id='+state.task);files=obj.edits||{};}for(const name of ['index.html','style.css','styles.css','script.js','app.js']){if(files[name]===undefined&&state.project){try{files[name]=(await api('/studio/read?'+new URLSearchParams({project:state.project,path:name}))).content;}catch{}}}
  if(!files['index.html']){toast('Для предпросмотра нужен index.html');return;}let html=files['index.html'];html=html.replace(/<link\b[^>]*href=["'](?:\.\/)?([^"']+)["'][^>]*>/gi,(tag,path)=>files[path]!==undefined?`<style>${files[path]}</style>`:tag);html=html.replace(/<script\b[^>]*src=["'](?:\.\/)?([^"']+)["'][^>]*>\s*<\/script>/gi,(tag,path)=>files[path]!==undefined?`<script>${files[path]}<\/script>`:tag);dialog('<h2>Предпросмотр сайта</h2><p>Изолированный просмотр. Это не полноценный запуск сервера.</p><iframe id="preview" sandbox="allow-scripts" title="Предпросмотр сайта"></iframe>');const shim='<script>for(const name of ["localStorage","sessionStorage"]){let store={};Object.defineProperty(window,name,{value:{getItem:k=>Object.prototype.hasOwnProperty.call(store,k)?store[k]:null,setItem:(k,v)=>store[k]=String(v),removeItem:k=>delete store[k],clear:()=>store={},key:i=>Object.keys(store)[i]||null,get length(){return Object.keys(store).length}}});}</script>';html=/<head[^>]*>/i.test(html)?html.replace(/<head[^>]*>/i,m=>m+shim):shim+html;const snapshot=await api('/studio/preview',{html});$('#preview').src=snapshot.url;}
 async function renderProjects(){
