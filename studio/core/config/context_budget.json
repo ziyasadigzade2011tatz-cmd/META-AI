@@ -1,0 +1,11 @@
+{
+  "enabled": false,
+  "base_context": 8192,
+  "chat_input": 5500,
+  "chat_output": 2000,
+  "thinking_input": 4000,
+  "thinking_output": 3500,
+  "code_input": 5000,
+  "code_output": 3000,
+  "fallback": "utf8_upper_bound"
+}
