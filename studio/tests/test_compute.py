@@ -3,6 +3,7 @@ from pathlib import Path
 core=Path(__file__).resolve().parents[1]/'core';sys.path.insert(0,str(core))
 from meta5.compute import ComputeGate
 from meta5.transport import prepare_model
+from meta5.python_child import argv as python_argv
 
 class ComputeTests(unittest.TestCase):
     def setUp(self):self.temp=tempfile.TemporaryDirectory()
@@ -16,7 +17,7 @@ class ComputeTests(unittest.TestCase):
         name='META-Test-'+uuid.uuid4().hex;gate=ComputeGate(name,folder=self.temp.name);self.assertTrue(gate.acquire(timeout=2))
         try:
             code='import sys;sys.path.insert(0,'+repr(str(core))+');from meta5.compute import ComputeGate;print(ComputeGate('+repr(name)+',folder='+repr(self.temp.name)+').acquire(blocking=False))'
-            result=subprocess.check_output([sys.executable,'-B','-c',code],text=True,timeout=10)
+            result=subprocess.check_output(python_argv('-B','-c',code),text=True,timeout=10)
             self.assertEqual(result.strip(),'False')
         finally:gate.release()
     def test_other_resident_model_unloaded_before_switch(self):

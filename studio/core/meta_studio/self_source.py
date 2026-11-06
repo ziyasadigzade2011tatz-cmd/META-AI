@@ -16,7 +16,7 @@ class SelfSource:
                     if any(any(word in part.lower() for word in ('secret','credential','token')) or part.endswith('_state') for part in p.relative_to(self.core).parts):continue
                     if '__pycache__' not in p.parts and not any(linked(v) for v in [p,*list(p.parents)[:len(p.relative_to(self.core).parts)-1]]):out['core/'+p.relative_to(self.core).as_posix()]=p
         root_sources=[p.name for p in self.core.glob('*.py') if not any(w in p.name.lower() for w in ('secret','credential','token'))]
-        defaults=['config/'+name for name in ('system.md','agent.json','domains.json','memory.json','models.json','performance.json','search.json','slang.json','understanding.json')]
+        defaults=['config/'+name for name in ('system.md','agent.json','domains.json','search_domains.json','memory.json','models.json','performance.json','search.json','slang.json','understanding.json')]
         for name in (*root_sources,'requirements.txt','meta5_models_seed.json',*defaults):
             p=self.core/name
             if p.is_file() and not linked(p):out['core/'+name]=p

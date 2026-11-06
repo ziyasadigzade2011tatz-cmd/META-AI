@@ -90,6 +90,9 @@ class SelfSourceTests(unittest.TestCase):
         projects=self.base/'projects';projects.mkdir()
         with self.assertRaises(ValueError):self.reader.workspace(projects)
         self.assertEqual(list(projects.iterdir()),[])
+    def test_public_search_configuration_is_included(self):
+        folder=self.reader.core/'config';folder.mkdir();(folder/'search_domains.json').write_text('{"blocked":[]}')
+        self.assertIn('core/config/search_domains.json',[r['path'] for r in self.reader.index()['files']])
     def test_git_workspace_is_separate_and_source_unchanged(self):
         import shutil
         if not shutil.which('git'):self.skipTest('Git unavailable')
