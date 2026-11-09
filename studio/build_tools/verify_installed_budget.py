@@ -21,7 +21,7 @@ with (out/'core.log').open('w',encoding='utf-8') as log:
                 break
             except OSError:time.sleep(.5)
         else:raise TimeoutError('Installed Core not ready')
-        assert health['version']=='5.4.1',health
+        assert health['version']=='5.5.0',health
         events=[];characters=0;started=time.monotonic()
         with request('/agent40/dialogue/stream',{'session_id':'synthetic-installed-budget-'+str(time.time_ns()),'messages':[{'role':'user','content':'привет'}],'model':'qwen3.5:4b','context':8192,'temperature':.3}) as r:
             for raw in r:

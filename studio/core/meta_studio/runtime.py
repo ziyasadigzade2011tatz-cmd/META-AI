@@ -47,7 +47,7 @@ def boot(namespace):
     code=marshal.loads((root/'studio_base.bin').read_bytes())
     def retitle(c):
         return c.replace(co_consts=tuple(retitle(x) if isinstance(x,types.CodeType) else
-            'META Studio 5.4' if isinstance(x,str) and x in ('META — Desktop Preview','META — Next Desktop') else x for x in c.co_consts))
+            'META Studio 5.5' if isinstance(x,str) and x in ('META — Desktop Preview','META — Next Desktop') else x for x in c.co_consts))
     code=retitle(code)
     # Only disable the original entry guard; module definitions remain unchanged.
     code=code.replace(co_consts=tuple('__studio_base__' if x=='__main__' else x for x in code.co_consts))

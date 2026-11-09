@@ -12,13 +12,13 @@ using System.Threading.Tasks;
 
 class Setup : Form {
  TextBox target; Button install; ProgressBar progress; Label status; CheckBox shortcut,launch;
- const string Version="5.4.1";
+ const string Version="5.5.0";
  Setup(){
   Text="META Studio · Установка "+Version;ClientSize=new Size(690,450);StartPosition=FormStartPosition.CenterScreen;BackColor=Color.FromArgb(35,36,39);ForeColor=Color.FromArgb(237,234,225);Font=new Font("Segoe UI",10);FormBorderStyle=FormBorderStyle.FixedDialog;MaximizeBox=false;
   Controls.Add(new Label{Text="ᴍ  META Studio",Font=new Font("Segoe UI",26,FontStyle.Bold),ForeColor=Color.FromArgb(220,149,93),Location=new Point(30,25),Size=new Size(600,60)});
   Controls.Add(new Label{Text="Твоё пространство для идей и кода",Location=new Point(34,92),Size=new Size(620,28)});
   Controls.Add(new Label{Text="Папка приложения",Location=new Point(34,140),Size=new Size(550,25)});
-  string current=@"C:\Users\Desktop\META_FULL_DESKTOP\META-Next";
+  string current=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"Programs","META");
   target=new TextBox{Text=Directory.Exists(current)?current:Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"Programs","META"),Location=new Point(34,170),Size=new Size(530,28)};Controls.Add(target);
   Button browse=new Button{Text="Обзор…",Location=new Point(574,167),Size=new Size(85,32)};browse.Click+=(s,e)=>{using(FolderBrowserDialog dialog=new FolderBrowserDialog()){dialog.SelectedPath=target.Text;if(dialog.ShowDialog()==DialogResult.OK)target.Text=dialog.SelectedPath;}};Controls.Add(browse);
   shortcut=new CheckBox{Text="Создать ярлык META на рабочем столе",Checked=true,Location=new Point(34,215),Size=new Size(600,28)};Controls.Add(shortcut);
