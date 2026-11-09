@@ -44,6 +44,12 @@ complete=true только когда файл закончен; для пром
 Установленные исходники только для чтения. Самоизменения готовь в отдельном Git-проекте, не подменяй работающий Core.
 Обращайся к ней по необходимости, не перечитывай справку вместо выполнения задачи.
 finish допустим только после выполнения задачи. Не утверждай успешный запуск, если его не было.
+Помощники: consult {role:"architect"|"reviewer",question}. Для сложной структуры спроси architect,
+для сомнительной правки reviewer. Они видят выдержки черновиков, дают независимый совет,
+но не пишут файлы. Не более двух консультаций за запуск; для простой задачи пропускай их.
+Проверки check выполняют два независимых помощника: синтаксис и связи файлов.
+Когда вся задача выполнена, используй check {complete:true,summary:"что сделано"}:
+успешная проверка завершит задачу без отдельного вызова finish. При ошибках исправь их.
 Пиши ответы пользователю по-русски. Инструменты исполняются приложением, а не описываются словами.'''
 from meta5.task_brief import build as task_brief,reference_query,POLICY as BRIEF_POLICY
 SYSTEM+='\n'+BRIEF_POLICY+'\nТакже доступны web_search {query}, clarify {question}. Сначала выполни обязательный поиск референса, если он запрошен.'
@@ -54,9 +60,10 @@ def slug(task):
     kind='website' if re.search(r'сайт|лендинг|website|landing',task,re.I) else 'python-app' if re.search(r'python|питон',task,re.I) else 'app'
     return kind+'-'+uuid.uuid4().hex[:6]
 
-def check_files(files,project=None,brief=None):
+def _check_files_serial(files,project=None,brief=None,paths=None):
     results=[]
     for name,text in files.items():
+        if paths is not None and name not in paths:continue
         try:
             validate(name,text)
             if name.endswith('.py'):ast.parse(text,filename=name)
@@ -84,6 +91,10 @@ def check_files(files,project=None,brief=None):
         except (ValueError,SyntaxError) as exc:results.append({'path':name,'status':'failed','error':str(exc)[:300]})
     return results
 
+def check_files(files,project=None,brief=None):
+    from .team import review_files
+    return review_files(files,lambda paths:_check_files_serial(files,project,brief,paths))
+
 def complete_stream(model,messages,cancel,emit,context=8192,deadline=None,output_tokens=None):
     from .agent_stream import generate
     return generate(model,messages,cancel,emit,context,deadline,output_tokens)
@@ -91,7 +102,7 @@ def complete_stream(model,messages,cancel,emit,context=8192,deadline=None,output
 def parse_action(raw):
     action=json.loads(raw)
     if not isinstance(action,dict) or not isinstance(action.get('action'),str):raise ValueError('Нужен объект action/args')
-    fields={'list':(), 'read':('path','start','end'),'search':('query',),'plan':('steps',),'write':('path','content'),
+    fields={'consult':('role','question'),'list':(), 'read':('path','start','end'),'search':('query',),'plan':('steps',),'write':('path','content'),
             'append':('path','sha256','content','complete'),'self_inspect':('path','start','end'),'language_help':('language','topic'),'edit':('path','old','new'),'check':(),'finish':('summary',),'web_search':('query',),'clarify':('question',)}
     name=action['action']
     if name not in fields:raise ValueError('Неизвестное действие; используй инструменты из инструкции')
@@ -113,7 +124,7 @@ class Sessions:
     def __init__(self,projects,state,client=None,researcher=None,image_reader=None):
         self.projects=Path(projects);self.projects.mkdir(parents=True,exist_ok=True)
         self.state=Path(state);self.state.mkdir(parents=True,exist_ok=True)
-        self.client=client;self.researcher=researcher;self.image_reader=image_reader;self.images={};self.lock=threading.RLock();self.active=None;self.cancel={}
+        self.client=client;self.researcher=researcher;self.image_reader=image_reader;self.images={};self.lock=threading.RLock();self.active=None;self.cancel={};self.progress={}
     def path(self,ident):
         if not re.fullmatch('[a-f0-9]{32}',ident or ''):raise ValueError('Неверная сессия')
         return self.state/(ident+'.json')
@@ -122,6 +133,7 @@ class Sessions:
             obj=read_json(self.path(ident))
             if not obj:raise ValueError('Сессия не найдена')
             if obj['status']=='running' and self.active!=ident:obj['status']='interrupted'
+            if ident in self.progress:obj['progress']=dict(self.progress[ident])
             return obj
     def history(self):
         rows=[]
@@ -131,9 +143,12 @@ class Sessions:
         return sorted(rows,key=lambda x:x.get('created',0),reverse=True)[:40]
     def emit(self,ident,event,data):
         with self.lock:
-            obj=read_json(self.path(ident),{})
             if event=='generation':
-                obj['progress']={**data,'at':time.time()};atomic_json(self.path(ident),obj);return
+                # Progress is ephemeral; code/action checkpoints remain durable.
+                self.progress={ident:{**data,'at':time.time()}}
+                return
+            obj=read_json(self.path(ident),{})
+            if ident in self.progress:obj['progress']=dict(self.progress[ident])
             obj['events'].append({'type':event,'data':data,'at':time.time()})
             obj['events']=obj['events'][-150:];atomic_json(self.path(ident),obj)
     def start(self,request):
@@ -334,7 +349,7 @@ class Sessions:
             if language_guide['languages']:
                 messages[0]['content']+='\nЯзыковой профиль (инструкции, не обучение весов):\n'+json.dumps(language_guide,ensure_ascii=False)
                 self.emit(ident,'status',{'message':'Профили: '+', '.join(language_guide['languages'])})
-            self.emit(ident,'model',{'model':model});started=time.monotonic();empty_finishes=0;seen={};last_check=None;web_count=0;errors=0
+            self.emit(ident,'model',{'model':model});started=time.monotonic();empty_finishes=0;seen={};last_check=None;web_count=0;errors=0;consultations=0
             finish_target=obj.get('finish_target');finish_description=obj.get('finish_description','')
             def finalize(description,checks):
                 obj.update(edits=edits,expected=expected,messages=messages,model=model,status='review',incomplete_files=[],
@@ -608,15 +623,24 @@ class Sessions:
                                 'defined_functions':re.findall(r'^def\s+(\w+)\s*\(',text,re.M) if path.endswith('.py') else []}
                         if not complete:result['next']='Продолжи с конца tail через append; sha256 указан выше. Не повторяй код. complete=true только для законченного файла.'
                         self.emit(ident,'file',{'path':path,'content':text,'incomplete':not complete})
+                    elif name=='consult':
+                        if consultations>=2:raise ValueError('Лимит двух консультаций; переходи к реализации и проверке')
+                        consultations+=1
+                        from .team import consult
+                        self.emit(ident,'status',{'message':'Агент-помощник: '+str(args['role']),'agent':args['role']})
+                        remaining=min(45,started+total_seconds-time.monotonic())
+                        if remaining<=0:raise ValueError('Нет времени на консультацию')
+                        result=consult(args['role'],args['question'],obj['task'],edits,model,obj.get('context',8192),self.cancel[ident],remaining)
                     elif name=='check':
+                        self.emit(ident,'status',{'message':'Агенты проверки: синтаксис и связи файлов','agents':['syntax','integration']})
                         checks=check_files(edits,project,brief);result={'checks':checks,'runtime_tests':'not_run'}
                         checks.extend({'path':p,'status':'failed','error':'Незавершённый файл: продолжи через append'} for p in sorted(incomplete))
                         last_check=None
                         if all(c['status']!='failed' for c in checks):last_check=json.dumps(edits,sort_keys=True,ensure_ascii=False)
                         self.emit(ident,'check',result)
-                        if edits and not incomplete and last_check is not None and finish_target==digest(last_check.encode('utf-8')):
+                        if edits and not incomplete and last_check is not None and (args.get('complete') is True or finish_target==digest(last_check.encode('utf-8'))):
                             self.emit(ident,'status',{'message':'Проверка пройдена: завершаю задачу без повторной генерации'})
-                            finalize(finish_description,checks);return
+                            finalize(str(args.get('summary',finish_description))[:1600],checks);return
                     else:raise ValueError('Неизвестное действие; используй инструменты из инструкции')
                     errors=0
                 except (ValueError,KeyError,TypeError,SyntaxError,OSError) as exc:

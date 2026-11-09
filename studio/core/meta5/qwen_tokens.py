@@ -10,6 +10,8 @@ from pathlib import Path
 import re
 import struct
 import unicodedata
+import threading
+from collections import OrderedDict
 
 WHITE_SPACE='\t\n\v\f\r \x85\xa0\u1680\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u2028\u2029\u202f\u205f\u3000'
 
@@ -90,6 +92,7 @@ def pieces(text):
 
 class Qwen35:
     def __init__(self,path):
+        self._segments=OrderedDict();self._segments_size=0;self._segments_lock=threading.Lock()
         data=vocabulary(path)
         if data.get('tokenizer.ggml.pre')!='qwen35' or data.get('tokenizer.ggml.model')!='gpt2' or data.get('tokenizer.ggml.add_bos_token',False):raise ValueError('Only Qwen35 byte BPE supported')
         tokens=data['tokenizer.ggml.tokens'];types=data['tokenizer.ggml.token_type']
@@ -123,7 +126,22 @@ class Qwen35:
     def count(self,text):
         if not isinstance(text,str) or len(text)>2000000:raise ValueError('Text tokenization limit')
         parts=self.special.split(text) if self.special else [text]
-        return sum(1 if self.special and self.special.fullmatch(part) else sum(self.word(p) for p in pieces(part)) for part in parts if part)
+        return sum(1 if self.special and self.special.fullmatch(part) else self.count_segment(part) for part in parts if part)
+
+    def count_segment(self,text):
+        # Cache unchanged message segments, not whole growing conversations.
+        # Bounded to 64 segments / 256k characters per tokenizer.
+        if len(text)>20000:return sum(self.word(p) for p in pieces(text))
+        with self._segments_lock:
+            if text in self._segments:
+                self._segments.move_to_end(text);return self._segments[text]
+        result=sum(self.word(p) for p in pieces(text))
+        with self._segments_lock:
+            if text not in self._segments:self._segments_size+=len(text)
+            self._segments[text]=result
+            while len(self._segments)>64 or self._segments_size>256000:
+                old,_=self._segments.popitem(last=False);self._segments_size-=len(old)
+        return result
 
 
 def render(messages,think=False):

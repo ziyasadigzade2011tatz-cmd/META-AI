@@ -9,7 +9,7 @@ from .fragments import IncompleteAction,string_prefix
 def action_schema():
     """Constrain model output to one executable action, including its arguments."""
     text={'type':'string'};path={'type':'string','minLength':1}
-    arguments={'list':{},'read':{'path':path},'search':{'query':text},
+    arguments={'consult':{'role':{'enum':['architect','reviewer']},'question':text},'list':{},'read':{'path':path},'search':{'query':text},
                'plan':{'steps':{'type':'array','items':text,'minItems':1,'maxItems':8}},
                'write':{'path':path,'content':text},'edit':{'path':path,'old':text,'new':text},
                'append':{'path':path,'sha256':{'type':'string','pattern':'^[a-f0-9]{64}$'},'content':text,'complete':{'type':'boolean'}},
@@ -21,6 +21,7 @@ def action_schema():
         args={'type':'object','properties':dict(properties),'required':list(properties),'additionalProperties':False}
         if name=='read':args['properties'].update(start={'type':'integer','minimum':1},end={'type':'integer','minimum':1})
         if name=='plan':args['properties']['title']={'type':'string','maxLength':60}
+        if name=='check':args['properties'].update(complete={'type':'boolean'},summary=text)
         variants.append({'type':'object','properties':{'action':{'const':name},'args':args},'required':['action','args'],'additionalProperties':False})
     return {'oneOf':variants}
 

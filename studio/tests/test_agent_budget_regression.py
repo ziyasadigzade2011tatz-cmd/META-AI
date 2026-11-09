@@ -20,6 +20,17 @@ from meta_studio.agent import Sessions
 
 
 class BudgetRegressionTests(unittest.TestCase):
+    def test_final_check_can_complete_without_extra_llm_finish_call(self):
+        actions=iter([{'action':'write','args':{'path':'data.json','content':'{}'}},
+                      {'action':'check','args':{'complete':True,'summary':'Готово'}}])
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory)
+            sessions=Sessions(root/'projects',root/'sessions',client=lambda messages:json.dumps(next(actions)))
+            obj=sessions.start({'task':'Создай JSON файл'})
+            deadline=time.monotonic()+5
+            while sessions.active and time.monotonic()<deadline:time.sleep(.01)
+            self.assertEqual(sessions.get(obj['id'])['status'],'completed')
+
     def test_plan_can_name_project_without_extra_model_request(self):
         actions=iter([{'action':'plan','args':{'title':'Органайзер','steps':['Создать файл']}},
                       {'action':'write','args':{'path':'data.json','content':'{}'}},

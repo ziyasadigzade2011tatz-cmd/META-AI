@@ -104,9 +104,9 @@ class StreamTests(unittest.TestCase):
             self.assertEqual(sessions.history()[0]['status'],'interrupted')
     def test_progress_is_latest_snapshot_not_endless_event_log(self):
         with tempfile.TemporaryDirectory() as d:
-            sessions=Sessions(Path(d)/'projects',Path(d)/'sessions');ident='a'*32;sessions.path(ident).write_text(json.dumps({'id':ident,'events':[]}))
+            sessions=Sessions(Path(d)/'projects',Path(d)/'sessions');ident='a'*32;sessions.path(ident).write_text(json.dumps({'id':ident,'status':'completed','events':[]}))
             for i in range(10):sessions.emit(ident,'generation',{'characters':i})
-            data=json.loads(sessions.path(ident).read_text('utf-8'));self.assertEqual(data['events'],[]);self.assertEqual(data['progress']['characters'],9)
+            data=sessions.get(ident);self.assertEqual(data['events'],[]);self.assertEqual(data['progress']['characters'],9)
     def test_flat_actions_create_files_and_keep_plan(self):
         with tempfile.TemporaryDirectory() as d:
             actions=iter([{'action':'plan','steps':['Создать файл']},{'action':'write','path':'main.py','content':'x=1\n'},{'action':'check'},{'action':'finish','summary':'Готово'}])
