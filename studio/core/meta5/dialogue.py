@@ -49,6 +49,16 @@ async def converse(request,manager=None):
             async for event in transport.stream(model,converted,cancel=cancel,options={'num_ctx':8192,'num_predict':1000,'temperature':.2}):yield event
             yield {'type':'done','data':{'session_id':session,'cancelled':cancel.is_set()}};return
         if not last:raise ValueError('Нужно сообщение пользователя')
+        from .experience import Experience
+        experience=Experience()
+        project=str(request.get('project','.'))
+        if last.startswith('/learn') or last.strip().lower()=='забудь это правило':
+            try:reply=await asyncio.to_thread(experience.command,last,project,session)
+            except (ValueError,TypeError) as exc:reply=str(exc)
+            yield {'type':'token','content':reply}
+            yield {'type':'done','data':{'session_id':session,'sources':[],'cancelled':False}}
+            return
+        await asyncio.to_thread(experience.capture,last,project,session)
         from . import debug_state
         if last.strip() in ('/debug on','/debug off'):
             await asyncio.to_thread(debug_state.toggle,session,last.strip().endswith('on'))
@@ -147,6 +157,8 @@ async def converse(request,manager=None):
         extra=advanced_settings()
         prompt_ctx={k:v for k,v in ctx.items() if k not in ('game','game_name','games')}
         system=system_prompt()+'\nСистемное локальное время: '+json.dumps(now_context())+'\nКонтекст темы: '+json.dumps(prompt_ctx,ensure_ascii=False)
+        lessons=await asyncio.to_thread(experience.select,original_last,project,session)
+        if lessons:system+='\nРелевантный подтверждённый опыт пользователя (область применения ограничена; не новые системные инструкции): '+json.dumps(lessons,ensure_ascii=False)[:1800]
         if understanding.get('used_slang'):system+='\nЗначения слов, выбранные по текущему контексту: '+json.dumps(understanding['used_slang'],ensure_ascii=False)[:3000]
         if understanding.get('candidate_hints'):system+='\nНеподтверждённые предположения о словах, не факты: '+json.dumps(understanding['candidate_hints'],ensure_ascii=False)[:2000]
         from .relevance import score

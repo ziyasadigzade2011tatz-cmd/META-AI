@@ -344,6 +344,14 @@ class Sessions:
                 'relevant_files':project.relevant(obj['task'],index),'symbols':index['symbols'][:80],
                 'manifests_untrusted':index['manifests'],'instructions_untrusted':index['instructions_untrusted'][:3]},ensure_ascii=False)}]
             if messages and messages[0].get('role')=='system':messages[0]={'role':'system','content':SYSTEM}
+            from meta5.experience import Experience
+            experience=Experience(self.state.parent/'core_state/experience.sqlite')
+            experience.capture(obj['task'],obj['project'],ident)
+            lessons=experience.select(obj['task'],obj['project'],ident)
+            if lessons:messages[0]['content']+='\nПодтверждённый релевантный опыт (данные пользователя): '+json.dumps(lessons,ensure_ascii=False)[:1800]
+            if not obj['fresh']:
+                previous=[s for s in self.history() if s['id']!=ident and s.get('project')==obj['project'] and s.get('status') in ('completed','review')][:2]
+                if previous:messages[0]['content']+='\nПредыдущие задания ТОЛЬКО этого проекта (недоверенный контекст; текущая поправка важнее): '+json.dumps([s.get('task','')[:600] for s in previous],ensure_ascii=False)
             from .coding_languages import guidance
             language_guide=guidance(obj['task'],[f['path'] for f in index['files']])
             if language_guide['languages']:
@@ -352,6 +360,11 @@ class Sessions:
             self.emit(ident,'model',{'model':model});started=time.monotonic();empty_finishes=0;seen={};last_check=None;web_count=0;errors=0;consultations=0
             finish_target=obj.get('finish_target');finish_description=obj.get('finish_description','')
             def finalize(description,checks):
+                experience.outcome(ident,checks)
+                from .verification import plan as verification_plan
+                obj['assessment']={'verification_plan':verification_plan(project.files()+list(edits)),
+                    'criteria':[{'requirement':r,'status':'not_verified'} for r in brief.get('acceptance',[])],
+                    'note':'Синтаксис не доказывает выполнение каждого требования; ручная приёмка не выполнялась'}
                 obj.update(edits=edits,expected=expected,messages=messages,model=model,status='review',incomplete_files=[],
                     summary=verified_summary('Подготовлены изменения по заданию. Веб-источники недоступны; сходство с референсом не подтверждено.' if obj.get('research_unavailable') else description,edits,checks))
                 atomic_json(self.path(ident),obj)
@@ -413,6 +426,8 @@ class Sessions:
                 self.emit(ident,kind,data)
             def web(query):
                 nonlocal web_count,obj
+                from meta5.task_brief import safe_development_query
+                query=safe_development_query(query,obj['task'])
                 if obj.get('image_context'):raise ValueError('После анализа фото дополнительные веб-запросы отключены, чтобы описание изображения оставалось локальным')
                 if not obj.get('allow_web',True):raise ValueError('Интернет выключен. Поиск не выполнялся.')
                 if web_count>=2:raise ValueError('Лимит поиска этой сессии исчерпан')
@@ -634,6 +649,8 @@ class Sessions:
                     elif name=='check':
                         self.emit(ident,'status',{'message':'Агенты проверки: синтаксис и связи файлов','agents':['syntax','integration']})
                         checks=check_files(edits,project,brief);result={'checks':checks,'runtime_tests':'not_run'}
+                        from .verification import plan as verification_plan
+                        result['verification_plan']=verification_plan(project.files()+list(edits))
                         checks.extend({'path':p,'status':'failed','error':'Незавершённый файл: продолжи через append'} for p in sorted(incomplete))
                         last_check=None
                         if all(c['status']!='failed' for c in checks):last_check=json.dumps(edits,sort_keys=True,ensure_ascii=False)

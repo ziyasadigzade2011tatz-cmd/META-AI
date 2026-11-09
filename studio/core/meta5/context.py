@@ -3,7 +3,7 @@ import json
 from urllib.parse import urlsplit
 
 OFFLINE=re.compile(r'без интернета|не ищи|не используй интернет|offline|do not browse',re.I)
-WEB=re.compile(r'найди|поищи|ищи|поиск|источник|веб|интернет|что такое|что значит|кто\b|когда\b|сколько\b|расскажи (?:про|о)|объясни|почему|как работает|what is|who|when|meaning|search',re.I)
+WEB=re.compile(r'найди|поищи|ищи|поиск|источник|веб|интернет|\bsearch\b|\bbrowse\b',re.I)
 FOLLOW=re.compile(r'^(?:а(?:\s|,)|(?:он|она|они|это|его|её)\b|нет\b|неверно\b|ты ошиб|(?:я )?(?:говорю|имел|имею)|уточн|подробнее|продолжи|расскажи ещё)',re.I)
 def texts(messages,role='user'):
     return [m['content'] for m in messages if m.get('role')==role and isinstance(m.get('content'),str)]
@@ -79,7 +79,13 @@ def resolve(messages,preferences=()):
         recent=recent or bool(re.search(r'сегодня|сейчас|актуальн|последни|в этом году',previous,re.I)) or any(int(y)>=year-1 for y in re.findall(r'\b20\d{2}\b',previous))
     from .privacy import sensitive
     general=bool(re.fullmatch(r'\s*(?:расскажи о себе|что ты умеешь|как дела)[?!.\s]*',last,re.I))
-    return dict(game=None,game_name=None,games=[],origin='conversation' if follow else 'current',topic=topic_state(messages),web_requested=not general and (bool(WEB.search(last)) or recent or follow),web_disabled=bool(OFFLINE.search(last)) or sensitive(last),verification_required=recent)
+    from .task_brief import development_request,build as task_brief
+    requested=bool(WEB.search(last)) or recent or (follow and len(users)>1 and bool(WEB.search(users[-2])))
+    if development_request(last):
+        recent=False
+        follow=False
+        requested=task_brief(last)['web_requested']
+    return dict(game=None,game_name=None,games=[],origin='conversation' if follow else 'current',topic=topic_state(messages),web_requested=not general and requested,web_disabled=bool(OFFLINE.search(last)) or sensitive(last),verification_required=recent)
 def search_plan(messages,preferences=()):
     users=texts(messages);q=users[-1].strip()
     if resolve(messages)['origin']=='conversation' and len(users)>1:q=users[-2][:120]+' '+q

@@ -133,6 +133,9 @@ def boot(namespace):
                 if path=='/studio/status':
                     profiles[:]=read_json(registry,profiles)
                     result={'version':VERSION,'profile':profile,'profiles':profiles,'preferences':enhanced,'projects_root':config['projects']}
+                elif path=='/studio/experience':
+                    from meta5.experience import Experience
+                    result={'rules':json.loads(Experience(data/'core_state/experience.sqlite').command('/learn list'))}
                 elif path=='/studio/download-status':result=dict(download)
                 elif path=='/studio/role-models':
                     from meta5 import models,advanced
@@ -165,6 +168,17 @@ def boot(namespace):
             except (ValueError,KeyError,OSError,UnicodeError) as exc:self.json_response({'error':str(exc)[:500]},400)
         def do_POST(self):
             path=urlsplit(self.path).path
+            if path=='/studio/experience':
+                if not self.studio_guard(True):return
+                try:
+                    from meta5.experience import Experience
+                    body=self.body();project=str(body.get('project','.'))
+                    from meta40.workspace import project_root
+                    project_root(config['projects'],project)
+                    result=Experience(data/'core_state/experience.sqlite').command(str(body.get('command','/learn list')),project,str(body.get('task','')))
+                    self.json_response({'message':result})
+                except (ValueError,KeyError,TypeError) as exc:self.json_response({'error':str(exc)[:300]},400)
+                return
             if path=='/next/settings':
                 # Same validation as Full, but no .backup.json copies.
                 if not self.studio_guard(True):return
