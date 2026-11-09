@@ -6,7 +6,7 @@
 и исправления основного и совместимого Core после финального аудита. [Проверки и состав](docs/RELEASE_5_3_1.md) · [Аудит слабых сторон](docs/CORE_AUDIT_5_3_1.md) · [Финальный проход всего Core](docs/FINAL_CODE_REVIEW_5_3_1.md).
 
 ## Скачать
-
+Скачать META можно как с гитхаба так и с сайта [META](site.ziya-sadigzade-2011-tatz.workers.dev)
 **[Скачать META-Setup.exe](https://github.com/ziyasadigzade2011tatz-cmd/META-AI/releases/latest/download/META-Setup.exe)**
 
 Для установки нужен один EXE из последнего релиза. Старые ZIP-комплекты и патчи
