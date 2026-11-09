@@ -36,7 +36,7 @@ class CodingReliabilityTests(unittest.TestCase):
         def researcher(messages,emit):
             queries.append(messages[-1]['content'])
             return {'sources':[{'url':'https://docs.example.org/reference','opened':True,'chunks':[{'text':'Interface uses a sidebar and readable spacing.'}]}]}
-        sessions,data,observations=self.run_task([call('write',path='index.html',content='<title>Clay Studio</title>'),call('check'),call('write',path='index.html',content='<title>Independent Studio</title>'),call('check'),call('finish',summary='Готово')],
+        sessions,data,observations=self.run_task([call('write',path='index.html',content='<title>Clay Studio</title>'),call('check'),call('edit',path='index.html',old='Clay Studio',new='Independent Studio'),call('check'),call('finish',summary='Готово')],
             'Сделай сайт по подобию Clay Studio (Web searching)',researcher=researcher)
         self.assertEqual(data['status'],'completed');self.assertEqual(len(queries),1)
         self.assertTrue(any('REFERENCE_RESEARCH' in m['content'] for m in observations[0]))

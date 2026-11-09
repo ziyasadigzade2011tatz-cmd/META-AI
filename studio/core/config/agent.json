@@ -1,10 +1,12 @@
 {
-  "step_seconds": 10800,
+  "step_seconds": 600,
   "queue_seconds": 300,
-  "total_seconds": 14400,
+  "total_seconds": 3600,
   "max_steps": 72,
   "transient_retries": 2,
   "heartbeat_seconds": 1,
   "progress_seconds": 0.75,
-  "output_tokens": 32768
+  "output_tokens": 3000,
+  "first_content_seconds": 180,
+  "idle_seconds": 60
 }

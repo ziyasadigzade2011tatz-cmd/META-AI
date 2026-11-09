@@ -49,7 +49,7 @@ def boot(namespace):
     # Only disable the original entry guard; module definitions remain unchanged.
     code=code.replace(co_consts=tuple('__studio_base__' if x=='__main__' else x for x in code.co_consts))
     exec(code,namespace)
-    namespace['DEFAULT']['context']=4096
+    namespace['DEFAULT']['context']=8192
     legacy=namespace['legacy'];legacy.PORT=free_port()
     data=namespace['DATA'];config=json.loads((namespace['CONFIG']/'meta40_config.json').read_text(encoding='utf-8'))
     from .agent import Sessions

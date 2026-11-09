@@ -2,6 +2,50 @@
 import json
 from meta5.project import digest
 
+def fit_request(messages, context, model, count=None):
+    """Budget the complete outbound prompt, preserving policy and task.
+
+    Tokenization is exact only for validated Qwen renderers; other models use
+    a conservative UTF-8 upper bound. Oversized mandatory input fails locally.
+    """
+    from meta5.token_budget import limits, utf8_upper_bound, BudgetExceeded
+    allocation = limits(context, 'code')
+    if count is None:
+        try:
+            from meta5.qwen_tokens import counter
+            if not model.startswith('qwen3.5:'):
+                raise ValueError('Unvalidated tokenizer')
+            count = counter(model, False)
+        except Exception:
+            count = utf8_upper_bound
+    rows = compact(messages, context)
+    cap = allocation['input_limit']
+    # Optional project metadata must never displace the user's actual goal.
+    if len(rows) > 1:
+        try:
+            task = json.loads(rows[1]['content'])
+            if isinstance(task, dict) and 'task' in task and count(rows[:2]) > cap:
+                rows[1] = {**rows[1], 'content': json.dumps(
+                    {k: task[k] for k in ('task', 'new_project', 'brief') if k in task}, ensure_ascii=False)}
+        except (ValueError, TypeError):
+            pass
+    # Evict oldest complete action/result pairs first. Keep latest tool state
+    # (including append hashes and tails) intact; never silently clip code.
+    while count(rows) > cap and len(rows) > 4:
+        index = next((i for i in range(2, len(rows)-2)
+                      if rows[i].get('role') == 'assistant'), None)
+        if index is None:
+            rows.pop(2)
+        else:
+            del rows[index:index+2]
+    while count(rows) > cap and len(rows) > 2:
+        if len(rows) <= 4:
+            raise BudgetExceeded('Последний результат инструмента слишком велик для контекста. Прочитай меньший диапазон строк или увеличь контекст.')
+        rows.pop(2)
+    if count(rows) > cap:
+        raise BudgetExceeded('Задача и обязательные инструкции не помещаются в контекст агента.')
+    return rows, allocation
+
 def compact(messages,context):
     budget=max(6000,min(28000,int(context)*2));out=[]
     for i,m in enumerate(messages):

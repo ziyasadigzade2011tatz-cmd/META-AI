@@ -37,12 +37,14 @@ def preview(raw):
     return value
 
 def payload(model,messages,context,output_tokens=None):
+    from .agent_context import fit_request
+    messages,allocation=fit_request(messages,context,model)
     return {'model':model,'messages':messages,'format':action_schema(),'think':False,'stream':True,'keep_alive':keep_alive(),
-            'options':{'num_ctx':context,'num_predict':max(256,min(32768,int(output_tokens or load('agent').get('output_tokens',4096)))),'temperature':.1}}
+            'options':{'num_ctx':context,'num_predict':max(1,min(allocation['output_limit'],int(output_tokens or load('agent').get('output_tokens',3000)))),'temperature':.1}}
 
 async def _exchange(model,messages,cancel,emit,context,output_tokens=None):
     cfg=load('agent');started=time.monotonic();owned=False;parts=[];characters=0;last_emit=0;last_preview={}
-    heartbeat=max(.05,min(2,cfg['heartbeat_seconds']));step_limit=max(1,min(10800,cfg['step_seconds']))
+    heartbeat=max(.05,min(2,cfg['heartbeat_seconds']));step_limit=max(1,min(600,cfg['step_seconds']))
     def progress(phase,message):
         emit('generation',{'phase':phase,'message':message,'elapsed_seconds':round(time.monotonic()-started,1),'characters':characters,**last_preview})
     try:
@@ -71,8 +73,8 @@ async def _exchange(model,messages,cancel,emit,context,output_tokens=None):
                 response.raise_for_status();iterator=response.aiter_lines().__aiter__();pending=None
                 stream_started=time.monotonic()
                 last_content_time=None
-                first_content_wait=900
-                idle_wait=300
+                first_content_wait=max(1,min(900,cfg.get('first_content_seconds',180)))
+                idle_wait=max(1,min(300,cfg.get('idle_seconds',60)))
                 try:
                     while True:
                         if cancel.is_set():raise InterruptedError('Остановлено пользователем; черновик сохранён')
@@ -85,7 +87,8 @@ async def _exchange(model,messages,cancel,emit,context,output_tokens=None):
                         if not ready:
                             progress('generating','Получаю действие модели' if not last_preview.get('path') else 'Готовлю '+last_preview['path']);continue
                         try:line=pending.result()
-                        except StopAsyncIteration:break
+                        except StopAsyncIteration:
+                            raise IncompleteAction(''.join(parts),'Поток оборвался без подтверждения завершения','timeout')
                         pending=None
                         if not line:continue
                         if len(line)>600000:raise ValueError('Слишком большой фрагмент ответа')
@@ -97,6 +100,7 @@ async def _exchange(model,messages,cancel,emit,context,output_tokens=None):
                         if time.monotonic()-last_emit>=max(.05,min(5,cfg['progress_seconds'])) or event.get('done'):
                             last_preview=preview(''.join(parts));progress('generating','Готовлю '+last_preview.get('path','действие'));last_emit=time.monotonic()
                         if event.get('done_reason')=='length':raise IncompleteAction(''.join(parts),'Достигнут размер порции; продолжаю файл следующим действием','length')
+                        if event.get('done'):break
                 finally:
                     if pending is not None:
                         pending.cancel()
@@ -112,7 +116,7 @@ async def exchange(model,messages,cancel,emit,context,deadline=None,output_token
     """Also cancel while HTTP headers are pending, not only between body chunks."""
     cfg=load('agent');started=time.monotonic();last=[started,{}]
     heartbeat=max(.05,min(2,cfg['heartbeat_seconds']))
-    limit=started+max(1,min(900,cfg['queue_seconds']))+max(1,min(10800,cfg['step_seconds']))
+    limit=started+max(1,min(900,cfg['queue_seconds']))+max(1,min(600,cfg['step_seconds']))
     if deadline is not None:limit=min(limit,deadline)
     def forward(kind,data):
         last[:]=[time.monotonic(),data];emit(kind,data)
@@ -130,4 +134,4 @@ async def exchange(model,messages,cancel,emit,context,deadline=None,output_token
         if not task.done():task.cancel()
         with contextlib.suppress(asyncio.CancelledError):await task
 
-def generate(model,messages,cancel,emit,context=4096,deadline=None,output_tokens=None):return asyncio.run(exchange(model,messages,cancel,emit,context,deadline,output_tokens))
+def generate(model,messages,cancel,emit,context=8192,deadline=None,output_tokens=None):return asyncio.run(exchange(model,messages,cancel,emit,context,deadline,output_tokens))
