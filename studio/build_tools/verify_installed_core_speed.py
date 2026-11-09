@@ -3,7 +3,7 @@ import json,os,socket,subprocess,time,urllib.request
 from pathlib import Path
 
 repo=Path(__file__).resolve().parents[2]
-runtime=Path('C:/Users/Desktop/META_FULL_DESKTOP/META-Next')
+runtime=Path('C:/Users/user/Documents/GitHub/META-AI/local/app')
 data=Path(os.environ['LOCALAPPDATA'])/'META'
 config=data/'core_config';state=data/'core_state'
 with socket.socket() as s:s.bind(('127.0.0.1',0));port=s.getsockname()[1]

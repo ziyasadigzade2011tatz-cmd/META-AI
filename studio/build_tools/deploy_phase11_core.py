@@ -2,7 +2,7 @@
 import argparse,hashlib,json,os,subprocess,sys,tempfile
 from pathlib import Path
 repo=Path(__file__).resolve().parents[2]
-runtime=Path('C:/Users/Desktop/META_FULL_DESKTOP/META-Next')
+runtime=Path('C:/Users/user/Documents/GitHub/META-AI/local/app')
 core=runtime/'_internal/core'
 
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()

@@ -12,7 +12,7 @@ try:
  subprocess.run([sys.executable,'-B','studio/build_tools/start_verification.py','--name',name],check=True)
  fixture=json.loads((repo/'build'/name/'fixture.json').read_text('utf-8'))
  health=json.load(urllib.request.urlopen(fixture['core_url']+'/health',timeout=10))
- subprocess.run([r'D:\META\Tools\node.exe','studio/build_tools/verify_chat.cjs'],check=True,env=dict(os.environ,META_VERIFY_DIR=name))
+ subprocess.run([r'C:\Users\user\Documents\GitHub\META-AI\local\tools\node.exe','studio/build_tools/verify_chat.cjs'],check=True,env=dict(os.environ,META_VERIFY_DIR=name))
  report={'step':args.step,'health':health,'chat':json.loads((repo/'build'/name/'chat-result.json').read_text('utf-8')),'desktop':'isolated native runtime HTTP bridge; working shortcut not automated'}
  (repo/'build'/name/'result.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
  print(json.dumps(report,ensure_ascii=False))

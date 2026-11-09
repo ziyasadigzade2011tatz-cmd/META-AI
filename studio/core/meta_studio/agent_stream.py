@@ -38,11 +38,11 @@ def preview(raw):
 
 def payload(model,messages,context,output_tokens=None):
     return {'model':model,'messages':messages,'format':action_schema(),'think':False,'stream':True,'keep_alive':keep_alive(),
-            'options':{'num_ctx':context,'num_predict':max(256,min(8192,int(output_tokens or load('agent').get('output_tokens',4096)))),'temperature':.1}}
+            'options':{'num_ctx':context,'num_predict':max(256,min(32768,int(output_tokens or load('agent').get('output_tokens',4096)))),'temperature':.1}}
 
 async def _exchange(model,messages,cancel,emit,context,output_tokens=None):
     cfg=load('agent');started=time.monotonic();owned=False;parts=[];characters=0;last_emit=0;last_preview={}
-    heartbeat=max(.05,min(2,cfg['heartbeat_seconds']));step_limit=max(1,min(900,cfg['step_seconds']))
+    heartbeat=max(.05,min(2,cfg['heartbeat_seconds']));step_limit=max(1,min(10800,cfg['step_seconds']))
     def progress(phase,message):
         emit('generation',{'phase':phase,'message':message,'elapsed_seconds':round(time.monotonic()-started,1),'characters':characters,**last_preview})
     try:
@@ -54,7 +54,7 @@ async def _exchange(model,messages,cancel,emit,context,output_tokens=None):
                 if time.monotonic()-started>max(1,min(900,cfg['queue_seconds'])):raise TimeoutError('Очередь локальной модели остаётся занятой')
                 await asyncio.sleep(heartbeat)
         progress('loading','Подготавливаю модель')
-        async with httpx.AsyncClient(timeout=httpx.Timeout(None,connect=10),trust_env=False) as client:
+        async with httpx.AsyncClient(timeout=httpx.Timeout(None,connect=10,read=900),trust_env=False) as client:
             prepare=asyncio.create_task(transport.prepare_model_async(client,model))
             try:
                 while not prepare.done():
@@ -69,10 +69,17 @@ async def _exchange(model,messages,cancel,emit,context,output_tokens=None):
             progress('generating','Модель обрабатывает контекст')
             async with client.stream('POST',transport.BASE+'/api/chat',json=request) as response:
                 response.raise_for_status();iterator=response.aiter_lines().__aiter__();pending=None
+                stream_started=time.monotonic()
+                last_content_time=None
+                first_content_wait=900
+                idle_wait=300
                 try:
                     while True:
                         if cancel.is_set():raise InterruptedError('Остановлено пользователем; черновик сохранён')
                         if time.monotonic()-started>step_limit:raise IncompleteAction(''.join(parts),'Лимит времени одного действия модели','timeout')
+                        quiet_for=time.monotonic()-(last_content_time if last_content_time is not None else stream_started)
+                        if quiet_for >= (idle_wait if last_content_time is not None else first_content_wait):
+                            raise IncompleteAction(''.join(parts),'Model stopped sending content; partial output preserved','timeout')
                         if pending is None:pending=asyncio.create_task(iterator.__anext__())
                         ready,_=await asyncio.wait({pending},timeout=heartbeat)
                         if not ready:
@@ -85,7 +92,7 @@ async def _exchange(model,messages,cancel,emit,context,output_tokens=None):
                         event=json.loads(line)
                         if event.get('error'):raise ValueError('Ollama не завершила действие')
                         content=event.get('message',{}).get('content','')
-                        if content:parts.append(content);characters+=len(content)
+                        if content:parts.append(content);characters+=len(content);last_content_time=time.monotonic()
                         if characters>500000:raise ValueError('Ответ модели слишком большой')
                         if time.monotonic()-last_emit>=max(.05,min(5,cfg['progress_seconds'])) or event.get('done'):
                             last_preview=preview(''.join(parts));progress('generating','Готовлю '+last_preview.get('path','действие'));last_emit=time.monotonic()
@@ -105,7 +112,7 @@ async def exchange(model,messages,cancel,emit,context,deadline=None,output_token
     """Also cancel while HTTP headers are pending, not only between body chunks."""
     cfg=load('agent');started=time.monotonic();last=[started,{}]
     heartbeat=max(.05,min(2,cfg['heartbeat_seconds']))
-    limit=started+max(1,min(900,cfg['queue_seconds']))+max(1,min(900,cfg['step_seconds']))
+    limit=started+max(1,min(900,cfg['queue_seconds']))+max(1,min(10800,cfg['step_seconds']))
     if deadline is not None:limit=min(limit,deadline)
     def forward(kind,data):
         last[:]=[time.monotonic(),data];emit(kind,data)

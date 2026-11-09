@@ -18,3 +18,7 @@ dist/
 secrets/
 *.pem
 *.key
+
+# Local installation, private data and development runtime
+/local/
+/.venv/

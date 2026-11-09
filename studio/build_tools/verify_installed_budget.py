@@ -3,8 +3,8 @@ import json,os,socket,subprocess,time,urllib.request
 from pathlib import Path
 
 repo=Path(__file__).resolve().parents[2]
-runtime=Path('C:/Users/Desktop/META_FULL_DESKTOP/META-Next')
-data=Path(os.environ['LOCALAPPDATA'])/'META';config=data/'core_config'
+runtime=Path('C:/Users/user/Documents/GitHub/META-AI/local/app')
+data=repo/'local/data';config=data/'core_config'
 out=repo/'build/budget-installed';out.mkdir(parents=True,exist_ok=True)
 with socket.socket() as sock:sock.bind(('127.0.0.1',0));port=sock.getsockname()[1]
 env=dict(os.environ,META_CORE_PORT=str(port),META5_STATE=str(data/'core_state'),META_CORE_CONFIG_DIR=str(config),META_DATA_DIR=str(data),PYTHONDONTWRITEBYTECODE='1')

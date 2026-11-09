@@ -1,5 +1,5 @@
 const fs=require('fs'),path=require('path');
-const {chromium}=require('D:/META/Tools/node_modules/playwright');
+const {chromium}=require('C:/Users/user/Documents/GitHub/META-AI/local/tools/node_modules/playwright');
 const repo=path.resolve(__dirname,'../..'),base=path.join(repo,'build','verification');
 (async()=>{
  const fixture=JSON.parse(fs.readFileSync(path.join(base,'fixture.json'),'utf8')),task=JSON.parse(fs.readFileSync(path.join(base,'real-task.json'),'utf8'));

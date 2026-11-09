@@ -26,10 +26,11 @@ def brief_check(text,brief):
     return problems
 
 def javascript(text,module=True):
-    import os,shutil,subprocess
+    import os,shutil,subprocess,sys
     from pathlib import Path
     node=shutil.which('node')
-    if not node and Path('D:/META/Tools/node.exe').is_file():node='D:/META/Tools/node.exe'
+    for candidate in (os.environ.get('META_NODE_BINARY',''),str(Path(sys.executable).resolve().parent.parent/'tools/node.exe'),str(Path(__file__).resolve().parents[3]/'local/tools/node.exe')):
+        if not node and candidate and Path(candidate).is_file():node=candidate
     if not node:return {'status':'not_run','scope':'JavaScript syntax: Node.js не установлен'}
     env={k:v for k,v in os.environ.items() if k.upper() not in ('NODE_OPTIONS','NODE_PATH')}
     try:

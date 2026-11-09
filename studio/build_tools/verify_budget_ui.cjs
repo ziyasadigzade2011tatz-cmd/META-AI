@@ -1,6 +1,6 @@
 // Real synthetic-profile Desktop UI request, not a mocked model response.
 const fs=require('fs'),path=require('path');
-const {chromium}=require('D:/META/Tools/node_modules/playwright');
+const {chromium}=require('C:/Users/user/Documents/GitHub/META-AI/local/tools/node_modules/playwright');
 const repo=path.resolve(__dirname,'../..'),base=path.join(repo,'build/budget-step1');
 const thinking=!process.argv.includes('--chat');
 (async()=>{

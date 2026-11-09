@@ -17,6 +17,14 @@ def free_port():
     with socket.socket() as sock:sock.bind(('127.0.0.1',0));return sock.getsockname()[1]
 
 def boot(namespace):
+    # Consolidated local installation; private state stays outside tracked source.
+    project_home=Path(sys.executable).resolve().parent.parent.parent
+    if (project_home/'studio').is_dir() and Path(sys.executable).resolve().parent==project_home/'local/app':
+        local=project_home/'local'
+        os.environ.setdefault('META_DATA_DIR',str(local/'data'))
+        os.environ.setdefault('META_STUDIO_HOME',str(local/'profiles'))
+        os.environ.setdefault('META_NODE_BINARY',str(local/'tools/node.exe'))
+        os.environ.setdefault('META_PROJECTS_DIR',str(Path(os.environ['META_DATA_DIR'])/'projects'))
     root=Path(getattr(sys,'_MEIPASS',Path(__file__).resolve().parents[2]))
     data_home=Path(os.environ.get('META_STUDIO_HOME',str(Path(os.environ['LOCALAPPDATA'])/'META Profiles')))
     data_home.mkdir(parents=True,exist_ok=True)
@@ -229,9 +237,18 @@ def boot(namespace):
                     project=Project(project_root(config['projects'],body['project']));file=project.path(body['path'])
                     raw=file.read_bytes() if file.exists() else None
                     if digest(raw)!=body.get('hash'):raise ValueError('Файл изменился. Открой его заново перед сохранением.')
-                    validate(body['path'],body['content']);file.parent.mkdir(parents=True,exist_ok=True)
-                    temp=file.with_name(file.name+'.meta-write-tmp');temp.write_text(body['content'],encoding='utf-8',newline='\n');temp.replace(file)
-                    result={'saved':True,'hash':digest(file.read_bytes())}
+                    validate(body['path'], body['content'])
+                    from .safe_write import apply_changes
+                    transaction = apply_changes(
+                        [(file, body['content'], body.get('hash'))],
+                        data / 'studio_file_backups',
+                        digest
+                    )
+                    result = {
+                        'saved': True,
+                        'hash': digest(file.read_bytes()),
+                        'backup': transaction['backup']
+                    }
                 elif path=='/studio/preferences':
                     with lock:
                         for key in ('baseColor','accent'):

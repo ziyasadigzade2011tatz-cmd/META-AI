@@ -68,7 +68,8 @@ def run_tests(root,profile,allow):
     if profile=='python-unittest':return execute([sys.executable,'--studio-unittest',str(root)],root)
     if profile=='javascript-syntax':
         node=shutil.which('node')
-        if not node and Path(r'D:\META\Tools\node.exe').is_file():node=r'D:\META\Tools\node.exe'
+        for candidate in (os.environ.get('META_NODE_BINARY',''),str(Path(sys.executable).resolve().parent.parent/'tools/node.exe'),str(Path(__file__).resolve().parents[3]/'local/tools/node.exe')):
+            if not node and candidate and Path(candidate).is_file():node=candidate
         if not node:return {'status':'not_available','output':'Node.js не установлен. Проверка JavaScript не запускалась.'}
         from meta5.project import Project
         files=[f['path'] for f in Project(root).files() if f['path'].endswith(('.js','.cjs','.mjs'))]
