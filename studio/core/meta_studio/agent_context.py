@@ -12,10 +12,10 @@ def fit_request(messages, context, model, count=None):
     allocation = limits(context, 'code')
     if count is None:
         try:
-            from meta5.qwen_tokens import counter
-            if not model.startswith('qwen3.5:'):
+            from meta5.qwen_tokens import agent_counter
+            if not model.startswith(('qwen3.5:', 'mimo-v2.6:')):
                 raise ValueError('Unvalidated tokenizer')
-            count = counter(model, False)
+            count = agent_counter(model)
         except Exception:
             count = utf8_upper_bound
     rows = compact(messages, context)

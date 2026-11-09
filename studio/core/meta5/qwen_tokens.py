@@ -158,3 +158,30 @@ def for_model(model):
 def counter(model,think=False):
     tokenizer=for_model(model)
     return lambda messages:tokenizer.count(render(messages,think))
+
+
+@functools.lru_cache(maxsize=4)
+def agent_counter(model):
+    """Estimate custom Qwen35 renderers using validated vocabulary + reserve.
+
+    This is deliberately not advertised as exact chat framing. Include model
+    preset messages and reserve 1024 tokens for the custom renderer.
+    """
+    try:
+        return counter(model, False)
+    except ValueError:
+        pass
+    import httpx
+    from .transport import BASE
+    with httpx.Client(timeout=15,trust_env=False) as client:
+        response=client.post(BASE+'/api/show',json={'model':model})
+        response.raise_for_status();data=response.json()
+    if data.get('model_info',{}).get('general.architecture')!='qwen35':
+        raise ValueError('Unsupported custom model vocabulary')
+    line=next((line[5:].strip().strip('"') for line in data.get('modelfile','').splitlines() if line.startswith('FROM ')),None)
+    if not line or not Path(line).is_file():raise ValueError('Local model vocabulary unavailable')
+    tokenizer=Qwen35(line)
+    preset=data.get('messages') or []
+    if not isinstance(preset,list):raise ValueError('Unsupported preset messages')
+    overhead=1024+sum(tokenizer.count(str(m.get('content',''))) for m in preset if isinstance(m,dict))
+    return lambda messages:tokenizer.count(render(messages,False))+overhead

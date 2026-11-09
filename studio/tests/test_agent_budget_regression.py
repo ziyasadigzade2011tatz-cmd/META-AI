@@ -20,6 +20,16 @@ from meta_studio.agent import Sessions
 
 
 class BudgetRegressionTests(unittest.TestCase):
+    def test_mimo_uses_its_vocabulary_counter_and_keeps_selected_model(self):
+        rows=[{'role':'system','content':'Инструкция ' * 500},
+              {'role':'user','content':'Create a file'}]
+        with patch('meta5.qwen_tokens.agent_counter',return_value=lambda messages:1800) as lookup:
+            request=agent_stream.payload('mimo-v2.6:9b',rows,8192)
+        lookup.assert_called_once_with('mimo-v2.6:9b')
+        self.assertEqual(request['model'],'mimo-v2.6:9b')
+        self.assertEqual(request['options']['num_predict'],3000)
+        self.assertFalse(request['think'])
+
     def test_rechecking_changed_files_is_not_a_repeated_action_loop(self):
         actions=[{'action':'write','args':{'path':'data.json','content':'{"value":0}'}}]
         for i in range(4):
