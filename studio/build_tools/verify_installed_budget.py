@@ -1,9 +1,10 @@
 """Probe the installed Core on a free port; no Desktop chat is created."""
-import json,os,socket,subprocess,time,urllib.request
+import argparse,json,os,socket,subprocess,time,urllib.request
 from pathlib import Path
 
 repo=Path(__file__).resolve().parents[2]
-runtime=Path('C:/Users/user/Documents/GitHub/META-AI/local/app')
+parser=argparse.ArgumentParser();parser.add_argument('--runtime',default=str(repo/'local/app'));args=parser.parse_args()
+runtime=Path(args.runtime).resolve()
 data=repo/'local/data';config=data/'core_config'
 out=repo/'build/budget-installed';out.mkdir(parents=True,exist_ok=True)
 with socket.socket() as sock:sock.bind(('127.0.0.1',0));port=sock.getsockname()[1]
