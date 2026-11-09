@@ -41,6 +41,9 @@ def boot(namespace):
         import uvicorn
         uvicorn.run('main:app',host='127.0.0.1',port=int(os.environ['META_CORE_PORT']))
         return
+    if '--studio-server' not in sys.argv:
+        from .single_instance import acquire
+        if not acquire(os.environ.get('META_DATA_DIR',str(Path(os.environ['LOCALAPPDATA'])/'META'))):return
     code=marshal.loads((root/'studio_base.bin').read_bytes())
     def retitle(c):
         return c.replace(co_consts=tuple(retitle(x) if isinstance(x,types.CodeType) else
@@ -90,6 +93,13 @@ def boot(namespace):
         except Exception:download.update(status='failed',message='Загрузка не завершена. Проверь Ollama, интернет и свободное место.')
 
     class StudioHandler(original):
+        def authorized(self):
+            # Password-free local desktop, with DNS-rebinding and origin guards.
+            return (self.client_address[0]=='127.0.0.1'
+                    and self.headers.get('Host')==f'127.0.0.1:{legacy.PORT}')
+        def auth_guard(self):
+            if self.authorized():return True
+            self.json_response({'error':'Разрешён только локальный доступ'},403);return False
         def body(self):
             if urlsplit(self.path).path!='/api/message/stream':return super().body()
             with namespace['SETTINGS_LOCK']:
@@ -129,6 +139,10 @@ def boot(namespace):
                     result={'profiles':models.profiles(),'settings':{**advanced.settings(),'understand_model':models.select('understand')[0]}}
                 elif path=='/studio/projects':
                     base=Path(config['projects']);result={'projects':[p.name for p in sorted(base.iterdir()) if p.is_dir() and not p.name.startswith('.') and not p.is_symlink()]}
+                    result['titles']={}
+                    for session in reversed(sessions.history()):
+                        title=session.get('title')
+                        if title:result['titles'][session['project']]=title
                 elif path=='/studio/files':
                     p=Project(project_root(config['projects'],query.get('project','.')));result={'files':p.files()}
                 elif path=='/studio/read':

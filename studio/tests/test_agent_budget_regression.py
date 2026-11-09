@@ -20,6 +20,21 @@ from meta_studio.agent import Sessions
 
 
 class BudgetRegressionTests(unittest.TestCase):
+    def test_plan_can_name_project_without_extra_model_request(self):
+        actions=iter([{'action':'plan','args':{'title':'Органайзер','steps':['Создать файл']}},
+                      {'action':'write','args':{'path':'data.json','content':'{}'}},
+                      {'action':'check','args':{}},
+                      {'action':'finish','args':{'summary':'Готово'}}])
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory)
+            sessions=Sessions(root/'projects',root/'sessions',client=lambda messages:json.dumps(next(actions)))
+            obj=sessions.start({'task':'Создай JSON файл'})
+            deadline=time.monotonic()+5
+            while sessions.active and time.monotonic()<deadline:time.sleep(.01)
+            saved=sessions.get(obj['id'])
+            self.assertEqual(saved['status'],'completed')
+            self.assertEqual(saved['title'],'Органайзер')
+
     def test_mimo_uses_its_vocabulary_counter_and_keeps_selected_model(self):
         rows=[{'role':'system','content':'Инструкция ' * 500},
               {'role':'user','content':'Create a file'}]

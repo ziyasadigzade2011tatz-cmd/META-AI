@@ -20,6 +20,7 @@ def action_schema():
     for name,properties in arguments.items():
         args={'type':'object','properties':dict(properties),'required':list(properties),'additionalProperties':False}
         if name=='read':args['properties'].update(start={'type':'integer','minimum':1},end={'type':'integer','minimum':1})
+        if name=='plan':args['properties']['title']={'type':'string','maxLength':60}
         variants.append({'type':'object','properties':{'action':{'const':name},'args':args},'required':['action','args'],'additionalProperties':False})
     return {'oneOf':variants}
 

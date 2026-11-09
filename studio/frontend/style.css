@@ -10,3 +10,31 @@
 .activity-stage small{white-space:normal}
 
 .view-tools{overflow:auto}.tools-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.tools-tabs .selected{border-color:var(--accent);color:var(--accent)}#metaTools textarea{width:100%;box-sizing:border-box;margin:10px 0}#metaTools input[type=file]{margin:14px 0}.memory-import-rows{max-height:340px;overflow:auto;border:1px solid var(--line);border-radius:12px;padding:12px}.memory-import-rows label{align-items:flex-start!important;overflow-wrap:anywhere;padding:7px}.native-window{display:flex;gap:8px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}.native-window>div{flex:1;min-width:0;overflow-wrap:anywhere}.native-window small{display:block;color:var(--muted)}.window-snapshot{max-width:100%;max-height:430px;object-fit:contain;border:1px solid var(--line);border-radius:12px}.permission-dialog{max-width:520px;background:var(--base);color:var(--text);border:1px solid var(--line);border-radius:16px;padding:28px}.permission-dialog::backdrop{background:#0008}.permission-dialog strong{overflow-wrap:anywhere}.tools-range{display:flex;gap:10px;align-items:end;flex-wrap:wrap}.tools-range input{max-width:100px}#sourcePath{max-width:100%;margin:12px 0}#sourceContent{max-height:400px;overflow:auto}#sourceScope{overflow-wrap:anywhere}
+
+/* Calm desktop surfaces: keep the user's base/accent palette and motion choice. */
+.chat-row{display:flex;align-items:center;gap:3px;border-radius:10px;margin:3px 0}
+.chat-row .chat-link{flex:1;min-width:0;margin:0!important}
+.delete-chat{opacity:.4;flex:0 0 28px;padding:6px!important;font-size:19px}
+.chat-row:hover .delete-chat,.delete-chat:focus-visible{opacity:1}
+.chat-row:hover{background:color-mix(in srgb,var(--text) 5%,transparent)}
+#sidebar{background:color-mix(in srgb,var(--base) 96%,var(--text));border-right:1px solid color-mix(in srgb,var(--text) 9%,transparent)}
+#sidebar nav button{border-radius:10px;margin-bottom:4px}
+#sidebar .brand{padding-bottom:24px}
+main>header{background:color-mix(in srgb,var(--base) 97%,transparent);border-bottom:1px solid color-mix(in srgb,var(--text) 8%,transparent)}
+.page{max-width:1080px;margin:0 auto;width:100%;box-sizing:border-box;padding:36px 42px}
+.page>h1{font-size:30px;font-weight:550;letter-spacing:-1px;margin-bottom:10px}
+.page>p{max-width:740px;line-height:1.7}
+.page h2{font-size:18px;font-weight:550;margin-top:36px;padding-top:22px;border-top:1px solid var(--line)}
+.page label{line-height:1.6}
+.page input,.page select,.page textarea{border-radius:10px}
+.presets{gap:12px!important}
+.presets button{border-radius:14px!important;padding:18px!important;transition:transform .18s,box-shadow .18s}
+.presets button:hover{transform:translateY(-2px);box-shadow:0 7px 20px #0001}
+.material,.session-row{border:1px solid var(--line);border-radius:14px;padding:18px!important;margin:12px 0;background:color-mix(in srgb,var(--base) 97%,var(--text))}
+.material-tools{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0 12px}
+.material-tools input{flex:1;min-width:180px}
+.composer{box-shadow:0 4px 24px #0001;border-radius:18px!important}
+.welcome h1{letter-spacing:-1.4px;font-weight:500}
+.new{border-radius:12px!important}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media(max-width:780px){.page{padding:24px 18px}.delete-chat{opacity:.8}}
