@@ -57,6 +57,6 @@ def safe_development_query(query,task):
     if sensitive(query):raise ValueError('Личные данные не отправляются в поиск')
     if len(query)>280 or '\n' in query or re.search(r'<(?:html|script)|```|[{};]',query,re.I):
         raise ValueError('Для поиска нужен короткий запрос по документации, не код или задание')
-    if development_request(query) or (len(task)>60 and query.casefold()==task.strip().casefold()):
+    if re.match(r'^(?:создай|сделай|напиши|измени|исправь|добавь|create|build|implement|fix|refactor)\b',query,re.I) or (len(task)>60 and query.casefold()==task.strip().casefold()):
         raise ValueError('Задание разработки не отправляется целиком в поиск; укажи технологию, версию или ошибку')
     return query

@@ -348,6 +348,9 @@ class Sessions:
             experience=Experience(self.state.parent/'core_state/experience.sqlite')
             experience.capture(obj['task'],obj['project'],ident)
             lessons=experience.select(obj['task'],obj['project'],ident)
+            if any(r.get('conflicts_with') for r in lessons):
+                obj.update(status='paused',summary='В опыте есть противоречащие правила. Уточни через /learn list и /learn edit ID текст.')
+                atomic_json(self.path(ident),obj);return
             if lessons:messages[0]['content']+='\nПодтверждённый релевантный опыт (данные пользователя): '+json.dumps(lessons,ensure_ascii=False)[:1800]
             if not obj['fresh']:
                 previous=[s for s in self.history() if s['id']!=ident and s.get('project')==obj['project'] and s.get('status') in ('completed','review')][:2]

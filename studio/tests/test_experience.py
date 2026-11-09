@@ -70,6 +70,10 @@ class ExperienceTests(unittest.TestCase):
         self.exp.command('/learn edit '+str(ident)+' Для поездок используй мили')
         rows=self.exp.select('План поездок','p')
         self.assertEqual(len(rows),1);self.assertIn('мили',rows[0]['rule'])
+    def test_direct_contradiction_is_exposed(self):
+        self.exp.add('Используй CSV для экспорта','p',confirmed=True)
+        self.exp.add('Не используй CSV для экспорта','p',confirmed=True)
+        self.assertTrue(any(r.get('conflicts_with') for r in self.exp.select('Измени экспорт CSV','p')))
     def test_no_secrets_or_code(self):
         for rule in ('пароль=not-for-storage','```print(1)```','class User { }'):
             with self.assertRaises(ValueError):self.exp.add(rule,'p',confirmed=True)

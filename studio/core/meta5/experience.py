@@ -9,8 +9,8 @@ from .storage import STATE
 from .privacy import sensitive
 
 def terms(text):
-    stop={'используй','нужно','всегда','правило','проект','вместо','только','чтобы','этого','этой','впредь','пожалуйста'}
-    return {s[:6] for s in re.findall(r'[a-zа-яё]{4,}',text.lower()) if s not in stop}
+    stop={'для','это','как','при','так','эти','его','используй','нужно','всегда','правило','проект','вместо','только','чтобы','этого','этой','впредь','пожалуйста'}
+    return {s[:6] for s in re.findall(r'[a-zа-яё]{3,}',text.lower()) if s not in stop}
 
 class Experience:
     def __init__(self,path=None):
@@ -64,10 +64,16 @@ class Experience:
                 if overlap<(2 if row['scope']=='global' else 1):continue
                 rows.append({'id':row['id'],'rule':row['rule'],'scope':row['scope'],'reason':'scope_match_and_keywords','score':overlap})
         result=sorted(rows,key=lambda r:-r['score'])[:limit]
+        for row in result:
+            conflicts=[other['id'] for other in result if other['id']!=row['id'] and other['scope']==row['scope']
+                       and len(terms(row['rule']) & terms(other['rule']))>=2
+                       and bool(re.search(r'\b(?:не|без|никогда)\b',row['rule'],re.I))!=bool(re.search(r'\b(?:не|без|никогда)\b',other['rule'],re.I))]
+            if conflicts:row['conflicts_with']=conflicts
         if task and result:
             with self.db() as db:db.execute('INSERT OR REPLACE INTO options VALUES(?,?)',('last:'+task,json.dumps([r['id'] for r in result])))
         return result
     def outcome(self,task,checks):
+        if not self.enabled():return
         # Only check categories/status; never file contents or model answers.
         safe=[{'status':r.get('status'),'scope':str(r.get('scope',''))[:100]} for r in checks[:50]]
         with self.db() as db:db.execute('INSERT OR REPLACE INTO outcomes VALUES(?,?,?)',(task,json.dumps(safe),time.time()))
